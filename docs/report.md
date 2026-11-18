@@ -470,7 +470,12 @@ _Not available yet._
 _Not available yet._
 <!-- /generated -->
 
-<p class="caption"><b>Table B4.</b> Pass rate in percent by the kind of bug injected, with the number of tasks in brackets.</p>
+<p class="caption"><b>Table B4.</b> What each KB held when it was frozen: the files the agent wrote, their words (a rough measure of what reading all of it costs), the largest file, and the session transcripts the CLI kept for the two transcript approaches.</p>
+
+<!-- generated: KB contents -->
+<!-- /generated -->
+
+<p class="caption"><b>Table B5.</b> Pass rate in percent by the kind of bug injected, with the number of tasks in brackets.</p>
 
 <!-- generated: By bug category -->
 | Condition | Set | Arithmetic | Assignment | State machine | Timing |
@@ -479,7 +484,7 @@ _Not available yet._
 | No KB | B | 51.5 (11) | 40.5 (14) | 0.0 (2) | 33.3 (14) |
 <!-- /generated -->
 
-<p class="caption"><b>Table B5.</b> Share of all runs of each condition showing each limitation, in percent. A run can show several. Where a KB approach has been assessed, a second table gives the share of B's tasks where a limitation the baseline showed is gone (resolved) or one it did not show has appeared (introduced).</p>
+<p class="caption"><b>Table B6.</b> Share of all runs of each condition showing each limitation, in percent. A run can show several. Where a KB approach has been assessed, a second table gives the share of B's tasks where a limitation the baseline showed is gone (resolved) or one it did not show has appeared (introduced).</p>
 
 <!-- generated: Limitations -->
 | Condition | Set | Changed more than the bug | Own test missed the fault | Wasted effort | Missed the bug | Broke the interface |

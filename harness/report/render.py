@@ -99,6 +99,37 @@ def _seen_and_unseen(build: list[Row], baseline_a: list[Row], prices: dict, mode
     return {name: compare.paired(rows, baseline_a, prices, model) for name, rows in parts.items() if rows}
 
 
+def _final_state(root: Path, experiment: str) -> dict:
+    """What a built KB holds when frozen: its files and their words, the
+    session transcripts it keeps apart (they are the CLI's, not written by the
+    agent). Words are a rough measure of what reading it all would cost."""
+    out = {}
+    for chain in sorted((root / "runs" / experiment / "kb").glob("*/*/chain.json")):
+        final = json.loads(chain.read_text()).get("final")
+        folder = chain.parent / "snapshots" / str(final)
+        if not final or not folder.is_dir():
+            continue
+        files, words, largest, sessions = 0, 0, ("", 0), 0
+        for file in sorted(folder.rglob("*")):
+            if not file.is_file():
+                continue
+            relative = file.relative_to(folder).as_posix()
+            if relative.startswith("sessions/"):
+                sessions += 1
+                continue
+            try:
+                count = len(file.read_text(encoding="utf-8").split())
+            except (UnicodeDecodeError, OSError):
+                count = 0
+            files += 1
+            words += count
+            if count > largest[1]:
+                largest = (relative, count)
+        out[chain.parent.parent.name] = {"files": files, "words": words, "largest": largest[0],
+                                         "largest_words": largest[1], "sessions": sessions}
+    return out.get("build", next(iter(out.values()), {}))
+
+
 def _group_outcomes(rows: list[Row]) -> dict:
     """How many groups (modules) pass in every run, in none, or in some."""
     groups = {}
@@ -172,6 +203,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
                                              prices, model),
             "learning_curve": learning_curve(build),
             "seen_and_unseen": _seen_and_unseen(build, _select(baseline, side="A"), prices, model),
+            "final_state": _final_state(root, experiment),
         }
 
     findings = Counter(f.get("category") for r in rows for f in r.findings
@@ -528,6 +560,14 @@ def _markdown(report: dict) -> str:
             out += _table(header, [[_name(name), *[_share((entry.get(c) or {}).get(key))
                                                    for c in shown for key in ("resolved", "introduced")]]
                                    for name, entry in changes if entry])
+
+    states = [(name, (report["kb"].get(name) or {}).get("final_state") or {}) for name, _ in compared]
+    if any(state for _, state in states):
+        out += ["## KB contents", ""]
+        out += _table(["Approach", "Files", "Words", "Largest file", "Words in it", "Session transcripts kept"],
+                      [[_name(name), state.get("files", ""), f"{state.get('words', 0):,}",
+                        f"`{state['largest']}`" if state.get("largest") else "", f"{state.get('largest_words', 0):,}",
+                        state.get("sessions", "")] for name, state in states if state])
 
     out += ["## Trust", ""]
     body = [[_name(label), c["planned"], c["recorded"], c.get("completed", 0), c.get("timeout", 0),
