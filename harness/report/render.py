@@ -446,20 +446,21 @@ def _body_sections(report: dict) -> list[str]:
         seen = [(name, report["kb"].get(name, {}).get("seen_and_unseen") or {}) for name, _ in compared]
         if any(entry for _, entry in seen):
             out += ["## Seen and unseen modules", ""]
-            body = []
-            for (name, versus), (_, entry) in zip(compared, seen):
-                row = [_name(name)]
-                for key in ("seen", "first"):
-                    part = entry.get(key) or {}
-                    difference = part.get("pass_rate_difference") or {}
-                    row += [part.get("tasks", ""), _num(100 * difference["value"], signed=True)
-                            if difference.get("value") is not None else "", _range(difference, signed=True)]
-                row += [versus["tasks"], _num(100 * versus["pass_rate_difference"]["value"], signed=True),
-                        _range(versus["pass_rate_difference"], signed=True)]
-                body.append(row)
-            out += _table(["Approach", "A, module met before: tasks", "difference, points", "95% interval",
-                           "A, module new: tasks", "difference, points", "95% interval",
-                           "B, every module new: tasks", "difference, points", "95% interval"], body)
+            def cell(part: dict) -> str:
+                difference = (part or {}).get("pass_rate_difference") or {}
+                if difference.get("value") is None:
+                    return ""
+                return f"{_num(100 * difference['value'], signed=True)} ({_range(difference, signed=True)})"
+
+            def tasks(key: str) -> str:
+                counts = {((e.get(key) or {}) if key != "B" else v).get("tasks") for (_, v), (_, e) in zip(compared, seen)}
+                counts.discard(None)
+                return f", {counts.pop()} tasks" if len(counts) == 1 else ""
+
+            body = [[_name(name), cell(entry.get("seen")), cell(entry.get("first")), cell(versus)]
+                    for (name, versus), (_, entry) in zip(compared, seen)]
+            out += _table(["Approach", f"A, module met before{tasks('seen')}", f"A, module new{tasks('first')}",
+                           f"B, every module new{tasks('B')}"], body)
     return out
 
 
@@ -493,21 +494,28 @@ def _markdown(report: dict) -> str:
     compared = _ordered(report)
     if compared:
         out += [f"## Approaches against the baseline on B ({report['approaches_compared']} compared)", ""]
+        with_empty = any(((report["comparisons"][n].get("vs_empty_kb") or {}).get("pass_rate_difference") or {})
+                         .get("value") is not None for n, _ in compared)
         body = []
         for name, versus in compared:
             empty = report["comparisons"][name].get("vs_empty_kb") or {}
-            body.append([_name(name), versus["tasks"],
-                         _num(100 * versus["pass_rate_difference"]["value"], signed=True),
-                         _range(versus["pass_rate_difference"], signed=True),
-                         f"{versus['helped']} / {versus['harmed']} / {versus['unchanged']}",
-                         _num(versus["token_ratio"]["value"], 2), _range(versus["token_ratio"], 1.0, digits=2),
-                         _num(versus["time_ratio"]["value"], 2), _range(versus["time_ratio"], 1.0, digits=2),
-                         _num(100 * empty["pass_rate_difference"]["value"], signed=True)
-                         if (empty.get("pass_rate_difference") or {}).get("value") is not None else "",
-                         _range(empty.get("pass_rate_difference"), signed=True)])
-        out += _table(["Approach", "Tasks", "Pass rate difference, points", "95% interval",
-                       "Tasks helped / harmed / unchanged", "Tokens, × no KB", "95% interval",
-                       "Time, × no KB", "95% interval", "Against its own empty KB, points", "95% interval"], body)
+            row = [_name(name), versus["tasks"],
+                   _num(100 * versus["pass_rate_difference"]["value"], signed=True),
+                   _range(versus["pass_rate_difference"], signed=True),
+                   f"{versus['helped']} / {versus['harmed']} / {versus['unchanged']}",
+                   _num(versus["token_ratio"]["value"], 2), _range(versus["token_ratio"], 1.0, digits=2),
+                   _num(versus["cost_ratio"]["value"], 2), _range(versus["cost_ratio"], 1.0, digits=2),
+                   _num(versus["time_ratio"]["value"], 2), _range(versus["time_ratio"], 1.0, digits=2)]
+            if with_empty:
+                difference = empty.get("pass_rate_difference") or {}
+                row += [_num(100 * difference["value"], signed=True) if difference.get("value") is not None else "",
+                        _range(difference, signed=True)]
+            body.append(row)
+        header = ["Approach", "Tasks", "Pass rate, points", "95% interval", "Helped / harmed / same",
+                  "Tokens, ×", "95% interval", "Cost, ×", "95% interval", "Time, ×", "95% interval"]
+        if with_empty:
+            header += ["Against its empty KB, points", "95% interval"]
+        out += _table(header, body)
 
         out += ["## Cost of building", ""]
         body = []

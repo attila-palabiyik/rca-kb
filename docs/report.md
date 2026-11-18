@@ -78,21 +78,14 @@ The order of A is random, fixed by seed, and the same for every approach.
 It is an order of tasks, not modules: 28 of the 45 tasks come after an
 earlier task of the same module.
 
-### Grading and isolation
+### Grading
 
-Each run gets a fresh container, started by Harbor [3]. The testbench and the
-reference module exist only in a second container, where the answer is graded
-after the agent has finished. The testbench drives the answer and the
-reference with the same inputs and counts the samples on which their outputs
-differ. An answer passes on zero mismatches.
-
-A pass therefore means the repair matches the reference on the testbench's
-inputs. It does not mean that the agent identified the root cause. Section 3
-labels each trajectory for, among other things, whether the agent missed the
-bug.
-
-Before any agent ran, every task was run twice with no model: a known-good
-answer has to pass and the untouched module has to fail [4, 5].
+ChipBench's testbench drives the answer and the reference module with the
+same inputs and counts the samples on which their outputs differ. An answer
+passes on zero mismatches. A pass therefore means the repair matches the
+reference on the testbench's inputs. It does not mean that the agent
+identified the root cause; section 3 labels each trajectory for, among other
+things, whether the agent missed the bug.
 
 ### Measures
 
@@ -102,9 +95,9 @@ task. Time to solution is that turn's wall-clock time, whether or not the
 answer passes. Grading and the KB update are excluded from both and reported
 separately as the cost of building. Cost uses the list prices in
 `configs/prices.toml`, and is reported beside correctness rather than folded
-into it [6].
+into it [3].
 
-Each approach is compared with the baseline paired by task [7]. Intervals are
+Each approach is compared with the baseline paired by task [4]. Intervals are
 95% bootstrap intervals that resample whole modules, because tasks of one
 module are correlated. Thirteen approaches are compared with one baseline and
 no correction is made for that: about one of thirteen intervals would exclude
@@ -133,8 +126,8 @@ and only the runner's executor is specific to Harbor and Codex.
 
 ### One run
 
-A run starts in a new container with the task's workspace at `/app` and the
-Setup applied: the base configuration, plus the approach's overlay. The
+A run starts in a new container, started by Harbor [5], with the task's
+workspace at `/app` and the Setup applied: the base configuration, plus the approach's overlay. The
 overlay is data, not code. It names the approach's instructions, its update
 prompt, where its KB is placed, and which KB files to link to where the CLI
 already looks. It may not change the model, the effort, the rules, the
@@ -181,7 +174,7 @@ defined and any of them run with one command.
 ### Checking the runs
 
 Before any agent ran, every task was run with a known-good answer, which has
-to pass, and with its module untouched, which has to fail. After every run a
+to pass, and with its module untouched, which has to fail [6, 7]. After every run a
 monitor reads the trajectory for breaches of the rules: a model judge with a
 written rubric, cross-checked by a pattern match. Its sensitivity was tested
 by planting violations in clean baseline trajectories, and it flagged all 20.
@@ -455,14 +448,17 @@ text, gained least. Neither comparison is large against the noise.
 
 <!-- generated: Results on B -->
 | Approach | Runs passed | Pass rate, % | Difference, points | 95% interval | Tasks helped | Tasks harmed | Tokens, × no KB | Time, × no KB | Runs that read the KB, % |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | No KB | 48 of 123 | 39.0 |  |  |  |  |  |  |  |
+| Playbook | 18 of 32 | 56.2 | +20.8 | +3.4 to +41.0 | 8 | 0 | 1.24 | 1.41 | in context |
+| Single-file guide | 24 of 41 | 58.5 | +19.5 | +7.1 to +33.3 | 10 | 0 | 1.56 | 1.33 | in context |
+| Notes by similarity | 23 of 41 | 56.1 | +17.1 | +4.7 to +32.6 | 9 | 0 | 1.68 | 2.05 | 100.0 |
 | Skills | 23 of 41 | 56.1 | +17.1 | +4.7 to +31.8 | 9 | 0 | 1.51 | 1.36 | 100.0 |
-| Notes by similarity | 7 of 10 | 70.0 | +16.7 | 0.0 to +40.0 | 2 | 0 | 1.83 | 2.59 | 100.0 |
 | Notes | 22 of 41 | 53.7 | +14.6 | +2.4 to +28.6 | 8 | 0 | 1.48 | 1.38 | 100.0 |
-| Shared session | 22 of 41 | 53.7 | +14.6 | +2.5 to +28.6 | 8 | 0 | 6.73 | 1.47 |  |
+| Shared session | 22 of 41 | 53.7 | +14.6 | +2.5 to +28.6 | 8 | 0 | 6.73 | 1.47 | in context |
 | Summaries | 21 of 41 | 51.2 | +12.2 | +2.4 to +23.8 | 7 | 0 | 1.63 | 1.37 | 78.0 |
-| Hierarchical skills | 19 of 39 | 48.7 | +10.3 | 0.0 to +21.6 | 6 | 0 | 1.58 | 1.38 | 100.0 |
+| Hierarchical skills | 20 of 41 | 48.8 | +9.8 | 0.0 to +20.5 | 6 | 0 | 1.58 | 1.37 | 100.0 |
+| Signature guides | 7 of 15 | 46.7 | +8.9 | 0.0 to +22.2 | 2 | 0 | 1.30 | 1.38 | 86.7 |
 | Raw cases | 18 of 41 | 43.9 | +4.9 | 0.0 to +11.9 | 4 | 0 | 1.45 | 1.42 | 97.6 |
 <!-- /generated -->
 
@@ -476,12 +472,15 @@ text, gained least. Neither comparison is large against the noise.
 <!-- generated: Seen and unseen modules -->
 | Approach | A, module met before: tasks | difference, points | 95% interval | A, module new: tasks | difference, points | 95% interval | B, every module new: tasks | difference, points | 95% interval |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Playbook | 28 | +7.1 | −7.1 to +25.9 | 17 | −2.0 | −5.9 to 0.0 | 32 | +20.8 | +3.4 to +41.0 |
+| Single-file guide | 28 | +17.9 | +3.7 to +35.7 | 17 | −7.8 | −21.6 to 0.0 | 41 | +19.5 | +7.1 to +33.3 |
+| Notes by similarity | 28 | +10.7 | 0.0 to +28.0 | 17 | −2.0 | −5.9 to 0.0 | 41 | +17.1 | +4.7 to +32.6 |
 | Skills | 28 | +10.7 | 0.0 to +28.0 | 17 | −2.0 | −19.6 to +15.7 | 41 | +17.1 | +4.7 to +31.8 |
-| Notes by similarity | 28 | +10.7 | 0.0 to +28.0 | 17 | −2.0 | −5.9 to 0.0 | 10 | +16.7 | 0.0 to +40.0 |
 | Notes | 28 | +3.6 | −7.4 to +16.1 | 17 | −2.0 | −5.9 to 0.0 | 41 | +14.6 | +2.4 to +28.6 |
 | Shared session | 28 | +10.7 | 0.0 to +28.0 | 17 | +3.9 | −5.9 to +17.6 | 41 | +14.6 | +2.5 to +28.6 |
 | Summaries | 28 | +7.1 | 0.0 to +22.2 | 17 | −2.0 | −5.9 to 0.0 | 41 | +12.2 | +2.4 to +23.8 |
-| Hierarchical skills | 28 | +7.1 | −7.1 to +25.9 | 17 | −2.0 | −5.9 to 0.0 | 39 | +10.3 | 0.0 to +21.6 |
+| Hierarchical skills | 28 | +7.1 | −7.1 to +25.9 | 17 | −2.0 | −5.9 to 0.0 | 41 | +9.8 | 0.0 to +20.5 |
+| Signature guides | 28 | +10.7 | 0.0 to +28.0 | 17 | −2.0 | −5.9 to 0.0 | 15 | +8.9 | 0.0 to +22.2 |
 | Raw cases | 28 | +3.6 | 0.0 to +11.1 | 17 | −2.0 | −5.9 to 0.0 | 41 | +4.9 | 0.0 to +11.9 |
 <!-- /generated -->
 
@@ -613,11 +612,11 @@ mismatch, so no answer can pass. The check described in section 1 found it.
 
 1. Yu, Z., Zhou, C., Lin, Y., Zhang, H., Ye, H., Cui, J., Pan, Z., Zhao, J., Ding, Y. (2026). ChipBench: A Next-Step Benchmark for Evaluating LLM Performance in AI-Aided Chip Design. arXiv:2601.21448. Tasks from github.com/zhongkaiyu/ChipBench at commit `b4ba3a0`.
 2. OpenAI (2026). Codex CLI, version 0.170.0. developers.openai.com/codex
-3. Harbor Framework Team (2026). Harbor: a framework for evaluating agents in container environments, version 0.26.0. docs.harborframework.com
-4. Zhu, Y., Jin, T., Pruksachatkun, Y., et al. (2025). Establishing Best Practices for Building Rigorous Agentic Benchmarks. arXiv:2507.02825.
-5. Wang, H., Li, H., Mang, Q., Cheung, A., Sen, K., Song, D. (2026). Do Androids Dream of Breaking the Game? Systematically Auditing AI Agent Benchmarks with BenchJack. arXiv:2605.12673.
-6. Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., Narayanan, A. (2024). AI Agents That Matter. arXiv:2407.01502.
-7. Miller, E. (2024). Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. arXiv:2411.00640.
+3. Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., Narayanan, A. (2024). AI Agents That Matter. arXiv:2407.01502.
+4. Miller, E. (2024). Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. arXiv:2411.00640.
+5. Harbor Framework Team (2026). Harbor: a framework for evaluating agents in container environments, version 0.26.0. docs.harborframework.com
+6. Zhu, Y., Jin, T., Pruksachatkun, Y., et al. (2025). Establishing Best Practices for Building Rigorous Agentic Benchmarks. arXiv:2507.02825.
+7. Wang, H., Li, H., Mang, Q., Cheung, A., Sen, K., Song, D. (2026). Do Androids Dream of Breaking the Game? Systematically Auditing AI Agent Benchmarks with BenchJack. arXiv:2605.12673.
 8. Cemri, M., Pan, M. Z., Yang, S., et al. (2025). Why Do Multi-Agent LLM Systems Fail? arXiv:2503.13657.
 9. Zhang, B., Lazuka, K., Murag, M. (2025). Equipping agents for the real world with Agent Skills. Anthropic Engineering, 16 October 2025.
 10. Zhang, Q., Hu, C., Upasani, S., et al. (2025). Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models. arXiv:2510.04618.
@@ -660,19 +659,22 @@ stored runs. The README gives the commands.
 | No KB | A | 45 | 135 | 69.6 | 45.7 to 90.8 | 15.5k | 52.8k | 1.7k | 0.061 | 0.088 | 31 | 4.8 |
 | No KB | B | 41 | 123 | 39.0 | 19.0 to 62.5 | 15.7k | 56.9k | 2.1k | 0.066 | 0.169 | 37 | 5.1 |
 | Single-file guide, build | A | 45 | 45 | 77.8 | 63.0 to 91.1 | 20.1k | 71.9k | 1.7k | 0.074 | 0.095 | 33 | 5.0 |
+| Single-file guide | B | 41 | 41 | 58.5 | 39.0 to 78.4 | 23.3k | 91.5k | 2.2k | 0.089 | 0.152 | 49 | 5.3 |
 | Hierarchical skills, build | A | 45 | 45 | 73.3 | 53.1 to 90.7 | 18.9k | 80.5k | 1.9k | 0.074 | 0.101 | 36 | 6.0 |
-| Hierarchical skills | B | 39 | 39 | 48.7 | 27.5 to 73.7 | 21.6k | 99.6k | 2.4k | 0.088 | 0.180 | 51 | 6.5 |
+| Hierarchical skills | B | 41 | 41 | 48.8 | 27.3 to 72.1 | 21.5k | 98.8k | 2.4k | 0.087 | 0.179 | 51 | 6.5 |
 | Notes by similarity, build | A | 45 | 45 | 75.6 | 55.3 to 93.0 | 17.0k | 77.8k | 1.9k | 0.069 | 0.092 | 43 | 6.3 |
-| Notes by similarity | B | 10 | 10 | 70.0 | 40.0 to 100.0 | 18.0k | 114.6k | 1.9k | 0.076 | 0.108 | 80 | 8.8 |
+| Notes by similarity | B | 41 | 41 | 56.1 | 35.7 to 77.5 | 18.3k | 110.7k | 2.4k | 0.080 | 0.143 | 72 | 8.2 |
 | Notes, build | A | 45 | 45 | 71.1 | 50.0 to 89.4 | 17.9k | 79.1k | 2.0k | 0.073 | 0.102 | 38 | 6.2 |
 | Notes | B | 41 | 41 | 53.7 | 31.7 to 76.3 | 19.3k | 90.0k | 2.3k | 0.081 | 0.151 | 51 | 6.5 |
 | Playbook, build | A | 45 | 45 | 73.3 | 53.1 to 90.7 | 17.2k | 60.2k | 1.7k | 0.066 | 0.090 | 33 | 4.9 |
+| Playbook | B | 32 | 32 | 56.2 | 33.3 to 81.2 | 18.6k | 71.3k | 2.1k | 0.074 | 0.132 | 52 | 5.2 |
 | Raw cases, build | A | 45 | 45 | 71.1 | 48.8 to 90.7 | 18.4k | 82.0k | 1.9k | 0.073 | 0.103 | 36 | 6.3 |
 | Raw cases | B | 41 | 41 | 43.9 | 22.7 to 67.5 | 19.1k | 89.6k | 2.3k | 0.080 | 0.182 | 51 | 6.5 |
 | Rules by tags, build | A | 45 | 45 | 73.3 | 53.1 to 90.7 | 18.0k | 73.9k | 2.0k | 0.072 | 0.098 | 37 | 5.8 |
 | Shared session, build | A | 45 | 45 | 77.8 | 57.1 to 95.3 | 3.0k | 268.6k | 1.1k | 0.045 | 0.058 | 28 | 3.8 |
 | Shared session | B | 41 | 41 | 53.7 | 33.3 to 75.6 | 2.8k | 494.8k | 1.4k | 0.071 | 0.132 | 51 | 3.7 |
 | Signature guides, build | A | 45 | 45 | 75.6 | 55.3 to 93.0 | 17.9k | 68.5k | 1.8k | 0.069 | 0.092 | 35 | 5.4 |
+| Signature guides | B | 15 | 15 | 46.7 | 22.2 to 76.9 | 19.0k | 77.3k | 1.9k | 0.074 | 0.159 | 48 | 5.7 |
 | Skills, build | A | 45 | 45 | 75.6 | 55.3 to 92.7 | 18.9k | 74.1k | 1.9k | 0.074 | 0.097 | 36 | 5.6 |
 | Skills | B | 41 | 41 | 56.1 | 35.0 to 78.4 | 22.4k | 90.6k | 2.3k | 0.088 | 0.157 | 49 | 5.8 |
 | Summaries, build | A | 45 | 45 | 73.3 | 52.3 to 91.7 | 17.6k | 90.0k | 2.1k | 0.074 | 0.101 | 40 | 6.9 |
@@ -686,12 +688,15 @@ stored runs. The README gives the commands.
 <!-- generated: Approaches against the baseline -->
 | Approach | Tasks | Pass rate difference, points | 95% interval | Tasks helped / harmed / unchanged | Tokens, × no KB | 95% interval | Time, × no KB | 95% interval | Against its own empty KB, points | 95% interval |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| Playbook | 32 | +20.8 | +3.4 to +41.0 | 8 / 0 / 24 | 1.24 | 1.20 to 1.28 | 1.41 | 1.30 to 1.55 |  |  |
+| Single-file guide | 41 | +19.5 | +7.1 to +33.3 | 10 / 0 / 31 | 1.56 | 1.48 to 1.65 | 1.33 | 1.23 to 1.43 |  |  |
+| Notes by similarity | 41 | +17.1 | +4.7 to +32.6 | 9 / 0 / 32 | 1.68 | 1.55 to 1.81 | 2.05 | 1.87 to 2.24 |  |  |
 | Skills | 41 | +17.1 | +4.7 to +31.8 | 9 / 0 / 32 | 1.51 | 1.43 to 1.59 | 1.36 | 1.27 to 1.45 |  |  |
-| Notes by similarity | 10 | +16.7 | 0.0 to +40.0 | 2 / 0 / 8 | 1.83 | 1.71 to 1.96 | 2.59 | 2.26 to 2.88 |  |  |
 | Notes | 41 | +14.6 | +2.4 to +28.6 | 8 / 0 / 33 | 1.48 | 1.37 to 1.60 | 1.38 | 1.28 to 1.51 |  |  |
 | Shared session | 41 | +14.6 | +2.5 to +28.6 | 8 / 0 / 33 | 6.73 | 6.12 to 7.32 | 1.47 | 1.30 to 1.65 |  |  |
 | Summaries | 41 | +12.2 | +2.4 to +23.8 | 7 / 0 / 34 | 1.63 | 1.49 to 1.79 | 1.37 | 1.31 to 1.44 |  |  |
-| Hierarchical skills | 39 | +10.3 | 0.0 to +21.6 | 6 / 0 / 33 | 1.58 | 1.43 to 1.74 | 1.38 | 1.28 to 1.49 |  |  |
+| Hierarchical skills | 41 | +9.8 | 0.0 to +20.5 | 6 / 0 / 35 | 1.58 | 1.43 to 1.72 | 1.37 | 1.27 to 1.47 |  |  |
+| Signature guides | 15 | +8.9 | 0.0 to +22.2 | 2 / 0 / 13 | 1.30 | 1.15 to 1.43 | 1.38 | 1.24 to 1.54 |  |  |
 | Raw cases | 41 | +4.9 | 0.0 to +11.9 | 4 / 0 / 37 | 1.45 | 1.36 to 1.55 | 1.42 | 1.36 to 1.49 |  |  |
 <!-- /generated -->
 
@@ -700,12 +705,15 @@ stored runs. The README gives the commands.
 <!-- generated: Cost of building -->
 | Approach | Extra tokens | Extra cost, $ | Extra time, min | Tasks after which the KB changed, % | Pays for itself after |
 |---|---:|---:|---:|---:|---|
-| Skills | 6.14M | 1.96 | 25 | 97.8 | never |
+| Playbook | 3.43M | 0.93 | 15 | 100.0 | never |
+| Single-file guide | 4.90M | 1.63 | 18 | 93.3 | never |
 | Notes by similarity | 4.36M | 1.15 | 29 | 100.0 | never |
+| Skills | 6.14M | 1.96 | 25 | 97.8 | never |
 | Notes | 4.22M | 1.27 | 21 | 97.8 | never |
 | Shared session | 9.12M | −0.72 | −2 | 100.0 | never |
 | Summaries | 4.58M | 1.26 | 22 | 100.0 | never |
 | Hierarchical skills | 6.79M | 2.10 | 26 | 100.0 | never |
+| Signature guides | 4.33M | 1.41 | 22 | 100.0 | never |
 | Raw cases | 1.45M | 0.53 | 4 | 100.0 | never |
 <!-- /generated -->
 
@@ -714,12 +722,15 @@ stored runs. The README gives the commands.
 <!-- generated: KB contents -->
 | Approach | Files | Words | Largest file | Words in it | Session transcripts kept |
 |---|---:|---:|---|---:|---:|
-| Skills | 5 | 6,856 | `skills/debug-verilog-cycle-alignment/SKILL.md` | 4,759 | 0 |
+| Playbook | 1 | 1,949 | `AGENTS.md` | 1,949 | 0 |
+| Single-file guide | 1 | 5,759 | `AGENTS.md` | 5,759 | 0 |
 | Notes by similarity | 14 | 11,714 | `entries/.kbsearch/index.json` | 5,060 | 0 |
+| Skills | 5 | 6,856 | `skills/debug-verilog-cycle-alignment/SKILL.md` | 4,759 | 0 |
 | Notes | 16 | 6,809 | `entries/014-preserve-pipelined-fsm-timing.md` | 931 | 0 |
 | Shared session | 0 | 0 |  | 0 | 1 |
 | Summaries | 79 | 13,664 | `entries/5-grouped-sequence-detector-reference-reset.md` | 286 | 0 |
 | Hierarchical skills | 10 | 7,122 | `skills/debug-hdl-fsms/registered-output-timing/SKILL.md` | 3,620 | 0 |
+| Signature guides | 21 | 11,431 | `entries/moore-output-timing-and-async-reset.md` | 1,247 | 0 |
 | Raw cases | 0 | 0 |  | 0 | 45 |
 <!-- /generated -->
 
@@ -730,27 +741,33 @@ stored runs. The README gives the commands.
 |---|---|---:|---:|---:|---:|
 | No KB | A | 75.0 (12) | 73.3 (15) | 75.0 (4) | 59.5 (14) |
 | No KB | B | 51.5 (11) | 40.5 (14) | 0.0 (2) | 33.3 (14) |
+| Playbook | B | 81.8 (11) | 57.1 (14) | 0.0 (2) | 20.0 (5) |
+| Single-file guide | B | 72.7 (11) | 64.3 (14) | 0.0 (2) | 50.0 (14) |
+| Notes by similarity | B | 72.7 (11) | 57.1 (14) | 0.0 (2) | 50.0 (14) |
 | Skills | B | 72.7 (11) | 50.0 (14) | 0.0 (2) | 57.1 (14) |
-| Notes by similarity | B | 70.0 (10) |  |  |  |
 | Notes | B | 72.7 (11) | 50.0 (14) | 0.0 (2) | 50.0 (14) |
 | Shared session | B | 72.7 (11) | 57.1 (14) | 0.0 (2) | 42.9 (14) |
 | Summaries | B | 72.7 (11) | 42.9 (14) | 0.0 (2) | 50.0 (14) |
-| Hierarchical skills | B | 63.6 (11) | 50.0 (14) | 0.0 (2) | 41.7 (12) |
+| Hierarchical skills | B | 63.6 (11) | 50.0 (14) | 0.0 (2) | 42.9 (14) |
+| Signature guides | B | 63.6 (11) | 0.0 (4) |  |  |
 | Raw cases | B | 63.6 (11) | 42.9 (14) | 0.0 (2) | 35.7 (14) |
 <!-- /generated -->
 
 <p class="caption"><b>Table B6.</b> Share of all runs of each condition showing each limitation, in percent. A run can show several. Where a KB approach has been assessed, a second table gives the share of B's tasks where a limitation the baseline showed is gone (resolved) or one it did not show has appeared (introduced).</p>
 
 <!-- generated: Limitations -->
-| Condition | Set | KB did not help | Changed more than the bug | Own test missed the fault | Wasted effort | Missed the bug | Ignored the KB | Misled by the KB | Broke the interface |
+| Condition | Set | KB did not help | Wasted effort | Changed more than the bug | Own test missed the fault | Missed the bug | Ignored the KB | Misled by the KB | Broke the interface |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| No KB | A | 0.0 | 59.3 | 36.3 | 34.8 | 3.0 | 0.0 | 0.0 | 5.2 |
-| No KB | B | 0.0 | 64.2 | 64.2 | 34.1 | 12.2 | 0.0 | 0.0 | 1.6 |
-| Notes | B | 58.8 | 47.1 | 47.1 | 5.9 | 11.8 | 0.0 | 5.9 | 0.0 |
-| Raw cases | B | 92.7 | 58.5 | 61.0 | 46.3 | 14.6 | 4.9 | 0.0 | 0.0 |
-| Shared session | B | 0.0 | 46.3 | 53.7 | 0.0 | 12.2 | 0.0 | 0.0 | 2.4 |
-| Skills | B | 19.5 | 46.3 | 46.3 | 43.9 | 12.2 | 0.0 | 0.0 | 0.0 |
-| Summaries | B | 31.7 | 51.2 | 51.2 | 36.6 | 9.8 | 7.3 | 2.4 | 4.9 |
+| No KB | A | 0.0 | 34.8 | 59.3 | 36.3 | 3.0 | 0.0 | 0.0 | 5.2 |
+| No KB | B | 0.0 | 34.1 | 64.2 | 64.2 | 12.2 | 0.0 | 0.0 | 1.6 |
+| Single-file guide | B | 0.0 | 51.5 | 39.4 | 42.4 | 12.1 | 3.0 | 0.0 | 3.0 |
+| Hierarchical skills | B | 34.1 | 51.2 | 46.3 | 53.7 | 14.6 | 7.3 | 0.0 | 2.4 |
+| Notes by similarity | B | 38.9 | 66.7 | 33.3 | 38.9 | 11.1 | 5.6 | 0.0 | 0.0 |
+| Notes | B | 56.1 | 24.4 | 41.5 | 51.2 | 14.6 | 2.4 | 7.3 | 0.0 |
+| Raw cases | B | 92.7 | 46.3 | 58.5 | 61.0 | 14.6 | 4.9 | 0.0 | 0.0 |
+| Shared session | B | 0.0 | 0.0 | 46.3 | 53.7 | 12.2 | 0.0 | 0.0 | 2.4 |
+| Skills | B | 19.5 | 43.9 | 46.3 | 46.3 | 12.2 | 0.0 | 0.0 | 0.0 |
+| Summaries | B | 31.7 | 36.6 | 51.2 | 51.2 | 9.8 | 7.3 | 2.4 | 4.9 |
 <!-- /generated -->
 
 ## Appendix C. The rules that open every prompt
@@ -813,10 +830,10 @@ in full; none touched the tests, the reference or the network.
 | Notes | 41 | 41 | 41 | 0 | 0 | 3 | 0 | 0 | 2 |
 | Notes, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Notes by similarity, build | 45 | 45 | 45 | 0 | 0 | 5 | 5 | 0 | 0 |
-| Notes by similarity | 41 | 10 | 10 | 0 | 0 | 0 | 0 | 0 | 7 |
+| Notes by similarity | 41 | 41 | 41 | 0 | 0 | 2 | 0 | 0 | 14 |
 | Notes by similarity, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Playbook, build | 45 | 45 | 45 | 0 | 0 | 2 | 2 | 0 | 0 |
-| Playbook | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Playbook | 41 | 32 | 32 | 0 | 0 | 0 | 0 | 0 | 18 |
 | Playbook, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Rules by tags, build | 45 | 45 | 45 | 0 | 0 | 5 | 5 | 0 | 0 |
 | Rules by tags | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -825,22 +842,22 @@ in full; none touched the tests, the reference or the network.
 | Wiki | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Wiki, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Skills, build | 45 | 45 | 45 | 0 | 0 | 7 | 7 | 0 | 0 |
-| Skills | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 3 |
+| Skills | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Skills, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Hierarchical skills, build | 45 | 45 | 45 | 0 | 0 | 9 | 9 | 0 | 0 |
-| Hierarchical skills | 41 | 39 | 39 | 0 | 0 | 0 | 0 | 0 | 19 |
+| Hierarchical skills | 41 | 41 | 41 | 0 | 0 | 2 | 0 | 0 | 1 |
 | Hierarchical skills, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Single-file guide, build | 45 | 45 | 45 | 0 | 0 | 3 | 3 | 0 | 0 |
-| Single-file guide | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Single-file guide | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 5 |
 | Single-file guide, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Signature guides, build | 45 | 45 | 45 | 0 | 0 | 2 | 2 | 0 | 0 |
-| Signature guides | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Signature guides | 41 | 15 | 15 | 0 | 0 | 0 | 0 | 0 | 7 |
 | Signature guides, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Troubleshooting tree, build | 45 | 45 | 45 | 0 | 0 | 6 | 6 | 0 | 0 |
 | Troubleshooting tree | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Troubleshooting tree, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
-Monitor findings: grader targeting 1, kb answer 35, outside answer 34, rule violation 59.
+Monitor findings: grader targeting 1, kb answer 35, outside answer 34, rule violation 63.
 
 Violations planted in clean baseline trajectories: the monitor flagged 20 of 20 (reading the grading assets 4 of 4, searching for answers 4 of 4, fetching from the network 4 of 4, faking the result 4 of 4, copying another run's answer 4 of 4). The model judge flagged 20 and the pattern match 8.
 <!-- /generated -->
