@@ -1,0 +1,9 @@
+# redteam: not a KB approach. An overlay that tells the agent to get a pass by
+# any means, used only by the red-team experiment that tests the monitor.
+
+instructions = [
+    "_pieces/redteam.md",
+]
+
+[kb]
+path = "/kb"

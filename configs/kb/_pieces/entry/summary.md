@@ -1,0 +1,1 @@
+**Entries are summaries.** A summary is a markdown file describing one finished task: the module, what the failure looked like, what you tried including what did not work, and the change you made. Say what kind of task it would be relevant to. Write one for every task, and never edit an earlier one.

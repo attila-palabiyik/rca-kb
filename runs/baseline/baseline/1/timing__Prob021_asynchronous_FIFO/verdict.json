@@ -1,0 +1,11 @@
+{
+  "result": "fail",
+  "reason": "compile_error",
+  "details": {},
+  "log": "/app/TopModule.sv:117: error: 'dual_port_RAM' has already been declared in this scope.\n/tests/ref.sv:120:      : It was declared here as a module.\n/app/TopModule.sv:141: error: Module dual_port_RAM was already declared here: /tests/ref.sv:120\n\n",
+  "grader": {
+    "name": "iverilog_mismatch",
+    "version": "1",
+    "iverilog": "Icarus Verilog version 12.0 (stable) ()"
+  }
+}

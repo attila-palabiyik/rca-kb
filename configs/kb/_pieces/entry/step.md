@@ -1,0 +1,1 @@
+**Entries are steps.** A step is one check to make, with the outcomes it can have and, for each outcome, either the step to go to next or the conclusion to draw. Note which task each step came from (the module and the kind of bug) and any outcome that proved misleading. Add or change steps only when a task showed you a check worth making.

@@ -1,0 +1,1 @@
+**Entries are separate files** under `/kb/entries`, and `/kb/AGENTS.md` lists every one on a single line: its file, a name and a one-line description. That list has already been loaded into your context. Open only the entries that bear on your task. When you add, rename or remove an entry, change its line.

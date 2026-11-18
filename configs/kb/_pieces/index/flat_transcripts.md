@@ -1,0 +1,1 @@
+**Transcripts are separate files** under `/kb/sessions`, in the order the tasks were done, with no index. List the folder and search it by text to find what bears on your task. The files are long; search within them instead of reading them whole.

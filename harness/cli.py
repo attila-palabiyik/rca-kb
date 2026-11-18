@@ -108,7 +108,23 @@ def cmd_monitor(args) -> int:
 def cmd_assess(args) -> int:
     from harness.monitor.assess import assess_experiment_dir
 
-    return assess_experiment_dir(ROOT, args.experiment, args.parallel, args.limit)
+    return assess_experiment_dir(ROOT, args.experiment, args.parallel, args.limit,
+                                 second_reading=args.second_reading)
+
+
+def cmd_notes(args) -> int:
+    """Free-text notes on a sample of A's runs, from which the categories are drawn."""
+    from harness.dataset.loader import load_split
+    from harness.monitor.assess import notes_for_sample
+    from harness.records import store
+
+    info = store.load_experiment_info(ROOT / "runs" / args.experiment)
+    dataset = load_dataset(ROOT / "datasets" / info["dataset"])
+    split = load_split(dataset, info["split"])
+    out = ROOT / "reports" / "assessment-notes" / f"{args.experiment}.json"
+    notes = notes_for_sample(ROOT, args.experiment, split.a, out, args.sample, args.parallel)
+    print(f"{len(notes)} notes written to {out}")
+    return 0
 
 
 def cmd_report(args) -> int:
@@ -153,7 +169,16 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("experiment")
         sub.add_argument("--parallel", type=int, default=8)
         sub.add_argument("--limit", type=int)
+        if name == "assess":
+            sub.add_argument("--second-reading", type=int, default=0,
+                             help="read this many runs twice, to measure the reader's agreement with itself")
         sub.set_defaults(run=function)
+
+    notes = commands.add_parser("notes", help="free-text notes on a sample of A's runs")
+    notes.add_argument("experiment")
+    notes.add_argument("--sample", type=int, default=30)
+    notes.add_argument("--parallel", type=int, default=8)
+    notes.set_defaults(run=cmd_notes)
 
     report = commands.add_parser("report", help="build a report from stored runs")
     report.add_argument("experiments", nargs="+")

@@ -1,0 +1,54 @@
+{
+  "run_id": "smoke/build/0/timing__Prob006_data_serial-to-parallel_circuit",
+  "experiment": "smoke",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "notes",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob006_data_serial-to-parallel_circuit",
+  "repeat": 0,
+  "position": 2,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "04b3766609550b98",
+    "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T17:02:41.654192Z",
+      "ended": "2026-11-18T17:03:18.278552Z",
+      "usage": {
+        "input_uncached": 16574,
+        "input_cached": 71426,
+        "output": 2111,
+        "responses": 6
+      },
+      "trajectory": "trial/steps/solve/agent/trajectory.json",
+      "raw_log": "trial/steps/solve/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T17:03:42.135462Z",
+      "ended": "2026-11-18T17:03:58.812927Z",
+      "usage": {
+        "input_uncached": 18286,
+        "input_cached": 140049,
+        "output": 2652,
+        "responses": 10
+      },
+      "trajectory": "trial/steps/update/agent/trajectory.json",
+      "raw_log": "trial/steps/update/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "9142fe1f5702ab2c",
+    "after": "02514bf78c63b1ec",
+    "changed": true
+  }
+}

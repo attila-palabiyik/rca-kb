@@ -1,0 +1,51 @@
+{
+  "name": "preflight-loaded",
+  "kind": "results",
+  "resolved": {
+    "dataset": "chipbench",
+    "split": "main",
+    "repeats": 1,
+    "seed": 1,
+    "max_parallel": 1,
+    "retries": 0,
+    "tasks": [
+      "assignment__Prob005_signal_generator"
+    ],
+    "monitor": {
+      "judge_model": "gpt-6.2-sol",
+      "rubric": "v1",
+      "assessment": "v1"
+    },
+    "conditions": [
+      {
+        "name": "eval",
+        "mode": "eval",
+        "kb": "_check-loaded",
+        "side": [
+          "B"
+        ],
+        "snapshot": "seed"
+      }
+    ],
+    "excluded_tasks": [
+      "arithmetic__Prob013_least_common_multiple",
+      "assignment__Prob013_least_common_multiple",
+      "timing__Prob013_least_common_multiple"
+    ]
+  },
+  "dataset": "chipbench",
+  "dataset_version": "3c9d7d87dd78573f",
+  "split": "main",
+  "seed": 1,
+  "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+  "base_setup_hash": "8d8639787f0793de",
+  "executor": {
+    "name": "harbor",
+    "version": "0.26.0"
+  },
+  "started": "2026-11-18T17:28:15.564398+00:00",
+  "max_parallel": 1,
+  "setups": {
+    "eval": "8d8639787f0793de"
+  }
+}

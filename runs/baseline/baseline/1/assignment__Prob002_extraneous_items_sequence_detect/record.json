@@ -1,0 +1,42 @@
+{
+  "run_id": "baseline/baseline/1/assignment__Prob002_extraneous_items_sequence_detect",
+  "experiment": "baseline",
+  "condition": {
+    "name": "baseline",
+    "mode": "baseline",
+    "kb": null,
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob002_extraneous_items_sequence_detect",
+  "repeat": 1,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "1d5ffed1353b46d8",
+    "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T17:22:00.591085Z",
+      "ended": "2026-11-18T17:22:32.036930Z",
+      "usage": {
+        "input_uncached": 15285,
+        "input_cached": 53887,
+        "output": 1774,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": null,
+    "after": null,
+    "changed": false
+  }
+}

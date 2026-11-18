@@ -1,0 +1,1 @@
+**Entries are notes.** A note is a markdown file holding one lesson, in whatever form suits it. Say what you tried that did not work as well as what did, when the note applies, and which task it came from (the module and the kind of bug). Add a note only when a task taught you something worth keeping, and revise an existing note in preference to adding a near-duplicate.

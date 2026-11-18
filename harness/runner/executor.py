@@ -53,19 +53,34 @@ class Trial:
     update_ok: bool | None = None            # None when the run had no Update turn
 
 
-def _usage(agent_result: dict | None, trajectory: Path | None) -> dict:
-    result = agent_result or {}
-    total_in = result.get("n_input_tokens") or 0
-    cached = result.get("n_cache_tokens") or 0
-    responses = 0
+def turn_usage(agent_result: dict | None, trajectory: Path | None) -> dict:
+    """Tokens and model responses of one turn alone.
+
+    A trajectory can hold earlier turns: the Update turn resumes Solve's
+    session, and a continued session carries every earlier task. So the turn's
+    own usage is what follows the last user message, not the session's total.
+    """
     if trajectory and trajectory.is_file():
         try:
             steps = json.loads(trajectory.read_text(encoding="utf-8")).get("steps", [])
-            responses = sum(1 for s in steps if s.get("source") == "agent")
         except (ValueError, OSError):
-            responses = 0
+            steps = []
+        last_user = max((i for i, s in enumerate(steps) if s.get("source") == "user"), default=-1)
+        measured = [s["metrics"] for s in steps[last_user + 1:]
+                    if s.get("source") == "agent" and s.get("metrics")]
+        if measured:
+            prompt = sum(m.get("prompt_tokens") or 0 for m in measured)
+            cached = sum(m.get("cached_tokens") or 0 for m in measured)
+            written = sum((m.get("extra") or {}).get("cache_write_input_tokens") or 0 for m in measured)
+            return {"input_uncached": max(prompt - cached, 0), "input_cached": cached,
+                    "input_cache_write": written,
+                    "output": sum(m.get("completion_tokens") or 0 for m in measured),
+                    "responses": len(measured)}
+    result = agent_result or {}
+    total_in = result.get("n_input_tokens") or 0
+    cached = result.get("n_cache_tokens") or 0
     return {"input_uncached": max(total_in - cached, 0), "input_cached": cached,
-            "output": result.get("n_output_tokens") or 0, "responses": responses}
+            "input_cache_write": 0, "output": result.get("n_output_tokens") or 0, "responses": 0}
 
 
 def _first(directory: Path, *names: str) -> Path | None:
@@ -79,7 +94,7 @@ def _phase(name: str, timing: dict | None, agent_result: dict | None, agent_dir:
     trajectory = _first(agent_dir, "trajectory.json")
     timing = timing or {}
     return Phase(name, timing.get("started_at"), timing.get("finished_at"),
-                 _usage(agent_result, trajectory), trajectory, _first(agent_dir, "codex.txt"))
+                 turn_usage(agent_result, trajectory), trajectory, _first(agent_dir, "codex.txt"))
 
 
 def parse_trial(run_id: str, trial_dir: Path, task: Task, steps: list[str]) -> Trial:

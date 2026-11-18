@@ -1,0 +1,1 @@
+**Everything is in one file,** `/kb/AGENTS.md`, read as a whole. It has already been loaded into your context, so you do not need to open it. Keep it short enough to be read in full every time: when it grows, merge and trim instead of appending.

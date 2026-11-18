@@ -1,0 +1,7 @@
+# Pulse output valid when the final input is accepted
+
+For a circuit that emits a result after a fixed number of accepted transfers, check when its counter is sampled. A counter holding the number already accepted reaches `N-1` before the final transfer. If input can stall there, decoding `N-1` directly can assert output valid early and hold it through the stall. Adding input valid to that combinational decode still places the indication before the edge that updates a registered result. Register the result and its valid pulse on the edge that accepts the final transfer, and clear the pulse on the following edge even if input stalls. Use the interface contract to determine whether ready is constant or depends on reset or capacity.
+
+In the `TopModule` six-bit serial-to-parallel task, `cnt == 5` drove `valid_b` as soon as the fifth bit had been accepted, while `data_b` updated on the sixth. The supplied `ready_a` also stayed low from reset until the next rising edge despite the always-ready requirement. The edit tied ready high and registered the completed word and its valid pulse together on the sixth accepted bit.
+
+The local Icarus Verilog test sampled both outputs after each rising edge. It reported a pass for all 64 words, including consecutive groups, stalls between the fifth and sixth bits, and asynchronous reset during a partial group. No external grading result was available.

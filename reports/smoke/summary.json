@@ -1,0 +1,289 @@
+{
+  "provisional": true,
+  "pending": 1,
+  "experiments": [
+    "smoke"
+  ],
+  "model": "gpt-6.2-sol",
+  "prices": {
+    "date": "2026-11-18",
+    "source": "LiteLLM's price table, the one Harbor 0.26.0 uses"
+  },
+  "conditions": {
+    "smoke/build": {
+      "A": {
+        "tasks": 3,
+        "runs": 3,
+        "repeats": 1,
+        "pass_rate": 0.3333333333333333,
+        "pass@1": 0.3333333333333333,
+        "pass^1": 0.3333333333333333,
+        "tokens_per_run": {
+          "input_uncached": 16496.666666666668,
+          "input_cached": 75807,
+          "output": 2043.6666666666667
+        },
+        "tokens_per_run_total": 94347.33333333333,
+        "cost_per_run": 0.06924953333333334,
+        "cost_per_solved_task": 0.2077486,
+        "seconds_mean": 36.86885,
+        "seconds_median": 36.62436,
+        "responses_per_run": 6.333333333333333,
+        "steps_per_run": {
+          "exec": 5.333333333333333
+        },
+        "kb_use": 1.0,
+        "outcomes": {
+          "completed": 3
+        },
+        "mode": "build",
+        "kb": "notes",
+        "pass_rate_interval": {
+          "value": 0.3333333333333333,
+          "low": 0.0,
+          "high": 1.0,
+          "se": 0.27046621271837673,
+          "tasks": 3
+        },
+        "within_budget": [
+          {
+            "tokens": 85995,
+            "solved": 0.0
+          },
+          {
+            "tokens": 90111,
+            "solved": 0.0
+          },
+          {
+            "tokens": 106936,
+            "solved": 0.3333333333333333
+          }
+        ],
+        "limitation_rates": {},
+        "by_category": {
+          "arithmetic": 0.0,
+          "assignment": 1.0,
+          "timing": 0.0
+        }
+      }
+    },
+    "smoke/empty": {
+      "B": {
+        "tasks": 3,
+        "runs": 3,
+        "repeats": 1,
+        "pass_rate": 0.0,
+        "pass@1": 0.0,
+        "pass^1": 0.0,
+        "tokens_per_run": {
+          "input_uncached": 15329.666666666666,
+          "input_cached": 63342.333333333336,
+          "output": 1731
+        },
+        "tokens_per_run_total": 80403,
+        "cost_per_run": 0.061959900000000005,
+        "cost_per_solved_task": null,
+        "seconds_mean": 30.767969,
+        "seconds_median": 32.179971,
+        "responses_per_run": 5.666666666666667,
+        "steps_per_run": {
+          "exec": 4.666666666666667
+        },
+        "kb_use": 1.0,
+        "outcomes": {
+          "completed": 3
+        },
+        "mode": "eval",
+        "kb": "notes",
+        "pass_rate_interval": {
+          "value": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "se": 0.0,
+          "tasks": 3
+        },
+        "within_budget": [
+          {
+            "tokens": 68641,
+            "solved": 0.0
+          },
+          {
+            "tokens": 84468,
+            "solved": 0.0
+          },
+          {
+            "tokens": 88100,
+            "solved": 0.0
+          }
+        ],
+        "limitation_rates": {},
+        "by_category": {
+          "arithmetic": 0.0,
+          "assignment": 0.0
+        }
+      }
+    },
+    "smoke/eval": {
+      "B": {
+        "tasks": 3,
+        "runs": 3,
+        "repeats": 1,
+        "pass_rate": 0.0,
+        "pass@1": 0.0,
+        "pass^1": 0.0,
+        "tokens_per_run": {
+          "input_uncached": 16640.666666666668,
+          "input_cached": 85849.66666666667,
+          "output": 2403.6666666666665
+        },
+        "tokens_per_run_total": 104894,
+        "cost_per_run": 0.0742128,
+        "cost_per_solved_task": null,
+        "seconds_mean": 43.66528266666666,
+        "seconds_median": 47.143442,
+        "responses_per_run": 7,
+        "steps_per_run": {
+          "exec": 6.0
+        },
+        "kb_use": 1.0,
+        "outcomes": {
+          "completed": 3
+        },
+        "mode": "eval",
+        "kb": "notes",
+        "pass_rate_interval": {
+          "value": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "se": 0.0,
+          "tasks": 3
+        },
+        "within_budget": [
+          {
+            "tokens": 89717,
+            "solved": 0.0
+          },
+          {
+            "tokens": 103611,
+            "solved": 0.0
+          },
+          {
+            "tokens": 121354,
+            "solved": 0.0
+          }
+        ],
+        "limitation_rates": {},
+        "by_category": {
+          "arithmetic": 0.0,
+          "assignment": 0.0
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "smoke": {
+      "vs_empty_kb": {
+        "tasks": 3,
+        "pass_rate_difference": {
+          "value": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "se": 0.0,
+          "tasks": 3
+        },
+        "helped": 0,
+        "harmed": 0,
+        "unchanged": 3,
+        "token_ratio": {
+          "value": 1.302249884333354,
+          "low": 1.0183541430192962,
+          "high": 1.5094622747337596,
+          "se": 0.12918937138606276,
+          "tasks": 3
+        },
+        "cost_ratio": {
+          "value": 1.1995545540301582,
+          "low": 1.052142986402128,
+          "high": 1.3325485166645927,
+          "se": 0.06699476321223054,
+          "tasks": 3
+        },
+        "time_ratio": {
+          "value": 1.4295230135725627,
+          "low": 1.2277354299877563,
+          "high": 1.604666921545703,
+          "se": 0.09120568670156454,
+          "tasks": 3
+        },
+        "smallest_detectable_difference": 0.0
+      }
+    }
+  },
+  "kb": {
+    "smoke": {
+      "build_cost": {
+        "chains": 1,
+        "tokens": 477731.0,
+        "dollars": 0.25580179999999997,
+        "seconds": 163.14149100000003,
+        "contribution_rate": 1.0
+      },
+      "break_even": {},
+      "learning_curve": [
+        {
+          "position": 0,
+          "pass_rate": 0.0,
+          "tokens": 85995
+        },
+        {
+          "position": 1,
+          "pass_rate": 1.0,
+          "tokens": 106936
+        },
+        {
+          "position": 2,
+          "pass_rate": 0.0,
+          "tokens": 90111
+        }
+      ]
+    }
+  },
+  "approaches_compared": 1,
+  "repeat_noise": {},
+  "trust": {
+    "run_counts": {
+      "smoke/build": {
+        "planned": 3,
+        "recorded": 3,
+        "completed": 3,
+        "flagged": 0,
+        "cleared": 0,
+        "void": 0,
+        "pending": 1
+      },
+      "smoke/eval": {
+        "planned": 3,
+        "recorded": 3,
+        "completed": 3,
+        "flagged": 0,
+        "cleared": 0,
+        "void": 0,
+        "pending": 0
+      },
+      "smoke/empty": {
+        "planned": 3,
+        "recorded": 3,
+        "completed": 3,
+        "flagged": 0,
+        "cleared": 0,
+        "void": 0,
+        "pending": 0
+      }
+    },
+    "monitor_findings": {},
+    "redteam_caught": null,
+    "redteam_runs": 0,
+    "clean_sample_read": 0,
+    "clean_sample_voided": null
+  }
+}

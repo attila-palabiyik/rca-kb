@@ -1,0 +1,22 @@
+# Confirms what the agent CLI loads on its own from a KB: a linked AGENTS.md
+# and a linked skills folder. One frozen run on one task.
+
+dataset = "chipbench"
+split   = "main"
+repeats = 1
+seed    = 1
+max_parallel = 1
+retries = 0
+tasks = ["assignment__Prob005_signal_generator"]
+
+[monitor]
+judge_model = "gpt-6.2-sol"
+rubric      = "v1"
+assessment  = "v1"
+
+[[conditions]]
+name     = "eval"
+mode     = "eval"
+kb       = "_check-loaded"
+side     = ["B"]
+snapshot = "seed"

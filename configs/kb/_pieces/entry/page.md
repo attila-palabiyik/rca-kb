@@ -1,0 +1,1 @@
+**Entries are pages.** A page is a markdown file about one topic, gathering what has been learned about it across tasks. Include what did not work as well as what did, say when the page applies, and name the tasks it draws on (the module and the kind of bug). Extend or revise the page a task bears on, and start a new page only for a new topic.

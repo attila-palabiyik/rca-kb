@@ -1,0 +1,14 @@
+{
+  "result": "fail",
+  "reason": "mismatch",
+  "details": {
+    "mismatches": 266,
+    "samples": 353
+  },
+  "log": "VCD info: dumpfile wave.vcd opened for output.\n/tests/test.sv:64: $finish called at 1766 (1ps)\nHint: Output 'remain' has 262 mismatches. First mismatch occurred at time 350.\nHint: Output 'yellow' has 28 mismatches. First mismatch occurred at time 540.\nHint: Output 'red' has 15 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 266 out of 353 samples\n\nSimulation finished at 1766 ps\nMismatches: 266 in 353 samples\n",
+  "grader": {
+    "name": "iverilog_mismatch",
+    "version": "1",
+    "iverilog": "Icarus Verilog version 12.0 (stable) ()"
+  }
+}

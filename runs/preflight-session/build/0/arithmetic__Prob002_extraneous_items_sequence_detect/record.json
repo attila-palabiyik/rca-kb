@@ -1,0 +1,42 @@
+{
+  "run_id": "preflight-session/build/0/arithmetic__Prob002_extraneous_items_sequence_detect",
+  "experiment": "preflight-session",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "shared-session",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob002_extraneous_items_sequence_detect",
+  "repeat": 0,
+  "position": 0,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "2a0919470bcbb840",
+    "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T17:10:30.758885Z",
+      "ended": "2026-11-18T17:10:52.545120Z",
+      "usage": {
+        "input_uncached": 14236,
+        "input_cached": 39451,
+        "output": 1039,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "e3b0c44298fc1c14",
+    "after": "843b45c497a7ca90",
+    "changed": true
+  }
+}

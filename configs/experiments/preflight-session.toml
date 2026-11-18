@@ -1,0 +1,32 @@
+# Pre-flight check 9: one session continued across runs. Two tasks in a chain,
+# then one frozen run that continues a copy of the session.
+
+dataset = "chipbench"
+split   = "main"
+repeats = 1
+seed    = 1
+max_parallel = 1
+retries = 0
+tasks = [
+    "arithmetic__Prob002_extraneous_items_sequence_detect",
+    "timing__Prob006_data_serial-to-parallel_circuit",
+    "assignment__Prob005_signal_generator",
+]
+
+[monitor]
+judge_model = "gpt-6.2-sol"
+rubric      = "v1"
+assessment  = "v1"
+
+[[conditions]]
+name = "build"
+mode = "build"
+kb   = "shared-session"
+side = ["A"]
+
+[[conditions]]
+name     = "eval"
+mode     = "eval"
+kb       = "shared-session"
+side     = ["B"]
+snapshot = "build"

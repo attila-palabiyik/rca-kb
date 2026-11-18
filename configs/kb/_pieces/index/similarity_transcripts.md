@@ -1,0 +1,1 @@
+**Transcripts are separate files** under `/kb/sessions`, found by meaning instead of by name. Run `kbsearch query "what you are looking for" /kb/sessions` to list the transcripts closest in meaning, with their paths. The files are long; search within the ones that look relevant instead of reading them whole.

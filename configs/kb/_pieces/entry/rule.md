@@ -1,0 +1,1 @@
+**Entries are rules.** A rule is one sentence stating something to do or to check, followed by when it applies and which task it came from (the module and the kind of bug). Record what proved to be a dead end as a rule too. Add a rule only when a task taught you one, and reword or merge an existing rule in preference to adding a near-duplicate.

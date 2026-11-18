@@ -1,0 +1,10 @@
+experiment,condition,side,task_id,module,category,runs,pass_rate,tokens_mean,cost_mean,seconds_mean
+smoke,build,A,arithmetic__Prob002_extraneous_items_sequence_detect,Prob002_extraneous_items_sequence_detect,arithmetic,1,0.000,85995,0.0623,33.4
+smoke,build,A,assignment__Prob003_non-overlapping_sequence_detect,Prob003_non-overlapping_sequence_detect,assignment,1,1.000,106936,0.0758,40.5
+smoke,build,A,timing__Prob006_data_serial-to-parallel_circuit,Prob006_data_serial-to-parallel_circuit,timing,1,0.000,90111,0.0697,36.6
+smoke,empty,B,arithmetic__Prob007_data_accumulation_output,Prob007_data_accumulation_output,arithmetic,1,0.000,88100,0.0702,38.4
+smoke,empty,B,assignment__Prob001_continuous_input_sequence_detect,Prob001_continuous_input_sequence_detect,assignment,1,0.000,68641,0.0530,21.7
+smoke,empty,B,assignment__Prob005_signal_generator,Prob005_signal_generator,assignment,1,0.000,84468,0.0627,32.2
+smoke,eval,B,arithmetic__Prob007_data_accumulation_output,Prob007_data_accumulation_output,arithmetic,1,0.000,89717,0.0738,47.1
+smoke,eval,B,assignment__Prob001_continuous_input_sequence_detect,Prob001_continuous_input_sequence_detect,assignment,1,0.000,103611,0.0653,32.2
+smoke,eval,B,assignment__Prob005_signal_generator,Prob005_signal_generator,assignment,1,0.000,121354,0.0835,51.6

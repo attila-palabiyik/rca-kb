@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from harness.config.load import Experiment, RunSpec
-from harness.runner.executor import HARBOR_VERSION, Trial
+from harness.runner.executor import HARBOR_VERSION, Trial, turn_usage
 
 
 def _json(path: Path, data) -> None:
@@ -151,7 +151,11 @@ class Run:
         return self.record["status"]
 
     def usage(self, phase: str = "solve") -> dict:
-        return (self.record["phases"].get(phase) or {}).get("usage") or {}
+        """One turn's tokens, taken from its trajectory so every record is counted alike."""
+        info = self.record["phases"].get(phase) or {}
+        if info.get("trajectory") and (self.directory / info["trajectory"]).is_file():
+            return turn_usage(None, self.directory / info["trajectory"])
+        return info.get("usage") or {}
 
     def seconds(self, phase: str = "solve") -> float | None:
         info = self.record["phases"].get(phase) or {}

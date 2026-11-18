@@ -1,0 +1,44 @@
+# A three-task check of the whole KB path with one approach: a build chain on
+# A with its Update turn, then frozen runs on B with and without what was built.
+
+dataset = "chipbench"
+split   = "main"
+repeats = 1
+seed    = 1
+max_parallel = 3
+retries = 1
+tasks = [
+    # on side A
+    "arithmetic__Prob002_extraneous_items_sequence_detect",
+    "assignment__Prob003_non-overlapping_sequence_detect",
+    "timing__Prob006_data_serial-to-parallel_circuit",
+    # on side B
+    "arithmetic__Prob007_data_accumulation_output",
+    "assignment__Prob001_continuous_input_sequence_detect",
+    "assignment__Prob005_signal_generator",
+]
+
+[monitor]
+judge_model = "gpt-6.2-sol"
+rubric      = "v1"
+assessment  = "v1"
+
+[[conditions]]
+name = "build"
+mode = "build"
+kb   = "notes"
+side = ["A"]
+
+[[conditions]]
+name     = "eval"
+mode     = "eval"
+kb       = "notes"
+side     = ["B"]
+snapshot = "build"
+
+[[conditions]]
+name     = "empty"
+mode     = "eval"
+kb       = "notes"
+side     = ["B"]
+snapshot = "seed"

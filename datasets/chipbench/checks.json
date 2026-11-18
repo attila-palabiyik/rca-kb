@@ -11,5 +11,1149 @@
       "expected": "fail"
     },
     "ok": true
+  },
+  "arithmetic__Prob002_extraneous_items_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob006_data_serial-to-parallel_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob007_data_accumulation_output": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob008_non-integer_data_width_conversion_24to128": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob009_non-integer_data_width_conversion_8to12": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob013_least_common_multiple": {
+    "known_good": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": false
+  },
+  "arithmetic__Prob014_sequence_generator": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob016_odd-number_division_with_a_duty_cycle_of_half": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob017_arbitrary_fractional_frequency_division": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob021_asynchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob022_synchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob023_gray_code_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob024_multiplication_and_bitwise_operations": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob025_pulse_synchronization_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob028_up_and_down_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob030_simple_implementation_RAM": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob031_johnson_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob032_pipeline_multiplier": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob033_traffic_lights": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "arithmetic__Prob034_gaming_machine_billing_program": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob001_continuous_input_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob002_extraneous_items_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob003_non-overlapping_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob004_continuous_input_sequence_detect2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob005_signal_generator": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob006_data_serial-to-parallel_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob007_data_accumulation_output": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob008_non-integer_data_width_conversion_24to128": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob009_non-integer_data_width_conversion_8to12": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob011_4-bit_carry_look-ahead_adder_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob012_state_machine_overlapping_sequence_detection": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob013_least_common_multiple": {
+    "known_good": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": false
+  },
+  "assignment__Prob014_sequence_generator": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob015_vending_machine2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob016_odd-number_division_with_a_duty_cycle_of_half": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob017_arbitrary_fractional_frequency_division": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob020_write_state_machine_two_stage": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob021_asynchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob022_synchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob023_gray_code_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob024_multiplication_and_bitwise_operations": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob026_simple_stopwatch": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob027_settable_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob028_up_and_down_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob030_simple_implementation_RAM": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob031_johnson_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob032_pipeline_multiplier": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob033_traffic_lights": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "assignment__Prob034_gaming_machine_billing_program": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob003_non-overlapping_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob004_continuous_input_sequence_detect2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob012_state_machine_overlapping_sequence_detection": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob015_vending_machine2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob020_write_state_machine_two_stage": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "state_machine__Prob033_traffic_lights": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob001_continuous_input_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob002_extraneous_items_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob003_non-overlapping_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob004_continuous_input_sequence_detect2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob005_signal_generator": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob006_data_serial-to-parallel_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob007_data_accumulation_output": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob008_non-integer_data_width_conversion_24to128": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob009_non-integer_data_width_conversion_8to12": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob012_state_machine_overlapping_sequence_detection": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob013_least_common_multiple": {
+    "known_good": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "compile_error",
+      "expected": "fail"
+    },
+    "ok": false
+  },
+  "timing__Prob014_sequence_generator": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob015_vending_machine2": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob016_odd-number_division_with_a_duty_cycle_of_half": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "compile_error",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob017_arbitrary_fractional_frequency_division": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob021_asynchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob022_synchronous_FIFO": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "sim_timeout",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob023_gray_code_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob025_pulse_synchronization_circuit": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob026_simple_stopwatch": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob027_settable_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob028_up_and_down_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob030_simple_implementation_RAM": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob031_johnson_counter": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob032_pipeline_multiplier": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob033_traffic_lights": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  },
+  "timing__Prob034_gaming_machine_billing_program": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
   }
 }

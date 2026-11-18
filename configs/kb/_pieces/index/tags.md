@@ -1,0 +1,1 @@
+**Entries are separate files** under `/kb/entries`, and `/kb/AGENTS.md` lists every one on a single line with its file and its tags, after a list of the tags in use. That list has already been loaded into your context. Pick the tags that fit your task and open the entries carrying them. When you add an entry, use existing tags where they fit and add a new tag only when none does.

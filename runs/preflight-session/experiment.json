@@ -1,0 +1,62 @@
+{
+  "name": "preflight-session",
+  "kind": "results",
+  "resolved": {
+    "dataset": "chipbench",
+    "split": "main",
+    "repeats": 1,
+    "seed": 1,
+    "max_parallel": 1,
+    "retries": 0,
+    "tasks": [
+      "arithmetic__Prob002_extraneous_items_sequence_detect",
+      "timing__Prob006_data_serial-to-parallel_circuit",
+      "assignment__Prob005_signal_generator"
+    ],
+    "monitor": {
+      "judge_model": "gpt-6.2-sol",
+      "rubric": "v1",
+      "assessment": "v1"
+    },
+    "conditions": [
+      {
+        "name": "build",
+        "mode": "build",
+        "kb": "shared-session",
+        "side": [
+          "A"
+        ]
+      },
+      {
+        "name": "eval",
+        "mode": "eval",
+        "kb": "shared-session",
+        "side": [
+          "B"
+        ],
+        "snapshot": "build"
+      }
+    ],
+    "excluded_tasks": [
+      "arithmetic__Prob013_least_common_multiple",
+      "assignment__Prob013_least_common_multiple",
+      "timing__Prob013_least_common_multiple"
+    ]
+  },
+  "dataset": "chipbench",
+  "dataset_version": "3c9d7d87dd78573f",
+  "split": "main",
+  "seed": 1,
+  "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+  "base_setup_hash": "2a0919470bcbb840",
+  "executor": {
+    "name": "harbor",
+    "version": "0.26.0"
+  },
+  "started": "2026-11-18T17:10:09.651912+00:00",
+  "max_parallel": 1,
+  "setups": {
+    "build": "2a0919470bcbb840",
+    "eval": "2a0919470bcbb840"
+  }
+}

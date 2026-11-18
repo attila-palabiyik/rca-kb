@@ -1,0 +1,1 @@
+**Entries are transcripts.** A transcript is the complete record of one earlier task, saved as a JSON-lines file under `/kb/sessions` by the tool you are running in. Each holds everything that was said and done, including what did not work. You do not write these; they are kept for you after each task.

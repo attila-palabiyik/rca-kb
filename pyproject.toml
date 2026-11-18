@@ -12,5 +12,6 @@ dependencies = [
 dev = ["pytest>=8"]
 
 [tool.pytest.ini_options]
+pythonpath = ["."]
 testpaths = ["tests/fast"]
 markers = ["container: needs Docker and the harness image"]

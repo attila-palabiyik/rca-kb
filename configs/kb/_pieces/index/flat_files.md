@@ -1,0 +1,1 @@
+**Entries are separate files** under `/kb/entries`, named by a number and a short title, with no index. List the folder and search it by text to find what bears on your task. When you add an entry, give it the next number.

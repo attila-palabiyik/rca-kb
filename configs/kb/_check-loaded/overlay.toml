@@ -1,0 +1,9 @@
+# _check-loaded: not a KB approach. Confirms that a KB file linked as AGENTS.md,
+# and a KB skill linked into the CLI's skills folder, reach the agent unasked.
+
+[kb]
+path = "/kb"
+
+[kb.links]
+"/app/AGENTS.md" = "AGENTS.md"
+"/root/.agents/skills" = "skills"

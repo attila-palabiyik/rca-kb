@@ -1,0 +1,1 @@
+**Entries are separate files** under `/kb/entries`, found by meaning instead of by name. Run `kbsearch query "what you are looking for" /kb/entries` to list the entries closest in meaning, with their paths, and open the ones that look relevant. New and changed files are picked up the next time a query runs, so adding an entry needs nothing more than writing its file.

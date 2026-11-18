@@ -1,0 +1,71 @@
+{
+  "name": "smoke",
+  "kind": "results",
+  "resolved": {
+    "dataset": "chipbench",
+    "split": "main",
+    "repeats": 1,
+    "seed": 1,
+    "max_parallel": 3,
+    "retries": 1,
+    "tasks": [
+      "arithmetic__Prob002_extraneous_items_sequence_detect",
+      "assignment__Prob003_non-overlapping_sequence_detect",
+      "timing__Prob006_data_serial-to-parallel_circuit",
+      "arithmetic__Prob007_data_accumulation_output",
+      "assignment__Prob001_continuous_input_sequence_detect",
+      "assignment__Prob005_signal_generator"
+    ],
+    "monitor": {
+      "judge_model": "gpt-6.2-sol",
+      "rubric": "v1",
+      "assessment": "v1"
+    },
+    "conditions": [
+      {
+        "name": "build",
+        "mode": "build",
+        "kb": "notes",
+        "side": [
+          "A"
+        ]
+      },
+      {
+        "name": "eval",
+        "mode": "eval",
+        "kb": "notes",
+        "side": [
+          "B"
+        ],
+        "snapshot": "build"
+      },
+      {
+        "name": "empty",
+        "mode": "eval",
+        "kb": "notes",
+        "side": [
+          "B"
+        ],
+        "snapshot": "seed"
+      }
+    ],
+    "excluded_tasks": []
+  },
+  "dataset": "chipbench",
+  "dataset_version": "3c9d7d87dd78573f",
+  "split": "main",
+  "seed": 1,
+  "harness_commit": "9ee3970673ccba645644f2557733d9bc17cb849e",
+  "base_setup_hash": "04b3766609550b98",
+  "executor": {
+    "name": "harbor",
+    "version": "0.26.0"
+  },
+  "started": "2026-11-18T16:57:57.764803+00:00",
+  "max_parallel": 3,
+  "setups": {
+    "build": "04b3766609550b98",
+    "eval": "04b3766609550b98",
+    "empty": "04b3766609550b98"
+  }
+}

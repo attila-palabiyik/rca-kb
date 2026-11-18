@@ -1,0 +1,1 @@
+**Skills live where the tool you are running in looks for them,** `~/.agents/skills`, one folder each. Their names and descriptions have already been listed in your context, and a skill's body is read when you choose to use it. To add or change a skill, write its folder there; a good description is what gets it chosen.

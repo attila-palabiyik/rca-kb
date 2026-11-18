@@ -1,0 +1,11 @@
+# The fast tier: no container, network or model. Runs on every commit.
+name: tests
+on: [push, pull_request]
+jobs:
+  fast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run pytest tests/fast -q
