@@ -416,9 +416,12 @@ _Pending: what worked, what failed, and how the choice of A affects B._
   for an approach may therefore reflect a KB that was not read rather than
   one that did not help; the "Runs that read the KB" column of Table 6 says
   which.
-- _Instructions apart from content._ An approach adds instructions as well as
-  a KB. The control that separates them, the same instructions with an empty
-  KB, is defined for every approach but was not run, for lack of time.
+- _Instructions and timing apart from content._ An approach adds
+  instructions as well as a KB, and its runs on B came two to five hours
+  after the baseline's, against the same model service. A gain shared by
+  every approach could come from either. The control that separates them,
+  the same instructions with an empty KB run alongside, is defined for every
+  approach but was not run, for lack of time.
 - _Size and contamination._ B has 41 tasks in 15 modules, from a public
   benchmark the model may have seen. That would raise the baseline and leave
   an approach less room to help.
