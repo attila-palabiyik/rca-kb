@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 225,
+      "quote": "+            q <= {q[4:0], q[5]};",
+      "note": "The patch clocked the rotation but left `data` combinational, so it showed the already-rotated bit instead of registering the pre-rotation `q[5]` on each rising edge."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "if (rst_n) position = (position + 1) % 6;",
+      "note": "The test advanced its expected position before checking the rising-edge output, so it treated the reset value as the first bit and accepted the one-clock phase error."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38230,
+    "output": 183
+  }
+}

@@ -112,11 +112,11 @@ ul.limits { padding-left: 22px; margin: 0; }
 
 <!-- 2 -->
 <section class="slide">
-  <h1>Every KB raised the pass rate on unseen modules, by @S_RANGE@ points, and none made a task worse</h1>
+  <h1>Every KB raised the pass rate on unseen modules, by 5 to 20 points, and none made a task worse</h1>
   <div class="body rows">
     <div><span class="label">What to store</span><p>Ways of working that hold for any module, above all to repair and not reimplement. The agents stored cases instead.</p></div>
-    <div><span class="label">How to organise and retrieve it</span><p>Loaded on every task did best: the playbook and the single-file guide. Transcripts searched by text did least.</p></div>
-    <div><span class="label">What it costs</span><p>About 1.5 times the tokens and 1.35 times the time per run, at 1.1 to 1.4 times the cost; $0.50 to $2.10 to build.</p></div>
+    <div><span class="label">How to organise and retrieve it</span><p>Loaded whole on every task did best: the playbook and the single-file guide, +19.5 points each. Added indexes did no better than flat files.</p></div>
+    <div><span class="label">What it costs</span><p>1.2 to 1.7 times the tokens per run (6.7 for the shared session), 1.1 to 1.4 times the cost, about 1.4 times the time; $0.50 to $2.10 to build.</p></div>
     <div><span class="label">How set A shapes set B</span><p>No module in common, so only what generalises carries over. A passes 70% with no KB, so its KB learns mostly from successes.</p></div>
   </div>
   <div class="foot"><span>Set B: 41 tasks in 15 modules that set A does not contain. No KB passes 39% of B.</span></div>
@@ -266,6 +266,31 @@ end</pre>
   <div class="foot"><span>Words counted in each KB as frozen after the 45 tasks of A. Source: <code>runs/kb-*/kb/build/0/</code>.</span></div>
 </section>
 
+<!-- 10c -->
+<section class="slide">
+  <h1>What worked was a way of repairing, loaded every time; what failed was distilling it</h1>
+  <div class="body two">
+    <div>
+      <p class="label" style="color: var(--ink); font-weight: 600; margin-bottom: 14px;">Worked</p>
+      <ul class="limits">
+        <li>A KB loaded whole on every task: +19.5 points for the playbook and for the single-file guide, at 1.2 and 1.6 times the tokens</li>
+        <li>Fewer rewrites: the KBs removed "changed more than the bug" from up to a quarter of B's tasks</li>
+        <li>No harm: no KB made a task worse, and a KB misled the agent in at most 7% of runs</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label" style="color: var(--ink); font-weight: 600; margin-bottom: 14px;">Failed</p>
+      <ul class="limits">
+        <li>Distilling: asked for rules, guides or skills, the agents kept cases about modules B does not contain</li>
+        <li>Relevance: the KB had no bearing on the task in 20% to 93% of runs, most for raw cases</li>
+        <li>Reading: the rule to work only in the workspace kept some agents out of their KB</li>
+        <li>Ranking: one build each cannot separate the approaches from one another</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>"No bearing" and "misled" are a model's reading of each run against the task and the correct fix. For a KB loaded into context the reader cannot see whether a rule was used.</span></div>
+</section>
+
 <!-- 11 -->
 <section class="slide">
   <h1>On A the KBs gained only where they had met the module; on B, where every module was new, every one still gained</h1>
@@ -277,12 +302,12 @@ end</pre>
 
 <!-- 12 -->
 <section class="slide">
-  <h1>Every KB raised the pass rate on unseen modules, by @S_RANGE@ points, and none made a task worse</h1>
+  <h1>Every KB raised the pass rate on unseen modules, by 5 to 20 points, and none made a task worse</h1>
   <div class="body wide-narrow">
     <div class="rows">
       <div><span class="label">What to store</span><p>Ways of working that hold for any module, above all to repair and not reimplement. The agents stored cases instead.</p></div>
-      <div><span class="label">How to organise and retrieve it</span><p>Loaded on every task did best: the playbook and the single-file guide. Transcripts searched by text did least.</p></div>
-      <div><span class="label">What it costs</span><p>About 1.5 times the tokens and 1.35 times the time per run, at 1.1 to 1.4 times the cost; $0.50 to $2.10 to build.</p></div>
+      <div><span class="label">How to organise and retrieve it</span><p>Loaded whole on every task did best: the playbook and the single-file guide, +19.5 points each. Added indexes did no better than flat files.</p></div>
+      <div><span class="label">What it costs</span><p>1.2 to 1.7 times the tokens per run (6.7 for the shared session), 1.1 to 1.4 times the cost, about 1.4 times the time; $0.50 to $2.10 to build.</p></div>
       <div><span class="label">How set A shapes set B</span><p>No module in common, so only what generalises carries over. A passes 70% with no KB, so its KB learns mostly from successes.</p></div>
     </div>
     <div>

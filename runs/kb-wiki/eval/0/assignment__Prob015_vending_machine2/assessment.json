@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "out1 <= vend && !sel;",
+      "note": "Instead of changing only the beverage-2 output patterns to `010` at 2.5 yuan and `011` at 3 yuan, the agent replaced the FSM with registered outputs, falling-edge credit updates, simultaneous-coin accumulation, and queued change, altering observable behavior the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "paid = paid + rising[0] + 2 * rising[1];",
+      "note": "The test modeled the rewrite\u2019s edge-detected coin summing and queued change rather than checking the corrected output patterns against the original FSM\u2019s timing and transitions."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "decode the current state in a combinational block",
+      "note": "The agent read relevant guidance on combinational FSM outputs but did not use it to preserve the existing decode and isolate the two incorrect output values."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11723,
+    "output": 436
+  }
+}

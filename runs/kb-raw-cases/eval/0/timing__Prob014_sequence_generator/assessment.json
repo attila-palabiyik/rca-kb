@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign data = q[5];",
+      "note": "The patch fixed the combinational feedback in the ring register but made reset synchronous and exposed the rotated bit directly, rather than asynchronously resetting a registered output that captures the pre-rotation bit."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (data !== 1) $fatal(1, \"Output changed before rising edge\");",
+      "note": "The test required the output to stay high until a clock edge after reset assertion and counted the first bit before the first post-reset rising edge, so it validated the patch's assumptions instead of catching the reset and output-phase mismatches."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -n -o -m 8 '.{0,65}001011.{0,95}'",
+      "note": "The targeted lookup returned only a truncated transcript fragment and provided no useful guidance on reset or output timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6535,
+    "output": 264
+  }
+}

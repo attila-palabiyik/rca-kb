@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "clkn <= clkp ;",
+      "note": "Sampling `clkp` fixes the duty cycle but shifts both output transitions half an input cycle later than the threshold-only fix that preserves the counter-based timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (transitions > 0 && $time - last_transition != 35)",
+      "note": "The test checked the spacing between transitions but not which input edges produced them, so the half-cycle phase shift went undetected."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7749,
+    "output": 246
+  }
+}

@@ -1,0 +1,11 @@
+# Pattern checks and cycle alignment in a shift-register sequence detector
+
+Applies when a shift-register detector misses matches, reports false matches, or pulses one cycle away from the expected edge.
+
+1. Map the stream order to the register indices using the shift assignment. Check each slice and literal against the fixed bits of the specified pattern, and check that all wildcard values are accepted.
+2. Trace which window each comparison reads. A clocked comparison reads the pre-edge register when the shift uses a nonblocking assignment. A combinational comparison settles using the post-edge register. Use the specified timing and existing registered stages to identify the edge that should report a match. When the comparisons already read the intended window, a wrong literal can be fixed in place.
+3. Drive an isolated match followed by a bit that makes the new window fail. Check the output after both edges, and check reset while the output is high. When the output reports the pre-edge register, compute the expected match before shifting the testbench history.
+
+In one `TopModule.sv` task, the `011XXX110` detector already registered both comparisons, but the prefix literal was `001`. Changing it to `011` passed all 237 graded samples. The output reported a match one rising edge after the final bit was sampled. An Icarus test checked all 512 windows using the pre-edge history and verified that asynchronous reset cleared an asserted match.
+
+In an earlier `TopModule.sv` task for the same pattern, the combinational prefix comparison and registered suffix comparison read different windows. Registering the prefix with the same asynchronous reset as the suffix aligned both to the pre-edge window. A submitted fix instead compared the incoming window and reported a match on the edge that sampled the final bit. Its exhaustive Icarus test passed because it shifted its history before calculating the expected output. The grader reported 16 mismatches in 237 samples.

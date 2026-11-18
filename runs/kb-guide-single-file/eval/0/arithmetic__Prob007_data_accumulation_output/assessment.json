@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The counter fix was correct, but removing `ready_b` from the accumulator condition changed an accepted first byte from being added to the previous sum to replacing it when downstream was not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sum = 0;",
+      "note": "The scoreboard cleared its sum after every group regardless of downstream readiness, so it exercised the disputed case but treated the extra behavior change as correct."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the simulation command to be resubmitted, and a later `git diff` in a non-Git workspace required a separate file inspection."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10764,
+    "output": 319
+  }
+}

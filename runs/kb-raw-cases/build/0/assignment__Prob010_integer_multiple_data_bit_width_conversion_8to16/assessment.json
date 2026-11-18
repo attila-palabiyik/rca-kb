@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "24-bit input data into 128-bit output data",
+      "note": "The knowledge-base search surfaced a different width converter and offered no guidance on the reversed capture condition in this module."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7768,
+    "output": 124
+  }
+}

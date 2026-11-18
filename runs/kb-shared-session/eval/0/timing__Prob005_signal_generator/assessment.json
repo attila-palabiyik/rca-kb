@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? PEAK : 5'd0;",
+      "note": "The counter fix was correct, but the square-wave rewrite overwrote the previous output between counts 9 and 19 instead of holding it, changing what happens when entering square mode."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "else if (wave == 5'd0) begin",
+      "note": "The triangle rewrite changed startup and mode-entry behavior: after reset, its first triangle sample is 1, whereas the reference preserves the original decrement from 0 to 31."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "tick(2, 1);",
+      "note": "The test explicitly expected the rewritten triangle startup and did not check whether entering square mode with a nonzero output held that value until count 9, so it passed despite both behavior changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38265,
+    "output": 322
+  }
+}

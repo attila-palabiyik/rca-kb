@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter rollover but also tied `ready_a` high through reset, allowing acceptance on the first post-reset edge, and made `valid_b` stay low during stalls at count five."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "ready_a !== 1'b1 || valid_b !== complete",
+      "note": "The test exercised reset and stalls but expected the rewrite's constant ready and completion-only valid, so it passed without detecting either timing regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The combined edit-and-test command had to be reissued after a cleanup command was rejected, and the test setup had to be reissued again with `python3`."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "The submitted fix also tied `ready_a` high and qualified `valid_b` with `valid_a`.",
+      "note": "The consulted skill documented a closely related failure caused by these same extra handshake changes, but that warning did not change the agent's implementation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8731,
+    "output": 376
+  }
+}

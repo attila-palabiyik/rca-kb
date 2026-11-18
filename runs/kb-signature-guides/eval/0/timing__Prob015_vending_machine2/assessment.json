@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "preserve the registered dispensing timing",
+      "note": "The actual fix was to decode the outputs combinationally from the current state and selection, but the rewrite kept them registered and changed coin acceptance and change dispensing instead."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sell = credit >= price;",
+      "note": "The testbench mirrored the rewrite\u2019s credit and clocking rules, so even 20,000 randomized cycles did not check whether dispensing asserted as soon as the FSM entered a dispensing state."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Test the result immediately after the final sampling edge",
+      "note": "The agent read a relevant guide on reset-gated combinational output decoding but did not apply its advice to the vending machine."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "55 7 3",
+      "note": "The agent retried a Python state-space calculation to size the replacement credit and change counters, work that did not diagnose or fix the output timing defect."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10753,
+    "output": 514
+  }
+}

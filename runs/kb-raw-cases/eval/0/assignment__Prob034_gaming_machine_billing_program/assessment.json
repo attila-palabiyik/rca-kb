@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -il 'gaming machine billing|prepaid charging|remaon' /kb/sessions",
+      "note": "Neither the task-specific search nor the follow-up search found a match, so the knowledge base did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7954,
+    "output": 113
+  }
+}

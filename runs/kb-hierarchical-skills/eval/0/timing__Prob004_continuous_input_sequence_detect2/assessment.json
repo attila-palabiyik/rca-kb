@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "The final 0 and new 1 form the next prefix 01.",
+      "note": "The patch fixed the one-cycle match delay but also changed two exits from the match state to reuse the final zero, enabling overlapping detections that the reference fix does not produce."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 15,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test caught timing errors, but its rolling-history oracle treated overlapping matches as expected, so the exhaustive pass could not flag the extra pulses introduced by the patch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "ValueError: not enough values to unpack (expected 1, got 0)",
+      "note": "Four edit attempts failed because they matched source text or comments that did not exist as written; inspecting the exact lines earlier would have avoided the retries."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11672,
+    "output": 365
+  }
+}

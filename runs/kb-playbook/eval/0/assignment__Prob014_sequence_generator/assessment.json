@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository.",
+      "note": "The first test launch was blocked by its cleanup command and had to be retried, then an unrelated Git check made the successful simulation command report a failure."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6763,
+    "output": 131
+  }
+}

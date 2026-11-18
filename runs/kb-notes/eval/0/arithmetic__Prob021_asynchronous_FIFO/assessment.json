@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wptr <= gray_pointer(waddr_next);",
+      "note": "The rewrite fixed the inverted RAM read enable but also advanced both Gray pointers a clock earlier, changing when `wfull` and `rempty` update; it additionally gated RAM accesses during reset, which the reference leaves unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "accepted = rrstn && rinc && !rempty;",
+      "note": "The scoreboard used the rewritten DUT\u2019s flags to decide which transfers to check and verified fill and drain after settling, so it could pass without detecting that the flags changed on different cycles."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12124,
+    "output": 309
+  }
+}

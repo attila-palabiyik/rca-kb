@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "wptr <= gray_pointer(waddr_next);",
+      "note": "The rewrite fixed the inverted RAM read enable but also removed the original one-cycle lag in both Gray pointers, changing when the full and empty flags update and which requests are accepted."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 227,
+      "quote": "accept_r = r_edge && rrstn && rd && !rempty;",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to expect, so it could verify ordering and guard against underflow or overflow without detecting the cycle-by-cycle flag timing mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 40723,
+    "output": 272
+  }
+}

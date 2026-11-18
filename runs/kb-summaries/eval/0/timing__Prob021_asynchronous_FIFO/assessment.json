@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "output reg wfull,\n    output reg rempty,",
+      "note": "The rewrite fixed the unregistered write Gray pointer but also computed registered flags from next-state pointers, changing the cycle-by-cycle full and empty timing that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT's flags to decide which transfers counted, so it could verify FIFO ordering and capacity without detecting that the flags changed on the wrong cycles."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the entire verification command to be rejected before simulation, so the agent had to resubmit the setup and test bench through Python."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11166,
+    "output": 382
+  }
+}

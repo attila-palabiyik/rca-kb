@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first test command was rejected because of its cleanup command, the retry used an unavailable `python` executable, and the eventual passing run ended with an inapplicable Git check."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "Check both window alignment and output latency.",
+      "note": "The consulted pages offered general timing advice but no guidance on the duplicated partial product, and the record shows no change to the fix or test strategy attributable to them."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10434,
+    "output": 211
+  }
+}

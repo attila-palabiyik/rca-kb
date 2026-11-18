@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/assignment__Prob006_data_serial-to-parallel_circuit",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob006_data_serial-to-parallel_circuit",
+  "repeat": 0,
+  "position": 24,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "1852b5620a66fcd011882fa4df232efb30f733ab",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:05:11.726978Z",
+      "ended": "2026-11-18T19:05:40.313105Z",
+      "usage": {
+        "input_uncached": 17515,
+        "input_cached": 60024,
+        "input_cache_write": 17500,
+        "output": 1401,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5ca15f7690cf0e64",
+    "after": "b318d25ab8ed0a92",
+    "changed": true
+  }
+}

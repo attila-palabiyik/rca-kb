@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-guide-single-file/eval/0/assignment__Prob015_vending_machine2",
+  "experiment": "kb-guide-single-file",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "guide-single-file",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob015_vending_machine2",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "54cd06f44b2db497",
+    "harness_commit": "7f35a344096494b63cc4a32a5212054b13ebfe60",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 2,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:42:12.279891Z",
+      "ended": "2026-11-18T21:44:35.048826Z",
+      "usage": {
+        "input_uncached": 28177,
+        "input_cached": 212551,
+        "input_cache_write": 28147,
+        "output": 6801,
+        "responses": 10
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "56c16ec84ca032b7",
+    "after": "56c16ec84ca032b7",
+    "changed": false
+  }
+}

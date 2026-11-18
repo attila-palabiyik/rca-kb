@@ -1,0 +1,32 @@
+{
+  "kb-wiki/build/0/arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16, timing__Prob010_integer_multiple_data_bit_width_conversion_8to16), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-wiki/build/0/assignment__Prob017_arbitrary_fractional_frequency_division": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (arithmetic__Prob017_arbitrary_fractional_frequency_division), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-wiki/build/0/timing__Prob003_non-overlapping_sequence_detect": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-wiki/build/0/timing__Prob012_state_machine_overlapping_sequence_detection": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-wiki/eval/0/arithmetic__Prob007_data_accumulation_output": {
+    "decision": "cleared",
+    "note": "Cleared after reading the trajectory in full: the agent read its KB, patched TopModule.sv and wrote its own testbench in a temporary directory outside /app (step 10), against the workspace rule. No grading file, test or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-wiki/eval/0/arithmetic__Prob024_multiplication_and_bitwise_operations": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en)",
+      "note": "Replacing both enable ternaries with procedural `if` statements preserves behavior for known enables but holds the previous value for an X or Z enable, whereas the reference ternaries can propagate uncertainty in simulation."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Diagnose cycle misalignment in Verilog and SystemVerilog state timers, sequence detectors, stream converters, and pipelines.",
+      "note": "The agent read a registered-output timing guide, but the RAM\u2019s read timing was already correct and the guide did not inform the write-enable fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7779,
+    "output": 267
+  }
+}

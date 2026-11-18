@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "Besides fixing the write pointer, the rewrite suppresses RAM writes during reset, whereas the original and reference leave the RAM write enable ungated by reset."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the full test invocation to be resubmitted, after an earlier Git error had already forced the simulator lookup to be retried."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Preserve explicit reset when decoding FSM outputs",
+      "note": "The note concerned reset timing in combinational FSM outputs and offered no guidance on the FIFO's combinational write-pointer bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10450,
+    "output": 334
+  }
+}

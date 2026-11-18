@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "the upper sum added `temp[2]` twice and omitted `temp[3]`.",
+      "note": "The multiplier entry described a partial-product bug that was already absent from this version, so it did not help identify the missing output register."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6922,
+    "output": 232
+  }
+}

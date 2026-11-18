@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "balance <= (vend ? 3'd0 : balance) + inserted;",
+      "note": "The rewrite corrected the two balance transitions but also counted simultaneous inputs together instead of giving d1 priority, accepted new credit during vending, and replaced the original state-decoded change output with queued, clock-dependent pulses."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 9,
+      "quote": "localparam [2:0] PRICE1 = 3'd3, PRICE2 = 3'd5;",
+      "note": "The rewrite kept the module name and ports but removed the original public state parameters, so an instantiation that overrides them would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "// Simultaneous coins produce two half-yuan change pulses.",
+      "note": "The passing test covered the two bad transitions, but it treated the rewrite\u2019s simultaneous-credit and queued-change behavior as expected rather than checking that the original coin priority and output timing were preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10773,
+    "output": 441
+  }
+}

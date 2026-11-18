@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "idle, s6, sf6:",
+      "note": "Folding `idle` into the terminal-state branch changed how the FSM handles an X or Z on the first data bit: the original and reference choose `sf1`, but the ternary can produce an unknown state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the agent to resubmit the simulation setup, after an earlier Git status check had already aborted its command chain in the non-Git workspace."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8897,
+    "output": 388
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-signature-guides/build/0/assignment__Prob012_state_machine_overlapping_sequence_detection",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "signature-guides",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob012_state_machine_overlapping_sequence_detection",
+  "repeat": 0,
+  "position": 29,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T20:10:05.769236Z",
+      "ended": "2026-11-18T20:10:40.818982Z",
+      "usage": {
+        "input_uncached": 19685,
+        "input_cached": 97187,
+        "input_cache_write": 19664,
+        "output": 1769,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:11:36.998743Z",
+      "ended": "2026-11-18T20:11:56.710723Z",
+      "usage": {
+        "input_uncached": 1730,
+        "input_cached": 60356,
+        "input_cache_write": 1721,
+        "output": 696,
+        "responses": 3
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5118538fa5a863a0",
+    "after": "da57abae4ffa2da5",
+    "changed": true
+  }
+}

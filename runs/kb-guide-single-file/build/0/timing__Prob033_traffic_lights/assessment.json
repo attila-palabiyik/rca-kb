@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "red    = (state == s1_red);",
+      "note": "The rewrite made the countdown reload correctly but replaced the registered light-output stage with a direct state decode, lighting red during reset and changing the startup and transition timing that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test required the rewrite's red-during-reset behavior and used its transition schedule as the expected waveform, so passing did not establish that the original output timing was preserved."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 4,
+      "quote": "A scoreboard that assumes one candidate's pulse width can confirm its implementation while leaving the choice between candidates unresolved.",
+      "note": "The agent did not apply the available guide's analogous advice to compare the waveforms of competing fixes before writing a scoreboard around the rewrite."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8508,
+    "output": 377
+  }
+}

@@ -1,0 +1,7 @@
+# Trace registered outputs before changing a timed FSM
+
+In the traffic-light `TopModule`, the reference fixed two transition targets. At `cnt == 3`, red enters green and green enters yellow. Yellow already entered red. The reference preserved the idle reset state, the registered light buffers and outputs, and the counter reload logic.
+
+The submitted rewrite updated the light and countdown together and asserted red during reset. It passed a self-written Icarus test based on the prose specification, including pedestrian requests at every green count. Grading reported 220 mismatches out of 517 samples. The reference diff establishes the intended patch. The grading report gives no individual mismatch traces.
+
+For a timed FSM with registered outputs, check transition targets against the requested sequence first. Trace the old and new values of the state, output buffers, visible outputs, and timer on each edge before changing a threshold or removing a stage. Here, the edge that sees count 3 changes the internal state at count 2. The next edge updates the light buffer at count 1. On the following edge, the visible light changes and the counter reloads because the timer block sees the buffer high and the corresponding visible light still low. A targeted test can check this boundary and the first few edges after reset. If the prose and existing reset or output timing conflict, record the discrepancy explicitly so a test based on one interpretation does not silently settle it.

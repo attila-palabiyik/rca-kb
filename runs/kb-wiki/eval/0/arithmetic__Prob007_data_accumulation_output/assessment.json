@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if(data_cnt == 2'd0)",
+      "note": "The patch fixed the counter\u2019s OR-to-AND handshake bug but also removed the downstream-ready condition from the accumulator reload, changing `data_out` when the first input of a group is accepted with `ready_b` low."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (count == 0) sum = 0;",
+      "note": "The scoreboard assumed the accumulator should restart at every group boundary regardless of `ready_b`, so its backpressure cases confirmed the rewrite instead of catching the change from the reference behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the simulation invocation to be rejected and resubmitted, after an earlier failed `git status` had already forced the source-file read to be retried."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9740,
+    "output": 312
+  }
+}

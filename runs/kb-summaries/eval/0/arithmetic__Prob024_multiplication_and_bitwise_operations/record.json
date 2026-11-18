@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-summaries/eval/0/arithmetic__Prob024_multiplication_and_bitwise_operations",
+  "experiment": "kb-summaries",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "summaries",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob024_multiplication_and_bitwise_operations",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3fef61bdcc196f64",
+    "harness_commit": "968e0751fdb6db4bd9a6af11f35121363df7e591",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:03:07.126880Z",
+      "ended": "2026-11-18T21:03:42.056547Z",
+      "usage": {
+        "input_uncached": 17949,
+        "input_cached": 117173,
+        "input_cache_write": 17922,
+        "output": 1646,
+        "responses": 9
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "ab10f85a42edeeaa",
+    "after": "ab10f85a42edeeaa",
+    "changed": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent registered the output but compared the post-shift value, so the match pulse still arrives one clock edge earlier than required by the pre-edge comparison."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test compared `match` against the already-updated history, so even exhaustive transition coverage validated the agent's timing assumption rather than catching the one-cycle error."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first simulation launch was blocked by its cleanup command, and the retry used an unavailable `python` executable, so the test setup had to be submitted a third time before simulation ran."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8632,
+    "output": 357
+  }
+}

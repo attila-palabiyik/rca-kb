@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "+    always @(posedge clk or negedge rst_n) begin",
+      "note": "The patch clocked only the ring register and left `data` combinational, so after each rising edge it showed the newly rotated bit rather than registering the pre-edge `q[5]`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "check_bits(15);",
+      "note": "The test counted the sample before the first rising edge after reset release as bit zero, so it passed the combinational output instead of catching the one-cycle phase error."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6182,
+    "output": 267
+  }
+}

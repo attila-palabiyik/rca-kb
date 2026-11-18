@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "// Change the light and reload its timer on the same edge.",
+      "note": "The rewrite eliminated the red state's erroneous green assertion, but also removed the existing output pipeline, changed when the timer reloads, and turned red on during reset instead of preserving the all-off reset outputs."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "#1 check(RED, 10);",
+      "note": "The passing test asserted the rewrite's immediate red reset and same-edge timer reload, so it validated the new timing rather than detecting the regression against the original timing."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "/kb/entries/71-traffic-light-output-register-grading.md",
+      "note": "The search surfaced directly relevant traffic-light timing entries, but the agent did not open them before replacing the controller."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "# Incorrect low-input transition out of a Moore terminal state",
+      "note": "The only entry the agent read concerned a different FSM's terminal-state branch and did not inform the countdown or output timing fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup wrapper forced the agent to resubmit the test command, after an earlier failed Git check had already forced a separate source-read command."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10766,
+    "output": 606
+  }
+}

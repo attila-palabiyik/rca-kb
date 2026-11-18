@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "Publish the Gray encoding on the same edge that advances the RAM pointer.",
+      "note": "The agent registered the write-side Gray pointer, but also switched both sides to next-pointer encoding and gated RAM enables during reset, changing observable flag timing and reset behavior that the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (winc && !wfull) begin",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers counted and checked eventual boundary conditions, so it could pass without detecting the cycle-by-cycle flag timing mismatch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the tool to reject the entire verification command before simulation, forcing the agent to resubmit the long command with a different cleanup method."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12745,
+    "output": 480
+  }
+}

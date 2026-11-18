@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "valid_b <= word_complete;",
+      "note": "Registering `valid_b` fixed the early assertion, but gating it with `valid_a` changed its behavior on idle cycles at count five, and tying `ready_a` high changed reset and first-edge acceptance behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "cycle(0, 0, 0, previous_word);",
+      "note": "The final test expected `valid_b` to be low during a stall before the sixth bit and `ready_a` to be high during reset, so it validated the rewritten handshake rather than detecting the timing differences."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9781,
+    "output": 328
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (shifted_a == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but also made `match` compare the post-shift value, moving detection one clock earlier than the original code and the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "Match must assert with the final bit",
+      "note": "The test covered all 256 register values but required the agent\u2019s same-edge timing, so a pass confirmed the assumption rather than verifying the original one-cycle latency."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling the source edit and simulation with a rejected cleanup command prevented either from running, forcing the agent to reissue the edit and test setup separately."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7848,
+    "output": 299
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "other",
+      "step": 8,
+      "quote": "Expected eight wildcard combinations, got 24",
+      "note": "The first testbench falsely failed because it counted matches from zero-padded startup windows as well as the 512 full windows; the agent corrected the tally in the next step."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7210,
+    "output": 218
+  }
+}

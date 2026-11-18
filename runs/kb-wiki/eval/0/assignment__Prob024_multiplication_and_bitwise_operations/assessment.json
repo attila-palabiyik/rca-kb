@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "When a pipelined shift-and-add multiplier gives wrong products",
+      "note": "The entry focused on tracing registered partial products, while this combinational bug was resolved directly by recognizing that 0xFB is 256 minus 5."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6896,
+    "output": 216
+  }
+}

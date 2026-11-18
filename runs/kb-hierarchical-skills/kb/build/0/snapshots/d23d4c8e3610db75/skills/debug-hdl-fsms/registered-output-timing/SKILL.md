@@ -1,0 +1,30 @@
+---
+name: registered-output-timing
+description: Diagnose cycle misalignment in Verilog and SystemVerilog sequence detectors, stream converters, and pipelines with parallel operand paths.
+---
+
+# Registered output timing
+
+- Trace each predicate across a rising edge. A clocked comparison of a shift register reads its pre-edge value, while a combinational comparison of the same register sees the updated value after nonblocking assignments settle. Combining the two predicates can mix adjacent windows.
+- Compare the existing output pipeline with the requested timing before editing. If the intended output is a registered comparison of the stored window, evaluate every predicate using that pre-edge window. Comparing against the next shift-register value instead advances detection by a cycle. Preserve reset initialization and add a sample-valid gate only when the required startup behavior calls for one.
+- Verify timing with an isolated match. Check the output immediately after the final input bit is sampled and again after the following edge, allowing nonblocking assignments to settle. Test reset separately, including whether reset-filled history contributes to early windows. A testbench that assumes the proposed latency can pass every pattern and still miss the timing bug.
+
+In the graded TopModule detector for `011XXX110`, the suffix check already read the pre-edge window. The reference clocked the prefix check as well, so both checks used the same stored window and the result appeared one edge after the last bit entered the shift register. The reference retained zero-initialized history without a sample-count gate. A rewrite that compared the next window and added a nine-sample startup gate disagreed with the reference on 16 of 237 samples.
+
+## Counter status flags
+
+- If the specification places a status pulse in the cycle after a count is reached, register the comparison against the current count using the counter's clock edge. Trace both the edge that enters the count and the edge that leaves it. Check reset release between edges, especially when the reset count satisfies the comparison but the flag resets low.
+- In the graded decimal up/down counter, the reference replaced the combinational zero decode with a rising-edge comparison of the stored count and an active-low asynchronous reset for the flag. The submitted fix put the counter and flag in the same clocked block and matched all 289 samples. Entering zero during counting left the flag low for that cycle. The next edge asserted it as the count moved away from zero. After reset release, the flag stayed low until the first rising edge, which sampled the reset count of zero.
+
+## Parallel operand paths
+
+- At each clocked stage, trace the sampling edge of every operand. If an operand bypasses an earlier registered stage, register it in parallel with that stage using the same clock and reset. Use consecutive, distinct input samples that make a mixed-cycle result differ from the expected result.
+- Preserve existing submodule port names during a timing fix. A testbench may instantiate the submodule directly with named ports. When checking interface compatibility locally, instantiate it with its original named connections and compile alongside a test of the top-level timing.
+- In the graded three-input unsigned minimum `TopModule`, the second comparator consumed the registered minimum of `a` and `b` alongside live `c`. The supplied correction only changed `c1` into a rising-edge register with an asynchronous active-low reset, matching the first comparator's timing. The submitted fix also renamed the comparator inputs from `a` and `b` to `data_a` and `data_b`. Its top-level Icarus simulation passed, but grading reported a testbench compile failure. The supplied correction retained the original port names.
+
+## Stream width converters
+
+- If `valid_out` marks a newly completed word, trace the exact condition that loads `data_out` at the clock edge. A counter can remain at a completion position during an input gap. When the current input supplies the final bits, require both that position and acceptance of the input on that edge. Check a valid input before completion, an idle cycle at the completion position, and the accepted input that completes the word.
+- In the graded 24-to-128-bit `TopModule`, `data_out` loaded at pre-edge counts 5, 10, and 15 when `valid_in` was high. Changing the output-valid condition from OR to AND matched all 261 reference samples. The existing counter and data slices already carried the remaining bits into the next word.
+- If output valid already aligns with word completion but the stored portion of the word is wrong, trace the staging register's write enable and its value just before the completion edge. Check with distinct accepted values and with changing bus data during invalid cycles. Avoid changing output latency when the error is in input capture.
+- In the graded 8-to-16-bit `TopModule`, the staging register originally loaded on invalid cycles and held on valid cycles. The reference reversed the mux branches so that it captured every valid byte and held through gaps. The submitted fix captured only the first valid byte of each pair and matched all 141 samples. On the edge that accepts the second byte, the output register reads the pre-edge staging value, so a simultaneous nonblocking update to the staging register cannot change the completed word. The next pair captures its own first byte before the staging value is read again.

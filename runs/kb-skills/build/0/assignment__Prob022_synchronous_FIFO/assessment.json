@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "The patch fixed the read-pointer wrap comparison but also changed address widths and RAM ports for DEPTH=1 and rewrote the flag logic, none of which was needed for the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the full command with safer cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11503,
+    "output": 408
+  }
+}

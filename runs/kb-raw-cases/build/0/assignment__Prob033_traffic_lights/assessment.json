@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "{red, yellow, green} <= 3'b100;",
+      "note": "Instead of clearing the erroneous green flag in the red state, the rewrite asserted red during reset and removed the original startup delay, changing the cycle-by-cycle outputs that the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(RED, 10);",
+      "note": "The test required red to be asserted during reset, so it validated the rewrite\u2019s timing rather than detecting its departure from the original reset and startup behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "An unnecessary Git check blocked the first source read, and a disallowed cleanup command caused the entire edit-and-test command to be rejected and resubmitted."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "else if (green&&p_green)",
+      "note": "The search surfaced prior debugging records for the same controller, but the agent stopped at short excerpts without inspecting how those runs diagnosed or repaired the existing logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11581,
+    "output": 597
+  }
+}

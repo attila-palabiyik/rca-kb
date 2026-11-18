@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "match <= (samples == 4'd8) &&",
+      "note": "The rewrite aligns both comparisons, but it checks the window including the incoming bit rather than the stored pre-edge window, advancing matches by one clock and suppressing matches that use reset padding."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "tick(pattern[j], j == 0 && pattern[8:6] == 3'b011 &&",
+      "note": "The test expects a match on the edge that samples the final bit, so its exhaustive window coverage confirms the rewrite\u2019s timing assumption instead of detecting the one-clock mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9054,
+    "output": 248
+  }
+}

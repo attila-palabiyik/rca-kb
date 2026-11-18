@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match = (pstate == s6);",
+      "note": "The patch fixed the one-cycle output delay but dropped the explicit reset override and replaced the conditional decode with equality assignments, which can produce unknown outputs instead of zero when the state is uninitialized."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(2'b00);",
+      "note": "The test first checked reset outputs after a high-to-low reset pulse had time to set the state to idle, so it could not distinguish explicit output reset gating from clearing the outputs indirectly through the state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test launch to be rejected before simulation, so the agent had to resubmit it with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8388,
+    "output": 431
+  }
+}

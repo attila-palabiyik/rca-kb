@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The two-state rewrite still produces only one output per pair of valid bytes, rather than letting the counter reach 2 and emitting the second packed word from the previous byte\u2019s low nibble and the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "step(1, 8'h69, 0, 12'hA53);",
+      "note": "The test explicitly expected no output on the third valid byte, when the corrected design would assert valid_out and emit 12'h769."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8005,
+    "output": 273
+  }
+}

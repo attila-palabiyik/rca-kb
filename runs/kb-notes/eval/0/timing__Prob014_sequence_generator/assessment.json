@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "+    always @(posedge clk or negedge rst_n) begin",
+      "note": "The patch clocked the shift register but left `data` combinational, so it showed the newly rotated bit instead of capturing the pre-edge `q[5]`, putting the output one bit ahead."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "#1 check_bit(index);",
+      "note": "The test counted the reset value as bit zero and expected bit one on the first rising edge after reset, so it accepted the one-bit phase error instead of catching it."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 8,
+      "quote": "cat /kb/entries/003-reset-in-combinational-fsm-outputs.md",
+      "note": "The agent opened a note about combinational reset handling but did not open the listed notes on preserving pipeline timing or registering next-cycle outputs, which were more relevant to the output phase."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "When changing registered FSM outputs to combinational decoding, preserve any explicit reset override in the new block.",
+      "note": "The note addressed the opposite timing change and advised keeping a reset override that was already present, so it did not help resolve whether `data` needed to be registered."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7327,
+    "output": 529
+  }
+}

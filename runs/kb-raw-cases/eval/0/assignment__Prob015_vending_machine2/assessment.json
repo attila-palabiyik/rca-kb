@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "so both inputs can be accepted at once.",
+      "note": "Instead of correcting the two beverage-2 output encodings, the rewrite also replaced the FSM's coin priority with simultaneous acceptance and changed its combinational outputs to registered beverage signals and half-cycle change pulses."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "if ({out1,out2,out3} !== {expected[2:1], 1'b0})",
+      "note": "The test required change to go low on the falling edge, so its passing result validated the rewrite's timing rather than checking that the original state-based output timing was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "max(pending for _, _, pending in visited)",
+      "note": "The agent explored the reachable change-queue depth and then refined the queue and pulse logic, none of which was needed to correct the two output encodings."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "previous signal light values for rising edge detection",
+      "note": "The knowledge-base search surfaced signal-light edge-detection snippets but no guidance on the vending machine's faulty output encodings."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11550,
+    "output": 492
+  }
+}

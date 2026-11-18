@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "other",
+      "step": 8,
+      "quote": "Divider did not restart",
+      "note": "The first testbench checked the edge count in the same simulation time slot as the edge-counting monitor, so a scheduling race falsely reported a restart failure."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7843,
+    "output": 363
+  }
+}

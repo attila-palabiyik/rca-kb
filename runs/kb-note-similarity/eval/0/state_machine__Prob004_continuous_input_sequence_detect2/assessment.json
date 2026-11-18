@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "//The last 0 of the match and the new 1 form 01",
+      "note": "The patch correctly holds `s3_d011` across invalid samples, but also reuses the terminal `0` after a match, enabling overlapping detections where the original and reference FSMs return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = data_valid && valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding-window oracle that expected overlapping matches, so it validated the added behavior rather than checking that the original post-match transitions were preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8976,
+    "output": 262
+  }
+}

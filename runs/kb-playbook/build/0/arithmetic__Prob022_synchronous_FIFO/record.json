@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-playbook/build/0/arithmetic__Prob022_synchronous_FIFO",
+  "experiment": "kb-playbook",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "playbook",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob022_synchronous_FIFO",
+  "repeat": 0,
+  "position": 17,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3c589bc3fd912cb9",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:16:10.049078Z",
+      "ended": "2026-11-18T19:16:56.335900Z",
+      "usage": {
+        "input_uncached": 19133,
+        "input_cached": 65346,
+        "input_cache_write": 19118,
+        "output": 2797,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T19:18:06.566373Z",
+      "ended": "2026-11-18T19:18:24.418464Z",
+      "usage": {
+        "input_uncached": 2119,
+        "input_cached": 80549,
+        "input_cache_write": 2107,
+        "output": 368,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "6a24ee2b21b6ad8f",
+    "after": "d77d4b8a3d50fba1",
+    "changed": true
+  }
+}

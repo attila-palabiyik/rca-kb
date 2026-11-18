@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "valid_b <= word_complete;",
+      "note": "The rewrite fixed the counter advancing without a transfer, but it also suppressed `valid_b` during stalls at count five and tied `ready_a` high through reset instead of preserving its registered startup behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid || data_b !== held_word)",
+      "note": "The test exercised reset and stalls before the sixth bit, but its scoreboard expected the rewritten behavior rather than checking that the original ready and valid timing was preserved."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "the registered valid flag used the same condition as the data load",
+      "note": "The agent applied this lesson from a different width converter to gate `valid_b`, but this task's correct fix preserves the count-only valid condition and changes only the counter's hold condition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8411,
+    "output": 428
+  }
+}

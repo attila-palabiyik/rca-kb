@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "if (data_valid && data)\n                nstate = s2_d01;\n            else\n                nstate = s1_d0;",
+      "note": "The fix aligned the match pulse with the final bit, but also changed the post-match transitions so that `0110110` produces a second pulse that the reference does not produce."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = valid_bit && accepted >= 4 && history == 4'b0110;",
+      "note": "The test exercised overlapping sequences but defined every matching four-bit window as a hit, so it validated the added overlap behavior instead of checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "015-preserve-matching-suffixes-in-sequence-detectors.md",
+      "note": "The agent applied the matching-suffix lesson to the completed-match state, where the reference keeps the original transitions and fixes only the output timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository.",
+      "note": "Both Git checks failed in the non-repository workspace, and separate patch-context and cleanup-command failures also required retries unrelated to the design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10714,
+    "output": 430
+  }
+}

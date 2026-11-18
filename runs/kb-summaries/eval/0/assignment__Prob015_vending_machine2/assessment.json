@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "credit <= credit + inserted;",
+      "note": "The new balance logic gives the correct beverage-2 outputs at 2.5 and 3 yuan, but replaces the original FSM with edge-based coin counting, simultaneous coin acceptance, and multi-cycle change instead of correcting only the two output entries."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 10,
+      "quote": "reg [1:0] coin_sample, coin_previous;",
+      "note": "The rewrite kept the ports but removed the original state-encoding parameters, so an instantiation that overrides one of those parameters would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "pulse = coins & ~previous;",
+      "note": "The randomized scoreboard mirrored the rewrite's coin-counting and pending-change rules, so its passing results did not show that the original FSM behavior was preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "# Incorrect low-input transition out of a Moore terminal state",
+      "note": "The entries inspected concerned a terminal-state transition and a divider pulse-width bug, and neither helped the agent isolate the vending machine's two incorrect output values."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10993,
+    "output": 506
+  }
+}

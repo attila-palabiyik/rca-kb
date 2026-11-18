@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "The patch fixed the read pointer\u2019s wrap bit but also added depth-one support by changing the FIFO and RAM address widths, while the reference fix leaves parameter handling unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the test using Python-managed temporary files."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11512,
+    "output": 300
+  }
+}

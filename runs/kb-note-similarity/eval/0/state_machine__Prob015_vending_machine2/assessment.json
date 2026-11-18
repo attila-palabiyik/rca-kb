@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "out1 = rst && clk && vend && !sampled_sel;",
+      "note": "Instead of fixing the two incorrect 1-yuan transitions, the rewrite also gated vending outputs to the clock\u2019s high phase, sampled selection, counted simultaneous inputs together, and queued change, all of which changed behavior the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "$fatal(1, \"Pulse remained high after the falling edge\");",
+      "note": "The test required the rewrite\u2019s new half-cycle output timing and mirrored its edge-detection and change-queue assumptions, so passing 5,023 cycles did not establish compatibility with the original state machine."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "kbsearch query 'Verilog vending machine coin rising edge detection half clock pulse change output state machine' /kb/entries",
+      "note": "The knowledge-base query returned no entries and therefore supplied no guidance for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8166,
+    "output": 372
+  }
+}

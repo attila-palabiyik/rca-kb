@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// The final 0 of a match can start the next sequence.",
+      "note": "The patch correctly holds `s3_d011` on invalid input, but also changes the post-match transitions to allow overlapping matches that the original and reference implementations do not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected_match = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test oracle checks every four-bit window of valid data and therefore expects overlaps, so exhaustive input coverage still could not catch the unintended change in post-match behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The rejected cleanup command forced the agent to resubmit the full simulation command, after an earlier Git check had already failed and skipped the chained simulator checks."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "rg -l -m 1 'sequence detect|s3_d011|s4_d0110' /kb/sessions",
+      "note": "The agent found candidate transcripts with a filename-only search but did not inspect any matching passages before editing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10314,
+    "output": 508
+  }
+}

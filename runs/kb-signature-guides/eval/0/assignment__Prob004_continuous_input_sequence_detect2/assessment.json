@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "The matched sequence's final 0 and this 1 form 01",
+      "note": "The agent fixed the duplicate state encoding but also changed the match state's exits on a valid 1 and on an invalid cycle, retaining the final 0 for overlapping matches where the original and reference FSMs return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a rolling valid-bit history that assumed overlapping matches, so it accepted the changed behavior instead of catching the regression in the post-match transitions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8690,
+    "output": 229
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "\"exit_code\":1",
+      "note": "The knowledge-base search returned no matching transcripts, so it did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6426,
+    "output": 67
+  }
+}

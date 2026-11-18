@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the operator and both source bits in each carry term.",
+      "note": "The knowledge-base entry concerned carry logic in an adder and did not help diagnose the incorrect sign in the constant multiplier."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5688,
+    "output": 261
+  }
+}

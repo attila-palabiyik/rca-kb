@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "else if (wave_choice != 2'd0 || cnt == 5'd20)",
+      "note": "The square-wave counter still resets at 20 instead of 19, leaving the period at 21 clocks instead of 20."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd20) ? 5'd20 : 5'd0;",
+      "note": "The rewrite forces an immediate square-wave level on mode entry instead of holding the previous output until a threshold, and changes the triangle's first post-reset sample from 31 to 1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "phase = index % 21;",
+      "note": "The test passed because it expected the same incorrect 21-clock square-wave period that the fix retained."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7677,
+    "output": 316
+  }
+}

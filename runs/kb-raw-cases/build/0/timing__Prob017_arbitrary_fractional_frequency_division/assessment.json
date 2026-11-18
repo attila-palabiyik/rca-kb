@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "clk_out_r <= (clk_cnt < (period_length >> 1));",
+      "note": "The rewrite removed the faulty feedback but also changed the duty-cycle rule for parameter overrides, even though the default 8/9 settings produce the same waveform as the reference fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = ((position - segment_start) % length) < (length / 2);",
+      "note": "The parameter-override test assumed the rewrite\u2019s half-period duty-cycle rule, so it passed without detecting that the original duty-cycle behavior had changed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10858,
+    "output": 299
+  }
+}

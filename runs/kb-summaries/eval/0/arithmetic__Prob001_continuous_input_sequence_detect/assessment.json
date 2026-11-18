@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but changed `match` to compare the newly shifted value rather than the pre-edge register value, moving the match pulse one clock earlier than the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == pattern)",
+      "note": "The test updated `expected` before checking `match`, so it confirmed the agent\u2019s same-edge assumption rather than checking that the original registered timing was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire invocation to be rejected before simulation, so the agent had to repackage the same check in Python."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7057,
+    "output": 371
+  }
+}

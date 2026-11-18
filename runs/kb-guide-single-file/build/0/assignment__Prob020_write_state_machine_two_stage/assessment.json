@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The test harness had to be submitted three times: the first command was rejected for its cleanup syntax, the second invoked an unavailable `python` executable, and the third ran successfully with `python3`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7519,
+    "output": 93
+  }
+}

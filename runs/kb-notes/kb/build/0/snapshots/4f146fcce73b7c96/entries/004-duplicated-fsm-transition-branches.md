@@ -1,0 +1,7 @@
+# Check both branches of conditional FSM transitions
+
+When debugging a Verilog FSM against a transition table, compare each arm of `input_bit ? next_on_one : next_on_zero` with its corresponding column. Identical arms are valid only when both input values lead to the same state. A directed simulation should visit each state and exercise both values, including exits from a state that asserts the output.
+
+In the five-state Moore `TopModule` task, the original `S4` branch used `data ? S1 : S1`, so a zero incorrectly restarted at `S1` instead of returning to `S0`. Changing only the false arm to `S0` matched all 261 grading samples. The Icarus test passed all ten state/input combinations, checked that `flag` depended on the current state, and checked active-low reset from `S4`. No alternate fix was attempted.
+
+In the six-bit `011100` `TopModule` task, `sf6` reported a failed group and unconditionally entered `s1` on the next edge. This treated a leading `1` in the next group as a matched `0`. The reference fix changed only the `sf6` transition to `data ? sf1 : s1`, matching the transition out of the success state. The submitted version combined the identical transitions for `idle`, `s6`, and `sf6` and simplified the combinational output block. It passed all 1,215 grading samples and an Icarus check of all 4,096 ordered pairs of six-bit groups. For a fixed-width detector that immediately starts the next group, test both values of the next group's first bit after each verdict.

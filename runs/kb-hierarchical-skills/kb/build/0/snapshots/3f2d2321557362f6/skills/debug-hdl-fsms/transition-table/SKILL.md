@@ -1,0 +1,20 @@
+---
+name: transition-table
+description: Check next-state branches in Verilog and SystemVerilog against state transitions, counter rules, or rules for consecutive input groups.
+---
+
+# Check each transition table entry
+
+1. Match every state and input combination to the next-state expression. For `data ? a : b`, compare `a` against the `1` column and `b` against the `0` column. Check both columns even when the operands are identical, since a repeated destination may be valid.
+2. Check the outgoing transitions of states that assert an output. For a Moore machine, drive each input value before the active clock edge and check that the output still reflects the current state. After the edge and nonblocking assignments settle, check the destination and its output. If two destinations have the same output, inspect the state in simulation or apply a continuation that distinguishes them.
+3. For fixed-size, nonoverlapping groups, determine whether the clock edge leaving a result state also samples the first bit of the next group. If it does, check both first-bit values after each result. Include a failed group followed by a group whose first bit is wrong and whose remaining bits match the target. Such a group exposes an exit that assumes its first bit matched.
+4. If the state encodings, output decode, and reset already match the specification, limit the behavioral edit to the mismatched transition. For a supplied FSM with a timer and registered outputs, check the destination and the transition predicate independently. If the prose and the RTL imply different cycle timing, trace reset and one full transition through the existing registers and test the destination-only fix first. A testbench built around a new timing interpretation cannot establish compatibility with the supplied design.
+5. For a wrapping up/down counter, check the arithmetic and wraparound separately in each direction. Exercise an interior count in both modes to catch a copied increment or decrement. Exercise both boundary counts in both modes to check when the counter wraps and when it takes an ordinary step. If the counter has a registered status flag, also check its [sampling edge](../registered-output-timing/SKILL.md).
+
+In the graded decimal up/down counter task, the up-mode branch wrapped correctly at 9 but subtracted 1 at other counts. Changing that subtraction to addition matched all 289 grader samples. The reference used `1'd1` and the submitted change used `4'd1`. The local Icarus Verilog test covered all 20 combinations of count and direction, the registered `zero` pulse, and asynchronous reset.
+
+In the graded `TopModule.sv` task for a five-state Moore machine, `S4` asserted `flag` correctly but sent both input values to `S1`. Replacing the `0` operand with `S0` matched all 261 grader samples. The local Icarus Verilog test exercised all ten state and input combinations and checked `flag` and the active-low asynchronous reset.
+
+In the graded `TopModule.sv` detector for nonoverlapping `011100` groups, `sf6` unconditionally entered `s1`, the state reached after sampling a correct first bit. The reference fix made that exit `nstate = data ? sf1 : s1`, matching the exit from the success state. With the original exit, a failing group followed by `111100` would produce a false match. The submitted fix also used wildcard combinational blocks and matched all 1,215 grader samples. Local Icarus Verilog verification covered all 4,096 ordered pairs of six-bit groups, output timing, and asynchronous reset.
+
+In the graded `TopModule.sv` traffic-light controller, red exited to yellow and green exited to red. The supplied correction redirected those branches to green and yellow, respectively, and removed a trailing timing comment. It retained the `cnt == 3` transition trigger, countdown logic, buffered light outputs, and reset behavior. The submitted rewrite changed reset and visible countdown timing and passed local Icarus checks written for that timing. It differed from the reference on 220 of 517 graded samples.

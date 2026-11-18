@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= to_gray(waddr_next);",
+      "note": "The agent fixed the RAM read-enable polarity but also changed when both Gray pointers update, shifting the observable full and empty timing that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "((wdelta != 0) !== write_ok)",
+      "note": "The test required the rewritten same-edge pointer update and used the DUT's own flags to count accepted transfers instead of independently checking the original cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the simulation invocation to be rejected and resubmitted, after a failed Git check had already forced a separate invocation to locate Icarus."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Applies to a synchronous FIFO",
+      "note": "The consulted guides covered other FIFO failure modes and did not help the agent isolate the read-enable fix from the asynchronous pointer timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11662,
+    "output": 507
+  }
+}

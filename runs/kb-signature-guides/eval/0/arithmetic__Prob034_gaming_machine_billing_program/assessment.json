@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "when two modes produce the same step away from a wrap boundary",
+      "note": "The consulted guides focused on counter behavior away from the boundary and on output timing and reset, while the defect was in the normal-mode deduction guard at balances of zero and one."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7257,
+    "output": 207
+  }
+}

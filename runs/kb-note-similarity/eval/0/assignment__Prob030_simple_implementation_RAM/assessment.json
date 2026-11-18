@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(read_en)",
+      "note": "The patch fixed reset but also replaced both enable ternaries with procedural `if` statements, so an X or Z enable now holds the old value instead of merging the old and new values as the original and reference do."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Trace accepted transfers in a synchronous FIFO",
+      "note": "The consulted note covered FIFO pointer and transfer bugs, not a RAM reset loop that skips every valid address."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6270,
+    "output": 212
+  }
+}

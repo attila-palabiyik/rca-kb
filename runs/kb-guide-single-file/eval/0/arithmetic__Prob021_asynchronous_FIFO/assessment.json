@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Advance each binary pointer and its Gray encoding on the RAM access edge.",
+      "note": "The agent fixed the inverted RAM read enable but also removed the original cycle of delay between binary and Gray pointer updates, changing when `wfull` and `rempty` transition."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "accepted = rrstn && rinc && !rempty;",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers to count, so it could verify data ordering without detecting that `wfull` or `rempty` changed on the wrong cycle."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11176,
+    "output": 367
+  }
+}

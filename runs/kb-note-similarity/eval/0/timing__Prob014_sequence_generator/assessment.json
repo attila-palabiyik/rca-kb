@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 11,
+      "quote": "I\u2019ll move it to the rising edge and keep the output low whenever reset is asserted.",
+      "note": "The patch clocked the rotation but left `data` combinational, so it exposed the newly rotated bit rather than registering the pre-edge bit and put the sequence one clock out of phase."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "always @(posedge clk) begin",
+      "note": "The patch made reloading `q` wait for a rising clock edge, whereas both the original code and the reference fix reload it on reset assertion without waiting for the clock."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "expect_bits(23);",
+      "note": "The test counted the bit before the first post-reset clock as the first sequence bit and held reset through clock edges, masking both the output phase error and the lack of asynchronous reload."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "The register reads the pre-edge state",
+      "note": "The agent read a relevant note about registered-output timing but did not use it to check which bit `data` should sample."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6909,
+    "output": 455
+  }
+}

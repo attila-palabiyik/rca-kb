@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "Expand each carry in terms of G, P, and the external carry-in.",
+      "note": "The agent fixed the generate operator but also replaced the original carry chain with parallel look-ahead logic, changing the gate-level propagation paths without changing the arithmetic results."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "When a multiplier builds shifted partial products",
+      "note": "The skill focused on registered multiplier partial products and offered no diagnosis specific to this adder; the agent had already planned exhaustive testing before reading it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6932,
+    "output": 273
+  }
+}

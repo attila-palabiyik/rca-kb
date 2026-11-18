@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite aligned the two comparisons but used the newly shifted window, causing a match to assert one clock earlier than a fix that preserves the original registered suffix timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "history = (history << 1) | value;",
+      "note": "The test shifted in the current bit before computing its expected result, so all 512 windows could pass without exposing the one-cycle timing error."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "shift register|sequence detect",
+      "note": "The knowledge-base searches returned no relevant hits and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6918,
+    "output": 285
+  }
+}

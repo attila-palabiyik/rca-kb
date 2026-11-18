@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter wrap but also made `ready_a` high during reset, allowed input acceptance on the first clock after reset, and suppressed `valid_b` during stalls at count five, all of which differ from the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid || data_b !== expected_data)",
+      "note": "The test required constant readiness and expected `valid_b` only on the sixth accepted bit, so it confirmed the rewrite\u2019s assumptions rather than catching the changes to reset and stall behavior."
+    },
+    {
+      "category": "kb_misled",
+      "step": 6,
+      "quote": "check that the registered valid flag and output data update on the same edge",
+      "note": "The width-converter advice fit the prose specification, but applying it here led the agent to gate `valid_b` with `valid_a` even though the reference preserves the original count-only decode."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8099,
+    "output": 348
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "out3 <= pay_change;",
+      "note": "Instead of correcting only the beverage-two output codes at 2.5 and 3 yuan, the rewrite registered the outputs, summed simultaneous coin inputs instead of prioritizing d1, and added multi-cycle change payouts."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "check(previous);",
+      "note": "The test required outputs to hold their previous values until the next rising edge, so it validated the rewrite\u2019s registered timing rather than checking the original state decoder\u2019s immediate response to a selection change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38978,
+    "output": 276
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-summaries/eval/0/arithmetic__Prob025_pulse_synchronization_circuit",
+  "experiment": "kb-summaries",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "summaries",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob025_pulse_synchronization_circuit",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3fef61bdcc196f64",
+    "harness_commit": "968e0751fdb6db4bd9a6af11f35121363df7e591",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:03:01.091255Z",
+      "ended": "2026-11-18T21:03:32.627827Z",
+      "usage": {
+        "input_uncached": 17528,
+        "input_cached": 124654,
+        "input_cache_write": 17501,
+        "output": 1704,
+        "responses": 9
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "ab10f85a42edeeaa",
+    "after": "ab10f85a42edeeaa",
+    "changed": false
+  }
+}

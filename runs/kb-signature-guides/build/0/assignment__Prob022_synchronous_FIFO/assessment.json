@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The patch fixed the read-pointer wrap condition but also blocked RAM writes during reset, changing behavior that the original and reference implementations preserve."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "An unsupported cleanup command caused the entire verification command to be rejected before simulation, so the agent had to resubmit the full testbench with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11739,
+    "output": 347
+  }
+}

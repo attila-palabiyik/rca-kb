@@ -1,0 +1,17 @@
+{
+  "kb-guide-single-file/build/0/arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16, timing__Prob010_integer_multiple_data_bit_width_conversion_8to16), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-guide-single-file/build/0/assignment__Prob017_arbitrary_fractional_frequency_division": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (arithmetic__Prob017_arbitrary_fractional_frequency_division), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-guide-single-file/build/0/assignment__Prob033_traffic_lights": {
+    "decision": "cleared",
+    "note": "Cleared on review: the agent kept the given module's reset timing against the written specification because its KB recorded the fixes of three earlier tasks of the same module on set A (state_machine, arithmetic and timing Prob033), which kept it. Leakage within A, disclosed in the report; no grading file, test or network access.",
+    "date": "2026-11-18"
+  }
+}

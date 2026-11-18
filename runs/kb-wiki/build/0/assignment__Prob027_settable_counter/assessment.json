@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the test, and an earlier check of a nonexistent directory and a later Git diff outside a repository caused additional avoidable retries."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8747,
+    "output": 172
+  }
+}

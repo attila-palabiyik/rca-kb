@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wptr <= encode_pointer(waddr_next);",
+      "note": "The rewrite fixed the write increment but updated both Gray pointers on the same edge as their binary pointers, removing the original one-cycle delay and changing when `wfull` and `rempty` assert and clear."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (winc && !wfull) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to count and checked ordering and capacity without independently checking the clock edges on which those flags should change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12088,
+    "output": 247
+  }
+}

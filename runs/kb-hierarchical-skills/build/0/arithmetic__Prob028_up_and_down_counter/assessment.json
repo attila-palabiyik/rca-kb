@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "warning: Not a git repository.",
+      "note": "The first test command was rejected because of its cleanup trap, and the successful retry ended with an unrelated Git error that prompted another file check and a redundant compile."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8306,
+    "output": 121
+  }
+}

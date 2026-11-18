@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "update both forms of its pointer on the same edge",
+      "note": "The rewrite fixed the write increment but removed the existing one-cycle Gray-pointer lag and gated RAM enables during reset, changing flag and transfer timing that the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (writes - reads >= DEPTH)",
+      "note": "The test enforced the rewrite\u2019s immediate full-boundary behavior and used the DUT\u2019s flags to count transfers, rather than independently checking the expected cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected and resubmitted, and the later diff check failed because the workspace was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12126,
+    "output": 387
+  }
+}

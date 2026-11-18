@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "read_data <= (read_addr[7:3] == 5'b0) ? myRAM[read_addr[2:0]] : 4'b0;",
+      "note": "The reset fix passed grading, but the new address check also made enabled out-of-range reads return zero instead of the unknown value produced by the original and reference code."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "if (rd) expected = (ra < 8) ? model[ra] : 4'b0;",
+      "note": "The test covered the reset defect, but it hard-coded the new zero-on-invalid-read behavior, so it could not flag that change from the original."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38244,
+    "output": 253
+  }
+}

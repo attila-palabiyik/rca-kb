@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "idle, s6, sf6:",
+      "note": "Grouping `idle` with the terminal states changes simulation behavior for an unknown first bit: the original and reference enter `sf1`, while the new ternary can produce a partially unknown next state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the first simulation launch to be rejected and resubmitted, after an earlier `git status` failure had already forced the file inspection to be rerun."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9118,
+    "output": 275
+  }
+}

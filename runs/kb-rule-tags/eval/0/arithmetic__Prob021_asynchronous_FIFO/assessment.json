@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The agent fixed the inverted RAM read enable, but also removed the original one-clock Gray-pointer delay, changing when full and empty are reported; it additionally gated RAM accesses during reset and changed the RAM sizing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rrstn && rinc) begin",
+      "note": "The scoreboard assumed reset-gated reads and used the DUT's own full and empty flags to decide when transfers occurred, so it could pass without detecting changes to the original reset behavior or cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The test command had to be repackaged after its cleanup trap was rejected, and an earlier source read had to be retried because it was chained behind a Git check in a non-Git directory."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12105,
+    "output": 418
+  }
+}

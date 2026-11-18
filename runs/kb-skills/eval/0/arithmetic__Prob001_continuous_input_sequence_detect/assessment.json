@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (shifted == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but also changed `match` to compare the updated window rather than the pre-edge window, moving the match pulse one clock earlier than the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == 113)",
+      "note": "The test compared `match` against the same window it expected in `a_tem` after the edge, so it enforced the new timing rather than checking that the original one-cycle delay was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling the file edit and verification with a prohibited cleanup command caused the entire batch to be rejected and reissued."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7180,
+    "output": 395
+  }
+}

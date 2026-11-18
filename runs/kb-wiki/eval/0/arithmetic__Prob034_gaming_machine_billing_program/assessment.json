@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "for page in fsm-output-reset fsm-transition-tables width-converter-valid",
+      "note": "The FSM transition-table and width-converter pages did not help diagnose the normal-mode balance guard, though the output-timing guidance was relevant to preserving the warning behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7752,
+    "output": 357
+  }
+}

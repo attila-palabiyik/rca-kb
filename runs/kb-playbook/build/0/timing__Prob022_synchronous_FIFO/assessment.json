@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The clocked write pointer fixes the defect, but adding reset to the RAM write enable also suppresses writes during reset that the reference fix still permits."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The agent submitted the testbench three times because the first command used a prohibited cleanup operation and the second invoked an unavailable interpreter."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11187,
+    "output": 264
+  }
+}

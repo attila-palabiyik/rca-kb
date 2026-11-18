@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/AGENTS.md /kb/entries/shift-register-output-timing.md /kb/entries/fsm-output-reset.md /kb/entries/fifo-pointer-clocking.md",
+      "note": "The pages offered general timing advice but no clock-domain crossing guidance that materially informed the two-flop synchronizer fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8501,
+    "output": 272
+  }
+}

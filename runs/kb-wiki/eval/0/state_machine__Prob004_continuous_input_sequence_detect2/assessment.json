@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "End the match pulse and retain the final 0",
+      "note": "The patch correctly holds `s3_d011` across invalid cycles, but it also changes two exits from `s4_d0110` to retain an overlapping prefix where the original and reference both return to `idle`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test exhaustively checked short streams against a rolling valid-bit history that assumed overlapping matches, so it accepted the extra matches instead of catching the change to the original post-match behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10717,
+    "output": 285
+  }
+}

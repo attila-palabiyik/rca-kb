@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "if (read_en && read_addr < 8'd8)",
+      "note": "The fix correctly registers reads, but the added address guard holds the previous output on an enabled out-of-range read, whereas the reference returns an unknown value."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "read_addr = 8'hff;\\n        tick;\\n        check_data(4'hf);",
+      "note": "The out-of-range test hard-coded the agent's hold-last-value assumption, so it passed the behavioral change rather than exposing it."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Putting the cleanup trap in the same shell batch as the edit and verification caused the whole batch to be rejected and resubmitted."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "The FIFO uses a dual-port RAM for data storage",
+      "note": "The knowledge-base search surfaced FIFO material but supplied no guidance that the agent used to diagnose or fix this RAM's read behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9534,
+    "output": 435
+  }
+}

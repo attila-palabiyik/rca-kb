@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire div_flag = (cyc_cnt >= c89);",
+      "note": "The threshold decode fixes the default waveform, but replacing the registered toggle and widening both counters also changes behavior for parameter overrides that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "divider_check #(63, 0, 8, 9, 4) odd_only(odd_done);",
+      "note": "The override test assumes that c89 = 0 means divide by nine from reset onward, so it validates the new threshold behavior rather than detecting the regression from the reset-to-even toggle behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Two avoidable shell failures forced retries: the Git status check blocked the initial source read in a non-Git directory, and the rejected cleanup command blocked the first simulation invocation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9069,
+    "output": 473
+  }
+}

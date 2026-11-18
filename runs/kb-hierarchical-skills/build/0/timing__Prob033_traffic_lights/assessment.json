@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "case (state)",
+      "note": "The rewrite decodes the lights combinationally from the current state instead of restoring the missing clocked stage that makes the light outputs and counter reload sample the same pending light."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite starts directly in red and replaces the count-3 pipelined transitions with count-1 transitions, changing the reset and startup timing that the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "#1 expect_light(RED, 10);",
+      "note": "The bench required immediate red on reset and checked the rewrite\u2019s transition schedule, so it validated the new timing rather than detecting the loss of the registered output stage."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "It retained the `cnt == 3` transition trigger, countdown logic, buffered light outputs, and reset behavior.",
+      "note": "The agent read a relevant example warning that a traffic-light rewrite could pass local tests while changing graded timing, but that warning did not change its approach."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10598,
+    "output": 442
+  }
+}

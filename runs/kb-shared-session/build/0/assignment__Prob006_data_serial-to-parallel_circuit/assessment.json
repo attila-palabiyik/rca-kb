@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 128,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter rollover but also made `ready_a` high during reset and gated `valid_b` on input acceptance, whereas the reference keeps `ready_a` low until the first post-reset clock edge and asserts `valid_b` whenever the pre-edge count is 5, even during a gap."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 129,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, complete, expected})",
+      "note": "The testbench hard-coded `ready_a` high during reset and expected `valid_b` only on the sixth accepted bit, so its reset and gap tests endorsed the rewrite instead of catching the reference mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38824,
+    "output": 263
+  }
+}

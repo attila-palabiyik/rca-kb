@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "+\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The count fix correctly lets the counter reach three, but removing the `ready_b` guard also changes whether the first accepted input replaces `data_out` or is added to it when downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "partial = 0;",
+      "note": "The scoreboard starts each group from zero regardless of `ready_b` and checks `data_out` only while valid, so it accepts the new behavior instead of detecting the mismatch with the reference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38491,
+    "output": 214
+  }
+}

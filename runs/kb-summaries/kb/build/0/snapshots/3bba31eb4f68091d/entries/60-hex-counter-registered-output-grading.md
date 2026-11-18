@@ -1,0 +1,7 @@
+# Settable hexadecimal counter registered output grading
+
+This follows entry 59. The submitted TopModule differed from the reference on 248 of 273 samples. It registered the incremented or loaded value directly on `number` and asserted `zero` during reset. The independent simulation passed because it expected those same timing and reset choices.
+
+The reference keeps the original four-bit `num` register and `zero` process. The only change replaces the combinational assignment to `number` with a rising-edge register and active-low asynchronous reset. On each rising edge outside reset, `number` and `zero` both sample the pre-edge value of `num` through nonblocking assignments. A set or increment updates `num` on that edge and becomes visible at the outputs on the following rising edge. Reset clears `num`, `number`, and `zero`. The first rising edge after reset release shows `number = 0` and `zero = 1` while `num` updates.
+
+For similar RTL repairs, trace the original internal state and visible outputs edge by edge before changing a status flag. When a flag already samples the internal state and the corresponding data output is combinational, consider registering the data to align both outputs while preserving the original flag and reset behavior. Check the reset interval, the first edge after release, and both edges around a set or wrap to zero. In this task, the reference reset value for `zero` was an exception to the prose rule that it follows the displayed count.

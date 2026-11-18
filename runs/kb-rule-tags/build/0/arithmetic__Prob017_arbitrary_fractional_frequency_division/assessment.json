@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "+            clk_out_r <= (clk_cnt < (div_o >> 1));",
+      "note": "The default waveform matches the reference, but rewriting both duty-cycle comparisons and widening the counters changes behavior for parameter overrides that the one-line fix leaves intact."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "((frame_pos - 54) % 19 < 9)",
+      "note": "The default test could catch the original bug, but the parameterized test assumed the rewritten duty-cycle rule and therefore accepted a nine-cycle high pulse where the reference rule gives six."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Advance each synchronous FIFO pointer with a nonblocking assignment on the same rising clock edge that performs its enabled RAM access.",
+      "note": "The agent read several entries on unrelated FIFO, handshake, and capture behavior, but nothing in that lookup helped identify the divider's incorrect shift."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10077,
+    "output": 494
+  }
+}

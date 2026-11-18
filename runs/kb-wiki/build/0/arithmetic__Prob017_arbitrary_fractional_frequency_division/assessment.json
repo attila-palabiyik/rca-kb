@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire div_flag = (cyc_cnt >= c89);",
+      "note": "The default waveform matched the reference, but the rewrite also replaced the registered mode toggle with a combinational comparison and resized the counters, changing behavior for parameter overrides such as `c89=0`."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The reference diff shows that a one-line datapath correction was sufficient for this task.",
+      "note": "The agent read prior debugging notes, but their advice about preserving timing and making a targeted correction did not carry through to the divider rewrite."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command prevented the entire test invocation from starting, so the agent had to repackage it with Python-managed temporary files before it could run the simulation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9908,
+    "output": 602
+  }
+}

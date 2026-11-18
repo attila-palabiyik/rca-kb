@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "Applies when a flag derived from an FSM state or counter value asserts on the wrong clock",
+      "note": "The guides covered FSM, counter, and word-completion timing rather than detecting both transitions of a synchronized toggle, and they did not change the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Two workspace probes failed to locate the guides before the agent used their supplied path, and the rejected cleanup command forced it to resubmit the test unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8502,
+    "output": 306
+  }
+}

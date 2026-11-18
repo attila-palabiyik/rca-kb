@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "The clocked read fixed the timing bug, but replacing both enable ternaries with `if` guards also changed four-state simulation behavior: an X or Z enable now holds the previous value instead of merging it bitwise with the new value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6334,
+    "output": 146
+  }
+}

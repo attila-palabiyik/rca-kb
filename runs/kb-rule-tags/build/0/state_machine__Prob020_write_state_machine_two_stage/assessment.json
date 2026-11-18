@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that each state has a distinct encoding when a case-based FSM fails to advance despite matching the transition table.",
+      "note": "The agent consulted the knowledge base, but the state encodings were already distinct and the timing entries did not bear on the incorrect S4 transition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7323,
+    "output": 137
+  }
+}

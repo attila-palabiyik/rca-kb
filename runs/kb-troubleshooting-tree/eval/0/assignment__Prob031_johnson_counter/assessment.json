@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "compare each fixed pattern field with its slice and constant in stream order",
+      "note": "The entry addressed a pattern detector rather than Johnson-counter feedback and did not change the agent\u2019s already stated plan to fix the feedback bit."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6535,
+    "output": 205
+  }
+}

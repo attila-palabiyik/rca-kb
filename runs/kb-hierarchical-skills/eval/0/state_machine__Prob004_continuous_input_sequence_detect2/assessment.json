@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "//The final 0 and the new 1 form the prefix 01",
+      "note": "The patch correctly holds `s3_d011` through invalid samples, but it also changes the valid-1 and invalid exits from `s4_d0110` to preserve overlap where the original and reference both return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = (accepted >= 4 && history == 4'b0110);",
+      "note": "The rolling-history oracle assumes every overlapping occurrence should match, so the exhaustive test endorses the extra transitions instead of checking that the original post-match behavior is preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the test launch to be rejected and resubmitted, while an earlier failed Git check also forced the source inspection to be reissued."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9557,
+    "output": 461
+  }
+}

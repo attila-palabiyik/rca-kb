@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "idle, s6, sf6:",
+      "note": "Combining these branches fixed the faulty `sf6` exit but also changed how `idle` handles `X` or `Z` in simulation: the original entered `sf1`, while the ternary produces a partially unknown state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8208,
+    "output": 289
+  }
+}

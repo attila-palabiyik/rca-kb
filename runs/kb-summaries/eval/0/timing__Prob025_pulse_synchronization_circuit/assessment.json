@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -il 'clock.domain crossing|two.flip.flop|metastabil|two.stage synchroniz' /kb/entries",
+      "note": "The targeted knowledge-base search returned no matching entries, so it did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7770,
+    "output": 139
+  }
+}

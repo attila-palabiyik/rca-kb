@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -l -i 'twisted ring|0000 -> 1000 -> 1100' /kb/sessions",
+      "note": "The knowledge-base searches returned no matches, so they did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6384,
+    "output": 219
+  }
+}

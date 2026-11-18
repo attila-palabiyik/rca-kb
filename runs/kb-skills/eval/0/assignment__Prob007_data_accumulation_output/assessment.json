@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent fixed the counter wrap but also removed the `ready_b` guard, so the first accepted input of a group now replaces `data_out` when downstream is not ready instead of adding to it as the reference does."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "(pending && data_out !== expected[9:0])",
+      "note": "The checker skipped `data_out` comparisons while `valid_b` was low and modeled each group as starting from zero regardless of `ready_b`, so it confirmed the extra change rather than catching the deviation from the reference."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "After the first test launch was rejected for its cleanup command, the retry used a missing interpreter and ran Git outside a repository, requiring a third launch before simulation could run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9914,
+    "output": 365
+  }
+}

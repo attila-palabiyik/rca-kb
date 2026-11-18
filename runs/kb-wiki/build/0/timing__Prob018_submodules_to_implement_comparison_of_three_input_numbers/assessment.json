@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": ".data_a(a)",
+      "note": "The patch renamed the existing `slave_mod` ports `a` and `b`, so external named-port instantiations using the original interface would no longer compile."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "c_out <= (data_a > data_b) ? data_b : data_a;",
+      "note": "The patch correctly aligned the pipeline, but replacing the comparator's `if/else` with a ternary also changed simulation behavior when the comparison evaluates to unknown."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule dut (.clk(clk), .rst_n(rst_n), .a(a), .b(b), .c(c), .d(d));",
+      "note": "The test verified pipeline timing and reset through `TopModule`, but never instantiated `slave_mod` with its original named ports, so it could not catch the interface regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7464,
+    "output": 365
+  }
+}

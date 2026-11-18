@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "out2 <= vend & sel;",
+      "note": "The defect was two incorrect beverage-2 output entries, but the rewrite also replaced the combinational output decode with registered outputs, changed how coin inputs are accepted, and added a multi-cycle change queue."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 9,
+      "quote": "reg d1_sampled, d2_sampled;",
+      "note": "The replacement kept the module name and ports but removed the original public state parameters, so instantiations that override those parameters would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "outputs = (4 >> selection if purchase else 0) + (change > 0)",
+      "note": "The expected outputs came from the same credit-and-change model as the rewrite, so all 272 checks could pass without detecting departures from the original FSM behavior that should have been preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "34 reachable states, maximum simultaneous change = 4 coins",
+      "note": "The agent enumerated the new design's states and then narrowed its change arithmetic, work that only optimized a queue the two output-table corrections did not require."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8819,
+    "output": 636
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "synchronous-fifo-pointer-updates fifo-pointer-wrap-bit word-completion-valid ready-valid-counter-enable",
+      "note": "The agent read a broad batch of unrelated FIFO, handshake, and divider entries for a one-line warning-threshold fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8273,
+    "output": 218
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "valid_b <= word_complete;",
+      "note": "The patch fixed counting on invalid cycles but also suppressed valid_b during gaps at count five and tied ready_a high, changing the output timing and reset handshake that the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "complete = valid && count == 5;",
+      "note": "The test exercised input gaps and reset but expected the rewrite\u2019s valid_b gating and constant-high ready_a, so it could not catch either behavior change."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup wrapper caused the entire simulation command to be rejected and resubmitted, after an earlier Git status check also failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8090,
+    "output": 373
+  }
+}

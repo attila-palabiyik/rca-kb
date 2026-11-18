@@ -1,0 +1,5 @@
+Capture a byte needed for later word assembly in an edge-triggered register with a nonblocking assignment, and hold it across invalid cycles so the completing edge can combine the saved byte with the current input.
+
+Applies to clocked valid-only width converters whose output combines a saved byte with the current input. In one 8-to-16-bit `TopModule` variant, a combinational self-hold let the second byte overwrite the first before the output sampled it. The reference fix clocked the byte register with the same rising edge and asynchronous active-low reset as the output and captured every valid input. On the completing edge, the output used the saved first byte as its high byte and the current input as its low byte. The submitted fix used the same clock and reset, captured only the first byte of each pair, and matched all 141 graded samples.
+
+In a separate 8-to-16-bit `TopModule` variant, the byte register's update and hold branches were reversed. The reference fix swapped the branches to capture every valid input. The submitted fix captured only the first byte of each pair and matched all 141 graded samples.

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "out1 <= vend && !sel;",
+      "note": "The rewrite kept the dispense outputs clocked instead of decoding them combinationally from the current state and `sel`, and it replaced the original coin priority and change behavior rather than preserving them."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sold = credit >= price",
+      "note": "The 440-transition test derived its expected outputs from the same credit-and-refund rules as the rewrite and checked dispense outputs only after rising edges, so it did not verify the intended output timing."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "verify the externally visible reset, startup, and phase transition edges before changing the state machine",
+      "note": "The agent read relevant advice about verifying output timing before changing an FSM, but rewrote the machine without first isolating the timing defect."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10593,
+    "output": 571
+  }
+}

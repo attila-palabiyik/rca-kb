@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(input_accepted && (data_cnt == 2'd0))",
+      "note": "The counter fix was correct, but removing `ready_b` from the first-value load condition also changed `data_out` when a group starts while downstream is not ready, which the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "partial = 0;",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b`, so the test passed by expecting the extra behavior change rather than checking that the original accumulation behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "A failed Git check forced a second source-reading command, and two failed cleanup approaches forced the test command to be resubmitted and the temporary files to be removed separately."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8974,
+    "output": 297
+  }
+}

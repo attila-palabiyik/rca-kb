@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "//Clear the match pulse and retain the trailing 0.",
+      "note": "The agent fixed the duplicate state encoding but also changed two post-match transitions that originally returned to idle, enabling extra detections after a valid 1 or an invalid cycle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test oracle assumed every overlapping 0110 in the valid-bit stream should match, so exhaustive stimulus confirmed the new behavior instead of checking whether the original post-match transitions were preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The blocked cleanup command forced the agent to resubmit the test harness, and a later Git diff failed because the workspace was not a repository, requiring a separate file read."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10301,
+    "output": 364
+  }
+}

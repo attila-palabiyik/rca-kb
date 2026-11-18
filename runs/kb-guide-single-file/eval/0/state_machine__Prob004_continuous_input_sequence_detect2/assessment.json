@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "Clear match and retain the trailing 0",
+      "note": "The patch correctly holds `s3_d011` across invalid cycles, but it also changes two exits from `s4_d0110` to reuse the final zero, producing overlapping matches where the original and correct implementations return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The rolling-history oracle assumes overlapping matches are required, so the exhaustive input sweep confirms the extra behavior instead of catching it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8748,
+    "output": 308
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-wiki/build/0/arithmetic__Prob006_data_serial-to-parallel_circuit",
+  "experiment": "kb-wiki",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "wiki",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob006_data_serial-to-parallel_circuit",
+  "repeat": 0,
+  "position": 16,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fdd463af2b4f876e",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:13:04.015194Z",
+      "ended": "2026-11-18T19:13:42.268394Z",
+      "usage": {
+        "input_uncached": 19860,
+        "input_cached": 83540,
+        "input_cache_write": 19842,
+        "output": 2175,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T19:14:51.837322Z",
+      "ended": "2026-11-18T19:15:22.993525Z",
+      "usage": {
+        "input_uncached": 3675,
+        "input_cached": 85321,
+        "input_cache_write": 3663,
+        "output": 1105,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "168bcdf9d612b447",
+    "after": "2ffad5be5c62fc0e",
+    "changed": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite fixed the zero write increment but also advanced both Gray pointers a clock earlier, changing full and empty timing; it additionally gated RAM accesses during reset and changed RAM sizing, whereas the reference changes only the increment."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers counted, so it could verify ordering and detect underflow or overflow without checking whether the flags changed on the original cycles."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected and resubmitted, adding avoidable churn alongside a failed Git probe and a redundant compile check."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "The reference shows that the wrap condition alone fixed the reported defect.",
+      "note": "The consulted FIFO guides did not visibly help isolate the truncated write increment or persuade the agent to preserve the existing flag timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12451,
+    "output": 548
+  }
+}

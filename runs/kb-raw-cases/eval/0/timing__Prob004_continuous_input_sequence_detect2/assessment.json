@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "The final zero also starts a possible overlapping match.",
+      "note": "The edit fixed the one-cycle delay in `match` but also changed the transitions out of `s4_d0110`, allowing overlapping detections that the original and reference FSMs do not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = samples >= 4 && history == 4'b0110;",
+      "note": "The test's rolling valid-bit history expected overlapping matches, so even exhaustive eight-cycle testing could not flag the extra detections as regressions."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "Two edit attempts had to be redone for reasons unrelated to the design: the patch context did not match, and the fallback used an unavailable `python` command before retrying with `python3`."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -l 's4_d0110' /kb/sessions",
+      "note": "The knowledge-base search returned no hits and contributed no guidance to the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9398,
+    "output": 370
+  }
+}

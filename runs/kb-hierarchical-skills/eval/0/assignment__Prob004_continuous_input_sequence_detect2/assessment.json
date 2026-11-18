@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "// The final 0 can start an overlapping match.",
+      "note": "The agent fixed the duplicate state encoding but also changed the match state's exits for a valid 1 and for an invalid cycle, enabling overlapping matches that the original transition table did not allow."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = samples >= 4 && history == 4'b0110;",
+      "note": "The rolling-history oracle assumed overlapping matches, so the exhaustive test accepted the extra matches instead of checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling the edit and test with a prohibited cleanup command forced both to be resubmitted, after an earlier Git failure had already forced a separate source-file read."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9691,
+    "output": 313
+  }
+}

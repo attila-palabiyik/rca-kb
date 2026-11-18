@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "cat /kb/entries/fifo-pointer-clock-edge.md /kb/entries/moore-output-timing-and-async-reset.md",
+      "note": "The guides covered FIFO pointer timing and Moore output reset behavior, but neither offered guidance specific to the missing two-stage clock-domain synchronizer or visibly changed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6742,
+    "output": 156
+  }
+}

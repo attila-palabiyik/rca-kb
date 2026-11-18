@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "cat /kb/skills/debug-hdl-fsms/combinational-output-reset/SKILL.md",
+      "note": "The combinational-reset guide did not apply to the registered warning lights or help identify the faulty normal-mode balance check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8328,
+    "output": 162
+  }
+}

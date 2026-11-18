@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = (pstate == s6);",
+      "note": "The combinational decode fixed the one-cycle delay, but it dropped the explicit reset guard and allowed unknown state bits to produce unknown outputs instead of defaulting both outputs to zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "reg clk = 0, rst_n = 1, data = 0;",
+      "note": "The test always drove a falling reset edge and waited before checking, so it did not cover startup with reset already low and the state register still unknown."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that each state has a distinct encoding when a case-based FSM fails to advance despite matching the transition table.",
+      "note": "The agent read both entries, but the FSM already had distinct encodings and the register-snapshot example did not address the reset behavior of a combinational state decode."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7915,
+    "output": 340
+  }
+}

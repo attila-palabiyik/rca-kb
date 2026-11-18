@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixes the counter rollover but also forces `ready_a` high during reset and gates `valid_b` on `valid_a`, whereas the reference preserves registered readiness and asserts `valid_b` when the count is five even if the sixth bit stalls."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
+      "note": "The test exercised input gaps and reset but built the rewrite\u2019s assumptions into its expected outputs, so it passed without catching either handshake regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8050,
+    "output": 342
+  }
+}

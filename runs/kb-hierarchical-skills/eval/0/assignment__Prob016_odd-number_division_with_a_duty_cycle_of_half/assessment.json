@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The existing logic starts the falling-edge pulse early.",
+      "note": "The agent had already identified the timing defect before opening the detailed skill, and the record shows no concrete contribution from that lookup to the patch or test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7637,
+    "output": 264
+  }
+}

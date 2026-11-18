@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "Keep the final 0 as a prefix across invalid cycles",
+      "note": "The patch fixed the one-cycle match delay but also changed the match state's exits for a valid 1 and an invalid cycle, allowing overlapping detections where the reference returns to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding window that expected overlapping matches, so it validated the new behavior instead of catching the regression in the original match-state transitions."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "AssertionError",
+      "note": "The first two edit attempts failed to match the source and made no changes, so the edit had to be redone with line-based substitutions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10287,
+    "output": 340
+  }
+}

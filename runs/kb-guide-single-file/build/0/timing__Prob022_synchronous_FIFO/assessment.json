@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "localparam DP_WD = (DEPTH == 1) ? 2 : $clog2(DEPTH);",
+      "note": "The agent fixed the write-pointer bug but also changed address sizing to support DEPTH=1, a separate behavior change that the reference fix does not make."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The agent had to resubmit the simulation command after its cleanup syntax was rejected, and had already had to retry reading the source after an unnecessary Git check failed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9857,
+    "output": 318
+  }
+}

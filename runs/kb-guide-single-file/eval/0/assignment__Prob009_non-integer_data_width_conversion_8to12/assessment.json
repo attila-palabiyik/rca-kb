@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The two-state rewrite still emits nothing on the third valid byte; the actual fix makes count 2 reachable and selects the second packing branch at that count."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "data_out <= {data_lock, data_in[3:0]};",
+      "note": "The rewrite also changed the already-correct first output word by taking the second byte\u2019s low nibble instead of preserving its high nibble."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected_word = first * 16 + second % 16;",
+      "note": "The exhaustive test encoded the rewrite\u2019s low-nibble, one-output-per-pair assumption, so it passed without checking the required second output on the third valid byte."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 8,
+      "quote": "The acceptance edge for the second byte will register both outputs.",
+      "note": "The agent committed to pairwise behavior without applying the available FSM guide\u2019s transition check, which would have exposed that the existing count-2 output condition was unreachable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6991,
+    "output": 471
+  }
+}

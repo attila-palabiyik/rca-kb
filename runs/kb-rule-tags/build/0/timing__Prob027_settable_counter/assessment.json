@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "number <= next_number;",
+      "note": "Registering the newly computed count still exposes it one edge too early; `number` needed to sample the pre-edge `num` value, just as the existing `zero` logic did."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "zero <= 1'b1;",
+      "note": "The rewrite flipped the asynchronous reset value of `zero` from low to high and changed its timing, although the fix only needed to change how `number` was driven."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (number !== expected || zero !== (expected == 4'd0))",
+      "note": "The passing test encoded the rewrite's immediate count and mode of zero detection, expecting `number=1` on the first edge after reset and `zero=1` during reset rather than checking the required latency and reset value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "python: command not found",
+      "note": "The test launch had to be redone twice for reasons unrelated to the design: the runner first rejected the cleanup command, then the replacement invoked an unavailable `python` executable."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "align their sampled values and preserve the established output latency and reset values",
+      "note": "The agent read directly relevant guidance about aligning sampled values, but it did not carry that guidance into the patch: it replaced the established sampling stage and changed the reset value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8813,
+    "output": 510
+  }
+}

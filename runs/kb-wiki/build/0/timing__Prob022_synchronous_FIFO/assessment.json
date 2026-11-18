@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The agent fixed the write-pointer clocking bug but also gated both RAM enables with reset, suppressing writes during reset that the reference fix leaves enabled when the FIFO is not full."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected and resubmitted, and the retry then ran a Git check in a workspace that was not a Git repository."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When an FSM has a specified transition table, compare the next-state logic against every state and input combination.",
+      "note": "The consulted notes covered FSMs and shift-register detectors but offered no guidance specific to the FIFO's combinational write-pointer update."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12521,
+    "output": 325
+  }
+}

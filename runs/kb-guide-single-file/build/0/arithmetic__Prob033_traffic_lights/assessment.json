@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "{red, yellow, green} <= RED;",
+      "note": "The rewrite stopped green from stalling, but it also made red assert during reset and removed the original startup delay instead of changing only the green reload condition to detect a rising edge."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test hard-coded the rewrite\u2019s immediate-red reset behavior, so it passed the rewrite but would reject the correct one-line fix before reaching the green countdown."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 4,
+      "quote": "For a timed FSM with registered outputs, check the destination separately from the transition threshold.",
+      "note": "The agent did not apply this relevant guidance: it replaced the FSM without tracing how the existing state and output registers affected transition timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted.",
+      "note": "Two of the five tool calls had to be redone for unrelated reasons: the initial Git check blocked source inspection, and the cleanup command blocked the first simulation attempt."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9752,
+    "output": 492
+  }
+}

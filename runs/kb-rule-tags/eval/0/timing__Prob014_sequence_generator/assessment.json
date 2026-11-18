@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "+            q <= {q[4:0], q[5]};",
+      "note": "The patch clocked the rotation of `q` but left `data` combinational, so it showed the post-rotation bit instead of capturing the pre-edge bit and led the required sequence by one clock."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(PATTERN[5 - (i % 6)]);",
+      "note": "The test counted the reset-state zero as the first sequence bit and expected the second bit on the first rising edge after reset, so it passed the phase error instead of catching it."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "preserve the established output latency and reset values unless the specification explicitly changes them",
+      "note": "The agent read relevant latency guidance, but it did not prompt a check of whether `data` needed to capture `q[5]` before the rotation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6883,
+    "output": 339
+  }
+}

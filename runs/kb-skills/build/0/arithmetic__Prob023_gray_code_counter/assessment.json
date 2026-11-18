@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+      bin_out[3] <= gray_wire[3];",
+      "note": "Beyond correcting the shift, the patch made the increment stage always read the pre-edge decoded value, removing a scheduling dependency that the reference fix leaves unchanged; grading found no output mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6074,
+    "output": 293
+  }
+}

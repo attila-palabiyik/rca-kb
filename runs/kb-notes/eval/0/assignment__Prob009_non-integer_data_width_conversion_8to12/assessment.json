@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite kept the faulty two-input cadence instead of making count 2 reachable and aligning the second data write with it, so it omitted the output due on every third accepted byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "beat(1, 8'h2E, 0, 12'hA53);",
+      "note": "The test exercised the third accepted byte but explicitly expected no output, so it validated the rewrite's assumption rather than checking for the required valid output of 12'hC2E."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check that its enable agrees with the storage enable and that its wrap count agrees with the downstream completion predicates.",
+      "note": "The agent read directly relevant advice about reachable counts and completion predicates, but did not use it to reconcile the original counter wrap with the output conditions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8423,
+    "output": 340
+  }
+}

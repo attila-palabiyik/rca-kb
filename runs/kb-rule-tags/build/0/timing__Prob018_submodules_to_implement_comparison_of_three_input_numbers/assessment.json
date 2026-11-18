@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": ".data_a(a),",
+      "note": "The agent renamed the existing `slave_mod` ports `a` and `b` to `data_a` and `data_b`, so any caller using the original named ports would fail to elaborate."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule dut (clk, rst_n, a, b, c, d);",
+      "note": "The bench exercised the timing fix through the unchanged `TopModule` interface, but never instantiated `slave_mod` with its original named ports, so it could not catch the compatibility break."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "c_out <= (data_a > data_b) ? data_b : data_a;",
+      "note": "Beyond registering `c1`, the agent replaced the comparator\u2019s `if/else` with a ternary, which can merge branch values when the comparison is unknown instead of taking the original `else` branch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8001,
+    "output": 380
+  }
+}

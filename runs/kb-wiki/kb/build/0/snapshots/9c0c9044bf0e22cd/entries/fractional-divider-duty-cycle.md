@@ -1,0 +1,13 @@
+# Fractional divider duty cycle
+
+Use this check when a fractional divider already produces the expected rising-edge cadence but its waveform differs. Check the period schedule and pulse widths separately. Trace the pre-edge counter value used by the registered output. When the counter starts at zero and increments on every sample until wrap, `count <= H - 1` holds the output high for `H` samples when `H` fits within the period.
+
+In two 8.7× fractional divider `TopModule` tasks, the existing schedule produced three 8-cycle periods and seven 9-cycle periods per 87 input cycles. Compute this from the frame parameters: `c89 = 24` gives `24 / 8 = 3` periods before the switch, and `M_N - c89 = 63` gives `63 / 9 = 7` periods after it. That gives 10 output cycles per 87 input cycles and resolves the conflicting count in the prompt. For parameter overrides, check that both segments contain a whole number of periods so the mode switch and frame wrap occur when the period counter returns to zero.
+
+The even-period comparison was `clk_cnt <= ((div_e >> 1) + 1)` in one variant and `clk_cnt <= ((div_e >> 3) + 1)` in the other. At `div_e = 8`, the first gives six high cycles and the second gives three. A test that counts only rising edges misses both bugs. Each reference fixed only the even-period comparison by setting the shift to `>> 2`. Both modes then hold the output high at counts 0 through 3, giving a 4/4 high/low split for period 8 and a 4/5 split for period 9.
+
+Both submissions used `clk_cnt < (period >> 1)`, derived counter widths from the parameters, and selected the period from the frame count. Each matched all 2,021 grading samples. The submitted and reference comparisons agree at periods 8 and 9 and can differ for other periods. For period 10, they give five and four high cycles, respectively. Local Icarus checks on the second submission verified the submitted waveform at periods 17 and 18, checked frames using only one of those periods, and exercised asynchronous reset while the output was high. Those checks used expectations for the submitted half-period rule.
+
+Check both the rising-to-rising interval and the rising-to-falling interval through a complete frame. Include the period switch, frame wrap, and reset while the output is high. For tracing other registered outputs that sample the pre-edge counter, see [Shift-register output timing](shift-register-output-timing.md).
+
+For a zero-based address whose wrap bit must change on the same edge as the address returns to zero, see [FIFO pointer clocking](fifo-pointer-clocking.md#check-that-the-wrap-bit-toggles-with-the-address).

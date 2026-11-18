@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite fixed the RAM read-enable polarity but also advanced both Gray-pointer updates by one source-clock edge, changing the externally visible timing of `wfull` and `rempty` that the correct fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rempty !== 1 || reads != writes) $fatal(1, \"empty late\");",
+      "note": "The test required `rempty` to assert immediately after the last read, validating the rewrite\u2019s timing rather than checking whether it preserved the original one-cycle delay."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11421,
+    "output": 451
+  }
+}

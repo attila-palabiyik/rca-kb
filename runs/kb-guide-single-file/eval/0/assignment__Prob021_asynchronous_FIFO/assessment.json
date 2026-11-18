@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Advance the binary and registered Gray pointers on the same edge.",
+      "note": "The patch fixed the write increment but removed the one-cycle lag between the binary and Gray pointers, changing when `wfull` and `rempty` update instead of preserving the original timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "last read did not assert empty",
+      "note": "The test required `rempty` to assert immediately after the last read, encoding the rewrite\u2019s timing rather than checking that the original one-cycle delay was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The first test command was rejected because of its cleanup trap, and the replacement trap failed because Python was unavailable, requiring a third command to remove the temporary files."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12394,
+    "output": 321
+  }
+}

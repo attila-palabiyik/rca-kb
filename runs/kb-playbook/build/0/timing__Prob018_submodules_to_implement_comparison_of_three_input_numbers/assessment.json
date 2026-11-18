@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "+    input [7:0] data_a,",
+      "note": "The patch correctly registered `c1` but unnecessarily renamed the `slave_mod` ports `a` and `b`, breaking any existing instantiation that uses the original named ports."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule dut(.clk(clk), .rst_n(rst_n), .a(a), .b(b), .c(c), .d(d));",
+      "note": "The simulation checked pipeline alignment and reset through `TopModule`, but never instantiated `slave_mod` using its original named ports, so it could not catch the interface regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7597,
+    "output": 372
+  }
+}

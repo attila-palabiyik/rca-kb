@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "out1 <= vend && !sel;",
+      "note": "The rewrite accounts for the correct coin values but replaces the FSM\u2019s combinational output decode with registered outputs and changes how held inputs, simultaneous coins, and change payout are handled; the reference fix changes only two transition targets."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 15,
+      "quote": "arrived = coins & ~previous;",
+      "note": "The testbench used the rewrite\u2019s own coin-accounting and output-timing rules as its oracle, so its 10,030 passing cycles did not verify the two faulty transitions under the original FSM\u2019s behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "Both `S2` and `S3` were encoded as 2",
+      "note": "The entry the agent read concerned duplicate state encodings, whereas this FSM had distinct encodings and two incorrect transition destinations."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12396,
+    "output": 383
+  }
+}

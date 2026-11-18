@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixes the counter wrap but also changes when `ready_a` goes high after reset and suppresses `valid_b` during stalls at count 5, whereas the reference preserves both behaviors."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "repeat (3) cycle(0, 1, 0, 0);",
+      "note": "The test exercises stalls after five bits but expects `valid_b` to stay low, and its checker hard-codes `ready_a` high even during reset, so passing confirms the rewrite\u2019s assumptions rather than the reference behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8587,
+    "output": 342
+  }
+}

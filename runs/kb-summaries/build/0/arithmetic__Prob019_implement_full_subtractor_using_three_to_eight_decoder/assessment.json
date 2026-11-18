@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "full subtractor|3-to-8|decoder minterm|active-low decoder",
+      "note": "The knowledge-base search returned no matches, so it did not inform the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "warning: Not a git repository.",
+      "note": "Both Git checks failed outside a repository and had to be replaced with a direct file check; earlier, a rejected cleanup command also forced the agent to repackage the same testbench."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11622,
+    "output": 152
+  }
+}

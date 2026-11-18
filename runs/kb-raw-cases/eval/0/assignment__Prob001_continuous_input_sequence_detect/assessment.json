@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The patch corrected the pattern but compared the newly shifted value, making `match` assert and deassert one clock earlier than in the original design with only the pattern corrected."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test checked `match` against the post-shift value, so it confirmed the patch's timing assumption instead of detecting that the original output used the pre-shift value."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "reg [8:0] a_tem;",
+      "note": "The search surfaced a different 9-bit detector, and the record shows no finding from it that informed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7948,
+    "output": 281
+  }
+}

@@ -1,0 +1,3 @@
+When a mode bit toggles at counter thresholds and holds between them, update it in a clocked block with a nonblocking assignment so each comparison samples the pre-edge count.
+
+Applies to counter-driven mode switches in Verilog/SystemVerilog. In the 8.7× `TopModule` divider, `div_flag` read and inverted itself in `always @(*)`. The reference and submitted fixes registered the toggle on the rising input clock edge, cleared the flag on active-low asynchronous reset, and preserved the `c89 - 1` and `M_N - 1` thresholds. The submitted change was confined to the flag block and matched all 2021 graded samples.

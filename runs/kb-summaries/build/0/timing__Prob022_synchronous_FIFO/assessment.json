@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the write-pointer timing but also gated RAM writes during reset, whereas the reference fix leaves the RAM enables unchanged."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "TopModule checked consecutive, nonoverlapping six-bit groups for 011100.",
+      "note": "The knowledge-base search surfaced sequence-detector and FSM examples rather than guidance on synchronizing a FIFO write pointer with the RAM clock."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9846,
+    "output": 211
+  }
+}

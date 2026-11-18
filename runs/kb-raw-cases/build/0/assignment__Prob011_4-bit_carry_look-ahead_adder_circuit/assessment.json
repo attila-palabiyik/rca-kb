@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "Passed all 512 input combinations",
+      "note": "The knowledge-base search surfaced a prior exhaustive test but added nothing to the verification plan the agent had already announced."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9647,
+    "output": 230
+  }
+}

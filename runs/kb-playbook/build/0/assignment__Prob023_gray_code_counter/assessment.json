@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "bin_out[3] <= gray_wire[3];",
+      "note": "The patch also changed the decoder from blocking to nonblocking assignments, eliminating the possibility that the increment stage reads the newly decoded value on the same edge; the reference leaves that scheduling behavior unchanged, although grading found no mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6167,
+    "output": 440
+  }
+}

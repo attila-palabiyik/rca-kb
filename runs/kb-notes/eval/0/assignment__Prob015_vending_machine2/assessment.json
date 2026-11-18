@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire [1:0] coin_pulses = new_coins & {2{clk}};",
+      "note": "Instead of correcting only the beverage-2 output codes at 2.5 and 3 yuan, the agent replaced the FSM with a design that changes how held or simultaneous coin inputs are counted and can extend change dispensing across cycles."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "change = max(0, pending + (balance - price if vend else 0) - 1)",
+      "note": "The test used the rewrite\u2019s own change-queue and coin-edge rules as its oracle, so passing 440 transitions did not establish that the original FSM behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "55 7 3",
+      "note": "The agent enumerated reachable states to size a new change queue and then revised its arithmetic, work the two output-code corrections did not require."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "check every per-state output assignment before changing transition or counter logic",
+      "note": "The agent read advice directly relevant to this output-table defect but did not use it to constrain the patch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10500,
+    "output": 517
+  }
+}

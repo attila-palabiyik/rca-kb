@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "especially when the error depends on which bits of one operand are set",
+      "note": "The guides on partial-product wiring and adder carry logic did not contribute to diagnosing the wrong sign on the final term."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5912,
+    "output": 215
+  }
+}

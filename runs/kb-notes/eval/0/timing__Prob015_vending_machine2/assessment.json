@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll keep dispensing on the rising edge",
+      "note": "The defect was the registered output decoder: the outputs needed to respond combinationally to the current state, selection, and reset, but the rewrite retained rising-edge dispensing and changed coin and change handling instead."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "outputs = ((2 if sel else 4) if vend else 0) + (pending > 0)",
+      "note": "The test generated expectations from the rewrite\u2019s own credit and change model and checked dispensing only after rising edges, so it could not catch a missing combinational response to a selection change between edges."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "Trace the old and new values of the state, output buffers, visible outputs, and timer on each edge",
+      "note": "The agent read relevant advice about tracing FSM output timing, but the record shows no such trace before it decided to keep the outputs registered."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11238,
+    "output": 506
+  }
+}

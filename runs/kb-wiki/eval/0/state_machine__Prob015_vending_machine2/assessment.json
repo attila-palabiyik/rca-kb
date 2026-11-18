@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (!(out1 || out2 || out3) && total >= price) begin",
+      "note": "The rewrite corrected the one-yuan arithmetic but replaced the original FSM with registered vending outputs, edge-only coin acceptance, simultaneous coin summation, and scheduled change pulses, whereas the correct fix changes only two transition destinations."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "tick(2'b11, 1, 2'b11, 3'b000);",
+      "note": "The testbench asserted the rewrite\u2019s internal coin pulses and its own simultaneous-coin and change rules instead of checking that the two corrected transitions preserved the original FSM\u2019s input priority and output timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9161,
+    "output": 330
+  }
+}

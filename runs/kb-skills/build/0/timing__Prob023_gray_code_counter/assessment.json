@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "advance <= ~advance;",
+      "note": "The rewrite replaced the two registered conversion stages with combinational logic and a toggle, changing internal cycle timing that the reference fix preserves, although the graded output matched."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The agent had to resubmit the test harness twice for reasons unrelated to the design: the first command used a disallowed cleanup operation, and the second invoked an unavailable Python executable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8376,
+    "output": 389
+  }
+}

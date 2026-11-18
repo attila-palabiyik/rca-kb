@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Expand each carry in terms of G, P, and the incoming carry.",
+      "note": "The agent fixed carry generation but also replaced the original carry chain with parallel logic, changing the carry-path depth even though the reference fix preserves the chain and all settled outputs matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7097,
+    "output": 266
+  }
+}

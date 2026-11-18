@@ -1,0 +1,3 @@
+When a phase counter reloads on entry, compare the current and next phase indicators to detect the inactive-to-active transition, and preserve the existing reset and output latency when a predicate fix resolves the bug.
+
+Applies to Verilog/SystemVerilog controllers where one registered stage drives the visible phase output on the following clock edge. In the traffic-light `TopModule` with a green reload bug, `green && p_green` reloaded 60 while green stayed active. The reference changed the condition to `!green && p_green`, matching the red and yellow entry checks, and removed the trailing comment. The submitted rewrite passed its directed tests but changed the reset and countdown timing and differed from the reference on 220 of 517 samples.

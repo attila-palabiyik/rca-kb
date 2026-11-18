@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that the shift-register assignment inserts each new sample at the end the decoder treats as newest",
+      "note": "The knowledge-base lookup did not inform the fix: the defect was in how the active-low decoder outputs were combined, not in bit ordering or interface compatibility."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10228,
+    "output": 217
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "s4_d0110: nstate = (data_valid && data) ? s2_d01 : s1_d0;",
+      "note": "The patch correctly holds `s3_d011` on invalid cycles, but also retains the completed match\u2019s trailing zero after an invalid cycle or a valid `1`, enabling overlapping detections that the original and reference FSMs do not allow."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "expected = samples >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding-window oracle that expected overlapping matches, so it passed without checking that the FSM preserved the original post-match behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39279,
+    "output": 196
+  }
+}

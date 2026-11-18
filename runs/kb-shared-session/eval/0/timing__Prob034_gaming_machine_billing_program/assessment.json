@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 225,
+      "quote": "red <= (next_remain < rate);",
+      "note": "The agent registered the warning lights but computed them from the post-update balance, whereas both lights should sample the pre-edge value of `remain`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "expect_yellow = balance >= 1 && balance <= 9;",
+      "note": "The test updated its model balance before computing the expected warnings, so it validated the same timing assumption instead of catching the one-cycle mismatch at threshold crossings."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38255,
+    "output": 221
+  }
+}

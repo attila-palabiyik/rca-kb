@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "{red, yellow, green} <= RED;",
+      "note": "The rewrite corrected the color sequence but asserted red during reset and removed the original startup delay, shifting the visible light and countdown timing that the two-transition fix preserves."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": "localparam [2:0] RED    = 3'b100;",
+      "note": "The rewrite removed the four public state parameters, so an existing instantiation that overrides any of them would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(RED, 10);",
+      "note": "The test required the rewrite\u2019s immediate-red reset and countdown timing, so it passed without detecting the regression against the original startup behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -l -i 'countdown|off-by-one' /kb/sessions",
+      "note": "The knowledge-base searches returned no matching transcripts and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10798,
+    "output": 348
+  }
+}

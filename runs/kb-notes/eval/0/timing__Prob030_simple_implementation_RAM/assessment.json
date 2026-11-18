@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (read_en && read_addr < 8'd8)",
+      "note": "The clocked read fixes the timing bug, but the address guard also makes an enabled out-of-range read hold the previous value instead of returning an unknown value as the reference does."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1, 1, 255, 255, 0, 4'hf);",
+      "note": "The test caught the original read-timing defect, but its out-of-range case expected the newly introduced hold behavior, so it could not flag that difference from the reference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8162,
+    "output": 335
+  }
+}

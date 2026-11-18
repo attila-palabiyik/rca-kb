@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "`match` now updates on the rising edge that samples the final bit of `011XXX110`. The shift register resets to all ones so a match requires nine sampled bits.",
+      "note": "The rewrite made both comparisons use the same window, but it also asserted `match` one clock earlier than the correct fix and replaced the original zero-filled reset state with ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = (count >= 9) && ((history & 9'b111000111) == 9'b011000110);",
+      "note": "The test shifted in the new bit before computing its expectation and required nine samples, so it validated the rewrite's timing and startup assumptions rather than checking the original registered timing and zero-filled startup behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check for duplicate state encodings",
+      "note": "The knowledge-base index only pointed to duplicate FSM state encodings, which did not help diagnose the misaligned shift-register comparisons."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6652,
+    "output": 330
+  }
+}

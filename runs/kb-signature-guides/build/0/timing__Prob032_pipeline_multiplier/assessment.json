@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "After the first command was rejected because of its cleanup trap, the agent reran the test command with an unavailable Python executable in the replacement trap, then needed a separate command to remove the temporary files."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8164,
+    "output": 121
+  }
+}

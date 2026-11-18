@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository.",
+      "note": "The first simulation command was rejected because of its cleanup command and had to be rerun; after the simulation passed, two Git diff commands failed because the workspace was not a repository."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that the shift-register assignment inserts each new sample at the end the decoder treats as newest",
+      "note": "The consulted notes covered shift direction and reset overrides, but both were already correct here; neither note addressed which bit to invert for Johnson-counter feedback."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7179,
+    "output": 196
+  }
+}

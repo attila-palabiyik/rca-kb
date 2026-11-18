@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "The patch fixed the read-pointer wrap condition but also added depth-one support by changing the FIFO and RAM address widths, which the reference fix left unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command blocked the simulation before it started, forcing the agent to resubmit the test, while the parallel diff check also failed because the workspace was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11021,
+    "output": 353
+  }
+}

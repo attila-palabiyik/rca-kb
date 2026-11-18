@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "I\u2019ll align both Gray pointers with accepted transfers",
+      "note": "The rewrite fixed the unregistered write-side Gray pointer, but computing both Gray pointers from the next address changed the flag and cross-domain visibility timing; the reference registers the current write pointer and leaves the read path unchanged."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wen = wrstn && winc && !wfull;",
+      "note": "The rewrite also gated both RAM enables with their resets, changing whether the RAM can accept a request during reset even though the reference preserves the original enables."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to count and checked the boundary flags only after multiple cycles, so the test could pass without checking the exact cycles on which the flags were expected to change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11526,
+    "output": 412
+  }
+}

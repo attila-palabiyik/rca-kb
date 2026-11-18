@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "warning: Not a git repository.",
+      "note": "The first test command was rejected because of its cleanup command, and the retry passed simulation but still required manual cleanup because the Git check and Python cleanup failed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8336,
+    "output": 84
+  }
+}

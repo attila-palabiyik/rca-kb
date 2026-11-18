@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "end else if (minute < 6'd60) begin",
+      "note": "The outer guard changes the original rollover-before-stop priority: at 60:60 the reference would roll seconds to 1, while the rewrite would hold both counters, though this state is unreachable during normal operation after reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7125,
+    "output": 422
+  }
+}

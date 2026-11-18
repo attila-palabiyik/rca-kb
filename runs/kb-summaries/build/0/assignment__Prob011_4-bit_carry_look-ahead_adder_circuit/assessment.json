@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": "output wire [3:0] S,\\n    output wire       CO",
+      "note": "The rewrite swapped the output port order from `CO, S` to `S, CO`, breaking positional instantiations even though the named-port test passed."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "or  (c3, G[2], p2_g1, p2_p1_g0, p2_p1_p0_cin);",
+      "note": "The rewrite replaced the original chained carry logic with parallel product terms, changing the carry propagation path beyond the operand fix while preserving the settled arithmetic outputs."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling a rejected cleanup command with the entire edit and verification script prevented either from running, so the agent had to resubmit both."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7168,
+    "output": 377
+  }
+}

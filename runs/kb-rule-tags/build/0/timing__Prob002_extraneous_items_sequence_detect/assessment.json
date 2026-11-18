@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite fixed the misaligned comparisons but advanced detection by one clock edge relative to the correct fix and changed the shift register's reset value from all zeros to all ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = cycles >= 9 && ((history & 9'b111000111) == 9'b011000110);",
+      "note": "The test shifted in the new bit before computing the expected result and required nine post-reset samples, so it validated the rewrite's timing and startup assumptions rather than checking the original behavior that should have been preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that each state has a distinct encoding when a case-based FSM fails to advance despite matching the transition table.",
+      "note": "The consulted entry covered duplicate state encodings in a case-based FSM, not clock alignment between comparisons in a shift-register detector."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6489,
+    "output": 275
+  }
+}

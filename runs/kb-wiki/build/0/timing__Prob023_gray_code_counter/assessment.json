@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+      bin_out[2] <= ^gray_wire[3:2];",
+      "note": "The agent also rewrote the already-correct Gray decoder to use nonblocking assignments, changing when its updates become visible to the increment stage in simulation; the reference fixes only the output stage, and all 421 grading samples still matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8702,
+    "output": 305
+  }
+}

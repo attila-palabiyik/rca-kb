@@ -1,0 +1,9 @@
+# Input cycle alignment in a pipelined comparator
+
+Applies when a cascaded datapath produces an output on the expected edge, but varying one input on consecutive cycles makes the result depend on values from different samples.
+
+1. Trace what each operand contains just before the edge where the final stage captures its result. In the three-input minimum `TopModule.sv` task, the second registered `slave_mod` compared the previous edge's `min(a, b)` with the live value of `c`. The combinational reset mux on `c` could clear that path during reset, but it did not store the sample.
+2. Register the shorter path with the same clock edge and reset as the first stage. The grader's correction changed only the `c1` block to run on `posedge clk` or `negedge rst_n`, with nonblocking assignments for reset and capture. The second stage then sees the saved `c` and `min(a, b)` from the same edge. To expose the original bug, send `(220, 200, 12)` followed by `(140, 180, 250)` and check for `12` on the second rising edge. Also assert reset between rising edges while the output is nonzero.
+3. Preserve existing module names and port names unless the fix requires changing them. A testbench that instantiates only `TopModule` exercises the datapath but cannot detect whether existing named-port instantiations of `slave_mod` still elaborate. If a patch changes a submodule interface, compile a small caller using the original interface to check compatibility.
+
+The submitted patch aligned `c1` and passed a local top-level Icarus simulation, but it also renamed `slave_mod` ports `a` and `b` to `data_a` and `data_b`. The grader reported a testbench compile failure without giving a compiler diagnostic. Its supplied correction retained the original submodule interface. An existing instance using `.a(...)` and `.b(...)` would fail to elaborate with the renamed ports, although the report does not establish which testbench connection failed.

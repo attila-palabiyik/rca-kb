@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "+    always @(posedge clk or negedge rst_n) begin",
+      "note": "The patch clocked the shift register but left `data` combinational, so it exposes the rotated state instead of sampling the pre-edge state and advances the visible sequence by one clock."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check_bit(step % 6);",
+      "note": "The test expected pattern index 1 on the first rising edge after reset release rather than index 0, so it accepted the same one-clock phase error as the patch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6563,
+    "output": 326
+  }
+}

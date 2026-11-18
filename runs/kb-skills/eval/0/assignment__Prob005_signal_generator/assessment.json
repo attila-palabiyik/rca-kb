@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "*** Update File: /app/TopModule.sv",
+      "note": "The patch changed only triangle logic and left both square-wave terminal checks at 20, preserving the 21-clock period instead of correcting it to 20 clocks."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire triangle_falling = (wave == 5'd20) || (wave != 5'd0 && descending);",
+      "note": "Replacing the registered direction decision with a same-edge endpoint check changed the triangle's startup and mode-entry behavior instead of preserving the existing logic and correcting its upper comparison to 19."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "phase = (cycle - 1) % 21;",
+      "note": "The test explicitly expected the faulty 21-clock square-wave period and also encoded the rewritten triangle's startup sequence, so passing did not establish compatibility with the intended behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "verify their bit slices and comparison constants against the pattern before changing the pipeline",
+      "note": "The agent read relevant cycle-alignment advice, but it did not translate into checking the square-wave terminal count or tracing the triangle's pre-edge comparison before rewriting it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7460,
+    "output": 525
+  }
+}

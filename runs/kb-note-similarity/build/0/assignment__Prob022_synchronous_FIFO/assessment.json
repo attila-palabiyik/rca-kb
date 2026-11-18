@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "The read-pointer wrap fix was sufficient, but the patch also changed the RAM address widths for DEPTH=1 and replaced the existing full/empty logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9738,
+    "output": 200
+  }
+}

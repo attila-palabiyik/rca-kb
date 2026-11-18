@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite removed the faulty combinational counter but replaced the three-transfer packing sequence with disjoint pairs, dropping the output that combines the previous byte\u2019s low nibble with the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "beat(1, 8'hEF, 0, 12'hABC);",
+      "note": "The test exercised the third accepted byte but expected no output, so it passed the rewrite where it should have checked for valid output with data 12'hDEF."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the counter's wrap point](transfer-counter-wrap.md) before changing the output enables.",
+      "note": "The agent consulted relevant counter and output-enable guidance, but it did not lead to preserving the existing wrap sequence and output conditions while fixing the counter\u2019s clocking."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8477,
+    "output": 325
+  }
+}

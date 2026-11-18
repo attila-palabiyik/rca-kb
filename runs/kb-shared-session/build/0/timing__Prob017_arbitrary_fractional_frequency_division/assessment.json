@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 208,
+      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
+      "note": "The rewrite fixed the divider and matched the default waveform, but it also changed the pulse width for parameter overrides: a 20-cycle period is now high for 10 cycles instead of the original 7."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 208,
+      "quote": "(position % SHORT < SHORT / 2)",
+      "note": "The custom-period test used the rewrite\u2019s half-period rule as its expected result, so it passed without detecting the change to the original pulse-width behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38897,
+    "output": 256
+  }
+}

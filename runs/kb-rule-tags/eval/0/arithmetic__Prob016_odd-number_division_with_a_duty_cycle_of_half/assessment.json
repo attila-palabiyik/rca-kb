@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "synchronous-fifo-pointer-updates,fifo-pointer-wrap-bit,fifo-blocking-flag-polarity",
+      "note": "The agent read a broad set of timing and interface entries, including unrelated FIFO rules, when the divider-specific entry was the natural starting point for this one-line fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6732,
+    "output": 292
+  }
+}

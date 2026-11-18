@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite fixed advancement on valid inputs, but replaced the original three-phase packing with disjoint pairs, dropping the output that combines the previous byte\u2019s low nibble with the full third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1, 8'h56, 0, 12'ha5c);",
+      "note": "The test explicitly expected no output on the third accepted byte, so it passed by enforcing the rewrite\u2019s assumption instead of checking for the second packed word, `12'h356`."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the combined edit-and-test command to be resubmitted in pieces, after an unrelated Git check had already forced a separate source-file read."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8981,
+    "output": 339
+  }
+}

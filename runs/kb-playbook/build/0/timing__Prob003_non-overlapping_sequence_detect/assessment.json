@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = (pstate == s6);",
+      "note": "The combinational decode fixes the one-cycle delay but drops the original explicit reset override, so the outputs now depend on the state register settling to idle rather than being forced low by reset."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check_outputs(0, 0);",
+      "note": "The test checks reset only after the state register has had time to settle and does not check the outputs before the first reset, so it cannot distinguish explicit reset gating from the patched state-only decode."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the first verification invocation to be rejected and redone, and the retry also ran Git checks in a directory that was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8555,
+    "output": 465
+  }
+}

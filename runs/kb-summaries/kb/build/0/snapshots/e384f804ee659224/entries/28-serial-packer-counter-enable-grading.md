@@ -1,0 +1,7 @@
+# Grading result for the 1-to-6-bit serial packer
+
+The submitted `TopModule.sv` differed from the grading reference on 16 of 151 samples. The original counter held only when both `ready_a` and `valid_a` were low, so it could advance when only one handshake signal was high. The published fix changed its hold condition from `~ready_a && ~valid_a` to `~ready_a || ~valid_a`. The counter now advances or wraps only when `ready_a && valid_a`, matching the existing shift register's enable.
+
+The submission also tied `ready_a` high and changed `valid_b` to pulse only when the sixth bit was accepted. A self-written Icarus test passed all 64 data values with gaps, uninterrupted input, and reset during a partial word, but it encoded those same two interface changes as its expected behavior. The published fix preserves the registered `ready_a`, which is low during reset and rises on the first clock after release. It also preserves `valid_b <= cnt == 5`, which asserts on an idle clock at count 5 even though `data_b` holds. The grading report gives a total mismatch count without identifying individual samples.
+
+For similar handshake-counter repairs, derive the advance condition from the existing transfer enable and check unrelated output timing before editing it. With valid input at the first clock after reset and an idle clock after five accepted bits, a test can distinguish the published counter-only repair from the submitted rewrite. Compare the prose against the original register behavior when choosing test expectations.

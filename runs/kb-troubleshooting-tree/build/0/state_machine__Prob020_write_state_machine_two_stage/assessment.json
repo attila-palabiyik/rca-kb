@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the simulation, after an earlier failed `git status` had already forced it to rerun the source inspection."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The encodings are unique.** Compare the next-state case arms against the transition table",
+      "note": "Neither knowledge-base entry described the faulty S4 transition, and the applicable advice repeated the table comparison the agent had already planned."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7827,
+    "output": 267
+  }
+}

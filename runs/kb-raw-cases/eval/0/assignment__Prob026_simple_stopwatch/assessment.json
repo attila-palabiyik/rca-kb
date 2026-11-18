@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -l -i 'stopwatch|second counter|minute counter' /kb/sessions",
+      "note": "The knowledge-base search found no matching transcript, so it did not inform the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Bundling the source edit with a disallowed cleanup command caused the entire submission to be rejected before the file was edited, forcing the agent to resubmit the edit with a different cleanup mechanism."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7775,
+    "output": 249
+  }
+}

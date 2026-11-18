@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+      bin_out[2] <= ^gray_wire[3:2];",
+      "note": "The encoder only needed a one-bit shift, but the decoder rewrite also changed same-edge scheduling: the increment stage now always reads the previous decoded value, whereas the reference retains the original blocking assignments, even though all graded samples matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7545,
+    "output": 261
+  }
+}

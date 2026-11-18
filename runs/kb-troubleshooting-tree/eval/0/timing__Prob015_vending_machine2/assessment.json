@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 11,
+      "quote": "I\u2019ll preserve the registered dispensing timing",
+      "note": "The extra output register was the defect: the outputs should decode the current state and selection combinationally, but the rewrite kept them clocked and changed the coin and change rules instead."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "balance = balance + int'(deposit);",
+      "note": "The testbench mirrored the rewrite\u2019s delayed-deposit and registered-output assumptions, so its 10,028 passing cycles did not check whether the outputs responded immediately to a state or selection change."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "Script running with cell ID 3",
+      "note": "The agent spent 31 seconds on a change-queue state-space search, terminated it, and ran a revised search, all to size storage that the output-timing fix did not need."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "cat /kb/entries/fsm/{transition-table,state-output-assignments,transition-output-timing}.md",
+      "note": "The agent read adjacent FSM entries but skipped the indexed output-decode-and-reset check, which was directly relevant to making the outputs combinational while still forcing them low during reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10183,
+    "output": 488
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 186,
+      "quote": "wire [3:0] gray_wire = gray_out;",
+      "note": "Instead of just registering the output, the agent replaced the two-stage feedback pipeline with combinational feedback from `gray_out` and a toggle bit, changing the internal update timing even though all 421 graded samples matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 37742,
+    "output": 278
+  }
+}

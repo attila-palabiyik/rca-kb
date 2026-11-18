@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "+            clk_out_r <= clk_cnt<=((div_o>>1)+1);",
+      "note": "The agent changed the 9-cycle branch instead of fixing the 8-cycle branch, which still uses `div_e>>1` rather than `div_e>>2`."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+            clk_out_r <= clk_cnt<=((div_o>>1)+1);",
+      "note": "The patch stretched the already-correct 9-cycle high pulse from four input cycles to six and widened both counters, changing behavior for some parameter overrides."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "offset % period < period / 2 + 2",
+      "note": "The test expected six high samples in both default modes, accepting the original 8-cycle bug and the new 9-cycle regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7836,
+    "output": 385
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "count credit in half-yuan units, and return one change coin per clock cycle.",
+      "note": "The rewrite produced the correct beverage-2 payouts at 2.5 and 3 yuan, but also replaced the original FSM\u2019s coin priority, state transitions, and payout timing instead of changing just the two output literals."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 10,
+      "quote": "reg [1:0] sampled_coins;",
+      "note": "The rewrite kept the module name and signal ports but removed the original state-encoding parameters, so an instantiation that overrides them would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "edges = coins & ~last_coins;",
+      "note": "The passing testbench modeled the rewrite\u2019s edge detection and refund accounting, so it validated the new behavior rather than checking that the original FSM behavior was preserved outside the two faulty payout rows."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "synchronous-fifo-pointer-updates,fifo-pointer-wrap-bit,fifo-blocking-flag-polarity",
+      "note": "The agent read a broad batch of unrelated FIFO, arithmetic, and datapath entries after already reading the relevant FSM and timing entries."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "preserve the established output latency and reset values unless the specification explicitly changes them.",
+      "note": "The agent read guidance about preserving existing behavior, but it did not use that guidance to narrow the fix to the two incorrect payout entries."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10530,
+    "output": 508
+  }
+}

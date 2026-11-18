@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-shared-session/eval/0/timing__Prob015_vending_machine2",
+  "experiment": "kb-shared-session",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "shared-session",
+    "snapshot": "build"
+  },
+  "task_id": "timing__Prob015_vending_machine2",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "2a0919470bcbb840",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:46:21.987623Z",
+      "ended": "2026-11-18T19:47:33.645033Z",
+      "usage": {
+        "input_uncached": 5000,
+        "input_cached": 541212,
+        "input_cache_write": 4988,
+        "output": 3298,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "3d645f071a45b960",
+    "after": "3d645f071a45b960",
+    "changed": false
+  }
+}

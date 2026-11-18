@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-note-similarity/eval/0/arithmetic__Prob016_odd-number_division_with_a_duty_cycle_of_half",
+  "experiment": "kb-note-similarity",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "note-similarity",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob016_odd-number_division_with_a_duty_cycle_of_half",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "aae80ac4112c3a6b",
+    "harness_commit": "519f89901c412224fdb94d0c3a43ceb8c1413763",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:29:02.590988Z",
+      "ended": "2026-11-18T21:30:24.127778Z",
+      "usage": {
+        "input_uncached": 18735,
+        "input_cached": 130600,
+        "input_cache_write": 18705,
+        "output": 1946,
+        "responses": 10
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "545fa08aef48f152",
+    "after": "545fa08aef48f152",
+    "changed": false
+  }
+}

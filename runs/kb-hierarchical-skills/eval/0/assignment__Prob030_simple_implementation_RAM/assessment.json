@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "registered-output timing guidance to check when `read_data` samples the RAM.",
+      "note": "The timing guidance did not help locate the defect, which was in the RAM reset loop rather than in when the read port sampled data."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "end else if (write_en) begin",
+      "note": "Replacing both enable ternaries with `if` statements preserved behavior for known enables but changed four-state simulation: an `X` or `Z` enable now holds the value instead of merging the old and new values bit by bit."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire verification script to be rejected before compilation, so the agent had to resubmit the same checks in a different wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7747,
+    "output": 459
+  }
+}

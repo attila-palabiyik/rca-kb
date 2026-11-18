@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Expand each carry in terms of G, P, and the input carry.",
+      "note": "The agent fixed the propagate operand but also replaced the original carry chain with parallel look-ahead logic, changing the carry path depth even though the settled outputs matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7150,
+    "output": 210
+  }
+}

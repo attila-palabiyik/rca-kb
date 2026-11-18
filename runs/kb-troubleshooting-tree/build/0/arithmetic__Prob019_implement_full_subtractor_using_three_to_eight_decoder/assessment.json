@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the carry-generate and carry-propagate equations",
+      "note": "The knowledge-base entry covered carry generation in an adder and did not help diagnose how the subtractor combined its active-low decoder outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10087,
+    "output": 84
+  }
+}

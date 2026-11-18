@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter advancing on idle cycles, but it also made ready_a high during reset and suppressed valid_b during a stall at count five, changing two behaviors the correct fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
+      "note": "The passing test required ready_a to be high even during reset and expected valid_b to be low on every idle cycle, so it endorsed the rewrite instead of catching either regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7643,
+    "output": 350
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "zero <= (number == 4'd0);",
+      "note": "The timing fix passed grading, but the direct comparison can register X when the count is unknown, whereas the original and reference if/else logic drive zero low in that case."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6314,
+    "output": 204
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "have_first <= !have_first;",
+      "note": "The rewrite stopped advancing on invalid cycles, but it also replaced the original three-phase counter with disjoint pairs, dropping the second output word that packs the previous byte\u2019s low nibble with the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(1, 8'h12, 0, 12'habc);",
+      "note": "The test drove a third valid byte but expected no output, encoding the rewrite\u2019s assumption instead of checking that the third byte produces a valid word of 12'hd12."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7233,
+    "output": 349
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check both conversion equations in a Gray-code counter",
+      "note": "The note concerned Gray-code counter logic and did not inform the fix for the subtractor\u2019s active-low decoder outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10014,
+    "output": 78
+  }
+}

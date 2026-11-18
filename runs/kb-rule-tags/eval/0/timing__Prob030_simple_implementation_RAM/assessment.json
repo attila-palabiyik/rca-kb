@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "end else if (write_en && write_addr < 8'd8) begin",
+      "note": "The patch fixed the read timing but also rewrote the reset loop and write logic; unlike the reference\u2019s ternary assignment, the new write condition suppresses the write when write_en is X rather than merging the old and new data in simulation."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "warning: Not a git repository.",
+      "note": "An unsupported cleanup command blocked the first test invocation, and an inapplicable Git check made the retry exit with an error after the simulation had already passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9608,
+    "output": 297
+  }
+}

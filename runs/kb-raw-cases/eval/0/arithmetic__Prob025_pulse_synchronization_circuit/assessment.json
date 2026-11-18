@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The knowledge-base search returned no matches, so it did not inform the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected before Icarus ran, so the agent had to repackage the test in a Python temporary-directory wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8287,
+    "output": 248
+  }
+}

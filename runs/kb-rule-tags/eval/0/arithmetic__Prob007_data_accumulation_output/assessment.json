@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The counter fix was correct, but removing `ready_b` from the accumulator's reload condition changed what happens when the first input of a group is accepted while downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected_output = sum;",
+      "note": "The scoreboard cleared its sum after every four accepted inputs regardless of `ready_b`, so the backpressure test validated the extra change instead of detecting that it differed from the original accumulator behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8752,
+    "output": 469
+  }
+}

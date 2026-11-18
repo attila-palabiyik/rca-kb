@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -ni 'toggle|synchroniz|clock.domain|pulse' /kb/entries",
+      "note": "The agent searched the knowledge base, but no retrieved note visibly informed the AND-to-XOR fix or its verification."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7052,
+    "output": 222
+  }
+}

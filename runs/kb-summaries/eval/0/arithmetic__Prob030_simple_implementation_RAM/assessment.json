@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "Replacing both enable ternaries with procedural `if` statements changes simulation behavior for X or Z enables: the new code holds the old value instead of merging it with the candidate value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the test to be relaunched, and the retry then ended with an unrelated Git error because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7574,
+    "output": 244
+  }
+}

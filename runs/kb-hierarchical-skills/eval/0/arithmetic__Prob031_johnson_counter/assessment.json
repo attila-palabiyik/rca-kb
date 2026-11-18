@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Match every state and input combination to the next-state expression.",
+      "note": "The skill offered relevant general advice, but it did not change the feedback-bit fix or the sequence and reset checks the agent had already planned."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup command caused the entire verification script to be rejected before simulation, so the agent had to resubmit the same test with a different temporary-directory wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7016,
+    "output": 287
+  }
+}

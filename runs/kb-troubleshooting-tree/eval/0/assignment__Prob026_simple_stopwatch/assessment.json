@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first knowledge-base lookup used the wrong path and prompted an extra directory check, and bundling a disallowed cleanup command with the edit and verification caused the whole batch to be rejected and resubmitted."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7580,
+    "output": 174
+  }
+}

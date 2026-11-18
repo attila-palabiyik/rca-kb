@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "idle, s6, sf6:",
+      "note": "Merging the boundary states into the idle branch fixed the bug for binary inputs, but it also changed the existing `s6` transition for X/Z data: the `if` takes the failure branch instead of propagating an unknown next state as the original ternary did."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/{shared-register-snapshot,synchronous-fifo-pointer-updates}.md",
+      "note": "These two additional entries addressed register snapshots and FIFO pointer updates, neither of which informed the group-boundary fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9048,
+    "output": 332
+  }
+}

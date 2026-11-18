@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (rst_n) begin",
+      "note": "The output rewrite also changes four-state simulation behavior: when reset is X or Z and the FSM is in a completion state, the new logic clears both outputs, while the original and reference logic still decode that state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8612,
+    "output": 360
+  }
+}

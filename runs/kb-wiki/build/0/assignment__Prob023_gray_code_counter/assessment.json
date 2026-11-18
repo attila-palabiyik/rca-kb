@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/multiplier-partial-products.md /kb/entries/adder-carry-generation.md",
+      "note": "Those entries address multiplier terms and adder carries, not the incorrect XOR dependency in the Gray-to-binary decoder, and neither informed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8573,
+    "output": 493
+  }
+}

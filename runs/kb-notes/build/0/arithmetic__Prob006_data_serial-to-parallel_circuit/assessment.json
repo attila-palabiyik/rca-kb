@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the idle-cycle counter advance but also made ready_a high during reset and suppressed valid_b during gaps at count 5, whereas the reference preserves both original behaviors."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== complete || data_b !== expected)",
+      "note": "The test exercised reset and gaps before the sixth bit, but its scoreboard required the rewritten behavior in both cases, so a pass could not reveal the compatibility regressions."
+    },
+    {
+      "category": "kb_misled",
+      "step": 8,
+      "quote": "compare the full output-valid predicate with the data register's write condition on the same edge",
+      "note": "The advice from a different packer carried over to the valid_b rewrite, but here the reference leaves valid_b driven by the count alone."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8890,
+    "output": 308
+  }
+}

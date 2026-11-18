@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en)",
+      "note": "Replacing the read and write ternaries with procedural `if` statements fixed write-enable polarity but also made unknown enable values hold state rather than propagate uncertainty as the reference does."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When a mode bit toggles at counter thresholds and holds between them",
+      "note": "The consulted entries offered general timing and interface advice, but none addressed the RAM's inverted write enable or visibly informed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8481,
+    "output": 296
+  }
+}

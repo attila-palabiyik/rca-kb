@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-signature-guides/eval/0/assignment__Prob034_gaming_machine_billing_program",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "signature-guides",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob034_gaming_machine_billing_program",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "da22040aea9279369f28bca8f64cfbb880df4b3c",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:54:37.732620Z",
+      "ended": "2026-11-18T21:55:17.877758Z",
+      "usage": {
+        "input_uncached": 19684,
+        "input_cached": 83620,
+        "input_cache_write": 19666,
+        "output": 1322,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "730ffb253074c1f1",
+    "after": "730ffb253074c1f1",
+    "changed": false
+  }
+}

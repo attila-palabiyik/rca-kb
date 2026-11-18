@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "I\u2019ll update both Gray pointers on the same edges as their accepted transfers",
+      "note": "Registering the write Gray pointer fixed the CDC defect, but using next-state values for both pointers changed when `wfull` and `rempty` update compared with the reference, which only registers the existing write Gray value to match the read side."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to count, so it could verify FIFO ordering and bounds without detecting the cycle-by-cycle flag timing mismatch against the reference."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rm -f style commands are not permitted",
+      "note": "A rejected cleanup command forced the entire test invocation to be resubmitted, following unrelated failed checks for Git status and the `file` utility."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "When one pointer already uses the right clock and reset, use it as a template for the other.",
+      "note": "The agent read the directly relevant advice to mirror the existing pointer block, but it did not inform the fix: the agent rewrote both pointer updates instead."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12228,
+    "output": 493
+  }
+}

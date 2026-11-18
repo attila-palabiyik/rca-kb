@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "{red, yellow, green} <= 3'b100;",
+      "note": "The rewrite eliminated the red state's erroneous green assertion, but it also made red active during reset and removed the startup and registered timing that the one-line fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test required the rewrite's immediate red output at reset and used its countdown schedule, so a pass could not establish that the original reset and output timing were preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the combined edit-and-test invocation to be rejected and resubmitted in pieces, and later Git checks failed because the workspace was not a repository."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the last count in the old state and the first count in the new state.",
+      "note": "The agent read relevant guidance on tracing registered outputs and timer reloads, but did not use it to verify the existing timing before replacing the FSM."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10295,
+    "output": 410
+  }
+}

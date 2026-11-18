@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "and (carry3_terms[0], P[3], P[2], P[1], P[0], C_1);",
+      "note": "The agent fixed the propagate operand but also replaced the original carry chain with expanded look-ahead logic, changing the carry propagation paths that the reference fix preserves without changing the settled binary outputs."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the first verification attempt to be rejected before simulation, and the parallel Git check failed because the workspace was not a repository, so the agent had to redo verification with a different wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8457,
+    "output": 273
+  }
+}

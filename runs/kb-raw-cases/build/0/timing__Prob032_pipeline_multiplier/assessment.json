@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "After the first test command was rejected for its cleanup command, the retry used an unavailable Python executable and attempted `git diff` outside a repository, so the agent had to launch the same test a third time."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11058,
+    "output": 236
+  }
+}

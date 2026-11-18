@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "the second registered adder summed `temp[2] + temp[2]`",
+      "note": "The note described a partial-product bug already absent from this file and did not add to the agent\u2019s plan to verify output timing and reset."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rejected: rm -f style commands are not permitted",
+      "note": "The cleanup trap caused the entire test command to be rejected before simulation, so the agent had to reissue the full command with safer cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7495,
+    "output": 363
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(read_en)",
+      "note": "Replacing both enable ternaries with procedural `if` statements fixed the write polarity but also changed four-state simulation behavior: an X or Z enable now holds the old value instead of merging the old and new values bit by bit."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -n -i 'ram|address|boundary'",
+      "note": "The follow-up search through linked width-converter and divider notes did not inform the RAM write-enable fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8607,
+    "output": 362
+  }
+}

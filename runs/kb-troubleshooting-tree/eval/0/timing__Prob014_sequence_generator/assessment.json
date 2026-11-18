@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign data = q[5];",
+      "note": "The patch fixed the combinational feedback in `q` but exposed the post-rotation bit instead of registering the pre-rotation bit, advancing the output by one cycle and delaying reset until a rising clock edge."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick_and_check(PATTERN[5 - (i % 6)]);",
+      "note": "The test started at the second pattern bit after reset release and expected the old output to hold after reset assertion, so it validated the patch\u2019s assumptions rather than checking the required output phase and immediate reset."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "Check the edge that publishes a pipelined result",
+      "note": "The index pointed to a check on output publication timing, but the agent did not open it before replacing the output block with a direct tap."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the pattern fields against the shift direction",
+      "note": "The detector-specific entry the agent opened did not change the rotation logic or lead it to verify when this generator should publish each bit."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6594,
+    "output": 542
+  }
+}

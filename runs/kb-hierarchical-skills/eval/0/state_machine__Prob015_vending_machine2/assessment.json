@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "out1           <= vend && !sel;",
+      "note": "The rewrite corrected the credit arithmetic but also replaced the original FSM\u2019s combinational output decode with registered beverage outputs, new coin-sampling rules, and a separate change queue instead of fixing the two incorrect transitions."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 18,
+      "quote": "out3 !== 1'b0",
+      "note": "The passing test required change to clear on the falling edge, encoding the rewrite\u2019s timing rather than checking that the original state-decoded change output remained asserted until the state or selection changed."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 13,
+      "quote": "Script running with cell ID 8",
+      "note": "The agent spent 31 seconds on an unbounded search for the redesigned change queue, terminated it without a result, and reran the analysis under a different payout rule, none of which was needed to fix the two transitions."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Match every state and input combination to the next-state expression.",
+      "note": "The agent read the relevant transition-table guidance but did not use it to make a targeted repair that preserved the existing state and output behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11775,
+    "output": 532
+  }
+}

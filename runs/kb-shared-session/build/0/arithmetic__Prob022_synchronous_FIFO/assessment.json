@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 93,
+      "quote": "assign wenc = rst_n && winc && !wfull;",
+      "note": "The patch fixed the inverted full check, but it also added reset gating to the RAM enables, rewrote the flag logic, and changed address sizing for DEPTH=1, whereas the reference fix only inverted the full check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 40379,
+    "output": 194
+  }
+}

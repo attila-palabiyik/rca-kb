@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent registered `match` but compared the post-shift value, so the pulse still arrived on the final-bit edge, one clock earlier than the required comparison against pre-edge `a_tem`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test updated `expected` with the incoming bit before checking `match`, so it validated the same timing assumption as the patch rather than the required one-cycle delay."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Both flags then inspect the pre-edge shift-register value",
+      "note": "The agent read a relevant warning about pre-edge comparisons but did not use it to question the patch\u2019s timing or the test\u2019s expected result."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7786,
+    "output": 318
+  }
+}

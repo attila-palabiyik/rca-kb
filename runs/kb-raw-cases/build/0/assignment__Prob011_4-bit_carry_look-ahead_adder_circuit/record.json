@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/assignment__Prob011_4-bit_carry_look-ahead_adder_circuit",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob011_4-bit_carry_look-ahead_adder_circuit",
+  "repeat": 0,
+  "position": 43,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:43:28.335732Z",
+      "ended": "2026-11-18T19:44:23.508322Z",
+      "usage": {
+        "input_uncached": 18650,
+        "input_cached": 109455,
+        "input_cache_write": 18626,
+        "output": 2511,
+        "responses": 8
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "ddc4fb1c5dfea896",
+    "after": "fb3be32dc7dd2280",
+    "changed": true
+  }
+}

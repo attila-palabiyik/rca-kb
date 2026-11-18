@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "I\u2019ll preserve the registered beverage output timing",
+      "note": "The registered outputs were the actual defect: they should decode the current state and selection combinationally rather than wait for another rising edge."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire [2:0] deposit = {1'b0, coin_pulse};",
+      "note": "The rewrite replaced the original FSM\u2019s coin priority and state transitions with falling-edge balance updates, simultaneous coin accumulation, and queued change, none of which the targeted fix required."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "price = sel ? 5 : 3;",
+      "note": "The scoreboard predicted outputs from its own pre-edge credit model, so even exhaustive input sequences could pass without checking whether outputs decoded the newly entered FSM state immediately."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "The next-state logic feeds back `nstate` during gaps",
+      "note": "The agent jumped from the next-state feedback to a rewrite without applying the loaded guide\u2019s relevant check of the original FSM\u2019s Moore output before and after the clock edge."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8396,
+    "output": 559
+  }
+}

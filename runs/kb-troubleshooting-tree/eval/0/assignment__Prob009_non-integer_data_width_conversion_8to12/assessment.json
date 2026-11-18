@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite emits one word per pair and discards the second byte\u2019s low nibble instead of fixing the counter to reach phase 2 and aligning the second output word with that phase."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "cycle(1, 8'h27, 0, 12'hA5C);",
+      "note": "The test expects no output on the third valid input, so it passes the rewrite for suppressing the very output the correct circuit would produce there: `12'h327` with `valid_out` asserted."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "[Check the counter's wrap point](transfer-counter-wrap.md) before changing the output enables.",
+      "note": "The agent read the entry that pointed directly to the counter-wrap check but did not open that follow-up before replacing the counter."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7603,
+    "output": 318
+  }
+}

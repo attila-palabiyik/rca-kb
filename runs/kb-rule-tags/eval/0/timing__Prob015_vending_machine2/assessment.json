@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll keep dispensing on the rising edge",
+      "note": "The actual fix was to decode the outputs combinationally from the current state, selection, and reset; the rewrite kept them clocked and also replaced the original coin priority and change behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "Passed 440 reachable transitions and pulse/reset checks.",
+      "note": "The test exhaustively checked the rewrite against a model with the same registered-output assumption, so it could pass without detecting that dispensing should respond to selection changes between clock edges."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "combinational-fsm-output-reset",
+      "note": "The agent opened the relevant entry but still kept the dispensing outputs clocked, so the guidance did not affect the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10764,
+    "output": 507
+  }
+}

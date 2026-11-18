@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 123,
+      "quote": "idle, s6, sf6:",
+      "note": "The patch fixes the `sf6` encoding but also changes how the FSM handles an unknown first bit: the original `idle` branch entered `sf1`, while the merged ternary can produce an unknown state that the new output logic propagates as `X`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39438,
+    "output": 171
+  }
+}

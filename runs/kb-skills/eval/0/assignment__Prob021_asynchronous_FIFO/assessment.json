@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "I\u2019ll update each pointer on the same edge as its RAM access so full and empty reflect the last accepted transfer.",
+      "note": "The rewrite fixed the zero write increment but also removed the existing one-clock Gray-pointer delay, changing when `wfull` and `rempty` transition; the reference fix changes only the increment."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "empty flag timing D=%0d step=%0d",
+      "note": "The test checked empty-flag timing against the rewrite\u2019s immediate-update assumption, so it passed without catching the change from the original cycle timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "iverilog -g2012 -Wall -s TopModule -tnull TopModule.sv",
+      "note": "After the unrelated Git check failed, the agent spent a separate step stripping whitespace and repeating an already successful compile without making or checking any functional change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10955,
+    "output": 462
+  }
+}

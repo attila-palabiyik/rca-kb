@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "tools.write_stdin({session_id:50817,chars:\"\",yield_time_ms:1000})",
+      "note": "The agent spent several seconds polling a knowledge-base search that returned no output, then found the relevant note by listing the entries directly; the eventual search result identified the same note."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7119,
+    "output": 369
+  }
+}

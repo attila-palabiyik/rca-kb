@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Trace each partial product through a pipelined multiplier",
+      "note": "The retrieved note concerned partial products and register timing in a multiplier, so it offered no guidance on the adder\u2019s incorrect carry-generate operator."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7064,
+    "output": 423
+  }
+}

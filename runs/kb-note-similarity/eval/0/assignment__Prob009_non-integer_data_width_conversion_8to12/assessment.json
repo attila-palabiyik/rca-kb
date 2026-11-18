@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "have_first <= !have_first;",
+      "note": "The rewrite followed the prose\u2019s disjoint-pair interpretation instead of fixing the unreachable third-byte phase, so it still omitted the second packed output in each three-byte group."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "step(1, 8'hde, 0, 12'h9cb);",
+      "note": "The test expected no output on the third accepted byte, encoding the rewrite\u2019s assumption rather than checking for the missing packed word."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "Check counter wraparound and which value each registered output samples",
+      "note": "The search surfaced a note directly relevant to the premature counter wrap, but the agent opened only the width-converter note before replacing the counter."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository",
+      "note": "Both Git diff commands failed outside a repository, and a separate cleanup command was rejected, forcing the test command to be resubmitted without yielding any design evidence."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8960,
+    "output": 495
+  }
+}

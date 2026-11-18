@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The patch fixed the premature assertion by registering `valid_b`, but it also made `ready_a` high during reset and before the first post-reset clock edge, and suppressed `valid_b` on stalled cycles at count five; the reference fix preserves the registered `ready_a` and samples `cnt == 5` without gating it on `valid_a`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if ({ready_a, valid_b, data_b} !== 8'b10000000)",
+      "note": "The test expected `ready_a` to be high during reset and expected `valid_b` only when a sixth bit was accepted, so its reset and stall checks validated the rewrite\u2019s assumptions rather than detecting the behavioral mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8680,
+    "output": 319
+  }
+}

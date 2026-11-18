@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": ".data_a(a)",
+      "note": "The patch correctly registered `c` but also renamed the existing `slave_mod` inputs from `a` and `b` to `data_a` and `data_b`, breaking callers that use the original named ports and providing a plausible explanation for the grading compile error."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "TopModule dut(.clk(clk), .rst_n(rst_n), .a(a), .b(b), .c(c), .d(d));",
+      "note": "The test checked pipeline timing and reset correctly, but it instantiated only `TopModule`, so it could not catch the incompatible change to the `slave_mod` ports."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected and rerun, after an earlier Git check had already failed and skipped the simulator availability checks chained behind it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7957,
+    "output": 349
+  }
+}

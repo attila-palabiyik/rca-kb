@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 43,
+      "quote": "match = rst_n && (pstate == s6);",
+      "note": "The patch fixes the transition after a failed group, but the output rewrite can propagate an unknown state as `X` in simulation where the original and reference drive both outputs low."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 26564,
+    "output": 225
+  }
+}

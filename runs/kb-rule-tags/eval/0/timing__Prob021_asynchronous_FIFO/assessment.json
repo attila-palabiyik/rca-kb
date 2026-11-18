@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wgray <= wbin_next ^ (wbin_next >> 1);",
+      "note": "The rewrite registered the post-transfer Gray pointers in both domains, changing when full and empty update, whereas the reference only registers the write Gray pointer from the pre-edge binary count and leaves the read path unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers to count, so it could pass on ordering and capacity without detecting that full and empty changed on different cycles than expected."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "preserve the established output latency and reset values unless the specification explicitly changes them",
+      "note": "The agent read the relevant timing advice but did not apply it when choosing to rewrite both pointer paths."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10869,
+    "output": 391
+  }
+}

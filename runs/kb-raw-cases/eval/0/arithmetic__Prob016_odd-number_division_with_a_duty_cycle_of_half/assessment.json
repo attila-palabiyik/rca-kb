@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -il 'clock divider|divide.by.7|odd divider' /kb/sessions",
+      "note": "The knowledge-base searches returned no matches, so the notes did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8710,
+    "output": 127
+  }
+}

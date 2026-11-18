@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? WAVE_MAX : 5'd0;",
+      "note": "The clocked counter fixes the actual defect, but the rewrite also forces square mode low on entry instead of retaining the previous output until count 9, and makes triangle mode increment from zero when the original reset direction decrements to 31."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "tick(phase <= 20 ? phase : 40 - phase);",
+      "note": "The passing test encoded the rewrite\u2019s behavior: it expected the triangle to rise immediately from reset and the square output to clear immediately when switching from sawtooth, so it could not catch either regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7554,
+    "output": 350
+  }
+}

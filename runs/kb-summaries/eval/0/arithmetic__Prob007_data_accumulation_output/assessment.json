@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent correctly fixed the counter enable but also removed the `ready_b` guard, changing how the first byte of a group updates `data_out` when downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "pending && data_out !== expected[9:0]",
+      "note": "The scoreboard assumed a fresh sum for every group regardless of `ready_b` and checked `data_out` only when an output was pending, so it validated the extra change instead of detecting the departure from the original behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9555,
+    "output": 305
+  }
+}

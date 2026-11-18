@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 88,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter but also made `ready_a` high during reset and allowed input on the first edge after reset, and it suppressed `valid_b` during stalls at count 5, unlike the reference fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 89,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_word})",
+      "note": "The testbench required always-high `ready_a` and modeled `valid_b` as a pulse only on the sixth accepted bit, so its reset and gap tests confirmed the rewrite\u2019s assumptions instead of catching the timing changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38595,
+    "output": 248
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "python: command not found",
+      "note": "The first simulation command was rejected because of its cleanup command, and the retry used an unavailable Python executable, so the agent submitted the same test a third time before it ran."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -in 'sequence|shift register|reset|rotat' /kb/entries",
+      "note": "The search surfaced general timing and reset advice from other designs, but the record shows no finding that informed the one-line reset-seed correction."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7256,
+    "output": 269
+  }
+}

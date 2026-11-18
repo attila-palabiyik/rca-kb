@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "I\u2019ll switch phases and load the next countdown on the same edge, with reset immediately selecting red at 10.",
+      "note": "The rewrite bypassed the broken reload detection but changed the reset and phase-transition timing; registering the light outputs would have restored reload detection while preserving the original state machine and startup sequence."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "check(RED, 10);",
+      "note": "The testbench required the rewrite\u2019s immediate-red reset and same-edge phase reloads, so its passing checks could not catch the cycle-by-cycle timing differences from the expected behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9243,
+    "output": 383
+  }
+}

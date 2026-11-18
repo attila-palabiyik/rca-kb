@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent correctly fixed the counter's handshake condition but also removed `ready_b` from the accumulator-load condition, so the first accepted byte of a group replaces rather than adds to the prior sum when downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b`, so its backpressure tests validated the extra change instead of detecting the mismatch with the behavior the fix was supposed to preserve."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8169,
+    "output": 288
+  }
+}

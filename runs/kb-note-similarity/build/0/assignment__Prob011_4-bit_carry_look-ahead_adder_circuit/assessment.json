@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "// Expand each carry directly from generate, propagate, and carry-in.",
+      "note": "The agent fixed the propagate operand but also replaced the original carry chain with parallel look-ahead logic, changing the carry path and its propagation depth even though the reference fix preserves the chain."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6917,
+    "output": 340
+  }
+}

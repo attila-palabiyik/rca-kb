@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "The final 0 of the previous match and this 1 form 01",
+      "note": "The patch correctly holds `s3_d011` on invalid input, but it also changes two exits from `s4_d0110` to reuse the final zero, introducing overlapping matches that the original and reference implementations do not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = valid_count >= 4 && window == 4'b0110;",
+      "note": "The rolling-window oracle expects overlapping matches, so the exhaustive test validated the agent's assumption instead of catching the regression in post-match behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the test invocation to be rewrapped and retried, adding to earlier retries caused by a Git check outside a repository and a whitespace-sensitive patch failure."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10895,
+    "output": 338
+  }
+}

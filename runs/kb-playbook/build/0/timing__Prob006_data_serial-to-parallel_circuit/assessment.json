@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "`ready_a` stays high, including during reset. On the sixth accepted bit, the module updates `data_b` and pulses `valid_b` for one cycle.",
+      "note": "Registering `valid_b` fixed its early assertion, but the rewrite also changed `ready_a` from reset-low to always high and gated the registered terminal-count flag with `valid_a`, unlike the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
+      "note": "The test exercised reset and a stall after five bits, but its scoreboard expected the rewrite\u2019s always-high ready and completion-only valid, so passing could not reveal either mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8203,
+    "output": 417
+  }
+}

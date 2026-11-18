@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "python: command not found",
+      "note": "The agent submitted the same testbench three times because the first command used a disallowed cleanup operation and the second invoked an unavailable `python` executable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8134,
+    "output": 139
+  }
+}

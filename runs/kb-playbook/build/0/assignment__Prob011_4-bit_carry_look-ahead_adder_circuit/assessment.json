@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Expand each carry in terms of the generate bits, propagate bits, and C_1.",
+      "note": "The agent fixed the propagate operand but also replaced the original carry chain with parallel carry equations, changing the carry propagation paths that the reference fix preserves without changing the settled binary outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7170,
+    "output": 223
+  }
+}

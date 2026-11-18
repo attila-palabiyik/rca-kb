@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (clock == 8'd1) begin",
+      "note": "The rewrite corrected the light sequence but also made red active during reset and switched the light and reloaded the countdown on the same edge, whereas the reference changes only the two incorrect transition targets and preserves the original timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(YELLOW, 5);",
+      "note": "The test expected yellow to start at 5 immediately after green reached 1, so it validated the rewrite's timing instead of detecting that the original controller shows yellow at 0 before reloading to 5."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "004-duplicated-fsm-transition-branches",
+      "note": "The agent read a relevant note on duplicated FSM transitions, but it did not steer the agent toward checking and changing just the two incorrect destinations."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9900,
+    "output": 384
+  }
+}

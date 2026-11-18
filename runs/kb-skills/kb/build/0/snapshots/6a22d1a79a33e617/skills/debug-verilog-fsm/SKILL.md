@@ -1,0 +1,24 @@
+---
+name: debug-verilog-fsm
+description: Diagnose wrong transitions and unreachable states in Verilog or SystemVerilog FSMs by checking the transition table and state encodings.
+---
+
+# Debug Verilog FSMs
+
+1. Compare each next-state expression with both entries in its transition-table row. In `data ? A : B`, `A` is the destination for `1` and `B` is the destination for `0`. Identical destinations can be intentional, so check the row before changing either arm. For a Moore FSM, compare the output decode separately with the specified output for the current state.
+2. When the transition branches match the specification but a state is unreachable or gives the wrong output, evaluate each state constant at its declared literal width and then at the state register's width. A sized literal can lose high bits before it reaches the register. Check for duplicate encodings in both the next-state `case` and the output decode. A plain `case` selects the first matching branch, but a separate output comparison can still assert on the aliased value. Trace the edges into and out of that value, then assign a distinct representable encoding if the states are meant to be separate.
+3. For a small FSM, use the specification to drive every state/input pair, including self-loops and both exits from the output-asserting state. Check the state as well as the output during simulation, since several Moore states can have identical outputs. Change the input before a clock edge and check that the output still corresponds to the current state. Exercise reset from a state with a different output when possible.
+4. For a detector that processes consecutive fixed-length groups, trace the edge immediately after each result state. If that edge samples the first bit of the next group, check both input values from every result state against the transitions for the first sample after reset. Test consecutive groups without an intervening reset or idle cycle, especially a failed group followed by one whose first bit already fails.
+5. When a timer-driven FSM skips a phase, check the destination of each timer-expiry branch first. If the destinations account for the wrong sequence, try changing those branches alone. Trace the timer, intermediate state registers, and visible outputs around reset and expiry before changing the compare value or register depth.
+
+## Observed results
+
+In a separate version of the non-overlapping six-bit `011100` detector in `TopModule.sv`, `sf6 = 4'd20` truncated to `4'd4`, the encoding of `s4`. As a result, the output decode could assert `not_match` after four correct bits, and a failed group entered the `s4` transition branch on the next edge. The supplied correct fix changed only `sf6` to `4'd12`. The submitted fix also used wildcard combinational blocks. It passed all 4,096 ordered pairs of consecutive groups with output timing and asynchronous reset checks in Icarus Verilog, and all 1,215 graded samples matched the reference.
+
+In the non-overlapping six-bit `011100` detector in `TopModule.sv`, the failure state `sf6` advanced unconditionally to `s1`, treating the next group's first bit as a match. The reference changed that transition to `data ? sf1 : s1`. The submitted fix shared this transition across `idle`, `s6`, and `sf6` and used wildcard combinational output decoding with an explicit reset check. It passed all 4,096 ordered pairs of six-bit groups in Icarus Verilog and matched all 1,215 graded samples.
+
+In the five-state `TopModule.sv` Moore FSM, `S2` and `S3` both encoded decimal 2. The `S2` branch therefore kept selecting the same encoded state when it attempted to advance to `S3`. Changing only the value of `S3` to decimal 3 fixed the failure. Icarus Verilog passed all ten state/input pairs, Moore output checks, and active-low reset checks. The grader reported 261 of 261 samples matched the reference.
+
+In a separate five-state `TopModule.sv` task, the `S4` branch used `data ? S1 : S1`. Changing the `0` destination to `S0` matched the table. Icarus Verilog verified all ten state/input pairs, Moore output timing, and active-low reset from `S4`. The grader reported 261 of 261 samples matched the reference with this one-line fix.
+
+In the pedestrian traffic light controller in `TopModule.sv`, the supplied correct fix routed red to green and green to yellow at `cnt == 3`. Yellow already routed to red. The fix kept the idle reset state, the two stages from state to visible lamps, and the timer reload logic. The submitted rewrite used the lamp registers as state, asserted red during reset, and reloaded the timer at the same edge as each lamp change. Its Icarus tests passed the rewritten timing, including every green request count, but the grader reported 220 mismatches in 517 samples.

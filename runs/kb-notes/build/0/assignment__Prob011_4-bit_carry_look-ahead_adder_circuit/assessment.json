@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry so it can be computed directly from G, P, and C_1.",
+      "note": "The agent fixed the propagate expression but also replaced the original carry chain with parallel look-ahead logic, changing the carry-path depth that the reference fix preserves even though all binary outputs matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6821,
+    "output": 161
+  }
+}

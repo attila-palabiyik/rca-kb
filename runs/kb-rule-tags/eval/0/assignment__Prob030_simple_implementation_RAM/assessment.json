@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "end else if (write_en) begin",
+      "note": "The reset fix also replaced both enable ternaries with procedural conditionals, so an X or Z enable now holds the old value in simulation where the original could propagate X."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the shell to reject the entire verification command before simulation, so the agent had to resubmit the same test with different cleanup."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "cat /kb/entries/{shared-register-snapshot,synchronous-fifo-pointer-updates,fifo-pointer-wrap-bit,pipeline-output-register,preserve-submodule-ports}.md",
+      "note": "The consulted entries offered general timing and interface guidance but did not address the reset loop indexing outside the RAM."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7565,
+    "output": 404
+  }
+}

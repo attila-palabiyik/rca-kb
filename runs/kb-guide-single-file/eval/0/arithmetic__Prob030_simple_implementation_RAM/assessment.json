@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if(write_en)",
+      "note": "The conditional fixes the write-enable polarity, but it also makes an unknown `write_en` hold the old word instead of propagating uncertainty to bits where the old and new data differ, as the original and reference ternaries do."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command prevented the entire test script from starting, so the agent had to resubmit the testbench in a Python wrapper before any simulation could run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7607,
+    "output": 272
+  }
+}

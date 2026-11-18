@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else nstate = s2_d01;",
+      "note": "The patch fixed the duplicate state encoding but also changed the post-match transitions to retain the trailing `0` on a valid `1` or an invalid cycle, where the intended FSM returns to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test oracle assumed a sliding window over all valid bits, so the exhaustive run rewarded the added overlap behavior instead of catching the regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "error: Syntax error in variable list.",
+      "note": "The first test command was rejected because of its cleanup command, and the retry used the reserved word `matches` as a variable name, requiring another run and separate cleanup before verification was complete."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9388,
+    "output": 319
+  }
+}

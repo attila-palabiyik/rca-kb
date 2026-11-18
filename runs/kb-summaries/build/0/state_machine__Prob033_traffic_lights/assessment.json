@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "end else if (clock == 8'd1) begin",
+      "note": "The rewrite corrected the red \u2192 green \u2192 yellow sequence but also asserted red during reset and removed the original startup and output pipeline timing, which the reference fix preserves."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 10,
+      "quote": "module TopModule (",
+      "note": "The replacement kept the named ports but removed the four public state parameters, so existing instantiations that override those parameters would no longer elaborate."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expect_outputs(RED, 10);",
+      "note": "The bench expected immediate red on reset and the rewrite\u2019s phase timing, so its 201 passing checks reinforced the new behavior rather than checking that the original timing was preserved."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 8,
+      "quote": "/kb/entries/5-grouped-sequence-detector-reference-reset.md",
+      "note": "The search surfaced a relevant entry about reference reset behavior, but the agent read only the terminal-state transition entry before rewriting the reset and timing logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11099,
+    "output": 513
+  }
+}

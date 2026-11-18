@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite corrected the red and green transition destinations but also changed reset from idle with all lights off to immediate red and replaced the buffered output and countdown timing that the minimal fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(RED, 10);",
+      "note": "The bench required immediate red on reset and used the rewrite\u2019s cycle timing as its expected trace, so passing it did not establish that the fix preserved the original reset and output timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10627,
+    "output": 462
+  }
+}

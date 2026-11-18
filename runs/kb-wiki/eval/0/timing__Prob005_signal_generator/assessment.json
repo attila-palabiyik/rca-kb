@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": ": PEAK : 5'd0;",
+      "note": "The agent fixed the counter clocking but made square mode drive low before count 9 instead of holding the previous output until count 9 or 19, changing what happens when switching into square mode."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wave <= 5'd1;",
+      "note": "The rewrite makes the triangle rise immediately from zero, whereas the original and reference reset the direction flag to decrement first, producing 31 on the first triangle clock after reset."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(n == 10 ? 20 : 0);",
+      "note": "The bench expected square mode to force zero on entry and triangle mode to rise immediately after reset, so it passed the rewrite without detecting either regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "A local test that checks only the rewritten timing assumptions can pass while missing observable changes to reset and phase boundaries.",
+      "note": "The agent retrieved a directly relevant warning, but it did not change the approach: the rewrite altered startup and mode transitions, and the bench treated the new behavior as correct."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7883,
+    "output": 415
+  }
+}

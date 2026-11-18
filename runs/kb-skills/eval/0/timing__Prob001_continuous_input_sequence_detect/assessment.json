@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (a_tem == 8'b0111_0001);",
+      "note": "The registered comparison fixes the timing, but in four-state simulation it can drive `match` to `X` when the comparison is indeterminate, whereas both the original and reference `if/else` logic drive it to `0`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7168,
+    "output": 313
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The counter fix correctly lets it reach 3, but removing the `ready_b` condition also changes `data_out` when a group starts while downstream is not ready, behavior the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumes every four-input group starts from zero regardless of `ready_b`, so it validates the extra datapath change rather than checking that the counter fix preserves the original behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The targeted knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9619,
+    "output": 310
+  }
+}

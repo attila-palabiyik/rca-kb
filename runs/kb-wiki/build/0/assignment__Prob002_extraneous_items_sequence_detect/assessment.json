@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The verification command had to be resubmitted three times because of a blocked cleanup command, an unavailable Python executable, and a reserved SystemVerilog identifier in the testbench, none of which concerned the design fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10918,
+    "output": 144
+  }
+}

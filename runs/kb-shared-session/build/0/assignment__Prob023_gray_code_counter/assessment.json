@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 98,
+      "quote": "if (advance)",
+      "note": "The rewrite fixes the low-bit XOR but also replaces the original registered feedback pipeline with an explicit every-other-edge enable, removing its scheduling-dependent timing even though the graded samples matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38862,
+    "output": 403
+  }
+}

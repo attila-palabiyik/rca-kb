@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry directly from G, P, and the input carry.",
+      "note": "The rewrite fixed the generate operator and satisfied the primitive-gate requirement, but it also replaced the original carry chain with parallel logic, changing the gate depth while preserving the settled outputs."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "12-pipelined-multiplier-partial-products.md /kb/entries/17-three-input-minimum-pipeline-and-ports.md",
+      "note": "The entries offered general debugging advice but did not help diagnose the wrong generate operator or determine how to implement the carry logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7093,
+    "output": 224
+  }
+}

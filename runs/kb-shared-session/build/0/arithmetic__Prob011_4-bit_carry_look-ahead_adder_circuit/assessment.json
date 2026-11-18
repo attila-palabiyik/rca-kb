@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 78,
+      "quote": "// Expand each carry so it can be computed independently.",
+      "note": "The agent fixed the generate logic but also replaced the original carry chain with parallel look-ahead gates, changing the carry propagation paths while preserving the settled outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38214,
+    "output": 192
+  }
+}

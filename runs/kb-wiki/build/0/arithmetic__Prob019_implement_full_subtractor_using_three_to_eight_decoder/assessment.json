@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "check the per-bit generate and propagate signals before tracing the carry network",
+      "note": "The carry-generation page and its linked multiplier and Gray-code examples did not inform the active-low decoder fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire simulation launch to be rejected before it ran, so the agent had to repackage the same test in a Python wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12197,
+    "output": 272
+  }
+}

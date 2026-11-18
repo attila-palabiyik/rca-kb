@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "{red, yellow, green} <= 3'b100;",
+      "note": "The rewrite eliminated simultaneous red and green, but it also made red assert during reset and replaced the original registered transition pipeline, changing observable timing that the one-line fix preserved."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "#1 verify(RED, 10);",
+      "note": "The test required the rewrite\u2019s immediate-red reset and countdown schedule, so its 3,582 passing checks could not reveal that those behaviors differed from the expected reset and transition timing."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "cat /kb/entries/timer-reload-on-output-transition.md /kb/entries/moore-output-timing-and-async-reset.md",
+      "note": "The agent opened the relevant guides, but the resulting fix discarded the registered-output timing instead of checking which behavior needed to stay unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8201,
+    "output": 347
+  }
+}

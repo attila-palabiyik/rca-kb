@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly clocked the counter but also removed the existing `ready_b` condition, changing `data_out` from adding to reloading when a group starts while downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1, 0, 3);",
+      "note": "The test exercised a new group starting with `ready_b` low, but its scoreboard expected a fresh sum, so it endorsed the extra behavior change instead of catching it."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the test invocation to be resubmitted, after an earlier failed `git status` had already forced a retry of the file inspection."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9207,
+    "output": 413
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else nstate = s2_d01;",
+      "note": "The patch corrected the one-cycle delay in `match` but also changed the post-match transitions to reuse the final `0` after a valid `1` or an invalid cycle, where the reference returns to `idle`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = data_valid && length >= 4 && history == 4'b0110;",
+      "note": "The test covered overlapping sequences but used a rolling-history oracle that expected them to match, so it treated the unintended transition changes as correct."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "When converting registered FSM outputs to a combinational state decode, retain an explicit reset override if the outputs must take defined values while reset is asserted.",
+      "note": "The agent read an entry about a closely related sequence detector, but did not use it to isolate the fix to a reset-gated decode of the existing match state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9238,
+    "output": 596
+  }
+}

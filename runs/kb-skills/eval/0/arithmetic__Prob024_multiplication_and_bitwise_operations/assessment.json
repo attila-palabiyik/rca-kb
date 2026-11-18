@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The existing expression computes 253 \u00d7 A.",
+      "note": "The agent had already identified the arithmetic error before reading the skill, whose clocked one-hot testing procedure did not apply to this combinational constant multiplier."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "warning: Not a git repository.",
+      "note": "The first verification command had to be resubmitted because its cleanup was rejected, and the retry's Git check failed outside a repository, requiring a separate whitespace check after the simulation had passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6307,
+    "output": 192
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Verification needed two retries for reasons unrelated to the RTL fix: the cleanup command blocked the first attempt, and the next attempt left valid_in high after reset, letting the DUT accept a beat the scoreboard did not count."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9264,
+    "output": 170
+  }
+}

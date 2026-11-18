@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (data_cnt == 2'd0)",
+      "note": "The agent correctly made the counter clocked, but also removed the existing `ready_b` condition from the accumulator reload, so a first input accepted while `ready_b` is low now replaces the prior sum instead of adding to it."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sum = 0;",
+      "note": "The scoreboard unconditionally cleared its sum after each group, encoding the same behavior as the rewrite instead of checking the original `ready_b`-dependent reload."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8791,
+    "output": 305
+  }
+}

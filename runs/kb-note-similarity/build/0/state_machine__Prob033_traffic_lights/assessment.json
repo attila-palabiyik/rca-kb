@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "end else if (clock == 8'd1) begin",
+      "note": "The rewrite corrected the light order but also replaced the original staged transition logic with simultaneous light and timer updates and asserted red during reset, changing behavior the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "check(3'b100, 10);",
+      "note": "The test checked the correct light order but encoded the rewrite\u2019s immediate-red reset and synchronized countdown timing, so its pass could not reveal the timing regressions."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "verilog-fsm-transition-table-branches.md",
+      "note": "The agent opened a relevant note on checking FSM transition branches, but the lookup did not lead it to isolate the two incorrect next-state assignments and preserve the surrounding logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9229,
+    "output": 321
+  }
+}

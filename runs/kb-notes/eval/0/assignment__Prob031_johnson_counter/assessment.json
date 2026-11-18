@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Check Gray-code conversion and output timing",
+      "note": "The note offered general counter-testing advice, but it did not identify the Johnson counter\u2019s incorrect feedback bit or change the fix and verification plan the agent had already announced."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6298,
+    "output": 136
+  }
+}

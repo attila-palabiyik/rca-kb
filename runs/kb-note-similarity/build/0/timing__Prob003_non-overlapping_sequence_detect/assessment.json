@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "case (pstate)",
+      "note": "The patch fixed the one-cycle output delay but removed the explicit reset override, so the outputs depend on the state register reaching idle instead of being forced low whenever reset is asserted."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "reg rst_n = 1;",
+      "note": "The test started with reset high and checked outputs only after driving reset low and waiting, so it did not verify that the outputs were known zero when reset started low before any clock edge."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8093,
+    "output": 344
+  }
+}

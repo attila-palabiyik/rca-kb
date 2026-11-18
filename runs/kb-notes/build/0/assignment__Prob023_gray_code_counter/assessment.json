@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "the original combinational `zero` tracked the current `number`",
+      "note": "The knowledge-base search surfaced advice about status timing in a different counter, but nothing in the record shows that it helped diagnose the faulty Gray-to-binary XOR chain."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6520,
+    "output": 244
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent fixed the counter but also removed the downstream-ready condition, so the first accepted input of a group overwrites the accumulator when `ready_b` is low instead of being added to it."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (pending && data_out !== expected[9:0])",
+      "note": "The scoreboard exercised backpressure but expected a fresh sum for every group regardless of `ready_b`, so the test passed by treating the unintended behavior change as correct."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8083,
+    "output": 250
+  }
+}

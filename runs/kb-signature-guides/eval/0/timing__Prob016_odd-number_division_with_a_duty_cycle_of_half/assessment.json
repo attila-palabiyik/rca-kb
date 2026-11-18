@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Applies when a divider alternates integer periods and the output frequency looks right, but a high or low pulse has the wrong width in one mode.",
+      "note": "The guide addressed pulse widths in a fractional divider and did not help diagnose the invalid output driver in this fixed divide-by-seven design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6627,
+    "output": 162
+  }
+}

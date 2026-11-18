@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+      bin_out[0] <= ^gray_wire[3:0];",
+      "note": "The one-bit shift fixed the defect, but rewriting the decoder with nonblocking assignments also changed when the increment stage can see the decoded value on the same edge, removing a scheduling dependency that the reference leaves in place without changing the graded outputs."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the test command, after an earlier failed Git check had already forced it to retry reading the source."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8431,
+    "output": 599
+  }
+}

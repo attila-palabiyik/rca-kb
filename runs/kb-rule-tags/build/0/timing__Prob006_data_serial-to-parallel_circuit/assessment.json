@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite made `ready_a` high during reset and allowed input acceptance on the first clock after reset release, whereas the original and reference keep readiness low until that edge."
+    },
+    {
+      "category": "kb_misled",
+      "step": 6,
+      "quote": "using the same accepted-beat condition and pre-edge word-boundary checks",
+      "note": "Following this advice added a `valid_a` gate to `valid_b`, but the reference registers `cnt == 5` even when the sixth input bit is stalled."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
+      "note": "The test exercised reset and a stall after five bits, but its scoreboard expected the rewrite\u2019s always-high readiness and sixth-valid-beat pulse, so it passed despite both reference mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8415,
+    "output": 352
+  }
+}

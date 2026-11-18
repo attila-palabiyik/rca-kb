@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-troubleshooting-tree/eval/0/state_machine__Prob004_continuous_input_sequence_detect2",
+  "experiment": "kb-troubleshooting-tree",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "troubleshooting-tree",
+    "snapshot": "build"
+  },
+  "task_id": "state_machine__Prob004_continuous_input_sequence_detect2",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "cc9bda5f9c4478ba",
+    "harness_commit": "4a057ffdc53e60d7afa32ed63fd6fb75e32122b5",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T22:10:23.296237Z",
+      "ended": "2026-11-18T22:11:09.578074Z",
+      "usage": {
+        "input_uncached": 23532,
+        "input_cached": 156359,
+        "input_cache_write": 23502,
+        "output": 2126,
+        "responses": 10
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "0800599c97f78cb0",
+    "after": "0800599c97f78cb0",
+    "changed": false
+  }
+}

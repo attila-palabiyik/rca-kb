@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly changed the counter guard from OR to AND, but also removed `ready_b` from the accumulator\u2019s reload condition, changing `data_out` when a group starts while downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed that every group starts from zero regardless of `ready_b`, so its backpressure tests endorsed the extra change instead of detecting the mismatch with the original accumulator behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7043,
+    "output": 180
+  }
+}

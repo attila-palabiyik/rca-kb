@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 18,
+      "quote": "idle, s6, sf6:",
+      "note": "The patch fixed the one-cycle output delay but also changed how the terminal states handle unknown input bits and removed the explicit reset guard from the output decoder."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 19,
+      "quote": "task tick(input bit value, input [1:0] result);",
+      "note": "The test covered every binary group pair, but its two-state inputs and delayed reset checks could not expose the changes to unknown-input handling or output behavior at reset assertion."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12575,
+    "output": 299
+  }
+}

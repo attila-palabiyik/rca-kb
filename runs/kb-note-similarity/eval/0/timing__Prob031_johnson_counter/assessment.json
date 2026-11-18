@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "# Check counter wraparound and which value each registered output samples",
+      "note": "The note focused on timing a separate zero flag and did not change the Johnson-counter fix or the reset and sequence checks the agent had already planned."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6698,
+    "output": 170
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "The final 0 and current 1 start an overlapping match",
+      "note": "The agent correctly preserved `s3_d011` across invalid cycles, but also changed the transitions after a completed match to reuse its final zero, enabling overlapping matches that the original and reference implementations did not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding window that expected overlapping matches, so it confirmed the agent\u2019s new behavior instead of checking that post-match behavior stayed unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8291,
+    "output": 318
+  }
+}

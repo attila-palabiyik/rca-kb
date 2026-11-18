@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign wenc = rst_n && winc && !wfull;",
+      "note": "The clocked write-pointer update fixes the defect, but adding reset gating also suppresses RAM writes during reset, which the original and reference implementations leave enabled when requested and not full."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup trap caused the tool to reject the entire test command before simulation, so the agent had to resubmit the full testbench with a different cleanup method."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10179,
+    "output": 303
+  }
+}

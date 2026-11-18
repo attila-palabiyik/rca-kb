@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The agent fixed the inverted RAM read enable but also removed the original one-clock lag in the Gray pointers, changing when `wfull` and `rempty` update; it additionally gated RAM accesses during reset and changed how RAM depth is chosen."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide when transfers occurred, so it checked FIFO ordering without independently verifying the cycle-by-cycle flag timing that the rewrite changed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11504,
+    "output": 265
+  }
+}

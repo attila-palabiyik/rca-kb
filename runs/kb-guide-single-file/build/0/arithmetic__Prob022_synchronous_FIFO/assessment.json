@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "The agent fixed the write-enable polarity but also changed the FIFO and RAM address widths to support DEPTH=1, which the reference fix leaves unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10565,
+    "output": 176
+  }
+}

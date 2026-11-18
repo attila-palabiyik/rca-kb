@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "count_enable <= ~count_enable;",
+      "note": "The fix matched the graded output, but it replaced the existing two-register feedback loop with a toggle enable and combinational conversion logic when only the output needed to be registered."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8273,
+    "output": 295
+  }
+}

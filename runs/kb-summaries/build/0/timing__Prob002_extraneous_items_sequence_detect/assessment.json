@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "The fix registers the conjunction of both checks on the incoming nine-bit window, including the bit sampled at that edge.",
+      "note": "The rewrite aligned the two checks but advanced detection by one clock relative to the correct fix, which checks the pre-shift window, and added a sample counter that suppresses matches involving reset-initialized bits."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = samples >= 9 &&",
+      "note": "The testbench computed its expected result from the just-shifted history and enforced the same nine-sample gate as the rewrite, so passing confirmed the agent's assumptions rather than the required timing and post-reset behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "# Duplicate state encoding in a Moore FSM",
+      "note": "The only knowledge-base entry concerned duplicate FSM state encodings and offered no guidance on which shift-register window the detector should check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8765,
+    "output": 324
+  }
+}

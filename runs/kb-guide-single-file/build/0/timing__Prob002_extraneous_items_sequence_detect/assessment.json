@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (sample_count == 4'd8) &&",
+      "note": "The rewrite aligned the two comparisons but used the window after shifting in the current bit, asserting matches one clock earlier than expected, and added a startup gate that suppressed matches using reset padding."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = (count >= 9) && ((samples & 9'b111000111) == 9'b011000110);",
+      "note": "The test computed its expected output after shifting in the current bit and imposed the same nine-sample startup gate, so it confirmed the rewrite's assumptions rather than catching either timing difference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7200,
+    "output": 290
+  }
+}

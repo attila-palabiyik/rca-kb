@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "I\u2019ll use it to check each transition from reset.",
+      "note": "The transition-table skill reinforced the full-cycle check the agent had already planned, but did not change the diagnosis, patch, or verification plan."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6866,
+    "output": 237
+  }
+}

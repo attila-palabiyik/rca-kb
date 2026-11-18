@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// The final 0 is also the start of a possible overlapping match.",
+      "note": "The patch fixed the duplicate state encoding but also changed the post-match transitions: a valid 1 now goes to `s2_d01` and an invalid cycle goes to `s1_d0`, whereas the original behavior sends both to `idle`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a rolling history that assumed overlapping matches, so it accepted the changed behavior instead of checking that the original post-match transitions were preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first simulation command was rejected before it could run and had to be reissued with different cleanup, adding another retry after the initial patch failed to match the file."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9853,
+    "output": 390
+  }
+}

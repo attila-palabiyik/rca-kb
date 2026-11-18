@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "wire [1:0] new_coins = coin_inputs & ~held_coins;",
+      "note": "The rewrite still gives the wrong result on the affected transition paths when d2 is high on consecutive sampled cycles, because it suppresses the second deposit instead of taking S1 to S2 or, with sel high, S1_5 to S2_5."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll keep dispensing aligned to the rising edge and track the balance and change owed in half-yuan units.",
+      "note": "The rewrite replaced the original combinational output decode with registered outputs, summed simultaneous coin inputs instead of prioritizing d1, and added multi-cycle change dispensing, none of which the two-transition fix required."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "pulses = controls[1:0] & ~previous;",
+      "note": "The test used the rewrite\u2019s edge-filtering and payout rules as its oracle, so even exhaustive short sequences could not catch disagreements with the original FSM behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Compare each next-state expression with both entries in its transition-table row.",
+      "note": "The agent read relevant transition-table guidance but did not use it to isolate the two incorrect d2 destinations before rewriting the design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9854,
+    "output": 640
+  }
+}

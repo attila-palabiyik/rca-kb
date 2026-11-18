@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire triangle_down = (wave == PEAK) || (descending && wave != 5'd0);",
+      "note": "The agent fixed the square-wave counter but also replaced the triangle\u2019s registered direction logic, changing the first sample after reset from 31 to 1 even though the correct fix leaves triangle behavior unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step((phase <= 20) ? phase : 40 - phase);",
+      "note": "The test verified the square-wave timing but used the rewritten triangle sequence as its expected result, so it passed without detecting the triangle regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8140,
+    "output": 252
+  }
+}

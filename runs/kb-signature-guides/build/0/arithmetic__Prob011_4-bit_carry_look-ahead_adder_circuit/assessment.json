@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry in terms of G, P, and the carry input.",
+      "note": "The fix correctly uses AND for carry generation, but it also replaces the original carry chain with parallel look-ahead logic, changing the propagation paths even though the settled outputs match."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The malformed patch in step 7 and the rejected cleanup command in step 9 forced the edit and test launch to be resubmitted for reasons unrelated to the adder."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7680,
+    "output": 304
+  }
+}

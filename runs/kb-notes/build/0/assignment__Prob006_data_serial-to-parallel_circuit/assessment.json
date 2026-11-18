@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter wrap at five but also made ready_a high during reset and gated valid_b on sixth-bit acceptance, changing the original reset and terminal-count timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid ||",
+      "note": "The test passed by requiring ready_a to stay high through reset and valid_b to stay low during a gap after five accepted bits, so it validated the rewrite rather than catching either timing regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "For a localized repair, check the existing output timing at reset release and during a gap at the terminal count",
+      "note": "The agent read a note describing the same module and warning about both timing changes, but the warning did not affect the patch or the test expectations."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9082,
+    "output": 358
+  }
+}

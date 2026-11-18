@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The data width conversion should work as follows:",
+      "note": "The knowledge-base search surfaced similar task descriptions but no debugging insight that informed the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the tool to reject the entire verification script before simulation, so the agent had to resubmit the test with a different temporary-directory setup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8933,
+    "output": 376
+  }
+}

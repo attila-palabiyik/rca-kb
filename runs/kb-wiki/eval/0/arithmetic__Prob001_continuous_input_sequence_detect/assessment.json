@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign match = rst_n && (a_tem == 8'b0111_0001);",
+      "note": "The patch fixed the shift direction but replaced the registered comparison with a combinational one, making match assert and deassert one clock earlier than the original design."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (rst_n && history == 8'h71)",
+      "note": "The test used the just-updated history to predict match, so it passed the new timing rather than checking that match still reflected the pre-edge window."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Both the submitted fix and the reference used `{a_tem[7:0], a}` as the sole change.",
+      "note": "The agent read a directly analogous example that preserved registered match timing, but that guidance did not carry through to the patch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7098,
+    "output": 303
+  }
+}

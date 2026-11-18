@@ -1,0 +1,48 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "if (wave_choice == 2'd0 && cnt != 5'd20)",
+      "note": "The rewrite retained the square wave\u2019s 21-clock period instead of wrapping the counter and driving the output low at count 19, as the fix requires."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire triangle_down = (wave == MAX_LEVEL) || (descending && wave != 5'd0);",
+      "note": "Although this reverses the triangle at 20 in steady state, it also changes reset and mode-entry behavior by replacing the registered direction logic; for example, the first triangle sample after reset becomes 1 instead of 31."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd20) ? MAX_LEVEL : 5'd0;",
+      "note": "The square-wave rewrite forces the output low on entry at count 0, whereas the original and the correct fix hold the previous output until count 9."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "phase = sample % 21;",
+      "note": "The test encoded the rewrite\u2019s 21-clock square period and upward triangle startup as expected behavior, so passing could not validate the required square timing or preserved triangle startup."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup wrapper caused the entire verification command to be rejected and reissued, adding avoidable command churn after the failed Git and path probes."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/shift-register-output-timing.md",
+      "note": "The agent opened the relevant timing page, but its advice to check wrap thresholds and output alignment independently did not carry through to the patch or the test expectations."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8256,
+    "output": 677
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+            clk_out_r <= clk_cnt < (div_o >> 1);",
+      "note": "The fix matches the default waveform, but it also rewrites the already-correct odd-period comparison and resizes both counters, changing behavior for parameter overrides that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "? ((wide_slot % 17) < 8) : (((wide_slot - 85) % 18) < 9);",
+      "note": "The default test detects the original bug, but the override test expects the new half-period pulse widths, so it validates the extra behavior changes rather than detecting them."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7501,
+    "output": 248
+  }
+}

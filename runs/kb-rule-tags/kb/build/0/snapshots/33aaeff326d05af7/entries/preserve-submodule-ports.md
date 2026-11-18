@@ -1,0 +1,3 @@
+Preserve existing submodule port names during a behavioral fix when the description and source use different names, unless the task specifically requires an interface change.
+
+Applies to HDL repairs where a testbench or another consumer may instantiate a submodule by named ports. In the `TopModule` unsigned minimum circuit, the submission renamed the `slave_mod` inputs from `a` and `b` to `data_a` and `data_b`. A local testbench that instantiated only `TopModule` passed, but the submission failed to compile with the grading testbench. The report did not include the compiler diagnostic. The correct patch preserved the submodule interface and changed only the timing of `c1`.

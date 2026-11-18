@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "`ready_a` stays high, including during reset. On the rising edge that accepts the sixth bit, `data_b` updates and `valid_b` pulses for one cycle.",
+      "note": "The fix corrected the early assertion of `valid_b` on an unstalled transfer, but it also made `ready_a` high during reset and gated the registered `valid_b` with input acceptance, whereas the reference preserves the ready register and samples `cnt == 5` even during a stall."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(0, ~word_value[b], 0, previous);",
+      "note": "The test exercised reset and stalls before the sixth bit, but it expected the rewritten behavior\u2014ready high during reset and valid low during those stalls\u2014so passing could not reveal either mismatch with the reference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8377,
+    "output": 316
+  }
+}

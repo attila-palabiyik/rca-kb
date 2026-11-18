@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-guide-single-file/build/0/arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder",
+  "experiment": "kb-guide-single-file",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "guide-single-file",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder",
+  "repeat": 0,
+  "position": 38,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "54cd06f44b2db497",
+    "harness_commit": "939025fea10c6672407855a8b1f648a1d133bcdd",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T20:35:35.288075Z",
+      "ended": "2026-11-18T20:35:57.397802Z",
+      "usage": {
+        "input_uncached": 26035,
+        "input_cached": 91578,
+        "input_cache_write": 26020,
+        "output": 951,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:36:58.352439Z",
+      "ended": "2026-11-18T20:37:16.641258Z",
+      "usage": {
+        "input_uncached": 8195,
+        "input_cached": 145897,
+        "input_cache_write": 8180,
+        "output": 593,
+        "responses": 5
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5c2f2e3a26bed100",
+    "after": "72c37b427b604ba0",
+    "changed": true
+  }
+}

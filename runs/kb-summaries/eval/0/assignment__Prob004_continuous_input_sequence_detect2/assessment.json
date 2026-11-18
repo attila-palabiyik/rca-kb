@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "// The final 0 can start an overlapping match.",
+      "note": "The agent fixed the duplicate state encoding but also changed the post-match transitions for a valid 1 and an invalid cycle, retaining a prefix where the original and reference FSMs both return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a rolling valid-bit window that expected overlapping matches, so it passed the extra pulses that the reference FSM would not produce."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "apply_patch verification failed: Failed to find expected lines",
+      "note": "Two whitespace-sensitive patch attempts failed before an anchored edit succeeded, and the first simulation command also had to be reissued because its cleanup command was rejected."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 13108,
+    "output": 435
+  }
+}

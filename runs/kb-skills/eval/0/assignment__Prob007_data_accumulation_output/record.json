@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-skills/eval/0/assignment__Prob007_data_accumulation_output",
+  "experiment": "kb-skills",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "skills",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob007_data_accumulation_output",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "52859c2c02c34720",
+    "harness_commit": "519f89901c412224fdb94d0c3a43ceb8c1413763",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:09:34.578431Z",
+      "ended": "2026-11-18T21:10:29.330726Z",
+      "usage": {
+        "input_uncached": 25283,
+        "input_cached": 118834,
+        "input_cache_write": 25262,
+        "output": 3148,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5feb92bd7dbfd12e",
+    "after": "5feb92bd7dbfd12e",
+    "changed": false
+  }
+}

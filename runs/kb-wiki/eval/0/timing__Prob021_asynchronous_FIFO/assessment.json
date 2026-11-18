@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite registered the write-side Gray pointer but made both Gray pointers capture the next address, changing flag and transfer timing instead of preserving the existing read-side delay and making the write side match it."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rempty !== (idx == DEPTH)) $fatal(1, \"Empty boundary incorrect\");",
+      "note": "The test required empty to assert immediately after the last read, so it validated the rewrite\u2019s timing rather than checking the one-cycle delay retained by the correct fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "warning: Not a git repository.",
+      "note": "Two Git checks failed in the non-repository workspace and the whitespace check had to be redone with awk, after the first simulation command had already been resubmitted because its cleanup command was rejected."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12655,
+    "output": 377
+  }
+}

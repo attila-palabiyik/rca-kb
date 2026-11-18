@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The patch corrected the full-flag polarity but also gated both RAM enables with reset, rewrote the flag logic, and changed the RAM address widths for depth one; the reference fix only inverted the full flag in the write enable."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the harness with a different temporary-file wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11010,
+    "output": 397
+  }
+}

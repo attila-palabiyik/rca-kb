@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "Cycle 20: got 1111, expected 1110",
+      "note": "Two simulation attempts stopped at the same incorrect expected value, and the second also invoked Git outside a repository, so those attempts did not reveal a design defect."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "pipeline-operand-timing.md /kb/entries/clocked-logic/pipeline-output-timing.md /kb/entries/clocked-logic/divider-pulse-width.md",
+      "note": "The agent consulted timing guidance, but nothing in the record shows that it helped identify the incorrect Gray-code shift or shaped the rewrite."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10402,
+    "output": 345
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "else if (read_en)",
+      "note": "The reset fix passed grading, but replacing both enable ternaries with conditionals also changed four-state simulation behavior: an unknown enable now holds the previous value instead of merging it with the candidate value."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "FIFO (First In, First Out) buffer",
+      "note": "The knowledge-base matches concerned FIFO designs, and the follow-up search found nothing relevant to the RAM reset bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9487,
+    "output": 192
+  }
+}

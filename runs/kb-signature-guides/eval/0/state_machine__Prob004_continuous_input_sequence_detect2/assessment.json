@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "//The trailing 0 and the new 1 form the prefix 01",
+      "note": "The patch correctly held `s3_d011` on invalid input, but it also changed the exits from `s4_d0110` on a valid `1` and on an invalid cycle, allowing overlapping matches where the original and reference designs return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = count == 4 && history == 4'b0110;",
+      "note": "The rolling-history oracle checked invalid gaps but assumed that the final zero of a match could start another match, so the exhaustive test accepted the unintended overlap behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "apply_patch verification failed: Failed to find expected lines in /app/TopModule.sv:",
+      "note": "Two patch attempts failed because their tab spacing did not match the file, prompting a whitespace inspection and a third attempt before any edit landed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9884,
+    "output": 427
+  }
+}

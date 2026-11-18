@@ -1,0 +1,10 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Check duplicate and truncated state encodings that misroute transitions or assert Moore outputs early.
+- [Shift-register output timing](entries/shift-register-output-timing.md) — Trace shift direction, check pattern constants and sample edges, align pipeline inputs, preserve submodule ports, and verify counter updates and flag latency independently.
+- [FSM output timing and reset](entries/fsm-output-reset.md) — Decode terminal states at the intended edge and give reset priority in combinational Moore outputs.
+- [FSM transition tables](entries/fsm-transition-tables.md) — Check state destinations at input and timer boundaries, and trace existing output timing before editing it.
+- [FIFO pointer clocking](entries/fifo-pointer-clocking.md) — Advance each pointer with its RAM operation, check enable polarity at full and empty, and toggle the wrap bit when the address returns to zero.
+- [Width converter output validity](entries/width-converter-valid.md) — Check accepted-transfer enables, ensure the counter reaches the output boundary before wrapping, and trace valid, data, and partial-word retention across idle and reset cycles.
+- [Multiplier partial products](entries/multiplier-partial-products.md) — Trace each multiplier bit to find duplicated or omitted terms, and check the final sum's clock edge separately.
+- [Adder carry generation](entries/adder-carry-generation.md) — Check generate and propagate operators with isolated bit cases, then verify carry look-ahead structure in the source.
+- [Gray code conversion](entries/gray-code-conversion.md) — Trace cumulative XOR dependencies and check the decoded value separately from the counter cadence.
+- [Fractional divider duty cycle](entries/fractional-divider-duty-cycle.md) — Count high samples from zero, verify the frame schedule separately, and check duty-cycle formulas at overridden periods.

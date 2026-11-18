@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "always @(*) begin",
+      "note": "The patch left the warning outputs combinational instead of registering them from the pre-edge balance and mode, and rewrote billing to deduct a fee on recharge cycles that should only add money."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "cycle(1, 0, 11, 10, 0, 0);",
+      "note": "The testbench assumed both same-cycle recharge and deduction and immediate warning updates, so it passed the patch while rejecting the intended behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Both `number` and `zero` sample the old `num` on the same edge",
+      "note": "The agent read the relevant output-flag timing entry but did not apply its pre-edge sampling check to the warning lights."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8466,
+    "output": 332
+  }
+}

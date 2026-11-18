@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "out3 = (change_due != 3'd0) || (credit > price);",
+      "note": "The rewrite corrected the two beverage-2 output cases in isolation, but it also added change carryover, counted simultaneous coins together instead of giving d1 priority, and changed how coins are accepted during dispensing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "(due > 0 || credit > price)};",
+      "note": "The test used the rewrite\u2019s own change and credit rules as its oracle, so passing 440 transitions did not verify that the original FSM behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "Wall time 31.0 seconds",
+      "note": "The unbounded state-space search for the first rewrite ran for 31 seconds before being terminated without a result, and the design it analyzed was then discarded."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10401,
+    "output": 499
+  }
+}

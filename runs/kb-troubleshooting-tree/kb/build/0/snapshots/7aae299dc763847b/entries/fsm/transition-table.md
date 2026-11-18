@@ -1,0 +1,10 @@
+# Check next-state branches against the transition table
+
+**Check** the destination for each input value in every state's next-state logic. When a row specifies different destinations, check for a copied destination or an unconditional transition. In a grouped-input FSM, determine whether the edge leaving each result state also samples the first input of the next group. If it does, check that both the success and failure states make the same input-dependent choice as the initial state.
+
+- **A destination differs from the table.** Correct the mismatched branch. Exercise each input from the affected state on separate visits, and check the destination after the clock edge. A Moore output can have the same value in both destinations, so check the state or follow it until the output distinguishes the paths. If buffered outputs or a counter reload depend on that transition, [trace when the change reaches the ports](transition-output-timing.md) before adjusting the trigger.
+- **All destinations match.** Trace which states assert each Moore output. If reset or output timing is in question, go to [the output decode and reset check](output-decode-reset.md).
+
+**Observed in `TopModule.sv`**, a five-state Moore FSM with a wrong transition out of `S4`. Both branches selected `S1`, while the table specified `S1` for `data=1` and `S0` for `data=0`. Both destinations deasserted `flag`, so checking only that `flag` fell after leaving `S4` would miss the wrong destination. Changing only the `data=0` branch matched all 261 reference samples.
+
+**Observed in `TopModule.sv`**, a Moore FSM that checks `011100` in non-overlapping six-bit groups. Leaving the failure state `sf6` unconditionally entered `s1`, treating the next group's first bit as a match even when it was `1`. The reference fix selects `sf1` for `1` and `s1` for `0`. A failed group followed by `111100` exercises the bad path because the remaining five bits match the target suffix. The submitted fix made that transition change and used wildcard sensitivity lists. It matched all 1,215 grading samples. The reference patch changed only the transition.

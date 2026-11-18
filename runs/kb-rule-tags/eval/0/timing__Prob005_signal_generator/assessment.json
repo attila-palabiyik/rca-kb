@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? PEAK : 5'd0;",
+      "note": "The counter fix was correct, but the new square-wave branch forces the output low on entry instead of holding the previous waveform value until the counter reaches 9."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (wave == 5'd0) begin",
+      "note": "The triangle rewrite makes the first sample after reset 1 instead of the original 5-bit wrap to 31 and changes direction handling when entering triangle mode."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "check(phase <= 20 ? phase : 40 - phase);",
+      "note": "The test expected the rewritten triangle startup and the forced-low square-mode entry, so it passed despite both cycle-by-cycle regressions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7943,
+    "output": 346
+  }
+}

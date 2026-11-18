@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "map each selection bit to its binary weight before changing the adders",
+      "note": "The entries covered partial-product indexing in pipelined multipliers and did not help diagnose the incorrect sign in this constant multiplier."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6108,
+    "output": 166
+  }
+}

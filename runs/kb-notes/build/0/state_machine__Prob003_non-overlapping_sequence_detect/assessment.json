@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "idle, s6, sf6:",
+      "note": "Sharing the idle branch fixes the restart after failure, but it also changes the existing post-match transition for X or Z on data: the new if statement selects sf1, whereas the original and reference ternary propagate unknown bits into the next state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the shell to reject the entire test invocation before simulation, so the agent had to resubmit the same test using a different temporary-directory wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9312,
+    "output": 336
+  }
+}

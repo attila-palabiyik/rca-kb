@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-signature-guides/build/0/timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "signature-guides",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+  "repeat": 0,
+  "position": 9,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "1852b5620a66fcd011882fa4df232efb30f733ab",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:50:11.998273Z",
+      "ended": "2026-11-18T18:50:46.924200Z",
+      "usage": {
+        "input_uncached": 16185,
+        "input_cached": 87320,
+        "input_cache_write": 16164,
+        "output": 2019,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T18:51:52.916837Z",
+      "ended": "2026-11-18T18:52:18.055499Z",
+      "usage": {
+        "input_uncached": 1880,
+        "input_cached": 67716,
+        "input_cache_write": 1868,
+        "output": 917,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "40b46f506e0c2ce2",
+    "after": "244de37c15298cc9",
+    "changed": true
+  }
+}

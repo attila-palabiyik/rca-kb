@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire [3:0] gray_wire = gray_out;",
+      "note": "The agent fixed the shift but also replaced the registered feedback pipeline with combinational logic and an explicit toggle, changing internal signal timing even though the graded output matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7879,
+    "output": 298
+  }
+}

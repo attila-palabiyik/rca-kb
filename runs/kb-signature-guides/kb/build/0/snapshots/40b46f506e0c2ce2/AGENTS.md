@@ -1,0 +1,8 @@
+- FSM stalls after an apparently valid transition, or a Moore output never asserts because its state is unreachable: [Duplicate state encodings in a Verilog FSM](entries/duplicate-fsm-state-encodings.md)
+- FSM reaches the expected state but takes the same exit for both input values, or misclassifies a group after a failed group: [Next-state branches that disagree with the transition table](entries/fsm-next-state-branches.md)
+- A shift-register sequence detector mixes combinational and clocked comparisons, or its match pulse appears on the wrong edge: [Cycle alignment in a shift-register sequence detector](entries/shift-register-detector-cycle-alignment.md)
+- A Moore output reports one clock late, or a state-only output decode differs around asynchronous reset: [Moore output timing and asynchronous reset](entries/moore-output-timing-and-async-reset.md)
+- A synchronous FIFO pointer or flag changes before the clock edge, or the first write uses the wrong RAM address: [FIFO pointer updates that miss the RAM clock edge](entries/fifo-pointer-clock-edge.md)
+- Output valid asserts on partial inputs or stays high while input stalls at a word boundary: [Output valid and word completion](entries/output-valid-word-completion.md)
+- A width converter asserts output valid at the expected time, but a field from an earlier input is stale or reflects an idle cycle: [Input capture in a width converter](entries/width-converter-input-capture.md)
+- A pipelined multiplier reports on the expected cycle, but an isolated operand bit produces zero or twice its expected contribution: [Repeated partial products in a multiplier](entries/multiplier-partial-product-wiring.md)

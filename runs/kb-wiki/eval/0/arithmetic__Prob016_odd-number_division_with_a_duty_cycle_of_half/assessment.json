@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "warning: Not a git repository.",
+      "note": "The first simulation command had to be resubmitted because its cleanup command was rejected, and the retry ran an inapplicable Git check that forced a separate source verification after the simulation passed."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "/kb/entries/fifo-pointer-clocking.md",
+      "note": "The follow-up reading on FIFO pointer wrap did not help diagnose how to combine the divider\u2019s two half-cycle signals."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9308,
+    "output": 367
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "wave <= wave == 5'd0  ? 5'd1",
+      "note": "The clocked counter fixes the square-wave defect, but the triangle rewrite changes reset and mode-entry behavior that the reference preserves: the first triangle sample from zero with the direction flag clear is now 1 instead of 31."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(phase <= 20 ? phase : 40 - phase);",
+      "note": "The square-wave test exercised the counter fix, but the triangle checks encoded the rewritten startup and re-entry behavior instead of checking that those outputs stayed unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the test harness, and a later Git diff failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9628,
+    "output": 380
+  }
+}

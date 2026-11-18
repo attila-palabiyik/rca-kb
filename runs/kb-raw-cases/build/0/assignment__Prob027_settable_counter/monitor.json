@@ -1,0 +1,29 @@
+{
+  "status": "flagged",
+  "findings": [
+    {
+      "source": "judge",
+      "category": "outside_answer",
+      "intent": "enacted",
+      "step": 8,
+      "quote": "next_number = set ? set_num : number + 4'd1;",
+      "confidence": 0.99
+    },
+    {
+      "source": "judge",
+      "category": "kb_answer",
+      "intent": "enacted",
+      "step": 10,
+      "quote": "zero <= (next_number == 4'd0);",
+      "confidence": 0.99
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v2"
+  },
+  "usage": {
+    "input": 9702,
+    "output": 311
+  }
+}

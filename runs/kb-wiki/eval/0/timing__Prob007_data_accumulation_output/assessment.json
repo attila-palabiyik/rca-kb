@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly clocked the counter but also removed the existing `ready_b` condition, so an accepted first input overwrites `data_out` when `ready_b` is low instead of adding to it as the reference does."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (pending && data_out !== pending_sum[9:0])",
+      "note": "The scoreboard assumed each group starts a fresh sum regardless of `ready_b` and checked data only when an output was pending, so its passing result did not establish that the patch preserved the original accumulation behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "warning: Not a git repository.",
+      "note": "The Git check had to be replaced with direct file inspection, and an earlier chained directory listing likewise failed and forced a separate Icarus check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10030,
+    "output": 411
+  }
+}

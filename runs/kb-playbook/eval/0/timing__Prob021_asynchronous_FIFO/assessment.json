@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite registered the write-side Gray pointer, but it also made both Gray pointers track the post-increment address instead of the pre-edge address, changing the cycle timing of full and empty and adding reset gating to the RAM enables."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "always @(posedge wclk) if (monitor && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers counted and checked FIFO ordering and eventual fill and drain, but did not independently check the cycles on which full and empty should change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9912,
+    "output": 313
+  }
+}

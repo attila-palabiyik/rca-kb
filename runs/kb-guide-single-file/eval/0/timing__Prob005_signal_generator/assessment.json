@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wave <= (wave == 5'd0 || flag) ? wave + 5'd1 : wave - 5'd1;",
+      "note": "The clocked counter fixed the square-wave defect, but the patch also changed the triangle\u2019s first post-reset sample from 31 to 1, whereas the reference leaves the triangle logic unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "next_wave(phase <= 20 ? phase : 40 - phase);",
+      "note": "The test checked the square-wave timing, but its triangle expectation assumed the new ramp from zero and therefore could not detect the departure from the reference startup behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6802,
+    "output": 283
+  }
+}

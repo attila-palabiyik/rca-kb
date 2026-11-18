@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "s1_d0, s4_d0110: nstate = (data_valid && data) ? s2_d01 : s1_d0;",
+      "note": "The agent fixed the duplicate state encoding but also reused the final zero for overlapping matches, whereas the reference returns to idle after a match on an invalid cycle or a valid one."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "expected = valid && samples >= 4 && history == 4'b0110;",
+      "note": "The test used a sliding window and explicitly required overlapping matches across gaps, so it rewarded the changed behavior instead of checking that the original post-match transitions were preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39307,
+    "output": 194
+  }
+}

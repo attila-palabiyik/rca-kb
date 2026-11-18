@@ -1,0 +1,3 @@
+To assert an active-high function for any selected address of an active-low decoder, NAND the decoder outputs corresponding to the function's truth-table rows where the result is 1.
+
+Applies to combinational logic built from active-low decoder outputs. In the full-subtractor `TopModule`, the difference logic ORed two pairwise ANDs before inversion, so the unselected pair stayed high and forced the difference low for every binary input. Replacing the OR with an AND made the difference a four-input NAND over addresses `001`, `010`, `100`, and `111` in `{A, B, Ci}` order. This one-line fix matched the reference patch and passed all 57 grading samples.

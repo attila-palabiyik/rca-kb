@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire [2:0] total = credit + {1'b0, d2_inserted, d1_inserted};",
+      "note": "Instead of correcting the two wrong 1-yuan transitions in the existing FSM, the rewrite counted only rising transitions, credited both inputs when asserted together, registered the outputs instead of decoding them from state and selection, and spread change over extra cycles."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "total = credit + p1 + 2*p2",
+      "note": "The exhaustive test generated expected results from the rewrite\u2019s own edge-detection and credit model, so passing every modeled transition did not establish compatibility with the supplied FSM."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "/kb/entries/fsm-next-state-branches.md",
+      "note": "The agent opened the relevant next-state guide, but the subsequent diagnosis did not use it to isolate the two incorrect destinations before replacing the FSM."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9614,
+    "output": 538
+  }
+}

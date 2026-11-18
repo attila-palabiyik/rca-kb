@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter wrap but also made ready_a high during reset and before the first post-reset clock edge, and suppressed valid_b on stalled cycles at count 5, all of which the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "{1'b1, expected_valid, held_word}",
+      "note": "The test exercised reset and stalls before the sixth bit, but its expectations encoded the rewrite\u2019s always-high ready and sixth-transfer-only valid pulse, so it passed despite the timing differences."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the agent to repackage the test invocation, and the retry ended with an unrelated Git check that failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9235,
+    "output": 311
+  }
+}

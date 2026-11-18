@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The patch fixed the write-enable polarity but also gated both RAM enables during reset and changed the RAM address widths at DEPTH=1, neither of which was needed for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11336,
+    "output": 467
+  }
+}

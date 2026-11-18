@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The fix registers the comparison but uses the post-shift window, so the match pulse still arrives one clock early instead of reflecting the pre-edge value of `a_tem`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test checks `match` against the already-updated history, so even with all 256 windows covered, it accepts the early pulse and would reject the correct one-cycle delay."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7856,
+    "output": 250
+  }
+}

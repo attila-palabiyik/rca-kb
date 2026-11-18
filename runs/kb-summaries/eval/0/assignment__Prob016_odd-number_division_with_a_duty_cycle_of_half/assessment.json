@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clkn <= clkp;",
+      "note": "Sampling clkp on the falling edge fixes the duty cycle but delays both output transitions by half an input cycle compared with correcting only the clkn threshold from N>>2 to N>>1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (clk_out7 && (!clk_in || $time % 10 != 5))",
+      "note": "The test required the rewritten divider's rising-edge phase, so it passed the half-cycle timing shift and would have rejected the correct falling-edge rise."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7743,
+    "output": 283
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+      bin_out[2] <= ^gray_wire[3:2];",
+      "note": "The shift correction fixed the defect, but changing the decoder from blocking to nonblocking assignments also changed when `bin_out` becomes visible to the increment block on the same clock edge, although grading found no output mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7113,
+    "output": 292
+  }
+}

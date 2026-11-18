@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "The zero signal is asserted (goes high) for the next cycle when the number reaches 0",
+      "note": "The knowledge-base search surfaced only wording already in the task, so it added no debugging insight."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6656,
+    "output": 118
+  }
+}

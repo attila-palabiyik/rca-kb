@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 148,
+      "quote": "S0     : nstate = data ? S1 : S0;",
+      "note": "The patch correctly fixes the S3 fallback but also changes every next-state assignment from nonblocking to blocking, altering internal simulation scheduling even though the graded outputs match."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 37956,
+    "output": 273
+  }
+}

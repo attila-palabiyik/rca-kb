@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (advance)",
+      "note": "The rewrite fixed the XOR dependency but also replaced the registered decode and increment stages with a combinational path and an every-other-cycle enable, changing the internal timing even though all 421 graded output samples matched."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -l -i 'gray[_ -]?(code|out|wire)|bin_add_wire'",
+      "note": "The knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7999,
+    "output": 574
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The patch fixed the inverted full check but also gated both RAM enables with reset and changed pointer and RAM address widths for DEPTH=1, all beyond the reference fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "A failed Git check blocked the initial source inspection, and a rejected cleanup command forced the agent to resubmit the simulation, so both operations needed a second attempt for reasons unrelated to the FIFO."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11147,
+    "output": 365
+  }
+}

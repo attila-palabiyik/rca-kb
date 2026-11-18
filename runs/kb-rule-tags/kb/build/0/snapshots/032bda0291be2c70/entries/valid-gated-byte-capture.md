@@ -1,0 +1,3 @@
+Update an input history register on valid beats and hold it across invalid cycles when word assembly uses the register's pre-edge value together with the current beat.
+
+Applies to clocked valid-only width converters that assemble a word with nonblocking assignments. In the 8-to-16-bit `TopModule`, the byte register's update and hold branches were reversed. The reference fix swapped those branches, so the register captured every valid input while the output still used the previous byte on the completing edge. The submitted fix captured only the first byte of each pair and matched all 141 graded samples.

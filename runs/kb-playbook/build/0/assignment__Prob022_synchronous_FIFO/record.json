@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-playbook/build/0/assignment__Prob022_synchronous_FIFO",
+  "experiment": "kb-playbook",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "playbook",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob022_synchronous_FIFO",
+  "repeat": 0,
+  "position": 21,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3c589bc3fd912cb9",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:30:17.110140Z",
+      "ended": "2026-11-18T19:30:58.677127Z",
+      "usage": {
+        "input_uncached": 19144,
+        "input_cached": 66338,
+        "input_cache_write": 19129,
+        "output": 2511,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T19:31:57.927266Z",
+      "ended": "2026-11-18T19:32:14.290749Z",
+      "usage": {
+        "input_uncached": 2389,
+        "input_cached": 59872,
+        "input_cache_write": 2380,
+        "output": 368,
+        "responses": 3
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "c154276541fe476b",
+    "after": "9536ea97b172a928",
+    "changed": true
+  }
+}

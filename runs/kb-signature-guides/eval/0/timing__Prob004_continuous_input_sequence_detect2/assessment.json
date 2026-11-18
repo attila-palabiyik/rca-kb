@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// The last 0 of the match can also start the next match.",
+      "note": "The patch corrected the one-cycle delay in `match` but also changed the exits from `s4_d0110` to reuse the final zero, allowing overlapping matches that the original and reference FSMs do not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = (accepted >= 4 && history == 4'b0110);",
+      "note": "The testbench used a sliding window that expected overlapping matches, so even exhaustive inputs validated the agent\u2019s assumption instead of catching the changed post-match behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9020,
+    "output": 282
+  }
+}

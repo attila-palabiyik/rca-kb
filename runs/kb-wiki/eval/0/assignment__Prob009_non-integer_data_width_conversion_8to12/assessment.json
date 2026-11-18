@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The two-state rewrite preserves the original one-output-per-pair behavior instead of letting the counter reach 2 and emitting the second packed word on the third accepted byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1, first[7:0], 0, expected_data);",
+      "note": "The test expects no output on the third consecutive accepted byte, so even exhaustive byte-pair coverage validates the same assumption that hides the defect."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "For a stream packer whose counter wraps before the output decode can fire",
+      "note": "The agent read guidance pointing to premature counter wrap, but the patch still discarded the unreachable output path rather than checking whether the wrap was the bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8999,
+    "output": 376
+  }
+}

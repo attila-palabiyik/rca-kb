@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 173,
+      "quote": "number <= next_number;",
+      "note": "The rewrite registers the newly computed count directly instead of registering the previous value of `num`, so `number` still shows each increment or load one edge earlier than expected."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 173,
+      "quote": "zero <= (next_number == 4'd0);",
+      "note": "The rewrite also advances `zero` by an edge, replacing the original registered comparison of `num` that the correct fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 173,
+      "quote": "expected = load ? value : ((int'(expected) + 1) % 16);",
+      "note": "The test expects each increment or load to appear on the same edge that processes it, so its passing result cannot validate the required one-edge output delay."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 37634,
+    "output": 303
+  }
+}

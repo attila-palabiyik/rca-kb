@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "error: Syntax error in variable list.",
+      "note": "Verification took three attempts: the first command was rejected for its cleanup syntax, and the second used the reserved SystemVerilog keyword `matches` as a variable name."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8285,
+    "output": 87
+  }
+}

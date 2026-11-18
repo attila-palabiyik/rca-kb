@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but changed the registered comparison from the pre-edge window to the newly shifted window, making the match pulse occur one clock earlier than in the correct fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test checked `match` against the already-updated expected window, so even exhaustive input coverage confirmed the agent's timing assumption rather than checking that the original one-cycle delay was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7650,
+    "output": 290
+  }
+}

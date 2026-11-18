@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent correctly changed the counter wrap from 2 to 3, but also removed the `ready_b` guard, so the first accepted beat of a group overwrites `data_out` when downstream is not ready instead of adding to it as the reference does."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed each group starts from zero regardless of downstream readiness, so even its directed test with `ready_b` low on the first beat validated the extra change rather than checking that the original behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8266,
+    "output": 316
+  }
+}

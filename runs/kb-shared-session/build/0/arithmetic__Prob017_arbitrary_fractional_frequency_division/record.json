@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-shared-session/build/0/arithmetic__Prob017_arbitrary_fractional_frequency_division",
+  "experiment": "kb-shared-session",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "shared-session",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob017_arbitrary_fractional_frequency_division",
+  "repeat": 0,
+  "position": 20,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "2a0919470bcbb840",
+    "harness_commit": "1852b5620a66fcd011882fa4df232efb30f733ab",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:53:18.485487Z",
+      "ended": "2026-11-18T18:53:56.620240Z",
+      "usage": {
+        "input_uncached": 3452,
+        "input_cached": 260762,
+        "input_cache_write": 3440,
+        "output": 1903,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "8f0739f30ea1e79b",
+    "after": "938cb0f4635be25c",
+    "changed": true
+  }
+}

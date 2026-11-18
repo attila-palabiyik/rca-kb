@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When the input space is small, stream every input pair through the design",
+      "note": "The note reinforced exhaustive testing, which the agent had already planned, but did not help identify the incorrect sign in the constant multiplier."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5713,
+    "output": 136
+  }
+}

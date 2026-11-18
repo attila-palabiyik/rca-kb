@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "out1 <= vend && !sel;",
+      "note": "Instead of correcting the two wrong `d2` transitions, the rewrite registered the originally combinational outputs, edge-filtered the coin inputs, summed simultaneous coins rather than prioritizing `d1`, and added multi-cycle change dispensing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "$fatal(1, \"Dispense outputs changed midcycle on cycle %0d\", step_count);",
+      "note": "The test enforced the rewrite\u2019s assumptions, including stable outputs when `sel` changes midcycle, rather than checking that the original FSM\u2019s output timing and input behavior were preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "/kb/entries/014-preserve-pipelined-fsm-timing.md",
+      "note": "The agent read a relevant note warning that broad FSM rewrites can change observable timing, but proceeded with a rewrite without checking it against the original timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9174,
+    "output": 380
+  }
+}

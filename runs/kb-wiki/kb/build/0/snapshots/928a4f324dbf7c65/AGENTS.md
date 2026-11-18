@@ -1,0 +1,11 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Check duplicate encodings that make match states unreachable and truncated literals that assert Moore outputs early.
+- [Shift-register output timing](entries/shift-register-output-timing.md) — Trace shift direction, check pattern constants and sample edges, align pipeline inputs, preserve submodule ports, check counter steps, wrap thresholds, and flag latency independently, and align counter data with a registered flag.
+- [FSM output timing and reset](entries/fsm-output-reset.md) — Choose between a reset-gated Moore decode on state entry and registered outputs for delayed flags or timer reload feedback.
+- [FSM transition tables](entries/fsm-transition-tables.md) — Check state destinations, retain partial matches in overlapping detectors, and trace reload polarity and output stages at timer boundaries.
+- [FIFO pointer clocking](entries/fifo-pointer-clocking.md) — Advance each pointer with its RAM operation, check enable polarity at full and empty, and toggle the wrap bit when the address returns to zero.
+- [Width converter output validity](entries/width-converter-valid.md) — Check transfer and partial-word capture enable polarity, clock partial-word capture, verify the counter reaches the output boundary before wrapping, and trace valid and data across idle and reset cycles.
+- [Multiplier partial products](entries/multiplier-partial-products.md) — Check each multiplier bit's shift weight and contribution to the sum, then verify the final sum's clock edge separately.
+- [Adder carry generation](entries/adder-carry-generation.md) — Check generate and propagate operators with isolated bit cases, then verify carry look-ahead structure in the source.
+- [Active-low decoder outputs](entries/active-low-decoder-outputs.md) — Map asserted truth-table rows to decoder addresses and NAND the selected active-low lines.
+- [Gray code conversion](entries/gray-code-conversion.md) — Check cumulative XOR decoding, the one-bit encoder shift, the two-clock feedback cadence, and the first visible increment after reset.
+- [Fractional divider duty cycle](entries/fractional-divider-duty-cycle.md) — Count high samples from zero, verify the frame schedule separately, and check duty-cycle formulas at overridden periods.

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (sample_count == 4'd8) &&",
+      "note": "The rewrite aligned the two comparisons but used the incoming-bit window instead of the pre-edge register contents, advancing the output by one clock and adding a startup gate that suppresses matches on reset-padded windows."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "if (samples >= 9)",
+      "note": "The test shifted the new bit into its expected history before checking it and imposed the same nine-sample gate, so it validated the rewrite's assumptions rather than detecting the latency and startup mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5851,
+    "output": 334
+  }
+}

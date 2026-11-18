@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 225,
+      "quote": "module dual_port_RAM #(parameter DEPTH = 16,",
+      "note": "The submitted file redeclared the supplied RAM instead of only instantiating it, creating a duplicate module definition when compiled with the provided RAM."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite registers the next Gray pointer on each accepted transfer rather than sampling the current binary pointer, so full and empty can change on different cycles than in the reference fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "PASS: independent clocks, ordering, full/empty, wraparound and reset at depths 1, 2, 5, 16",
+      "note": "The test exercised FIFO behavior using the RAM bundled into the submission but did not compile with the separately supplied RAM, so it could not catch the duplicate definition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 40146,
+    "output": 369
+  }
+}

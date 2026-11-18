@@ -1,0 +1,50 @@
+module TopModule(
+     input  wire clk_in,
+     input  wire rst,
+     output wire clk_out
+);
+    parameter M_N = 8'd87; 
+    parameter c89 = 8'd24;  // 8/9 clock switching point
+    parameter div_e = 5'd8; //Even period
+    parameter div_o = 5'd9; //Odd period
+//*************code***********//
+    localparam MAX_PERIOD = (div_e > div_o) ? div_e : div_o;
+    localparam PERIOD_COUNT_WIDTH = (MAX_PERIOD > 1) ? $clog2(MAX_PERIOD) : 1;
+    localparam FRAME_COUNT_WIDTH = (M_N > 1) ? $clog2(M_N) : 1;
+
+    reg [PERIOD_COUNT_WIDTH-1:0] clk_cnt;
+    reg [FRAME_COUNT_WIDTH-1:0] cyc_cnt;
+    wire div_flag;
+    reg clk_out_r;
+
+    // Switch periods after the first c89 input clocks of each frame.
+    assign div_flag = (cyc_cnt >= c89);
+    
+    always@(posedge clk_in or negedge rst) begin
+        if(~rst)
+            clk_cnt <= 0;
+        else if(~div_flag)
+            clk_cnt <= clk_cnt==(div_e-1)? 0: clk_cnt+1;
+        else
+            clk_cnt <= clk_cnt==(div_o-1)? 0: clk_cnt+1;
+    end
+    
+    always@(posedge clk_in or negedge rst) begin
+        if(~rst)
+            cyc_cnt <= 0;
+        else
+            cyc_cnt <= cyc_cnt==(M_N-1)? 0: cyc_cnt+1;
+    end
+    
+    always@(posedge clk_in or negedge rst) begin
+        if(~rst)
+            clk_out_r <= 0;
+        else if(~div_flag)
+            clk_out_r <= clk_cnt<=((div_e>>2)+1);
+        else
+            clk_out_r <= clk_cnt<=((div_o>>2)+1);
+    end
+    
+    assign clk_out = clk_out_r;
+//*************code***********//
+endmodule

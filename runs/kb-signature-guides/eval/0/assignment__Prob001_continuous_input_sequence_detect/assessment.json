@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent corrected the pattern but switched the comparison from the pre-edge register to the incoming window, making `match` assert and clear one clock earlier than the original design."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (history == 8'b0111_0001)",
+      "note": "The test updated `history` before checking `match`, so it validated the agent\u2019s new timing assumption rather than catching the one-cycle regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "When the comparisons already read the intended window, a wrong literal can be fixed in place.",
+      "note": "The agent read a directly relevant guide that warned about this timing change and the test assumption behind it, but repeated both mistakes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7510,
+    "output": 322
+  }
+}

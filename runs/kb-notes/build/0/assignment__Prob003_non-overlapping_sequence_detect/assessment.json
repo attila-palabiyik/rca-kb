@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "warning: Not a git repository.",
+      "note": "The first verification command had to be resubmitted because its cleanup was rejected, and the rerun passed simulation but still exited with an error because it attempted a Git diff outside a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9716,
+    "output": 91
+  }
+}

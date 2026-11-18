@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "clk_out_r <= period_count < (period_cycles >> 1);",
+      "note": "The rewrite matches the default waveform but replaces the original pulse-width rule, so an override such as div_e=10 now produces five high clocks instead of the four preserved by the one-line fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "q < 64 ? (q % 32 < 16) : ((q - 64) % 55 < 27)",
+      "note": "The default check could catch the original bug, but the parameterized check encoded the rewrite\u2019s half-period rule and therefore could not detect the compatibility regression."
+    },
+    {
+      "category": "kb_misled",
+      "step": 9,
+      "quote": "period_cycles = (cyc_cnt < c89) ? div_e : div_o;",
+      "note": "The agent adopted the earlier transcript\u2019s frame-comparison rewrite, replacing the existing mode-toggle logic even though the defect only required changing the even-period shift."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10527,
+    "output": 425
+  }
+}

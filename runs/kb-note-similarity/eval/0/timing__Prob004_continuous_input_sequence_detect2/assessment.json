@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "nstate = data ? s2_d01 : s1_d0;",
+      "note": "The patch corrected the late match pulse but also reused the final zero as the start of an overlapping match, including across invalid cycles, whereas the correct fix leaves the post-match transitions unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = (valid_count >= 4 && history == 4'b0110);",
+      "note": "The exhaustive test used a rolling valid-bit history that expected overlapping matches, so it validated the added behavior instead of guarding against changes to the original post-match transitions."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 24,
+      "quote": "text(await tools.write_stdin({session_id:36195,chars:\"\",yield_time_ms:1000}))",
+      "note": "The agent repeatedly polled the same simulation without receiving new information; a longer wait would have avoided most of those calls."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10468,
+    "output": 346
+  }
+}

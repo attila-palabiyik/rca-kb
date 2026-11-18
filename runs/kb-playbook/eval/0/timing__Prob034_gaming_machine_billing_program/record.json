@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-playbook/eval/0/timing__Prob034_gaming_machine_billing_program",
+  "experiment": "kb-playbook",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "playbook",
+    "snapshot": "build"
+  },
+  "task_id": "timing__Prob034_gaming_machine_billing_program",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3c589bc3fd912cb9",
+    "harness_commit": "da22040aea9279369f28bca8f64cfbb880df4b3c",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:54:35.912937Z",
+      "ended": "2026-11-18T21:55:06.351437Z",
+      "usage": {
+        "input_uncached": 16846,
+        "input_cached": 47512,
+        "input_cache_write": 16834,
+        "output": 1036,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "fe9f0405f7971bd6",
+    "after": "fe9f0405f7971bd6",
+    "changed": false
+  }
+}

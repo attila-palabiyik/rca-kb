@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en && read_addr < 8'd8)",
+      "note": "The patch correctly registers reads, but the added range check makes an enabled out-of-range read hold the previous value instead of sampling the unknown value returned by the original array lookup."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "tick(15);",
+      "note": "The check after setting read_addr to 255 asserts the newly introduced hold behavior, so it cannot catch that regression even though the test does exercise the original read-timing bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6842,
+    "output": 342
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The patch correctly shifts `a` into bit 0 but makes `match` report the newly shifted window one clock earlier than the original and reference implementations."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test advances `expected` before checking `match`, so its oracle enforces the patch's same-edge timing instead of catching the regression from the original one-clock delay."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The attempted rewrite compared both slices of the next shift-register value",
+      "note": "The agent read a relevant warning about changing a detector to compare the next window but did not apply it to preserve the existing `match` timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8149,
+    "output": 328
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "output reg wfull,\\n    output reg rempty",
+      "note": "The rewrite fixed the inverted RAM read enable but also changed when the Gray pointers and full/empty flags update and added reset gating to RAM accesses, whereas the reference preserves that behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to expect, so it checked data ordering and capacity without independently checking the cycle-by-cycle flag timing that the rewrite changed."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be resubmitted, and a later Git check failed because the workspace was not a repository, adding rework unrelated to the FIFO."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "waddr_d_h|raddr_d_h|non.power.of.two|read pointer|write pointer|dual_port_RAM|simultaneous read",
+      "note": "The knowledge-base search surfaced earlier search commands rather than a relevant debugging finding, and nothing retrieved informed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 13727,
+    "output": 447
+  }
+}

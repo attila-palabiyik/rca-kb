@@ -1,0 +1,11 @@
+# Register a status flag specified for the next cycle
+
+In the decimal up/down counter `TopModule`, the original combinational `zero` tracked the current `number` as soon as the count changed. It also asserted on reset release while the count was still zero. The fix registered `zero <= (number == 4'd0)` on the rising clock edge and cleared `zero` on assertion of the active-low asynchronous reset. The comparison samples the count before the edge, so the flag asserts on the edge that leaves zero. The submitted change matched all 289 grading samples, and the reference used the same timing with an explicit `if`/`else` comparison. No alternate fix was tried.
+
+For a flag specified for the cycle after a condition, check both the edge that enters the condition and the following edge. In this counter, check `9 → 0 → 1` when counting up and `1 → 0 → 9` when counting down. Also check that the flag stays low from reset release until the first rising edge, when it samples the reset count of zero.
+
+In the overlapping `1011` detector `TopModule`, the original combinational `flag` went high on the edge that sampled the final `1` and entered `S4`. The submission and reference both registered `flag <= (state == S4)` with an active-low asynchronous reset. Sampling the pre-edge state made `flag` go high one rising edge after the final bit. The submission matched all 153 grading samples. No alternate fix was tried.
+
+To test this delay, drive `10110111` and check the flag just after each rising edge. The matches end on samples 4 and 7, and the one-cycle pulses appear on samples 5 and 8. The Icarus test also asserted reset while the flag was high and checked all 4,096 twelve-bit streams against the previous four sampled bits.
+
+In a later decimal up/down counter `TopModule` task, both mode branches subtracted one on ordinary steps, while their wraparound cases were correct. The submitted fix changed the up branch to `number + 4'd1` and matched all 289 grading samples. The reference used `number + 1'd1`. The existing registered `zero` logic passed as written. For up/down logic, check an ordinary step in each direction as well as each wraparound. A wraparound-only test would miss the wrong operator here.

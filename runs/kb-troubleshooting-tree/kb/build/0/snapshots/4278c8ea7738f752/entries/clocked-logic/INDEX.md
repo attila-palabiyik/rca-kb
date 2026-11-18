@@ -1,0 +1,18 @@
+# Clocked logic
+
+- [Check the sample cycle of each combined condition](combined-condition-timing.md)
+- [Check the pattern fields against the shift direction](pattern-fields.md)
+- [Check which cycle an output flag reports](output-flag-timing.md)
+- [Check the sample cycle of each operand at a pipeline stage](pipeline-operand-timing.md)
+- [Check the edge that publishes a pipelined result](pipeline-output-timing.md)
+- [Check the enable shared by registered data and valid](output-valid-enable.md)
+- [Check how a valid input is captured](input-capture-enable.md)
+- [Check when a handshake counter advances](handshake-counter-enable.md)
+- [Check whether a transfer counter reaches the completion count](transfer-counter-wrap.md)
+- [Check the polarity of a FIFO port enable](fifo-port-enable.md)
+- [Check when a memory address pointer advances](memory-pointer-timing.md)
+- [Check that the FIFO wrap bit toggles when its address rolls over](fifo-pointer-wrap.md)
+- [Check the weight and use of each partial product](partial-product-sums.md)
+- [Check the step taken by each counter mode](counter-mode-step.md)
+- [Check the wrap edge in each counter mode](counter-mode-wrap.md)
+- [Compare pulse width and period in each divider mode](divider-pulse-width.md)

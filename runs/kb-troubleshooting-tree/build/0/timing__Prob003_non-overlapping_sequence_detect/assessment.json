@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "case (pstate)",
+      "note": "The patch fixed the one-cycle output delay but dropped the explicit reset guard, so the outputs no longer respond directly to reset and instead depend on the state register updating to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "rst_n = 0;\n        #1;\n        verify(2'b00);",
+      "note": "The test waited for the state register to settle before checking reset and did not check startup before the first reset, so it could not distinguish direct output reset from clearing through the state register."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8416,
+    "output": 270
+  }
+}

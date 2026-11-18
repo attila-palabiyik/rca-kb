@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "cnt        ==20? 0:",
+      "note": "The square-wave counter still wraps at 20 instead of 19, leaving a 21-clock period rather than the expected 20-clock period."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd20) ? 5'd20 : 5'd0;",
+      "note": "The rewrite forces the square output low on mode entry instead of holding the previous output until a counter event, and replaces the triangle\u2019s registered direction logic with endpoint checks that change its post-reset and mode-entry sequence."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "step(i % 21 >= 9 && i % 21 < 20 ? 20 : 0);",
+      "note": "The test treats the faulty 21-clock square period as correct and likewise checks the rewritten triangle startup and mode transitions against the agent\u2019s assumptions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7537,
+    "output": 443
+  }
+}

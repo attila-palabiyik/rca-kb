@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite kept a two-input cadence instead of fixing the counter to cycle through three accepted bytes and making the second packing branch fire on the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(1, 8'h56, 0, 12'h123);",
+      "note": "The test passed because it expected no output on the third accepted byte, when it should have expected valid_out high with data_out equal to 12'h456."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check whether ready timing or valid timing contributes to the observed failure before editing either signal.",
+      "note": "The consulted guide warned that a rewrite and its matching scoreboard could agree on the wrong handshake, but that warning did not change the agent's approach."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7235,
+    "output": 299
+  }
+}

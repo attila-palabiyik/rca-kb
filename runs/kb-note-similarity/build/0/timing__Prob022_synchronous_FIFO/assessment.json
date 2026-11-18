@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the write pointer but also blocked RAM writes during reset, whereas the reference preserves the original write-enable logic and changes only the pointer update."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The temporary-directory cleanup command caused the shell to reject the entire test submission before simulation, so the agent had to resubmit the test with different cleanup."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "Preserve explicit reset gating when converting FSM outputs to combinational logic",
+      "note": "The note concerned reset timing in a sequence detector and did not help diagnose the FIFO's combinational write-pointer feedback."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10237,
+    "output": 409
+  }
+}

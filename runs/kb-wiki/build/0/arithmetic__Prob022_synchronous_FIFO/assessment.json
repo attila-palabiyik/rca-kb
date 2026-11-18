@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign wenc = rst_n && winc && !wfull;",
+      "note": "Inverting `wfull` fixed the defect, but the patch also suppressed RAM writes during reset, replaced the flag logic, and changed the RAM address-port widths at depth one."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "ls: cannot access '/app/kb': No such file or directory",
+      "note": "The nonexistent-directory and Git checks both short-circuited useful commands that had to be rerun, and a later rejected cleanup command forced the simulation command to be resubmitted."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "the write pointer assigned its own computed next value in `always @(*)`",
+      "note": "The FIFO note described a pointer-clocking defect that did not apply here: both pointers were already clocked correctly, and the defect was the polarity of the write enable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11592,
+    "output": 639
+  }
+}

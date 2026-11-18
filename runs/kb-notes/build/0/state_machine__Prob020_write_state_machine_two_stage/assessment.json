@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "In the five-state Moore `TopModule` task, `S2` and `S3` both used encoding 2.",
+      "note": "The knowledge base described duplicate encodings and reset timing, neither of which helped fix the incorrect `S4` transition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6909,
+    "output": 95
+  }
+}

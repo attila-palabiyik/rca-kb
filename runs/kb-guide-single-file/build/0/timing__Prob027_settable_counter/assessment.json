@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "number <= next_number;",
+      "note": "The rewrite registered `number` but still exposed the newly incremented or loaded value one clock too early instead of sampling the pre-edge `num` alongside `zero`."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "zero <= 1'b1;",
+      "note": "The rewrite asserted `zero` during asynchronous reset, changing the original reset value of 0 that the correct fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "if (number !== expected || zero !== (expected == 0))",
+      "note": "The test used same-edge count and load expectations and required `zero` to be high during reset, so it confirmed the rewrite's assumptions rather than checking the intended output latency and reset value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7186,
+    "output": 437
+  }
+}

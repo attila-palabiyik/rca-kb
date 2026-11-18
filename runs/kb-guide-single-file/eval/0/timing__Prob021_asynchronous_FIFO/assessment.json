@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "I\u2019ll register both from their next addresses and make the wrap logic work for depths other than powers of two.",
+      "note": "Registering the write pointer fixed the CDC defect, but using next addresses for both pointers changed when the full and empty flags update, while the reference preserves the existing read-pointer timing and changes only the write-pointer register."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "written = wrstn && winc && !wfull;",
+      "note": "The scoreboard used the DUT\u2019s flags to decide which transfers counted, so it could verify data order and capacity without checking whether those flags changed on the expected clock edges."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "Dimensions must be constant.",
+      "note": "Two verification attempts had to be resubmitted before simulation could start: the first was blocked by its cleanup command, and the second failed because the testbench used a hierarchical reference as a constant width."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 13462,
+    "output": 348
+  }
+}

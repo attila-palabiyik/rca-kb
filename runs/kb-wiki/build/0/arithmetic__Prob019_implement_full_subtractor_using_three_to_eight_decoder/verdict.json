@@ -1,0 +1,14 @@
+{
+  "result": "pass",
+  "reason": "ok",
+  "details": {
+    "mismatches": 0,
+    "samples": 57
+  },
+  "log": "VCD info: dumpfile wave.vcd opened for output.\n/tests/test.sv:48: $finish called at 286 (1ps)\nHint: Output 'D' has no mismatches.\nHint: Output 'Co' has no mismatches.\nHint: Total mismatched samples is 0 out of 57 samples\n\nSimulation finished at 286 ps\nMismatches: 0 in 57 samples\n",
+  "grader": {
+    "name": "iverilog_mismatch",
+    "version": "1",
+    "iverilog": "Icarus Verilog version 12.0 (stable) ()"
+  }
+}

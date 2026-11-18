@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-playbook/eval/0/assignment__Prob026_simple_stopwatch",
+  "experiment": "kb-playbook",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "playbook",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob026_simple_stopwatch",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3c589bc3fd912cb9",
+    "harness_commit": "58866613be09d5523ffbb3b3f004278d07f87062",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:48:50.262721Z",
+      "ended": "2026-11-18T21:49:32.628147Z",
+      "usage": {
+        "input_uncached": 17459,
+        "input_cached": 63794,
+        "input_cache_write": 17444,
+        "output": 1416,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "fe9f0405f7971bd6",
+    "after": "fe9f0405f7971bd6",
+    "changed": false
+  }
+}

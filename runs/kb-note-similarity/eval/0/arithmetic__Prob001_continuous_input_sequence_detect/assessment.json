@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The patch fixed the shift direction but made `match` report the newly shifted window one clock earlier than the original and reference designs, which compare the pre-edge contents of `a_tem`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test checked `match` against the post-shift window, so even exhaustive coverage of all 256 values validated the agent\u2019s timing assumption rather than catching the regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 10,
+      "quote": "The register reads the pre-edge state, so the pulse starts one rising edge after the final bit is sampled.",
+      "note": "The agent read a relevant note about the reporting edge, but it did not use that distinction to preserve or verify the existing registered timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "ls -ld /kb /kb/entries; command -v kbsearch; command -v iverilog",
+      "note": "Several calls went into waiting for, interrupting, and diagnosing a search that returned no results before the agent opened the relevant notes directly."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8088,
+    "output": 426
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = (pstate == s6);",
+      "note": "The patch fixed the one-clock output delay but removed the explicit reset override, so the outputs now depend on the state register having settled instead of being forced low whenever reset is asserted."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "rst_n = 0;\n        #1;\n        check(2'b00);",
+      "note": "The test waited for the state register to settle before checking the outputs, so it could not distinguish explicit output reset gating from clearing the outputs indirectly through the state register."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository.",
+      "note": "The first test command had to be resubmitted because its cleanup was rejected, and the separate Git diff check then failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8955,
+    "output": 328
+  }
+}

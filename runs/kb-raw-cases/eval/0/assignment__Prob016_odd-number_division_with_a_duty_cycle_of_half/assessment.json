@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "clkn <= clkp;",
+      "note": "Replacing the falling-edge count comparison with a delayed copy of clkp corrected the duty cycle but shifted both output transitions half an input cycle later than the minimal fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "rise did not align to an input rising edge",
+      "note": "The test required the rewrite\u2019s rising-edge phase and never checked the expected phase after reset, so it passed even though the corrected divider should rise on a falling input edge."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -il 'clock divider|clk_out7|divide.by.seven' /kb/sessions",
+      "note": "The knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9645,
+    "output": 288
+  }
+}

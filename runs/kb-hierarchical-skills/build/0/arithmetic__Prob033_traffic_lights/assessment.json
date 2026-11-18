@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "Switch lights and load the next countdown on the same edge.",
+      "note": "The rewrite eliminated the repeated green reload, but it also replaced the original pipelined timing and asserted red during reset, whereas the reference only changes the green reload condition to `!green && p_green`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "check(3'b100, 10);",
+      "note": "The testbench expected the rewrite\u2019s immediate red reset and direct countdown transitions, so its passing result could not catch the timing changes that caused the grading mismatch."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "registered-output-timing/SKILL.md",
+      "note": "The agent consulted the relevant timing skill, but the record shows no trace of the original state-to-buffer-to-output timing before it replaced that pipeline."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8389,
+    "output": 435
+  }
+}

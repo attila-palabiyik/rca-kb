@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the write-pointer timing but also blocked RAM writes during reset, whereas the reference fix leaves the RAM write enable unchanged."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Applies to Verilog/SystemVerilog FSMs with explicit state constants.",
+      "note": "The additional lookup covered FSM state encodings and transition tables, neither of which helped diagnose the FIFO\u2019s combinational write-pointer update."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9520,
+    "output": 264
+  }
+}

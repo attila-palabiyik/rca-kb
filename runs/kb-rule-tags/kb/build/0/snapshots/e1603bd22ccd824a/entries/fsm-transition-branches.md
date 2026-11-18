@@ -1,0 +1,3 @@
+Check the next state for each input value against the specification, including unconditional transitions from states where the next clock edge samples a new input.
+
+Applies to Verilog/SystemVerilog FSMs with input-dependent transitions. In one `TopModule` FSM, the S4 branch sent both input values to S1. Changing the `data = 0` destination to S0 matched all 261 reference samples. In the `TopModule` detector for `011100`, the failure-completion state `sf6` always went to `s1`, treating the first bit of the next group as a match regardless of its value. The reference fix made `sf6` choose `sf1` or `s1` based on `data`. The submitted fix used the same input-dependent transition from the initial state and both completion states and matched all 1215 reference samples.

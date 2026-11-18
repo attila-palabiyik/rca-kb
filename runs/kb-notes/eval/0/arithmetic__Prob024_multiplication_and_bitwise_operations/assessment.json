@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When the input space is small, stream every input pair through the design and compare the output against the expected product at the correct cycle.",
+      "note": "The note concerned pipelined multipliers and did not identify the sign error or change the exhaustive test the agent had already planned."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6299,
+    "output": 177
+  }
+}

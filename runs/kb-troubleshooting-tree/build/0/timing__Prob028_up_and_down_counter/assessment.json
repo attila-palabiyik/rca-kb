@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "expected count=9 zero=1, got count=6 zero=0",
+      "note": "Verification had to be retried twice for reasons unrelated to the RTL: the first command was rejected for its cleanup syntax, and the next run stopped at an incorrect hard-coded testbench expectation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7994,
+    "output": 243
+  }
+}

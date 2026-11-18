@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "localparam DP_WD = (DEPTH > 1) ? $clog2(DEPTH) : 1;",
+      "note": "Alongside the correct read-pointer fix, the agent changed both modules\u2019 address sizing to add depth-one support, which the reference fix leaves unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test script to be rejected before simulation, so the agent had to resubmit the full harness with a different cleanup mechanism."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10517,
+    "output": 368
+  }
+}

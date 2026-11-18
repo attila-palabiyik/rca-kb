@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The patch fixed the off-by-one counter wrap but also made `ready_a` high during reset and changed `valid_b` to stay low during gaps before the sixth bit, whereas the reference preserved both signals\u2019 original timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "step(0, 1, 0, previous_word);",
+      "note": "The passing test expected `valid_b` to be low during a gap after five accepted bits and `ready_a` to be high in reset, so it reinforced the rewrite\u2019s assumptions instead of detecting the timing regressions."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the test launch to be redone, just as the earlier Git probe failed outside a repository and forced a separate source-file read."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8938,
+    "output": 445
+  }
+}

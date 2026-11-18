@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "\"/kb/entries/fifo-pointer-clocking.md\",\"/kb/entries/width-converter-valid.md\",\"/kb/entries/multiplier-partial-products.md\"",
+      "note": "After finding the directly relevant shift-register timing guidance, the agent read several linked pages about other circuits that did not contribute to the one-line fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8615,
+    "output": 223
+  }
+}

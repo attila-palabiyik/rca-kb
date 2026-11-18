@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-signature-guides/build/0/assignment__Prob017_arbitrary_fractional_frequency_division",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "signature-guides",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob017_arbitrary_fractional_frequency_division",
+  "repeat": 0,
+  "position": 26,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:57:04.778688Z",
+      "ended": "2026-11-18T19:57:50.010626Z",
+      "usage": {
+        "input_uncached": 17596,
+        "input_cached": 76595,
+        "input_cache_write": 17578,
+        "output": 2175,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:00:13.370605Z",
+      "ended": "2026-11-18T20:00:52.177516Z",
+      "usage": {
+        "input_uncached": 3323,
+        "input_cached": 75084,
+        "input_cache_write": 3311,
+        "output": 1090,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "31e74d4a0296d05a",
+    "after": "d856f324d6fb0754",
+    "changed": true
+  }
+}

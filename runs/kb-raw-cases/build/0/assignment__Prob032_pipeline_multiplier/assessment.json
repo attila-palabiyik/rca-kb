@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "rg -il 'pipelined multiplier|partial products|adder_0' /kb/sessions",
+      "note": "The knowledge-base search returned no matches, so it did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7015,
+    "output": 174
+  }
+}

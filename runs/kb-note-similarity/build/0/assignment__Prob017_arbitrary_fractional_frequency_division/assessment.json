@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "clk_out <= clk_cnt < (period_ticks >> 1);",
+      "note": "The rewrite matches the default waveform but replaces the threshold in both modes, changing pulse widths for parameter overrides where the correct fix preserves the original odd-mode behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (wide_out !== ((offset % period) < (period / 2)))",
+      "note": "The default waveform check could catch the original bug, but the override check encoded the rewrite\u2019s half-period rule and therefore could not detect its departure from the original threshold convention."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The agent had to reissue the test setup after its cleanup command caused the shell invocation to be rejected, much as it had to rerun file discovery after chaining it behind a failing Git check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8700,
+    "output": 435
+  }
+}

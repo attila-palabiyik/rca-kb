@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match = rst_n && (pstate == s6);",
+      "note": "The patch fixes the failed-group transition, but the output rewrite can propagate X for an unknown state where the original decode drove both outputs low."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first patch needed a follow-up to correct its case-label syntax, and the simulation command then had to be resubmitted because its cleanup trap was rejected before Icarus ran."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9117,
+    "output": 558
+  }
+}

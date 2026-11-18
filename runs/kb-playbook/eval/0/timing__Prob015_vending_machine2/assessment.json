@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "out1 <= vend && !sel;",
+      "note": "The rewrite kept the outputs registered, so they still could not respond immediately to the current state and selection as the fix required; it also replaced the original coin-priority and change behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "end else if (balance >= p",
+      "note": "The testbench modeled the rewrite\u2019s balance and change rules and checked outputs after rising edges, so its 2,021 passing cycles did not verify that changing the selection between edges updates the outputs immediately."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8221,
+    "output": 250
+  }
+}

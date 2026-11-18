@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 14,
+      "quote": "End the match pulse and retain the final 0",
+      "note": "The agent correctly made `s3_d011` hold on invalid input, but also changed two exits from `s4_d0110` to retain a prefix where the original and correct designs return to `idle`, producing extra matches."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "expected = data_valid && valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding-window oracle that assumed overlaps were required, so it accepted the extra pulse on `0110110` instead of checking that a completed match clears the prefix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "apply_patch verification failed: Failed to find expected lines",
+      "note": "Four edit attempts failed because their search text did not match the file, and two subsequent Git diff commands failed because the workspace was not a Git repository."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "sequence-suffix-fallback.md",
+      "note": "The agent applied overlap-focused suffix fallback to the completed-match state even though this task's fix needed only to preserve the unfinished `011` prefix across invalid cycles."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10660,
+    "output": 440
+  }
+}

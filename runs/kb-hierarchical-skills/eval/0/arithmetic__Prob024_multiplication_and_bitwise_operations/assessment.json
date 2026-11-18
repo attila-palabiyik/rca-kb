@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "trace each multiplier bit from its gating expression through the registered sums to the output",
+      "note": "The skill focused on variable-multiplier partial products and pipeline timing, while this combinational bug was resolved by recognizing that 251 equals 256 minus 5."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5525,
+    "output": 167
+  }
+}

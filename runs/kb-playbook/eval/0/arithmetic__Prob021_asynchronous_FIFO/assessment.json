@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= encode_pointer(waddr_next);",
+      "note": "The rewrite fixed the inverted RAM read enable but also advanced both Gray pointers a cycle earlier, changing full and empty timing, and added reset gating to the RAM enables that the reference did not have."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "read_allowed = rrstn && rinc && !rempty;",
+      "note": "The test checked ordering using the DUT\u2019s own flags to decide which transfers counted and checked full and empty only after settling, so it could pass despite the changed cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the test in a different wrapper, after an earlier non-repository Git check had already forced a separate Icarus lookup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12176,
+    "output": 474
+  }
+}

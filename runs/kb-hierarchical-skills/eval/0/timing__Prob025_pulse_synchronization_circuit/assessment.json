@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Diagnose cycle misalignment in Verilog and SystemVerilog state timers, sequence detectors, stream converters, and pipelines.",
+      "note": "The agent consulted the registered-output timing skill, but the record shows no guidance from it that changed the two-flop synchronizer fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8248,
+    "output": 211
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 11,
+      "quote": "retains its original 21-clock period",
+      "note": "The square wave's 21-clock period was an off-by-one defect: both the counter wrap and the falling edge should occur at count 19, not 20."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < PEAK) ? PEAK : 5'd0;",
+      "note": "The rewrite cleared the output immediately on entry to square mode instead of holding the previous sample until a scheduled edge, and changed the triangle's reset and mode-entry behavior instead of preserving the registered direction logic."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "phase = sample % 21;",
+      "note": "The test asserted the defective 21-clock square period and the rewrite's new triangle startup sequence, so a pass did not validate the intended timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Bundling the main file edit with a prohibited cleanup command caused the whole submission to be rejected, forcing the agent to resubmit the edit and verification setup separately."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "wave_choice|triangular wave|sawtooth",
+      "note": "The targeted knowledge-base search returned no matches and supplied no guidance for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8825,
+    "output": 528
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "read_data <= (read_addr < 8'd8) ? myRAM[read_addr[2:0]] : 4'b0000;",
+      "note": "The registered read fixes the timing bug, but the new address guard makes out-of-range reads return zero instead of the unknown value produced by the original and reference RTL."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "read_addr = 255;\n        sample(0);",
+      "note": "The test checked the read timing, but its out-of-range assertion encoded the patch\u2019s own zero-return assumption rather than checking whether the original behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire invocation to be rejected before simulation, forcing the agent to resubmit the same test with different temporary-file handling after earlier failed Git and path probes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8776,
+    "output": 449
+  }
+}

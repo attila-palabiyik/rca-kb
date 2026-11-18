@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "clk_out_r <= clk_cnt < (period >> 1);",
+      "note": "The default waveform matched, but the rewrite also changed counter sizing, mode selection, and pulse widths under parameter overrides; the bug only required changing the even-period shift from 3 to 2."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "long_only !== (i % 18 < 9)",
+      "note": "The default waveform check would catch the bug, but the override check expected the rewrite\u2019s nine-cycle high pulse for a period of 18 rather than the six-cycle pulse from the unchanged odd-period comparison."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10913,
+    "output": 335
+  }
+}

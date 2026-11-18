@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "8-bit input data into 16-bit output data",
+      "note": "The knowledge-base search surfaced a different width converter and did not inform the fix."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "data_lock[119:8]",
+      "note": "The first patch fixed the valid pulse but also changed the correct data slice for the second output word; the bitstream test caught the regression, and the agent reverted that change before submission."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "python: command not found",
+      "note": "The agent had to relaunch verification after a rejected cleanup command and an unavailable Python executable, then attempted a Git diff in a workspace that was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11528,
+    "output": 267
+  }
+}

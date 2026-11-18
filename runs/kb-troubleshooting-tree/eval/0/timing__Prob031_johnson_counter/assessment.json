@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "Two verification attempts failed before simulation: the first used a prohibited cleanup command, and the second invoked unavailable `python` and ran `git diff` outside a repository."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Check the pattern fields against the shift direction",
+      "note": "The consulted entry covered shift ordering and pattern comparisons, not the faulty sensitivity list, and the fix left the shift expression unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8031,
+    "output": 202
+  }
+}

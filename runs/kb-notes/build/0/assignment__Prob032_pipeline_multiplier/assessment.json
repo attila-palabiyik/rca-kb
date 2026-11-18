@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -n -i 'multiplier|partial product|pipeline' /kb/entries",
+      "note": "The knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6925,
+    "output": 200
+  }
+}

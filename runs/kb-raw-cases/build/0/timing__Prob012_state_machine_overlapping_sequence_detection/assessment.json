@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "rg -n -o '.{0,65}10110111.{0,115}'",
+      "note": "The search surfaced repeated task wording and earlier search commands, but no debugging insight that informed the fix or test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8306,
+    "output": 148
+  }
+}

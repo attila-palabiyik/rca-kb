@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent correctly fixed the counter enable but also removed `ready_b` from the first-byte load condition, changing `data_out` when a new group starts while downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "if (pending && data_out !== expected[9:0])",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b` and checked `data_out` only when a result was pending, so its passing result did not verify preservation of the original accumulator behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "\"session_id\":4304,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The initial knowledge-base query and two empty polls consumed about 20 seconds before the agent listed the notes directly; later, a cleanup command rejected by the shell wrapper forced it to resubmit the simulation command."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9235,
+    "output": 444
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (next_history[8:6] == 3'b011) &&",
+      "note": "The rewrite aligned the two comparisons but moved detection one clock earlier by checking the just-shifted window instead of registering both comparisons from the pre-edge shift register, changing the timing that the correct fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected_history = {expected_history[7:0], value};",
+      "note": "The test updated its expected history before computing the expected match, so all 512 windows were checked against the rewrite\u2019s same-edge timing rather than the required one-cycle delay."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "When an FSM never asserts an output tied to a particular state, check that the named states have distinct encodings at the width of the state register.",
+      "note": "The consulted entry covered aliased FSM state encodings, not the mismatch between a combinational comparison and a registered comparison in a shift-register detector."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6077,
+    "output": 275
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The patch fixed the counter wrap but also made ready_a high during reset and before the first post-reset clock, and suppressed valid_b on stalls at count 5, changing behavior the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected_valid = input_valid && count == 5;",
+      "note": "The test exercised reset and stalls before the sixth bit, but its checks assumed ready_a was always high and valid_b required valid_a, so it validated the extra changes instead of catching the regressions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8005,
+    "output": 261
+  }
+}

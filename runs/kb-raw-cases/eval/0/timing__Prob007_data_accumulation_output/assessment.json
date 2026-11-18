@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (data_cnt == 2'd0)",
+      "note": "The agent correctly clocked the counter but also removed the original `ready_b` condition for loading the first value, so an accepted first beat with `ready_b` low overwrites `data_out` instead of adding to it."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (pending && data_out !== pending_sum[9:0])",
+      "note": "The scoreboard assumed each group started from zero regardless of `ready_b` and checked `data_out` only while an output was pending, so it validated the rewrite rather than checking the preserved accumulator behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup wrapper caused the entire test command to be rejected before simulation, forcing the agent to resubmit the full testbench with a different wrapper."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The knowledge-base search returned no matching entries and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9549,
+    "output": 487
+  }
+}

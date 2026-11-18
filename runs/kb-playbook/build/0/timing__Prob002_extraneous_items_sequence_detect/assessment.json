@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite aligned the two comparisons but moved both to the window that includes the incoming bit, asserting match one clock earlier than the fix that preserves the original suffix check\u2019s timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "history = ((history << 1) | int'(value)) & 511;",
+      "note": "The test shifted the incoming bit into its expected history before checking match, so all 512 windows could pass even though the output was one clock early."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6982,
+    "output": 339
+  }
+}

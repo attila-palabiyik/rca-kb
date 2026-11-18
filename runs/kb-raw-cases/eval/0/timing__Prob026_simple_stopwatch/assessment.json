@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the bundled file edit and test run before either could execute, so the agent had to resubmit both with a different cleanup method."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The targeted knowledge-base search returned no matches, so it provided no guidance for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7836,
+    "output": 283
+  }
+}

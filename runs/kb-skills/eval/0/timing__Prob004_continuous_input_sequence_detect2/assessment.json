@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "Keep the final 0 as the prefix of a possible overlap",
+      "note": "The patch correctly moved the match pulse to the edge that samples the final zero, but it also changed the post-match transitions for an invalid sample or a valid 1, enabling overlaps that the correct fix does not introduce."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = data_valid && valid_count >= 4 && history == 4'b0110;",
+      "note": "The test oracle used a sliding window of valid bits, so it expected overlapping matches and accepted the extra pulses instead of checking that the original post-match behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9019,
+    "output": 280
+  }
+}

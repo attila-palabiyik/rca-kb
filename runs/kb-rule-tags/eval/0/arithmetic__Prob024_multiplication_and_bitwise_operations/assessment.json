@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "check that each zero-indexed multiplier bit `i` selects the multiplicand shifted left by `i`",
+      "note": "The closest knowledge-base entry covered per-bit partial products, not the incorrect sign in the constant multiplier\u2019s shift-and-subtract expression, so it did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6085,
+    "output": 210
+  }
+}

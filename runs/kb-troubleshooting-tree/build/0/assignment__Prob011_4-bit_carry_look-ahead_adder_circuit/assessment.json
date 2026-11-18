@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry directly in terms of G, P, and the input carry.",
+      "note": "The rewrite corrected the propagate operand and met the gate-primitive requirement, but it also replaced the reference fix\u2019s chained carry path with parallel equations, changing the logic depth without changing the settled outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6214,
+    "output": 227
+  }
+}

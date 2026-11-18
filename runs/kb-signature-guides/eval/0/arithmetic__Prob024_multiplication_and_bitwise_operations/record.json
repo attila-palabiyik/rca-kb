@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-signature-guides/eval/0/arithmetic__Prob024_multiplication_and_bitwise_operations",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "signature-guides",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob024_multiplication_and_bitwise_operations",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "58866613be09d5523ffbb3b3f004278d07f87062",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:48:46.518528Z",
+      "ended": "2026-11-18T21:49:17.293255Z",
+      "usage": {
+        "input_uncached": 15095,
+        "input_cached": 42971,
+        "input_cache_write": 15083,
+        "output": 883,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "730ffb253074c1f1",
+    "after": "730ffb253074c1f1",
+    "changed": false
+  }
+}

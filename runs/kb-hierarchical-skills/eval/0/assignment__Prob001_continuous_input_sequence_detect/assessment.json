@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent corrected the pattern but compared the newly shifted value instead of the pre-edge register value, making match assert and clear one clock earlier than the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (history == 8'h71)",
+      "note": "The test updated history before checking match, so it enforced the agent\u2019s same-edge assumption rather than checking the original one-cycle delay."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The following edge reads that state and asserts the flag while the FSM processes the next bit.",
+      "note": "The agent read the relevant registered-output timing guidance, but it did not prompt a check of whether the original one-cycle delay should be preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6528,
+    "output": 311
+  }
+}

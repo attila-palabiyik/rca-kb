@@ -1,0 +1,9 @@
+# Check divider pulse width as well as period
+
+In the 8.7× fractional-divider `TopModule`, the counters already scheduled three 8-cycle periods and seven 9-cycle periods per 87 input cycles. The waveform bug was in the registered output comparison. The inclusive even-period threshold `(div_e >> 1) + 1` held the output high for six of the eight cycles. The reference changed `>> 1` to `>> 2`, so both branches compare `clk_cnt <= ((div >> 2) + 1)` using their respective divisors. The default periods each have four high cycles.
+
+In a second variant, `(div_e >> 3) + 1` held the output high for only three of the eight cycles. Changing only `>> 3` to `>> 2` matched the reference patch and all 2,021 grading samples. An Icarus simulation verified three 8-cycle periods followed by seven 9-cycle periods, four high cycles per period, and asynchronous reset during a high pulse. The task description also gave inconsistent cycle counts. The configured schedule produces 10 output cycles per 87 input cycles.
+
+The first submission used `clk_cnt < (div >> 1)` in both branches and sized the counters from the parameters. It matched all 2,021 grading samples. Icarus also checked asynchronous reset and a custom 18/19 divider schedule against the submitted half-period formula. The formulas agree for 8 and 9, but at 18 and 19 the submitted formula yields nine high cycles and the reference formula yields six. The grading match does not establish equivalence across parameter values.
+
+For clock-divider bugs, trace the counter wrap points to verify the period schedule, then enumerate the counts that make the registered output high. An inclusive threshold includes count zero and the threshold itself. When a sibling branch already gives the intended waveform, check its arithmetic before rewriting both branches. To distinguish candidate formulas, simulate a valid parameter set where they predict different pulse widths and compare against the intended waveform.

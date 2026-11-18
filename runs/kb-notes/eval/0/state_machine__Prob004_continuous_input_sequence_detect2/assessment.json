@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "End the match pulse and keep the ending 0",
+      "note": "The patch correctly held `s3_d011` across invalid cycles but also changed two transitions out of `s4_d0110`, enabling overlapping matches where the reference returns to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = samples >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding-window oracle that expected overlapping matches, so it confirmed the agent\u2019s assumption instead of catching the change to the original post-match behavior."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "For an overlapping sequence detector, derive each transition from the longest suffix",
+      "note": "The agent applied this advice to the full-match state without establishing that this task called for overlapping detections."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to repackage and resubmit it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9607,
+    "output": 406
+  }
+}

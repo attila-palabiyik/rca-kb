@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= clk_cnt < (period_clocks >> 1);",
+      "note": "The rewrite fixes mode switching and matches the default waveform, but it also changes pulse widths for parameter overrides: an 18-cycle period is now high for nine clocks instead of the six preserved by the reference fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "wide_expected = (wide_frame < 54) ? (wide_frame % 18 < 9)",
+      "note": "The default test exercises the switching bug, but the wider-parameter test assumes the new half-period duty cycle and therefore cannot catch the change from the original pulse-width behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8609,
+    "output": 401
+  }
+}

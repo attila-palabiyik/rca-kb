@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Check the carry-generate and carry-propagate equations",
+      "note": "The entry covered bit-level carry logic, not the incorrect sign in the constant-multiplier expression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the test wrapper to be rejected before simulation, forcing the agent to redo the setup; an earlier Git status check also failed because the workspace was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5752,
+    "output": 205
+  }
+}

@@ -1,0 +1,3 @@
+Advance each synchronous FIFO pointer with a nonblocking assignment on the same rising clock edge that performs its enabled RAM access.
+
+Applies when a FIFO pointer supplies a synchronous RAM address and also feeds the full or empty logic. In the `TopModule` FIFO, a combinational write-pointer update fed back through the next-address and write-enable logic. The reference fix made the write pointer edge-triggered with the existing active-low asynchronous reset and write enable. The submitted fix also changed the flag calculation and matched all 327 samples, while the reference patch established that the pointer update alone was sufficient.

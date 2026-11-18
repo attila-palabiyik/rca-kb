@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 153,
+      "quote": "+            nstate = S0;",
+      "note": "The duplicate encoding was fixed, but the patch also changed every combinational next-state assignment from nonblocking to blocking, altering internal simulation scheduling without changing the tested clock-cycle behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 37996,
+    "output": 163
+  }
+}

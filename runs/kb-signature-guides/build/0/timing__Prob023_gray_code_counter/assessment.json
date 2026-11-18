@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "advance <= ~advance;",
+      "note": "The rewrite replaced the clocked decode and increment stages with combinational logic and a toggle, whereas the reference fix preserves those stages and registers only the output; the submitted output still matched all graded samples."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "cat /kb/entries/gray-to-binary-xor-chain.md",
+      "note": "The agent opened the Gray conversion guide but skipped the mapped missing-output-register guide, which directly addresses a correct value appearing one clock early through a combinational final stage."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire combined edit-and-test invocation to be rejected before it ran, so the agent had to submit the whole operation again with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7735,
+    "output": 656
+  }
+}

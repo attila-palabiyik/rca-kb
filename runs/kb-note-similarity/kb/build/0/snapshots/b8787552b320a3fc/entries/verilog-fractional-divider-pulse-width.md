@@ -1,0 +1,7 @@
+# Check high and low pulse widths when repairing a fractional clock divider
+
+In the Verilog `TopModule` 8.7× divider, the period counters already scheduled three 8-tick periods and seven 9-tick periods per 87 input ticks. A test that counted only rising edges would pass the buggy divider. Its registered output stayed high for six ticks in the 8-tick mode and four in the 9-tick mode.
+
+The reference changed the even-mode threshold from `clk_cnt <= ((div_e >> 1) + 1)` to `clk_cnt <= ((div_e >> 2) + 1)`, matching the existing odd-mode expression. With counts starting at zero, each default mode then stays high for counts 0 through 3. The submitted fix instead used `clk_cnt < (div >> 1)` in each mode and derived the counter widths from the parameters. All 2,021 grading samples matched. The two threshold formulas give the same four high ticks for divisors 8 and 9. They can diverge for parameter overrides, so the grading result does not establish general equivalence. The wider-parameter local test checked the submitted half-period formula and did not compare it with the reference.
+
+For a similar repair, trace the registered output at each count in both modes and through the switch and frame wrap. Preserve an existing working mode when it establishes the intended threshold convention, and check that convention with an override whose pulse width distinguishes competing formulas if override behavior matters.

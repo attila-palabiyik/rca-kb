@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "{red, green, yellow} <= RED;",
+      "note": "The rewrite eliminated the repeated green reload, but it also asserted red immediately on reset and replaced the original registered light pipeline, whereas the reference fix only changes the reload condition to `!green && p_green`."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": "localparam [2:0] RED = 3'b100,",
+      "note": "The rewrite kept the ports but removed the original public state parameters, so existing instantiations that override those parameters would no longer elaborate."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "check(3'b100, 10);",
+      "note": "The test required red to be asserted during reset, so it validated the rewrite\u2019s timing rather than detecting its incompatibility with the original reset and startup sequence."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "verilog-registered-counter-zero-flag.md",
+      "note": "The agent opened notes on registered timing and reset, but they did not lead it to check or preserve the existing cycle-by-cycle behavior before rewriting the controller."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9112,
+    "output": 539
+  }
+}

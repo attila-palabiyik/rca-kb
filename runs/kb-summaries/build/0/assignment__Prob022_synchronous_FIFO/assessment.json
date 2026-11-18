@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the read-pointer wrap but also suppressed RAM writes during reset and changed the supplied RAM\u2019s address-port widths for DEPTH=1, neither of which the reference fix changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10192,
+    "output": 261
+  }
+}

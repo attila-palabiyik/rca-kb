@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 10,
+      "quote": "I\u2019ll preserve the registered output timing",
+      "note": "The registered output timing was the defect: the outputs should decode the current state and selection combinationally, but the rewrite kept them clocked and instead changed coin counting and change dispensing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (change_left == 0 && credit >= price) begin",
+      "note": "The testbench encoded the rewrite\u2019s credit and multi-cycle change rules and checked outputs after the rising edge, so it did not verify that the outputs respond immediately to a selection change between edges."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 8,
+      "quote": "Preserve explicit reset gating when converting FSM outputs to combinational logic",
+      "note": "The search surfaced a note directly relevant to the required output conversion, but the agent opened three other notes and skipped it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10196,
+    "output": 398
+  }
+}

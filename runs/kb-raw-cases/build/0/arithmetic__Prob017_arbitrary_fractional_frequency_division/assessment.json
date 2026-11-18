@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire [DIV_WIDTH-1:0] period_cycles = (cyc_cnt < c89) ? div_e : div_o;",
+      "note": "The rewrite matches the expected default waveform, but replacing the registered mode flag with a counter comparison changes mode selection for overrides such as c89 = 0, which the one-line fix leaves unchanged."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The targeted knowledge-base search returned no matches, so it did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8716,
+    "output": 279
+  }
+}

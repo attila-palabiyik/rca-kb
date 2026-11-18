@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-hierarchical-skills/eval/0/state_machine__Prob004_continuous_input_sequence_detect2",
+  "experiment": "kb-hierarchical-skills",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "hierarchical-skills",
+    "snapshot": "build"
+  },
+  "task_id": "state_machine__Prob004_continuous_input_sequence_detect2",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "42246f12e4e3dbfc",
+    "harness_commit": "519f89901c412224fdb94d0c3a43ceb8c1413763",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:25:45.836210Z",
+      "ended": "2026-11-18T21:26:31.841978Z",
+      "usage": {
+        "input_uncached": 23565,
+        "input_cached": 114837,
+        "input_cache_write": 23544,
+        "output": 1898,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "8887fe3f2e7b0707",
+    "after": "8887fe3f2e7b0707",
+    "changed": false
+  }
+}

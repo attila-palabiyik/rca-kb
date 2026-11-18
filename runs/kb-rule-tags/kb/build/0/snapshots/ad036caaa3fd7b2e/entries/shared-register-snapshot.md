@@ -1,0 +1,5 @@
+When a clocked stage combines paths from the same transaction, align their sampled values and preserve the established output latency and reset values unless the specification explicitly changes them.
+
+Applies when an output combines combinational and registered comparisons of a shift register. In the `TopModule` detector for `011XXX110`, the correct fix registered the prefix comparison alongside the suffix comparison. Both comparisons then used the pre-edge contents of the zero-reset shift register, so detection appeared one clock after the final bit shifted in. The attempted fix decoded the post-shift window and changed the reset fill to ones, which excluded reset padding from the input history. That version differed from the reference on 16 of 237 samples.
+
+Also applies when a direct input bypasses a registered stage and rejoins its output. In the `TopModule` two-stage unsigned minimum circuit, the correct fix registered `c` on the same rising edge as the first comparison of `a` and `b`, using the same active-low asynchronous reset.

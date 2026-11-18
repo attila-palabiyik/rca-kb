@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "assign data = q[5];",
+      "note": "The patch fixed the combinational feedback in `q` but made `data` reflect the newly rotated state instead of registering the pre-rotation bit, advancing the output sequence by one clock."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "for (position = 1; position <= 29; position = position + 1)",
+      "note": "The test treated the reset value as the first sequence bit and expected the first post-reset rising edge to emit the second bit, so it passed the one-clock phase error."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "/kb/entries/60-hex-counter-registered-output-grading.md",
+      "note": "The search surfaced a registered-output timing precedent, but the agent did not read it before replacing the output block with a direct assignment."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7914,
+    "output": 479
+  }
+}

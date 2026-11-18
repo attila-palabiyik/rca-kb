@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 118,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite fixed the red-to-green and green-to-yellow transitions but also removed the idle startup and light-output pipeline, asserting red during reset and changing the initial countdown timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 119,
+      "quote": "phase = 0;\n        remaining = 10;",
+      "note": "The testbench expected red immediately at reset and modeled the rewritten countdown, so its passing result did not establish that the fix preserved the original startup behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 40136,
+    "output": 254
+  }
+}

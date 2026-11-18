@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 12,
+      "quote": "Both branches now compare the period counter against the period shifted right by one with an exclusive bound",
+      "note": "The fix matches the default waveform, but rewriting both pulse-width comparisons and resizing the counters changes behavior for parameter overrides that the one-shift correction preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = period_offset < period / 2;",
+      "note": "The test catches the original short pulse at the default settings, but its override check assumes the new half-period rule rather than checking that the existing pulse-width behavior is preserved."
+    },
+    {
+      "category": "kb_misled",
+      "step": 8,
+      "quote": "Changed both registered comparisons to use an exclusive upper bound of half the active period, rounded down.",
+      "note": "The entry described a different original fault\u2014a six-cycle high pulse rather than the three-cycle pulse here\u2014and the agent carried over its broader comparator and counter-width changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10476,
+    "output": 458
+  }
+}

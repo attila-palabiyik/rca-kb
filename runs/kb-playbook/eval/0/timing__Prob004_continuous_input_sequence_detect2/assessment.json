@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "The last 0 of a match can start the next match.",
+      "note": "The next-state output check fixed the one-cycle delay, but the agent also changed the post-match transitions to support overlaps where the reference returns to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = data_valid && valid_count >= 4 && window == 4'b0110;",
+      "note": "The exhaustive test used a rolling-window oracle that expected overlapping matches, so it validated the extra behavior instead of catching the divergence from the original post-match transitions."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command, a patch that failed to match the source, and a retry with an unavailable Python executable all required redoing work without advancing the diagnosis."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9392,
+    "output": 350
+  }
+}

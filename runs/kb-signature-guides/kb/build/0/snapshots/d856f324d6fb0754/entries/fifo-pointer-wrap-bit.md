@@ -1,0 +1,9 @@
+# Wrap-bit updates in a synchronous FIFO
+
+Applies to a FIFO whose read and write pointers each contain a RAM address and a wrap bit. The FIFO can return data in order while reporting the wrong occupancy after a pointer wraps.
+
+1. From reset, fill every slot and then drain exactly that many words. Check the data and status after each rising edge. On the last read, the read address should return to zero and its wrap bit should toggle on that same edge. After draining a full FIFO from reset, both complete pointers should match, with `rempty` high and `wfull` low.
+2. If the address wraps correctly but the wrap bit stays unchanged, compare the two wrap conditions for each pointer. In this task, the read address returned to zero at `DEPTH - 1`, while the wrap bit toggled only at `DEPTH`. That value is unreachable because the address already wraps at the last legal slot. The write pointer used `DEPTH - 1` for both updates. The mismatched read wrap bit left equal addresses with different wrap bits, which the FIFO interpreted as full.
+3. Check request acceptance and clock timing if the pointer fails to move at all. Here the read and write enable polarities and rising-edge pointer updates were already correct. The flags were consistent with the pointer values they received. After correcting the wrap condition, repeat fill and drain across multiple wraps and try simultaneous requests at both boundaries and while partially occupied. A non-power-of-two depth also checks that the pointer wraps at the configured depth.
+
+Source task was `TopModule.sv`, a parameterized synchronous FIFO with dual-port RAM. The reference's only logic change was to compare the read address against `DEPTH - 1` when updating the wrap bit. The submission also simplified flag comparison, gated RAM enables during reset, and supported depth one. All 327 grading samples matched the reference. The reference shows that the wrap condition alone fixed the reported defect.

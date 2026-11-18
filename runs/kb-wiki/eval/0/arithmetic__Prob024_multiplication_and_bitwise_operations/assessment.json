@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_ignored",
+      "step": 11,
+      "quote": "the external `/kb` was left unread",
+      "note": "The agent read the workspace index but did not open the multiplier page, whose guidance on shift weights and contributions was relevant to the wrong sign."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire test launch to be rejected before simulation, so the agent had to resubmit the same test in a different wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6075,
+    "output": 289
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "# Check mode switching and pulse widths when repairing a fractional clock divider",
+      "note": "The note concerned divider thresholds, not clock-domain synchronization, and did not inform the fix the agent had already identified."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7338,
+    "output": 81
+  }
+}

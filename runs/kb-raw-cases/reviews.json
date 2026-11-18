@@ -1,0 +1,42 @@
+{
+  "kb-raw-cases/build/0/assignment__Prob017_arbitrary_fractional_frequency_division": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (arithmetic__Prob017_arbitrary_fractional_frequency_division), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/assignment__Prob020_write_state_machine_two_stage": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/assignment__Prob027_settable_counter": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (timing__Prob027_settable_counter), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/assignment__Prob028_up_and_down_counter": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (timing__Prob028_up_and_down_counter, arithmetic__Prob028_up_and_down_counter), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/state_machine__Prob003_non-overlapping_sequence_detect": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (timing__Prob003_non-overlapping_sequence_detect), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/timing__Prob022_synchronous_FIFO": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/build/0/timing__Prob032_pipeline_multiplier": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (assignment__Prob032_pipeline_multiplier), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-raw-cases/eval/0/timing__Prob025_pulse_synchronization_circuit": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  }
+}

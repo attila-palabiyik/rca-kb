@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite stopped idle cycles from advancing the state, but it also replaced the original three-input, two-output packing sequence with one output per pair, dropping the output that combines the previous byte\u2019s low nibble with the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "check_cycle(1, 8'h12, 0, 12'habc);",
+      "note": "The test exercised the third valid input but expected no output, so it passed by treating the missing second packed word as correct."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "accumulates two 8-bit inputs to form a 16-bit output",
+      "note": "The knowledge-base search surfaced a different width-conversion task and did not resolve how the two existing 12-bit packing branches were meant to work together."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9628,
+    "output": 318
+  }
+}

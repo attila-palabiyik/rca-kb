@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite replaced the three-phase counter with a two-state toggle, so it stopped emitting a word on the third valid input and dropped the original packing that combines the previous byte\u2019s low nibble with the current byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1,8'h12,0,12'habc);",
+      "note": "The test expected no output on the third valid input, encoding the rewrite\u2019s assumption instead of checking the original behavior, which would assert valid_out and emit 12'hD12."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "sample the existing word-boundary predicate on the output register clock with the established reset behavior, checking the predicate separately before changing its qualification",
+      "note": "The agent read guidance that distinguished timing fixes from changes to word boundaries, but still replaced the existing output conditions rather than limiting the fix to how the counter updates."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8357,
+    "output": 372
+  }
+}

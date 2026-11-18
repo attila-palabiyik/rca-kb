@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "advance <= ~advance;",
+      "note": "The agent fixed the Gray decoder\u2019s low-bit XOR but also replaced the original registered feedback stages with combinational logic and a toggle enable; the rewrite passed all graded samples, but the reference fix preserves those stages."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "correct that operand and preserve the register boundaries and reset behavior",
+      "note": "The agent read advice to keep register boundaries when a defect is confined to an operand, but that advice did not carry through to its patch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the tool to reject the entire verification script before simulation, so the agent had to resubmit it with a different cleanup command."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9078,
+    "output": 706
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= clk_cnt < (div_o >> 1);",
+      "note": "The patch matches the intended waveform at the default settings but rewrites both pulse-width formulas, changing the waveform for parameter overrides where the reference preserves the odd-period formula and only corrects the even-period shift."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "((position % 16) < 8) : (((position - 80) % 17) < 8)))",
+      "note": "The alternate-parameter test expected the patch\u2019s new eight-cycle high pulses rather than the six-cycle pulses the reference produces, so it passed without catching the timing regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8237,
+    "output": 342
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/clocked-logic/pattern-fields.md /kb/entries/clocked-logic/counter-mode-step.md",
+      "note": "The entries discussed pattern-detector shift direction and up/down counter arithmetic, but neither helped diagnose the missing feedback inversion, which the agent had already identified."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6019,
+    "output": 158
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-signature-guides/eval/0/arithmetic__Prob031_johnson_counter",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "signature-guides",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob031_johnson_counter",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "58866613be09d5523ffbb3b3f004278d07f87062",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:48:22.425744Z",
+      "ended": "2026-11-18T21:48:55.126773Z",
+      "usage": {
+        "input_uncached": 15896,
+        "input_cached": 58451,
+        "input_cache_write": 15881,
+        "output": 1158,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "730ffb253074c1f1",
+    "after": "730ffb253074c1f1",
+    "changed": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite aligned the two comparisons but used the newly shifted window, making match assert one clock earlier than the correct fix, which registers both comparisons from the pre-edge shift register."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "history[0] = bit_value;",
+      "note": "The test inserted the incoming bit before computing the expected output, so even exhaustive pattern coverage validated the rewrite's same-edge timing instead of catching the one-cycle mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6088,
+    "output": 204
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The patch fixed the counter advancing without an accepted bit, but also changed reset and first-edge acceptance by hardwiring `ready_a` high, and changed `valid_b` during stalls at count five by gating it with `valid_a`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "!== {1'b1, expected_valid, expected_data}",
+      "note": "The test exercised stalls and reset, but its scoreboard assumed `ready_a` was always high and `valid_b` only pulsed on the sixth accepted bit, so it endorsed the extra changes instead of detecting them."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The same testbench had to be submitted three times because the first wrapper used a rejected `rm -f` cleanup command and the second invoked an unavailable `python` executable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8567,
+    "output": 330
+  }
+}

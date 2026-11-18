@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "I\u2019ll preserve the clocked dispensing outputs",
+      "note": "The defect was that the outputs were clocked instead of decoded combinationally from the current state and selection; the rewrite kept them clocked and replaced the state machine and change logic that the correct fix leaves intact."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "Directed and 10,000 randomized cycles passed",
+      "note": "The testbench checked the rewrite\u2019s assumed clocked behavior rather than verifying that the outputs respond to the current state and to selection changes between rising edges."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "currency input|beverage|coin pulse",
+      "note": "The knowledge-base searches returned no matching entries, so they provided no guidance for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9363,
+    "output": 378
+  }
+}

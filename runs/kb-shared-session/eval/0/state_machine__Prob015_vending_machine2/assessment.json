@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 226,
+      "quote": "wire coin1 = d1 && !previous_d1;",
+      "note": "Instead of correcting the two 1-yuan transitions (`S1 \u2192 S2` and `S1_5 \u2192 S2_5`), the rewrite also changed how coin inputs are counted, registered the previously combinational outputs, and added a queue for multi-cycle change."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 227,
+      "quote": "check(last);",
+      "note": "The testbench required outputs to stay unchanged before each rising edge and generated expected values from the same new coin-edge and change-queue rules, so its pass did not verify that the fix preserved the original FSM\u2019s observable behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39064,
+    "output": 383
+  }
+}

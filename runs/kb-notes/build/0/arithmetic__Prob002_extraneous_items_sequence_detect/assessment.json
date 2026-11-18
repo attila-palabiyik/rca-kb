@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite fixed the shift but asserted match one clock earlier than the original registered comparisons and changed the shift register\u2019s reset value from zeros to ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected = (samples >= 9) &&",
+      "note": "The test checked the just-shifted window and required nine post-reset samples, encoding the rewrite\u2019s assumptions rather than checking the original cycle timing and zero-filled startup behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "A blocked cleanup command forced the combined edit-and-test command to be resubmitted, and the retry ended with an unrelated Git check that failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7747,
+    "output": 323
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The patch corrected the pattern but compared the newly shifted value instead of the pre-edge value of `a_tem`, moving the match pulse one clock earlier."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (history == pattern)",
+      "note": "The test updated `history` before checking `match`, so its expected result encoded the same early pulse as the patch and would reject the correct registered timing."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Both flags then inspect the pre-edge shift-register value",
+      "note": "The agent read a relevant note about preserving pre-edge detection timing, but it did not apply that lesson to either the patch or the test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8212,
+    "output": 313
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "I\u2019ll make the light and countdown change together on the edge after the count reaches 1.",
+      "note": "The rewrite stopped the repeated green reload, but it also removed the buffered light timing, eliminated the count-0 sample at phase changes, and asserted red during reset instead of preserving the original all-off outputs."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "countdown(GREEN, 60, 1);",
+      "note": "The test expected the rewritten timing, including a direct transition from green at count 1 to yellow at count 5, so it passed without detecting the missing count-0 sample or the changed reset outputs."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Trace the current state, light buffer, visible outputs, and timer across the boundary before editing any pipeline stage.",
+      "note": "The agent read this directly relevant advice, but it did not change the approach: the agent treated the buffered timing as a defect and rewrote it rather than preserving it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9107,
+    "output": 428
+  }
+}

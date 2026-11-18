@@ -1,0 +1,10 @@
+# Check how a state transition reaches registered outputs
+
+**Check** which edge updates each register between a next-state decision and the observable outputs. For each edge, use the values present before the edge to evaluate the nonblocking assignments. Include any counter reload condition that reads those registers.
+
+- **The outputs and counter reload already line up.** Keep the existing trigger and register stages when correcting a next-state destination. Check the last count in the old state and the first count in the new state.
+- **The outputs and counter reload land on different edges.** Identify the first register or condition that introduces the mismatch. If the discrepancy occurs during reset or startup, go to [the output decode and reset check](output-decode-reset.md).
+
+**Observed in `TopModule.sv`**, a traffic-light FSM with incorrect red and green destinations. The grading reference changed red to advance to green and green to advance to yellow. It kept the comparison at 3 and retained both output register stages and the original reset behavior. On an ordinary countdown, the edge sampling 3 updates the FSM state and produces count 2. The next edge updates the buffered lights and produces count 1. The following edge sees the difference between the buffered and visible lights, updates the visible lights, and reloads the timer on that same edge. The original comment predicted a visible count of 0, which the reload logic skips on this path.
+
+The submitted rewrite changed the destinations, removed the register stages, and drove red during reset. Its local tests passed against that interpretation of the prose, but 220 of 517 graded samples differed from the reference. The grade gives an aggregate for the rewrite, so it does not isolate the failures attributable to reset or any other individual change.

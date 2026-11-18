@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Advance the binary and Gray pointers on the same edge as the RAM access.",
+      "note": "The rewrite fixed the write increment but also removed the original one-cycle lag in the Gray pointers and gated RAM accesses during reset, changing flag timing and transfer acceptance that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "Empty failed to assert on the last read",
+      "note": "The test required immediate empty assertion and used the DUT\u2019s own flags to decide which transfers to score, so it validated the rewrite\u2019s timing rather than checking that the original cycle-by-cycle behavior was preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Preserve the existing acceptance rules unless the specification calls for changing them.",
+      "note": "The agent read a relevant FIFO note recommending that it use the working read pointer as a template and preserve transfer acceptance, but the advice did not constrain the rewrite."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11507,
+    "output": 346
+  }
+}

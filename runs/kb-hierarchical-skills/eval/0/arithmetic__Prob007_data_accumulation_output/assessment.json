@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent fixed the counter enable but also removed the downstream-ready guard, so the first accepted byte of a group replaces the previous sum when ready_b is low instead of being added to it as in the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed a fresh sum for every group regardless of ready_b, so the backpressure tests validated the extra change rather than detecting it."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the entire test invocation to be resubmitted, following an earlier retry caused by using the wrong knowledge-base path."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8392,
+    "output": 341
+  }
+}

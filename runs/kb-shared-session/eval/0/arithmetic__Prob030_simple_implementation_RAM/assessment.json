@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "read_data <= (read_addr < DEPTH) ? myRAM[read_addr[2:0]] : 4'b0;",
+      "note": "The agent fixed the inverted write enable but also made out-of-range reads return zero instead of preserving the original unknown result in simulation."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "if (rd) expected = ra < 8 ? memory[ra] : 0;",
+      "note": "The testbench checked the write-enable fix, but it assumed the new zero-on-invalid-read behavior and therefore could not catch that change from the original RAM."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38276,
+    "output": 303
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite fixed the inverted RAM read enable but also removed the existing one-cycle lag from both Gray pointers, changing when full and empty become visible, and added reset gating to the RAM enables."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT's own flags and reset gating to decide when transfers should occur, so it verified data ordering without checking whether the flags changed on the original cycles or whether RAM accesses during reset were preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test launch to be rejected before simulation, forcing the agent to resubmit the harness with different temporary-file handling."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12803,
+    "output": 558
+  }
+}

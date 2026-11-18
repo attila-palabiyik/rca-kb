@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-playbook/build/0/arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+  "experiment": "kb-playbook",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "playbook",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+  "repeat": 0,
+  "position": 32,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3c589bc3fd912cb9",
+    "harness_commit": "d382b0bd12b70678c6206bfa6472a0b14d0dae62",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T20:20:47.116572Z",
+      "ended": "2026-11-18T20:21:17.274390Z",
+      "usage": {
+        "input_uncached": 17081,
+        "input_cached": 61735,
+        "input_cache_write": 17066,
+        "output": 1503,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:22:14.289215Z",
+      "ended": "2026-11-18T20:22:32.640026Z",
+      "usage": {
+        "input_uncached": 2876,
+        "input_cached": 73618,
+        "input_cache_write": 2864,
+        "output": 420,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "7a7b268f64be746f",
+    "after": "f7788f5e2a539e06",
+    "changed": true
+  }
+}

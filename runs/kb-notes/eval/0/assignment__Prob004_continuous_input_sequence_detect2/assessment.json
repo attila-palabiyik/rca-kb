@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "//The final 0 and this 1 begin the next match",
+      "note": "The patch fixed the duplicate state encoding but also reused the final 0 after a valid 1 or an invalid cycle, whereas the original FSM and the reference return to idle in both cases."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = (valid_count >= 4 && window == 4'b0110);",
+      "note": "The sliding-window oracle assumed overlapping matches and retained history across invalid cycles, so the exhaustive test accepted the changed behavior instead of checking the original post-match transitions."
+    },
+    {
+      "category": "kb_misled",
+      "step": 6,
+      "quote": "For an overlapping sequence detector, derive each transition from the longest suffix of the matched prefix plus the new bit that is also a prefix of the target.",
+      "note": "The agent applied advice specific to overlapping detectors even though this repair only required a unique match-state encoding and the reference preserved the existing post-match transitions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8045,
+    "output": 334
+  }
+}

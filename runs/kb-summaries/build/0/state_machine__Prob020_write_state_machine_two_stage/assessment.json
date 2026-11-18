@@ -1,0 +1,11 @@
+{
+  "limitations": [],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7545,
+    "output": 134
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "/kb/entries/multiplier-partial-product-coverage.md",
+      "note": "The agent read a broad batch of unrelated FIFO, multiplier, adder, and Gray-code entries when the counter arithmetic and next-cycle flag entries were enough."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8071,
+    "output": 217
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll preserve the registered dispense timing",
+      "note": "The extra output register was the defect: dispensing should reflect the current state and selection combinationally, with reset forcing the outputs low."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "count each sampled rising transition once, and track any change still owed",
+      "note": "The rewrite also replaced rising-edge state transitions and coin-input priority with falling-edge credit updates, simultaneous coin acceptance, and queued change, none of which the correct fix changes."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 9,
+      "quote": "localparam [2:0] PRICE_1 = 3'd3;",
+      "note": "The rewrite kept the signal ports but removed the original public state parameters, so an instantiation that overrides one of them would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (credit >= price) begin",
+      "note": "The scoreboard based dispensing on credit accumulated before the rising edge, reproducing the rewrite\u2019s timing assumption instead of checking for dispensing on the edge that reaches the price."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 13,
+      "quote": "Checked all 55 reachable accounting states.",
+      "note": "Enumerating the new accounting states and then narrowing the change counter optimized machinery that the output-timing fix did not require."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "A separate clocked block that reads the current state on that same edge sees the pre-edge value and delays the result by a cycle.",
+      "note": "The consulted entry described the exact timing failure, but it did not change the agent\u2019s decision to keep the outputs registered."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 13047,
+    "output": 774
+  }
+}

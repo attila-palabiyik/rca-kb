@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "31-gray-counter-feedback-grading.md",
+      "note": "The agent found the companion grading entry on Gray-counter feedback but read only the earlier troubleshooting summary before editing."
+    },
+    {
+      "category": "kb_misled",
+      "step": 9,
+      "quote": "bin_out[0] <= ^gray_wire[3:0];",
+      "note": "Following the earlier entry led the agent to rewrite the decoder first, even though its XOR logic was already correct and the change still let the output advance on the first rising edge."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "advance <= ~advance;",
+      "note": "The final fix matched all graded outputs, but it replaced the original clocked decode and increment stages with combinational logic and a phase bit, whereas registering the output alone preserved those stages."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10282,
+    "output": 410
+  }
+}

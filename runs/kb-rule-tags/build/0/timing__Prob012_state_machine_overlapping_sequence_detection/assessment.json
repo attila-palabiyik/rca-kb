@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository. Use --no-index to compare two paths outside a working tree",
+      "note": "A rejected cleanup command forced the test script to be resubmitted, then an inapplicable Git check made the successful simulation command exit with an error and prompted a separate verification call."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8325,
+    "output": 147
+  }
+}

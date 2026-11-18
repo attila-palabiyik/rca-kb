@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "cnt ==20? 0",
+      "note": "Both square-wave comparisons still use 20 instead of 19, leaving a 21-clock period with one extra high sample."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire step_down = wave == 5'd20 || (wave != 5'd0 && descending);",
+      "note": "The triangle rewrite changes reset and mode-entry behavior: the first triangle sample after reset is 1 instead of the 31 produced by the original direction logic that the reference keeps."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "phase = (cycle - 1) % 21;",
+      "note": "The test encoded the defective 21-clock square period and the rewritten triangle\u2019s immediate ascent as expected behavior, so it passed despite both mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7531,
+    "output": 397
+  }
+}

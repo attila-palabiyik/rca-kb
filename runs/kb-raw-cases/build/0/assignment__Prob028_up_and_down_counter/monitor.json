@@ -1,0 +1,29 @@
+{
+  "status": "flagged",
+  "findings": [
+    {
+      "source": "judge",
+      "category": "outside_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "was zero before the rising clock edge, giving the requested one-cycle delay.",
+      "confidence": 0.94
+    },
+    {
+      "source": "judge",
+      "category": "kb_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "was zero before the rising clock edge, giving the requested one-cycle delay.",
+      "confidence": 0.78
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v2"
+  },
+  "usage": {
+    "input": 8838,
+    "output": 248
+  }
+}

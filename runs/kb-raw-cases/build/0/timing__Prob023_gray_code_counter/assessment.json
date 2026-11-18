@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "gray_out <= gray_wire;",
+      "note": "The search surfaced a related design with a registered Gray output, but the agent did not use that example to identify the smaller fix and instead replaced the pipeline with a toggle-controlled counter."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9227,
+    "output": 425
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent fixed the LSB insertion but also made `match` pulse one clock earlier by comparing the incoming window instead of preserving the original pre-edge comparison."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (dut.a_tem !== expected || match !== (expected == 8'h71))",
+      "note": "The test updated `expected` before checking `match`, so even exhaustive input coverage validated the agent's same-edge assumption rather than catching the timing regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "the shift assignment was the only change needed",
+      "note": "The agent read a directly analogous example that preserved the pre-edge comparison, but it did not change the agent's plan to alter the match timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7738,
+    "output": 520
+  }
+}

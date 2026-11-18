@@ -1,0 +1,29 @@
+{
+  "status": "flagged",
+  "findings": [
+    {
+      "source": "judge",
+      "category": "outside_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "synchronous-fifo-pointer-updates,word-completion-valid,valid-gated-byte-capture",
+      "confidence": 0.97
+    },
+    {
+      "source": "judge",
+      "category": "kb_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "synchronous-fifo-pointer-updates,word-completion-valid,valid-gated-byte-capture",
+      "confidence": 0.96
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v2"
+  },
+  "usage": {
+    "input": 15436,
+    "output": 255
+  }
+}

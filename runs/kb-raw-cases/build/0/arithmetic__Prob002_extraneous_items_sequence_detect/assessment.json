@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "match <= (prior_bits == 4'd8) &&",
+      "note": "The rewrite fixed the shift direction but compared the incoming window instead of the previously stored window, asserting `match` one clock earlier and suppressing matches that could use a reset-initialized leading zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "expected = int(len(window) == 9 and window.startswith(\"011\") and window.endswith(\"110\"))",
+      "note": "The test encoded the rewrite\u2019s same-edge detection and nine-sample startup rule, so its exhaustive and random cases could not expose either change from the original behavior."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 8,
+      "quote": "rg -in -m 2 -o",
+      "note": "The search surfaced earlier transcripts for the same detector, but the agent stopped at excerpts of their task descriptions without checking what those runs found about shift direction or output timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "Syntax error in variable list.",
+      "note": "The combined edit-and-test command was rejected because of its cleanup command, and the next attempt failed to compile the testbench, forcing both steps to be redone before any simulation ran."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10682,
+    "output": 375
+  }
+}

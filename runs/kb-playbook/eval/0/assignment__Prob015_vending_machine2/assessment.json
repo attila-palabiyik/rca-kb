@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "out2           <= vend && sel;",
+      "note": "The agent corrected the exact-payment and overpayment behavior for beverage 2, but replaced the state-decoded outputs with registered outputs and changed how coins and change are handled instead of fixing just the two output encodings."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "pulse = coins & ~previous",
+      "note": "The test generated expected outputs from the same edge-detection, credit, and queued-change assumptions as the rewrite, so its 10,025 passing cycles did not verify that the original FSM behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "git status --short && git diff --check",
+      "note": "The final check tried Git in a non-repository and repeated a standalone compile that had already passed, without any intervening changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10106,
+    "output": 477
+  }
+}

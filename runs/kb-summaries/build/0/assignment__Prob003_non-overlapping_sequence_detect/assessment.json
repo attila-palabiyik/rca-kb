@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "if (rst_n) begin",
+      "note": "The decoder rewrite also changed four-state simulation behavior: when rst_n is X or Z and the FSM is in a terminal state, the new code drives both outputs low, whereas the original and reference still decode the terminal state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9580,
+    "output": 178
+  }
+}

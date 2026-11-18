@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// The final 0 of this match can start the next match.",
+      "note": "The agent fixed the one-cycle delay in `match` but also changed the exits from `s4_d0110` to reuse the terminal zero, whereas the correct fix leaves those transitions unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = (count >= 4 && history == 4'b0110);",
+      "note": "The test exercised overlapping sequences, but its rolling-history oracle expected the new overlap behavior, so it passed the extra transition change instead of detecting it as a regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9789,
+    "output": 286
+  }
+}

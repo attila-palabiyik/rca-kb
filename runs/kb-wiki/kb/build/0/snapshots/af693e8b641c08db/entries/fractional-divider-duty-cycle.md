@@ -1,0 +1,11 @@
+# Fractional divider duty cycle
+
+Use this check when a fractional divider already produces the expected rising-edge cadence but its waveform differs. Check the period schedule and pulse widths separately. Trace the pre-edge counter value used by the registered output, and include count zero when working out how many samples an inclusive comparison holds high.
+
+In the 8.7× fractional divider `TopModule` task, the existing schedule produced three 8-cycle periods and seven 9-cycle periods per 87 input cycles. The prompt's count of 53 output cycles per 10 input cycles conflicted with the 8.7× target and the parameter values `M_N = 87` and `c89 = 24`. The even-period output comparison used `clk_cnt <= ((div_e >> 1) + 1)`, holding the output high at counts 0 through 5. A test that counted only rising edges would pass with this six-cycle high pulse. The supplied fix changed the shift from 1 to 2 in the even-period comparison. Both modes then held the output high at counts 0 through 3, giving a 4/4 high/low split for period 8 and a 4/5 split for period 9.
+
+The submission used `clk_cnt < (period >> 1)` and also derived counter widths and selected the period from the frame count. All 2,021 grading samples matched. The two comparisons give the same result at periods 8 and 9. They can differ for other parameters. For period 10, the submitted comparison gives five high cycles and the supplied comparison gives four. Local Icarus checks exercised parameter overrides for the submitted design. The supplied fix shows that changing the even-period shift alone was sufficient.
+
+Check both the rising-to-rising interval and the rising-to-falling interval through a complete frame. Include the period switch, frame wrap, and reset while the output is high. For tracing other registered outputs that sample the pre-edge counter, see [Shift-register output timing](shift-register-output-timing.md).
+
+For a zero-based address whose wrap bit must change on the same edge as the address returns to zero, see [FIFO pointer clocking](fifo-pointer-clocking.md#check-that-the-wrap-bit-toggles-with-the-address).

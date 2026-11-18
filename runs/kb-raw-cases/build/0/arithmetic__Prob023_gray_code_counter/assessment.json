@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "advance <= ~advance;",
+      "note": "Beyond correcting the Gray-code shift, the agent replaced the original clocked feedback stages with combinational logic and an explicit toggle, removing the scheduling-dependent timing that the reference patch leaves intact, although all graded samples matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9282,
+    "output": 528
+  }
+}

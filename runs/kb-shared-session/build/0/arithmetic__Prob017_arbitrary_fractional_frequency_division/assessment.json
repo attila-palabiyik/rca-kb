@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 108,
+      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
+      "note": "The rewrite fixes the default waveform but replaces the original pulse-width rule, so an overridden divide period of 20 produces 10 high cycles instead of the 7 preserved by the minimal fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 109,
+      "quote": "expected = (position % SHORT) < SHORT / 2;",
+      "note": "The parameter-override test used the rewrite\u2019s half-period rule as its expected result, so it passed without catching the change in pulse width for non-default settings."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38987,
+    "output": 330
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/fsm-state-encodings.md /kb/entries/fsm-transition-tables.md /kb/entries/fifo-pointer-clocking.md",
+      "note": "These entries covered state encoding, state transitions, and FIFO pointers, none of which helped diagnose the incorrect output-valid condition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7378,
+    "output": 251
+  }
+}

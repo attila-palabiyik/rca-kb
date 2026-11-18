@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "balance <= (dispense ? 3'd0 : balance) + inserted;",
+      "note": "The rewrite corrected the balance arithmetic but also changed how held and simultaneous coin inputs are counted, accepted coins during payout, and spread change across cycles instead of preserving the original state-decoded outputs."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(0, 0, 3'b001);",
+      "note": "The test expected a change-only cycle after dispensing, validating the rewrite\u2019s new payout timing rather than checking that the original output behavior was preserved after the two transition fixes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9664,
+    "output": 271
+  }
+}

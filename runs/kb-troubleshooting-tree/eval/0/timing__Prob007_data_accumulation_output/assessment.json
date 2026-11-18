@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent correctly made the counter clocked, but also removed the `ready_b` guard, so `data_out` reloads instead of adding when the first input of a group is accepted while downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sum = 0;",
+      "note": "The scoreboard clears its sum after every four inputs regardless of `ready_b`, so it exercises the disputed case but expects the agent\u2019s changed behavior rather than detecting the mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9047,
+    "output": 273
+  }
+}

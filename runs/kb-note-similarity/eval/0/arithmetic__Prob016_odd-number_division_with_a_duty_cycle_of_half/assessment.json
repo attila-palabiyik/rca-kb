@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "\"session_id\":78410,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The agent spent several seconds polling the knowledge-base search again after already finding and reading its top result; it also had to retry a simulation command rejected for its cleanup syntax and got no diff from Git because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8940,
+    "output": 195
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-note-similarity/eval/0/assignment__Prob026_simple_stopwatch",
+  "experiment": "kb-note-similarity",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "note-similarity",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob026_simple_stopwatch",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "aae80ac4112c3a6b",
+    "harness_commit": "519f89901c412224fdb94d0c3a43ceb8c1413763",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:34:02.816197Z",
+      "ended": "2026-11-18T21:34:54.803858Z",
+      "usage": {
+        "input_uncached": 16123,
+        "input_cached": 55420,
+        "input_cache_write": 16108,
+        "output": 1560,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "545fa08aef48f152",
+    "after": "545fa08aef48f152",
+    "changed": false
+  }
+}

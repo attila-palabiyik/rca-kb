@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "other",
+      "step": 5,
+      "quote": "Look at it before you start work on the task",
+      "note": "The agent skipped the requested knowledge-base check; the visible record does not establish that the base contained guidance relevant to this bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9399,
+    "output": 262
+  }
+}

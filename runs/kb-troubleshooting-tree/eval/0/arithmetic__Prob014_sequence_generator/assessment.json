@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "warning: Not a git repository.",
+      "note": "A blocked cleanup command forced the first verification command to be resubmitted, and the Git check then failed outside a repository even though the simulation had passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7765,
+    "output": 84
+  }
+}

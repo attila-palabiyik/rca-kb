@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else nstate = s2_d01;",
+      "note": "The patch fixed the one-cycle delay in `match` but also changed two exits from `s4_d0110` to retain the final zero for overlapping matches, whereas the correct fix leaves those exits unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = data_valid && samples >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding-window oracle that expected overlapping matches, so it confirmed the agent\u2019s assumption rather than checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected before it ran, forcing the agent to resubmit the same test with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8581,
+    "output": 334
+  }
+}

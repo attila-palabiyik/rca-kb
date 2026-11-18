@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Register each Gray pointer on the same edge as its RAM operation.",
+      "note": "The rewrite fixed the write increment but also removed the original one-cycle Gray-pointer lag, changing when `wfull` and `rempty` update and which requests the FIFO accepts."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which requests were accepted and checked data order and eventual flag changes, so it could pass despite changes to the expected cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the entire simulation command to be rejected before it ran, so the agent had to reissue the test using a different temporary-directory setup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11639,
+    "output": 492
+  }
+}

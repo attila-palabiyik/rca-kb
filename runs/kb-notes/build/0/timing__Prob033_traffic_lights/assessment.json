@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "{red, yellow, green} <= RED;",
+      "note": "The rewrite turns red on during reset and removes the staged startup sequence, whereas the reference fix only registers the light outputs and preserves the all-off reset and existing pipeline."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "verify(RED, 10);",
+      "note": "The test assumes immediate red on reset and a direct countdown from there, so its passing result cannot catch the mismatch with the expected all-off reset and pipelined startup."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first simulation command had to be resubmitted because its cleanup trap was rejected, and the earlier source-read command likewise had to be rerun because it was chained behind a failing Git check."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "014-preserve-pipelined-fsm-timing.md",
+      "note": "The agent read a relevant note on preserving FSM pipeline timing, but the advice did not carry through to the edit, which removed that pipeline."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10333,
+    "output": 487
+  }
+}

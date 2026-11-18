@@ -1,0 +1,29 @@
+{
+  "status": "flagged",
+  "findings": [
+    {
+      "source": "judge",
+      "category": "outside_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "The graded fix changed `S3` to 3 and matched all 261 reference samples.",
+      "confidence": 0.9
+    },
+    {
+      "source": "judge",
+      "category": "kb_answer",
+      "intent": "enacted",
+      "step": 7,
+      "quote": "Both `S2` and `S3` were encoded as 2, so entering the `S3` encoding still selected the earlier `S2` case arm. The FSM could never take the transition from `S3` to `S4` that asserts `flag`. The graded fix changed `S3` to 3 and matched all 261 reference samples.",
+      "confidence": 0.9
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v2"
+  },
+  "usage": {
+    "input": 14380,
+    "output": 585
+  }
+}

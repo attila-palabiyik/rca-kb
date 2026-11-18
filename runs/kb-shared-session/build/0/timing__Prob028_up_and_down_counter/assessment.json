@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 58,
+      "quote": "zero <= (number == 4'd0);",
+      "note": "The fix has the correct timing after reset, but if `number` is unknown at a clock edge before reset, it registers `X` instead of the `0` produced by the original and reference `if`/`else` logic."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 32270,
+    "output": 241
+  }
+}

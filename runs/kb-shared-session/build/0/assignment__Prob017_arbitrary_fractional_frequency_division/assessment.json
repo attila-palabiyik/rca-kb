@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 138,
+      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
+      "note": "The rewrite matches the expected default waveform but replaces both pulse-width formulas, changing behavior for parameter overrides where the reference fix preserves the odd-period formula."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 139,
+      "quote": "((pos_in_frame - SPLIT) % LONG < LONG / 2);",
+      "note": "The test caught the original default pulse-width error, but its custom cases assumed the rewrite's half-period rule and therefore could not catch the regression in parameterized pulse widths."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39095,
+    "output": 255
+  }
+}

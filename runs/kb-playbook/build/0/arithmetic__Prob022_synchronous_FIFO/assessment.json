@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "Reset blocks both RAM operations, and the address width supports `DEPTH=1`.",
+      "note": "The inverted write-full check was fixed, but the patch also added reset gating to both RAM enables and changed address sizing for DEPTH=1, neither of which the reference fix changed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10601,
+    "output": 335
+  }
+}

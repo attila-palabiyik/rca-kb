@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en)",
+      "note": "Rewriting the read logic was unnecessary and changes four-state simulation behavior: when read_en is unknown, the new code holds read_data, whereas the original and reference ternary propagate X on bits where the stored and held values differ."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7780,
+    "output": 278
+  }
+}

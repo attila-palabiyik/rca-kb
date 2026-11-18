@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "A cleanup command caused the simulator invocation to be rejected before it ran, requiring a resubmission after an earlier tool call had already failed on a syntax error."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8576,
+    "output": 95
+  }
+}

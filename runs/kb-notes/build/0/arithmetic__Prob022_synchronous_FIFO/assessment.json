@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n && winc && !wfull;",
+      "note": "The fix needed only to invert the full check, but the patch also suppressed RAM writes during reset, changed the read enable and flag logic, and modified RAM address widths for depth 1."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected and resubmitted, after an earlier Git status check had also failed because the workspace was not a repository."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "compare its hold and advance predicates with the storage enable before changing output logic",
+      "note": "The notes covered different defects, and their advice to preserve unrelated logic was not reflected in the broader patch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10766,
+    "output": 453
+  }
+}

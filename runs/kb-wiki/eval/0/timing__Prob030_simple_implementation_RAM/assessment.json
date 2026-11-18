@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (read_en && read_addr < DEPTH)",
+      "note": "The patch correctly registered reads but also made enabled reads above address 7 hold the previous value, whereas the reference preserves the full-width array lookup, which returns X for an out-of-range address in simulation."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "cycle(1, 8, 1, 8, 15, 2);",
+      "note": "The test checked the rising-edge fix, but its out-of-range case expected the newly introduced hold behavior, so it could not catch that difference from the reference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7824,
+    "output": 352
+  }
+}

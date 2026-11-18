@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= clk_cnt < (div_o >> 1);",
+      "note": "The fix matches the default waveform, but it also rewrote the already-correct odd-period comparison and widened the counters, changing behavior for parameter overrides that the reference fix leaves alone."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "? (custom_phase % 18 < 9) : ((custom_phase - 36) % 19 < 9);",
+      "note": "The default test could catch the original duty-cycle bug, but the custom test encoded the rewrite\u2019s half-period assumption and therefore could not catch its departure from the original parameterized behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7933,
+    "output": 314
+  }
+}

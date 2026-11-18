@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll track credit in half-yuan units and use a separate pulse for each change coin. If both coin inputs rise together, I\u2019ll count both.",
+      "note": "The rewrite corrected the beverage-2 payout in principle but also replaced the original coin priority and combinational output timing, when the fix only needed to change the output patterns at 2.5 and 3 yuan."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 17,
+      "quote": "if ({out1, out2, out3, dut.coin_pulse} !== {beverage, 3'b000})",
+      "note": "The test enforced the rewrite\u2019s assumption that change must go low on every falling edge, so its passing result could not establish that the original output timing was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The agent had to rerun its width analysis with Python 3 after earlier no-repository and rejected-cleanup errors, and then tuned arithmetic widths that the two-line output fix did not need."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "check each state's buffered output assignments against its intended one-hot pattern",
+      "note": "The agent read relevant advice about checking output patterns and preserving timing, but it did not use that advice to keep the repair local."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 13354,
+    "output": 519
+  }
+}

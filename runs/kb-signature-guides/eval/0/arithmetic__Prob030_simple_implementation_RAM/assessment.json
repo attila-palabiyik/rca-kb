@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en)",
+      "note": "The agent fixed write-enable polarity but also rewrote the read logic, changing four-state simulation behavior: an unknown read enable now holds the prior output instead of merging it with the addressed RAM value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire simulation script before it ran, so the agent had to resubmit the test with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8130,
+    "output": 263
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "zero <= (number == 4'd0);",
+      "note": "The registered comparison fixes the one-cycle delay, but in four-state simulation it can drive `zero` to `X` if `number` is unknown at a clock edge, whereas the original and reference `if/else` both drive it low."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6329,
+    "output": 344
+  }
+}

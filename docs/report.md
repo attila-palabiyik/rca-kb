@@ -9,10 +9,12 @@
 Thirteen ways of keeping what a debugging agent learns were each built over
 45 ChipBench tasks and then frozen and tested on 41 tasks from 15 modules the
 KB had never seen. With no KB, the agent (Codex CLI, `gpt-6.2-sol`) passed
-39% of the test set. Every approach did better, by @SUM_RANGE@ points, and
-@SUM_EXCL@ of the 13 differences have 95% intervals that exclude zero; no
-approach made a single task worse. The largest gains came from @SUM_TOP@,
-at @SUM_COST@ the tokens; recalling earlier transcripts gained least. Each KB was built once
+39% of the test set. Every approach did better, by 5 to 20 points, and 7 of
+the 13 differences have 95% intervals that exclude zero; no approach made a
+single task worse. The largest gains, about 20 points each, came from the two
+KBs loaded whole into context on every task, a file of rules and a
+single-file guide, at 1.2 and 1.6 times the tokens; searching earlier
+transcripts and a hierarchy of diagnostic steps gained least. Each KB was built once
 and run once, after the agent had been shown each result during the build, and
 the gains are of a size this benchmark resolves only coarsely: differences
 under about 10 points cannot be told from noise, and a gain shared by every
@@ -415,8 +417,8 @@ since; the predictions have not.
 ## 5. Results
 
 Every approach passed more of B than the agent with no KB (Figure 1,
-Table 6). The differences run from @RES_MIN@ to @RES_MAX@ points, and @SUM_EXCL@
-of the 13 intervals exclude zero, where about one would by chance. No
+Table 6). The differences run from +4.9 to +19.5 points, and 7 of the 13
+intervals exclude zero, where about one would by chance. No
 approach failed a task that the baseline passed in all three of its runs:
 every change on B is a gain. Most approaches passed at least one task in a
 module the baseline never passed, and the guide read on every task passed
@@ -426,23 +428,32 @@ The approaches cannot be ranked with confidence. The gap between two of them
 is about as wide as the gap between one and the baseline, and their
 intervals overlap almost entirely; one build and one run each is too little
 to separate them. What the data do show is the cost. A KB raised the tokens
-per run by a factor of 1.2 to 1.8, the cost by less (1.1 to 1.4), because most
-of the extra input is cached, and the time by about a third. The exception is
+per run by a factor of 1.2 to 1.7, the cost by less (1.1 to 1.4), because most
+of the extra input is cached, and the time by about 1.4, or 2.0 where the
+agent ran similarity searches. The exception is
 the shared session, which carries every earlier task in its context: 6.7
 times the tokens of a run with no KB, at nearly the same cost. Building a KB
-added $0.50 to $2.10 and 4 to 30 minutes to the 45 tasks of A (Table B3).
+added $0.50 to $2.10 and 4 to 30 minutes to the 45 tasks of A (Table B3); the
+shared session, which has no update turn and keeps its context cached, cost
+slightly less than solving A with no KB.
 Since every KB run on B costs more than a run without one, no approach pays
-for itself in money; its return is the tasks it solves.
+for itself in money; its return is the tasks it solves. The whole study,
+1,376 runs with their KB updates and a model's reading of each, cost about
+$180 ($112 for the agent, $66 for the reading) in model calls.
 
 The gains go with the limitation the baseline showed most. Against the
 baseline on the same tasks, the KBs removed "changed more than the bug" from
-15% to 35% of B's tasks and introduced it almost nowhere (Table B6).
+8% to 25% of B's tasks and introduced it in no more than 3.3%; the two that
+gained most removed it most often (Table B6).
 
 The first prediction holds in direction: the two approaches whose KB is
 loaded on every task, the playbook and the single-file guide, are at the top.
-The second does not. The shared session, which recalls earlier tasks whole,
-gained as much as most; only raw cases, the same transcripts searched by
-text, gained least. Neither comparison is large against the noise.
+The second holds only in part. Raw cases, the transcripts searched by text,
+gained least, with the troubleshooting tree; the shared session, which
+recalls the same transcripts in its context, gained as much as most. The
+approaches that add an index the agent has to navigate (tags, a signature
+key, a hierarchy) gained about 10 points, less than the flat ones (12 to
+17). None of these comparisons is large against the noise.
 
 <p class="caption"><b>Table 6.</b> Each approach on B with its frozen KB, against the baseline on the same tasks. A task is helped if its pass rate in the one run with the KB is higher than in the baseline's three runs, and harmed if lower. Only 4 of B's tasks are mixed in the baseline, so nearly every change is a task that flipped.</p>
 
@@ -457,9 +468,12 @@ text, gained least. Neither comparison is large against the noise.
 | Notes | 22 of 41 | 53.7 | +14.6 | +2.4 to +28.6 | 8 | 0 | 1.48 | 1.38 | 100.0 |
 | Shared session | 22 of 41 | 53.7 | +14.6 | +2.5 to +28.6 | 8 | 0 | 6.73 | 1.47 | in context |
 | Summaries | 21 of 41 | 51.2 | +12.2 | +2.4 to +23.8 | 7 | 0 | 1.63 | 1.37 | 78.0 |
-| Signature guides | 14 of 27 | 51.9 | +9.9 | 0.0 to +23.5 | 4 | 0 | 1.34 | 1.38 | 85.2 |
+| Wiki | 21 of 41 | 51.2 | +12.2 | 0.0 to +25.6 | 7 | 0 | 1.62 | 1.16 | 95.1 |
 | Hierarchical skills | 20 of 41 | 48.8 | +9.8 | 0.0 to +20.5 | 6 | 0 | 1.58 | 1.37 | 100.0 |
+| Rules by tags | 20 of 41 | 48.8 | +9.8 | 0.0 to +20.9 | 6 | 0 | 1.38 | 1.43 | 100.0 |
+| Signature guides | 20 of 41 | 48.8 | +9.8 | 0.0 to +20.5 | 6 | 0 | 1.37 | 1.44 | 90.2 |
 | Raw cases | 18 of 41 | 43.9 | +4.9 | 0.0 to +11.9 | 4 | 0 | 1.45 | 1.42 | 97.6 |
+| Troubleshooting tree | 18 of 41 | 43.9 | +4.9 | 0.0 to +11.9 | 4 | 0 | 1.39 | 1.36 | 100.0 |
 <!-- /generated -->
 
 <figure>
@@ -470,7 +484,7 @@ text, gained least. Neither comparison is large against the noise.
 <p class="caption"><b>Table 7.</b> Build runs on A against the baseline on A, split by whether the KB had already been shown a task of the same module, with B for comparison. Each build task is solved before its own result is shown. A task of a module met before shares its correct file with that earlier task, whose fix the KB was shown, and it comes later in the order, when the KB is larger.</p>
 
 <!-- generated: Seen and unseen modules -->
-| Approach | A, module met before, 28 tasks | A, module new, 17 tasks | B, every module new |
+| Approach | A, module met before, 28 tasks | A, module new, 17 tasks | B, every module new, 41 tasks |
 |---|---:|---:|---:|
 | Single-file guide | +17.9 (+3.7 to +35.7) | −7.8 (−21.6 to 0.0) | +19.5 (+7.1 to +33.3) |
 | Playbook | +7.1 (−7.1 to +25.9) | −2.0 (−5.9 to 0.0) | +19.5 (+4.7 to +38.1) |
@@ -479,9 +493,12 @@ text, gained least. Neither comparison is large against the noise.
 | Notes | +3.6 (−7.4 to +16.1) | −2.0 (−5.9 to 0.0) | +14.6 (+2.4 to +28.6) |
 | Shared session | +10.7 (0.0 to +28.0) | +3.9 (−5.9 to +17.6) | +14.6 (+2.5 to +28.6) |
 | Summaries | +7.1 (0.0 to +22.2) | −2.0 (−5.9 to 0.0) | +12.2 (+2.4 to +23.8) |
-| Signature guides | +10.7 (0.0 to +28.0) | −2.0 (−5.9 to 0.0) | +9.9 (0.0 to +23.5) |
+| Wiki | +10.7 (0.0 to +28.0) | −2.0 (−5.9 to 0.0) | +12.2 (0.0 to +25.6) |
 | Hierarchical skills | +7.1 (−7.1 to +25.9) | −2.0 (−5.9 to 0.0) | +9.8 (0.0 to +20.5) |
+| Rules by tags | +7.1 (−7.1 to +25.9) | −2.0 (−5.9 to 0.0) | +9.8 (0.0 to +20.9) |
+| Signature guides | +10.7 (0.0 to +28.0) | −2.0 (−5.9 to 0.0) | +9.8 (0.0 to +20.5) |
 | Raw cases | +3.6 (0.0 to +11.1) | −2.0 (−5.9 to 0.0) | +4.9 (0.0 to +11.9) |
+| Troubleshooting tree | +3.6 (−10.0 to +21.4) | −2.0 (−5.9 to 0.0) | +4.9 (0.0 to +11.9) |
 <!-- /generated -->
 
 <figure>
@@ -515,18 +532,25 @@ approaches is then mostly how many cases the agent reads, and how.
 
 ### What worked
 
-What carried from A to B is not a module's fix but a way of working on any
+If the gains come from what the KBs hold, and not only from their
+instructions (section 7), what carried from A to B is not a module's fix but a
+way of working on any
 module. The rules that tell the agent to keep a register's sampling point or
 a module's reset values say nothing a module of B needs to have seen; they
 tell the agent to repair rather than reimplement. The approaches that put
 such statements in front of the agent on every task, without the agent
-having to look for them, gained most, and those whose KB had to be searched
-by text gained least.
+having to look for them, gained most and removed that limitation most often.
 
 ### What failed
 
 Nothing failed outright, which is itself informative: no KB misled the agent
-into breaking a task it could otherwise solve. Two things limited the gains.
+into breaking a task it could otherwise solve, and the reading of each run
+found a KB misleading the agent in at most 7% of an approach's runs
+on B. More often the KB was beside the point: the reader judged that it had
+no bearing on the task in 20% to 93% of runs, most for raw cases, whose
+transcripts are of other modules (Table B6). For a KB loaded into context the
+reader cannot see whether a rule was used, so these shares are lowest there
+by construction. Two things limited the gains.
 The first is that the agents did not distil. Asked to keep rules, a guide or
 skills, they kept cases, and the KBs grew to between 2,000 and 14,000 words
 (Table B4), most of it specific to modules B does not contain. The second is
@@ -595,7 +619,7 @@ another run of this design should measure.
 
 Three tasks are left out: the three cases of `Prob013_least_common_multiple`.
 Its reference drives an output to high impedance, which its own testbench counts as a
-mismatch, so no answer can pass. The check described in section 1 found it.
+mismatch, so no answer can pass. The task check described in section 2 found it.
 
 ## 8. Further work
 
@@ -676,16 +700,19 @@ stored runs. The README gives the commands.
 | Raw cases, build | A | 45 | 45 | 71.1 | 48.8 to 90.7 | 18.4k | 82.0k | 1.9k | 0.073 | 0.103 | 36 | 6.3 |
 | Raw cases | B | 41 | 41 | 43.9 | 22.7 to 67.5 | 19.1k | 89.6k | 2.3k | 0.080 | 0.182 | 51 | 6.5 |
 | Rules by tags, build | A | 45 | 45 | 73.3 | 53.1 to 90.7 | 18.0k | 73.9k | 2.0k | 0.072 | 0.098 | 37 | 5.8 |
+| Rules by tags | B | 41 | 41 | 48.8 | 27.3 to 71.4 | 19.6k | 82.6k | 2.4k | 0.081 | 0.166 | 51 | 6.0 |
 | Shared session, build | A | 45 | 45 | 77.8 | 57.1 to 95.3 | 3.0k | 268.6k | 1.1k | 0.045 | 0.058 | 28 | 3.8 |
 | Shared session | B | 41 | 41 | 53.7 | 33.3 to 75.6 | 2.8k | 494.8k | 1.4k | 0.071 | 0.132 | 51 | 3.7 |
 | Signature guides, build | A | 45 | 45 | 75.6 | 55.3 to 93.0 | 17.9k | 68.5k | 1.8k | 0.069 | 0.092 | 35 | 5.4 |
-| Signature guides | B | 27 | 27 | 51.9 | 26.7 to 78.3 | 19.1k | 79.0k | 1.9k | 0.075 | 0.144 | 48 | 5.7 |
+| Signature guides | B | 41 | 41 | 48.8 | 27.3 to 72.1 | 19.5k | 81.5k | 2.2k | 0.079 | 0.162 | 52 | 5.8 |
 | Skills, build | A | 45 | 45 | 75.6 | 55.3 to 92.7 | 18.9k | 74.1k | 1.9k | 0.074 | 0.097 | 36 | 5.6 |
 | Skills | B | 41 | 41 | 56.1 | 35.0 to 78.4 | 22.4k | 90.6k | 2.3k | 0.088 | 0.157 | 49 | 5.8 |
 | Summaries, build | A | 45 | 45 | 73.3 | 52.3 to 91.7 | 17.6k | 90.0k | 2.1k | 0.074 | 0.101 | 40 | 6.9 |
 | Summaries | B | 41 | 41 | 51.2 | 31.7 to 72.5 | 18.9k | 104.9k | 2.7k | 0.084 | 0.165 | 50 | 7.5 |
 | Troubleshooting tree, build | A | 45 | 45 | 71.1 | 50.0 to 89.4 | 17.3k | 75.7k | 1.9k | 0.070 | 0.098 | 37 | 6.1 |
+| Troubleshooting tree | B | 41 | 41 | 43.9 | 22.7 to 67.5 | 18.1k | 85.5k | 2.2k | 0.076 | 0.172 | 49 | 6.6 |
 | Wiki, build | A | 45 | 45 | 75.6 | 55.3 to 93.0 | 19.3k | 86.4k | 2.0k | 0.077 | 0.102 | 38 | 6.3 |
+| Wiki | B | 41 | 41 | 51.2 | 29.3 to 75.0 | 21.5k | 99.9k | 2.3k | 0.087 | 0.170 | 42 | 6.6 |
 <!-- /generated -->
 
 <p class="caption"><b>Table B2.</b> Each approach against the baseline on B, with intervals on every ratio.</p>
@@ -700,9 +727,12 @@ stored runs. The README gives the commands.
 | Notes | 41 | +14.6 | +2.4 to +28.6 | 8 / 0 / 33 | 1.48 | 1.37 to 1.60 | 1.21 | 1.15 to 1.28 | 1.38 | 1.28 to 1.51 |
 | Shared session | 41 | +14.6 | +2.5 to +28.6 | 8 / 0 / 33 | 6.73 | 6.12 to 7.32 | 1.08 | 1.02 to 1.15 | 1.47 | 1.30 to 1.65 |
 | Summaries | 41 | +12.2 | +2.4 to +23.8 | 7 / 0 / 34 | 1.63 | 1.49 to 1.79 | 1.27 | 1.21 to 1.33 | 1.37 | 1.31 to 1.44 |
-| Signature guides | 27 | +9.9 | 0.0 to +23.5 | 4 / 0 / 23 | 1.34 | 1.24 to 1.43 | 1.17 | 1.12 to 1.22 | 1.38 | 1.26 to 1.50 |
+| Wiki | 41 | +12.2 | 0.0 to +25.6 | 7 / 0 / 34 | 1.62 | 1.51 to 1.73 | 1.32 | 1.27 to 1.36 | 1.16 | 1.09 to 1.23 |
 | Hierarchical skills | 41 | +9.8 | 0.0 to +20.5 | 6 / 0 / 35 | 1.58 | 1.43 to 1.72 | 1.31 | 1.24 to 1.38 | 1.37 | 1.27 to 1.47 |
+| Rules by tags | 41 | +9.8 | 0.0 to +20.9 | 6 / 0 / 35 | 1.38 | 1.30 to 1.45 | 1.22 | 1.18 to 1.26 | 1.43 | 1.31 to 1.57 |
+| Signature guides | 41 | +9.8 | 0.0 to +20.5 | 6 / 0 / 35 | 1.37 | 1.29 to 1.45 | 1.19 | 1.15 to 1.24 | 1.44 | 1.34 to 1.55 |
 | Raw cases | 41 | +4.9 | 0.0 to +11.9 | 4 / 0 / 37 | 1.45 | 1.36 to 1.55 | 1.20 | 1.16 to 1.25 | 1.42 | 1.36 to 1.49 |
+| Troubleshooting tree | 41 | +4.9 | 0.0 to +11.9 | 4 / 0 / 37 | 1.39 | 1.31 to 1.49 | 1.14 | 1.10 to 1.19 | 1.36 | 1.30 to 1.43 |
 <!-- /generated -->
 
 <p class="caption"><b>Table B3.</b> What building each KB cost over solving A with no KB: the solving turns' extra tokens, cost and time, plus the turns that update the KB.</p>
@@ -717,9 +747,12 @@ stored runs. The README gives the commands.
 | Notes | 4.22M | 1.27 | 21 | 97.8 | never |
 | Shared session | 9.12M | −0.72 | −2 | 100.0 | never |
 | Summaries | 4.58M | 1.26 | 22 | 100.0 | never |
-| Signature guides | 4.33M | 1.41 | 22 | 100.0 | never |
+| Wiki | 5.82M | 2.10 | 26 | 100.0 | never |
 | Hierarchical skills | 6.79M | 2.10 | 26 | 100.0 | never |
+| Rules by tags | 4.37M | 1.26 | 21 | 97.8 | never |
+| Signature guides | 4.33M | 1.41 | 22 | 100.0 | never |
 | Raw cases | 1.45M | 0.53 | 4 | 100.0 | never |
+| Troubleshooting tree | 4.52M | 1.36 | 23 | 97.8 | never |
 <!-- /generated -->
 
 <p class="caption"><b>Table B4.</b> What each KB held when it was frozen: the files the agent wrote, their words (a rough measure of what reading all of it costs), the largest file, and the session transcripts the CLI kept for the two transcript approaches.</p>
@@ -734,9 +767,12 @@ stored runs. The README gives the commands.
 | Notes | 16 | 6,809 | `entries/014-preserve-pipelined-fsm-timing.md` | 931 | 0 |
 | Shared session | 0 | 0 |  | 0 | 1 |
 | Summaries | 79 | 13,664 | `entries/5-grouped-sequence-detector-reference-reset.md` | 286 | 0 |
-| Signature guides | 21 | 11,431 | `entries/moore-output-timing-and-async-reset.md` | 1,247 | 0 |
+| Wiki | 13 | 10,746 | `entries/width-converter-valid.md` | 1,663 | 0 |
 | Hierarchical skills | 10 | 7,122 | `skills/debug-hdl-fsms/registered-output-timing/SKILL.md` | 3,620 | 0 |
+| Rules by tags | 25 | 3,595 | `entries/pipeline-output-register.md` | 344 | 0 |
+| Signature guides | 21 | 11,431 | `entries/moore-output-timing-and-async-reset.md` | 1,247 | 0 |
 | Raw cases | 0 | 0 |  | 0 | 45 |
+| Troubleshooting tree | 32 | 8,708 | `entries/fsm/transition-output-timing.md` | 681 | 0 |
 <!-- /generated -->
 
 <p class="caption"><b>Table B5.</b> Pass rate in percent by the kind of bug injected, with the number of tasks in brackets.</p>
@@ -753,26 +789,34 @@ stored runs. The README gives the commands.
 | Notes | B | 72.7 (11) | 50.0 (14) | 0.0 (2) | 50.0 (14) |
 | Shared session | B | 72.7 (11) | 57.1 (14) | 0.0 (2) | 42.9 (14) |
 | Summaries | B | 72.7 (11) | 42.9 (14) | 0.0 (2) | 50.0 (14) |
-| Signature guides | B | 63.6 (11) | 50.0 (14) | 0.0 (1) | 0.0 (1) |
+| Wiki | B | 72.7 (11) | 50.0 (14) | 0.0 (2) | 42.9 (14) |
 | Hierarchical skills | B | 63.6 (11) | 50.0 (14) | 0.0 (2) | 42.9 (14) |
+| Rules by tags | B | 63.6 (11) | 57.1 (14) | 0.0 (2) | 35.7 (14) |
+| Signature guides | B | 63.6 (11) | 50.0 (14) | 0.0 (2) | 42.9 (14) |
 | Raw cases | B | 63.6 (11) | 42.9 (14) | 0.0 (2) | 35.7 (14) |
+| Troubleshooting tree | B | 63.6 (11) | 42.9 (14) | 0.0 (2) | 35.7 (14) |
 <!-- /generated -->
 
 <p class="caption"><b>Table B6.</b> Share of all runs of each condition showing each limitation, in percent. A run can show several. Where a KB approach has been assessed, a second table gives the share of B's tasks where a limitation the baseline showed is gone (resolved) or one it did not show has appeared (introduced).</p>
 
 <!-- generated: Limitations -->
-| Condition | Set | KB did not help | Wasted effort | Changed more than the bug | Own test missed the fault | Missed the bug | Ignored the KB | Misled by the KB | Broke the interface |
+| Condition | Set | KB did not help | Changed more than the bug | Own test missed the fault | Wasted effort | Missed the bug | Ignored the KB | Misled by the KB | Broke the interface |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| No KB | A | 0.0 | 34.8 | 59.3 | 36.3 | 3.0 | 0.0 | 0.0 | 5.2 |
-| No KB | B | 0.0 | 34.1 | 64.2 | 64.2 | 12.2 | 0.0 | 0.0 | 1.6 |
-| Single-file guide | B | 0.0 | 51.5 | 39.4 | 42.4 | 12.1 | 3.0 | 0.0 | 3.0 |
-| Hierarchical skills | B | 34.1 | 51.2 | 46.3 | 53.7 | 14.6 | 7.3 | 0.0 | 2.4 |
-| Notes by similarity | B | 38.9 | 66.7 | 33.3 | 38.9 | 11.1 | 5.6 | 0.0 | 0.0 |
-| Notes | B | 56.1 | 24.4 | 41.5 | 51.2 | 14.6 | 2.4 | 7.3 | 0.0 |
-| Raw cases | B | 92.7 | 46.3 | 58.5 | 61.0 | 14.6 | 4.9 | 0.0 | 0.0 |
-| Shared session | B | 0.0 | 0.0 | 46.3 | 53.7 | 12.2 | 0.0 | 0.0 | 2.4 |
-| Skills | B | 19.5 | 43.9 | 46.3 | 46.3 | 12.2 | 0.0 | 0.0 | 0.0 |
-| Summaries | B | 31.7 | 36.6 | 51.2 | 51.2 | 9.8 | 7.3 | 2.4 | 4.9 |
+| No KB | A | 0.0 | 59.3 | 36.3 | 34.8 | 3.0 | 0.0 | 0.0 | 5.2 |
+| No KB | B | 0.0 | 64.2 | 64.2 | 34.1 | 12.2 | 0.0 | 0.0 | 1.6 |
+| Single-file guide | B | 0.0 | 41.5 | 43.9 | 53.7 | 14.6 | 4.9 | 0.0 | 2.4 |
+| Hierarchical skills | B | 34.1 | 46.3 | 53.7 | 51.2 | 14.6 | 7.3 | 0.0 | 2.4 |
+| Notes by similarity | B | 51.2 | 43.9 | 46.3 | 58.5 | 12.2 | 4.9 | 0.0 | 0.0 |
+| Notes | B | 56.1 | 41.5 | 51.2 | 24.4 | 14.6 | 2.4 | 7.3 | 0.0 |
+| Playbook | B | 0.0 | 39.0 | 41.5 | 51.2 | 9.8 | 0.0 | 0.0 | 0.0 |
+| Raw cases | B | 92.7 | 58.5 | 61.0 | 46.3 | 14.6 | 4.9 | 0.0 | 0.0 |
+| Rules by tags | B | 36.6 | 48.8 | 51.2 | 61.0 | 14.6 | 2.4 | 0.0 | 4.9 |
+| Shared session | B | 0.0 | 46.3 | 53.7 | 0.0 | 12.2 | 0.0 | 0.0 | 2.4 |
+| Signature guides | B | 39.0 | 46.3 | 53.7 | 53.7 | 17.1 | 2.4 | 0.0 | 0.0 |
+| Skills | B | 19.5 | 46.3 | 46.3 | 43.9 | 12.2 | 0.0 | 0.0 | 0.0 |
+| Summaries | B | 31.7 | 51.2 | 51.2 | 36.6 | 9.8 | 7.3 | 2.4 | 4.9 |
+| Troubleshooting tree | B | 29.3 | 53.7 | 58.5 | 39.0 | 9.8 | 7.3 | 4.9 | 0.0 |
+| Wiki | B | 43.9 | 48.8 | 51.2 | 43.9 | 12.2 | 2.4 | 0.0 | 2.4 |
 <!-- /generated -->
 
 ## Appendix C. The rules that open every prompt
@@ -829,40 +873,40 @@ in full; none touched the tests, the reference or the network.
 | Raw cases | 41 | 41 | 41 | 0 | 0 | 1 | 1 | 0 | 0 |
 | Raw cases, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Summaries, build | 45 | 45 | 45 | 0 | 0 | 19 | 19 | 0 | 0 |
-| Summaries | 41 | 41 | 41 | 0 | 0 | 11 | 6 | 0 | 2 |
+| Summaries | 41 | 41 | 41 | 0 | 0 | 11 | 11 | 0 | 0 |
 | Summaries, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Notes, build | 45 | 45 | 45 | 0 | 0 | 7 | 7 | 0 | 0 |
-| Notes | 41 | 41 | 41 | 0 | 0 | 3 | 0 | 0 | 2 |
+| Notes | 41 | 41 | 41 | 0 | 0 | 3 | 3 | 0 | 0 |
 | Notes, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Notes by similarity, build | 45 | 45 | 45 | 0 | 0 | 5 | 5 | 0 | 0 |
-| Notes by similarity | 41 | 41 | 41 | 0 | 0 | 5 | 0 | 0 | 3 |
+| Notes by similarity | 41 | 41 | 41 | 0 | 0 | 5 | 5 | 0 | 0 |
 | Notes by similarity, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Playbook, build | 45 | 45 | 45 | 0 | 0 | 2 | 2 | 0 | 0 |
-| Playbook | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 24 |
+| Playbook | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Playbook, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Rules by tags, build | 45 | 45 | 45 | 0 | 0 | 5 | 5 | 0 | 0 |
-| Rules by tags | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Rules by tags | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Rules by tags, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Wiki, build | 45 | 45 | 45 | 0 | 0 | 4 | 4 | 0 | 0 |
-| Wiki | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Wiki | 41 | 41 | 41 | 0 | 0 | 2 | 2 | 0 | 0 |
 | Wiki, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Skills, build | 45 | 45 | 45 | 0 | 0 | 7 | 7 | 0 | 0 |
 | Skills | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Skills, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Hierarchical skills, build | 45 | 45 | 45 | 0 | 0 | 9 | 9 | 0 | 0 |
-| Hierarchical skills | 41 | 41 | 41 | 0 | 0 | 2 | 0 | 0 | 1 |
+| Hierarchical skills | 41 | 41 | 41 | 0 | 0 | 2 | 2 | 0 | 0 |
 | Hierarchical skills, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Single-file guide, build | 45 | 45 | 45 | 0 | 0 | 3 | 3 | 0 | 0 |
-| Single-file guide | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 5 |
+| Single-file guide | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Single-file guide, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Signature guides, build | 45 | 45 | 45 | 0 | 0 | 2 | 2 | 0 | 0 |
-| Signature guides | 41 | 27 | 27 | 0 | 0 | 0 | 0 | 0 | 14 |
+| Signature guides | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Signature guides, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Troubleshooting tree, build | 45 | 45 | 45 | 0 | 0 | 6 | 6 | 0 | 0 |
-| Troubleshooting tree | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Troubleshooting tree | 41 | 41 | 41 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Troubleshooting tree, empty KB | 41 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
-Monitor findings: grader targeting 1, kb answer 35, outside answer 34, rule violation 67.
+Monitor findings: grader targeting 1, kb answer 35, outside answer 34, rule violation 69.
 
 Violations planted in clean baseline trajectories: the monitor flagged 20 of 20 (reading the grading assets 4 of 4, searching for answers 4 of 4, fetching from the network 4 of 4, faking the result 4 of 4, copying another run's answer 4 of 4). The model judge flagged 20 and the pattern match 8.
 <!-- /generated -->

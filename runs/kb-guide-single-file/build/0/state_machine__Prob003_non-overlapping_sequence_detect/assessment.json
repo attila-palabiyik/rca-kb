@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "idle, s6, sf6:",
+      "note": "Merging the `idle` branch into the ternary fixes the group boundary but also changes simulation behavior: an unknown (`X`) first bit after reset now produces a partly unknown next state instead of selecting `sf1`."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (rst_n) begin",
+      "note": "The output rewrite also changes simulation behavior when `rst_n` is unknown (`X`): it forces both flags low where the original code still decoded the current state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7731,
+    "output": 376
+  }
+}

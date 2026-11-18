@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch fixed the counter but also removed the original `ready_b` guard, so an accepted first input with `ready_b` low replaces the old sum instead of adding to it as in the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sum = 0;",
+      "note": "The scoreboard cleared its running sum at every group boundary regardless of `ready_b`, so the backpressure cases validated the agent\u2019s changed behavior rather than detecting the difference from the reference."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup wrapper forced the agent to resubmit the test command, after an earlier failed `git status` had already forced it to redo the workspace and tool checks."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9054,
+    "output": 412
+  }
+}

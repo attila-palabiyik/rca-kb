@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 12,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent registered the output but compared the post-shift value, so match still asserted and cleared one clock edge earlier than the reference, which compares the pre-shift value of a_tem."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 14,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test advanced expected to the post-shift state before checking match, so it validated the agent's timing assumption and would reject the correct one-cycle-delayed output."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 13,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire simulation script to be rejected before it ran, so the agent had to resubmit the test using a different temporary-directory wrapper."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "else if (a_tem[2:0] == 3'b110)",
+      "note": "The search surfaced a related registered comparison, but it did not inform the agent's choice of whether to compare the pre-shift or post-shift state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9611,
+    "output": 451
+  }
+}

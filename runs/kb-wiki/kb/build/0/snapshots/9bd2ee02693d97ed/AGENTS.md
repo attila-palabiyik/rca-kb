@@ -1,0 +1,8 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Diagnose aliased state constants that make an expected Moore output unreachable.
+- [Shift-register output timing](entries/shift-register-output-timing.md) — Trace shift direction, check pattern constants and sample edges, align pipeline inputs, preserve submodule ports, and verify counter updates and flag latency independently.
+- [FSM output timing and reset](entries/fsm-output-reset.md) — Decode terminal states at the intended edge and give reset priority in combinational Moore outputs.
+- [FSM transition tables](entries/fsm-transition-tables.md) — Check both input values on exits from Moore output states, including the first bit of the next group.
+- [FIFO pointer clocking](entries/fifo-pointer-clocking.md) — Advance each pointer with its RAM operation and check enable polarity at the full and empty boundaries.
+- [Width converter output validity](entries/width-converter-valid.md) — Check accepted-transfer counter enables, output validity at word boundaries, and retention of partial words across idle cycles.
+- [Multiplier partial products](entries/multiplier-partial-products.md) — Trace each multiplier bit through the registered sums to find duplicated or omitted terms.
+- [Adder carry generation](entries/adder-carry-generation.md) — Check generate and propagate operators with isolated bit cases, then verify carry look-ahead structure in the source.

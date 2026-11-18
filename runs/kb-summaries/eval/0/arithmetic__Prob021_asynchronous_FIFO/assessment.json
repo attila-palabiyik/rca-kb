@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "The fix advances each pointer on the same edge as its RAM operation.",
+      "note": "The agent corrected the RAM read-enable polarity but also removed a stage of Gray-pointer latency, changing when `wfull` and `rempty` transition compared with the correct fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers to expect, so it could check ordering and capacity without checking whether the flags transitioned on the required cycles."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "Two attempts to launch the test had to be redone for reasons unrelated to the RTL: the first used a rejected cleanup command, and the second invoked an unavailable interpreter."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 14022,
+    "output": 458
+  }
+}

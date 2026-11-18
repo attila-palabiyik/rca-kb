@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "{red, yellow, green} <= RED;",
+      "note": "The rewrite eliminated the faulty green reload but also made red active during reset and removed the original startup staging, whereas the correct fix only changes the reload condition to `!green && p_green`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check(RED, 10);",
+      "note": "The passing test asserted the rewrite\u2019s immediate-red reset behavior instead of checking that the original all-off reset and delayed red assertion were preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "It kept the comparison at 3 and retained both output register stages and the original reset behavior.",
+      "note": "The agent read directly relevant guidance about preserving the traffic-light controller\u2019s timing, but its rewrite discarded the stages and reset behavior described there."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8270,
+    "output": 371
+  }
+}

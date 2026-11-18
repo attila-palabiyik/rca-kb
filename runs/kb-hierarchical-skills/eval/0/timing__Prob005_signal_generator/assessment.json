@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? PEAK : 5'd0;",
+      "note": "The counter was correctly made clocked, but the new square-wave decode forces the output low on mode entry instead of holding the previous value until the counter reaches 9."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (wave == 5'd0 || (wave != PEAK && triangle_rising))",
+      "note": "The triangle rewrite changes the first post-reset sample from 31 to 1, even though the counter-only fix preserves the original direction logic."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(phase >= 9 && phase < 19 ? 20 : 0);",
+      "note": "The passing test expected the rewritten square waveform even after switching modes and likewise assumed the triangle would rise immediately from reset, so it accepted both behavior changes rather than detecting them."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8180,
+    "output": 416
+  }
+}

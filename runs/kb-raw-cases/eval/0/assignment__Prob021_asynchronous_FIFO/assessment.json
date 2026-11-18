@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "I\u2019ll update each pointer on the edge that accepts its transaction and generate each status flag in its own clock domain.",
+      "note": "The rewrite fixed the zero write increment but also changed when the Gray pointers and full/empty flags update and added reset gating to the RAM enables, whereas the correct patch preserves that behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "accepted_read = rrstn && rinc && !rempty;",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers occurred and checked settled fill and drain states, so it could verify FIFO ordering without detecting cycle-by-cycle flag timing mismatches."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "gray code|gray-coded|non.power.of.two|next-state|next binary",
+      "note": "The knowledge-base searches surfaced transcript matches but yielded no actionable finding that informed the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 14725,
+    "output": 380
+  }
+}

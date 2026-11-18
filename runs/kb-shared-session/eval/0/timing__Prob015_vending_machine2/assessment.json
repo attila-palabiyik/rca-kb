@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 225,
+      "quote": "out1 <= !sel;",
+      "note": "The rewrite still registers the outputs, so a beverage is indicated one clock edge after the credit reaches its price instead of being decoded immediately from the current state and selection."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "Coins sampled on the sale edge start the next purchase.",
+      "note": "The rewrite replaced the original state transitions with new transaction rules that count simultaneous coin inputs together, carry sale-edge coins into the next purchase, and dispense change over multiple cycles."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "check(previous);",
+      "note": "The test expected outputs to stay unchanged after inputs changed and before the next rising edge, so it validated the rewrite\u2019s registered timing rather than checking the required combinational response to selection changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39021,
+    "output": 319
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "else if (cnt == 5'd19 || cnt == 5'd0)",
+      "note": "The patch correctly clocked the square-wave counter, but it also forced the output low on entry to square mode and rewrote the triangle\u2019s startup and direction logic, both of which the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "check(phase <= 20 ? phase : 40 - phase);",
+      "note": "The test encoded the rewritten triangle\u2019s immediate rise after reset, so it passed the patch without detecting that the original triangle logic produces 31 on the first clock after reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8733,
+    "output": 270
+  }
+}

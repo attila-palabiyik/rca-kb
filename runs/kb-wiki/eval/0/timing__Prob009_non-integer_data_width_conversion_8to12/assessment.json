@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite removed the combinational counter defect but replaced the original three-input packing cadence with disjoint pairs, dropping the output that combines the second byte\u2019s low nibble with the full third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sample(1, 8'hDE, 0, 12'hABC);",
+      "note": "The test explicitly expected no output on the third accepted input, so its PASS validated the rewrite\u2019s assumption instead of catching the missing valid `12'h7DE` output."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Use the existing output logic to derive the expected timing on those boundary cycles.",
+      "note": "The agent read relevant guidance but did not use it to trace the two existing output branches before replacing them with pair-only behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the entire combined edit-and-test command to be rejected before execution, so the agent had to resubmit the edit and test separately."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9564,
+    "output": 526
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 13,
+      "quote": "out2 <= vend && sel;",
+      "note": "Instead of correcting the two beverage-2 output rows, the rewrite registered beverage outputs, made change a half-cycle pulse, and replaced the original coin-input priority with accumulation of both inputs."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 15,
+      "quote": "expected2 = choice && credit >= price;",
+      "note": "The testbench modeled the rewrite\u2019s credit arithmetic and pulse timing, so its 20,022 passing cycles did not establish that the original FSM behavior was preserved outside the two faulty output rows."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "\"states\":789,\"maximum\":21",
+      "note": "The agent ran four state-space searches to size a change queue that the two-row output fix did not require."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Correct a wrong bit in its state row first",
+      "note": "The agent read directly applicable advice to correct the output rows first, but did not use it to constrain the patch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11128,
+    "output": 543
+  }
+}

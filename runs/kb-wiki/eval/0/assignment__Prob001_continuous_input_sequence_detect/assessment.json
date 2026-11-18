@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign match = rst_n && (a_tem == 8'b0111_0001);",
+      "note": "The patch corrected the pattern but replaced the registered output with a combinational decode, moving the match pulse one clock earlier than the correct fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (rst_n && expected == 8'h71)",
+      "note": "The test compared match against the updated shift-register value, so it validated the new timing instead of catching the loss of the original one-cycle delay."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The registered prefix and suffix checks still read the pre-edge window",
+      "note": "The agent read a directly relevant example that preserved registered match timing, but did not apply that lesson to the patch or the test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7563,
+    "output": 373
+  }
+}

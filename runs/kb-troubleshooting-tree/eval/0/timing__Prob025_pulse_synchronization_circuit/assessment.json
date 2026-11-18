@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "cat /kb/entries/clocked-logic/combined-condition-timing.md /kb/entries/clocked-logic/pipeline-output-timing.md",
+      "note": "The entries covered timing within registered datapaths, not the missing clock-domain synchronizer, and the agent had already identified the crossing as the area to fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6620,
+    "output": 174
+  }
+}

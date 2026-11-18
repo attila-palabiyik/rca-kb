@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "always @(*) begin",
+      "note": "The patch left both warning lights combinational instead of registering them on the rising edge using the pre-edge balance, and rewrote the balance logic to deduct a fee on recharge cycles that originally only added money."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "red !== (rst_n && balance < (boost ? 2 : 1))",
+      "note": "The test expected the warnings to track the live balance and mode and modeled recharge followed by deduction, so passing it confirmed the rewrite\u2019s assumptions rather than checking the required clocked warnings and recharge priority."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "[check which count each output samples](registered-output-timing/SKILL.md#counter-status-flags)",
+      "note": "The knowledge-base index pointed directly to counter status-flag timing, but the agent opened only the transition-table branch before editing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8220,
+    "output": 419
+  }
+}

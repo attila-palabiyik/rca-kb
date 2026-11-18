@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-guide-single-file/build/0/arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit",
+  "experiment": "kb-guide-single-file",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "guide-single-file",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit",
+  "repeat": 0,
+  "position": 14,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "54cd06f44b2db497",
+    "harness_commit": "1852b5620a66fcd011882fa4df232efb30f733ab",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:06:19.597727Z",
+      "ended": "2026-11-18T19:06:52.176005Z",
+      "usage": {
+        "input_uncached": 18000,
+        "input_cached": 66172,
+        "input_cache_write": 17985,
+        "output": 1672,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T19:08:00.242669Z",
+      "ended": "2026-11-18T19:08:23.912317Z",
+      "usage": {
+        "input_uncached": 4386,
+        "input_cached": 98439,
+        "input_cache_write": 4371,
+        "output": 624,
+        "responses": 5
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "e6934d4ba41b9fd3",
+    "after": "34e104735d346c14",
+    "changed": true
+  }
+}

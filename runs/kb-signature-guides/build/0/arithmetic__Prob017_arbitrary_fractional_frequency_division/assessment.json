@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+            clk_out_r <= (clk_cnt < (div_o >> 1));",
+      "note": "The default waveform is correct, but rewriting both pulse thresholds and resizing the counters changes behavior for parameter overrides that the minimal fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (divided !== (position < period / 2))",
+      "note": "The test catches the default bug but uses the rewrite's half-period rule as its expected result, so the wider-parameter case cannot detect changes to the original odd-period pulse width."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8009,
+    "output": 385
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The two-state toggle retains the premature wrap after the second accepted byte, so the third byte never produces the second 12-bit word from the middle byte\u2019s low nibble and the full third byte."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "data_out <= {first_byte, data_in[3:0]};",
+      "note": "The rewrite changes the first output word to use the second byte\u2019s low nibble, whereas the original and the correct fix both use its high nibble."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(1, 8'h57, 0, 12'hab3);",
+      "note": "The test exercised the third accepted byte but expected no output, encoding the rewrite\u2019s pairwise assumption instead of checking for the missing second word."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "cat /kb/entries/{shared-register-snapshot,shift-register-bit-order,word-completion-valid,valid-gated-byte-capture,next-cycle-status-flag,pipeline-output-register,ready-valid-counter-enable,preserve-submodule-ports}.md",
+      "note": "The agent consulted the knowledge base but skipped the directly relevant phase-counter reload entry before deciding to replace the counter."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling a prohibited cleanup trap into the edit-and-test command caused the entire batch to be rejected before execution and forced it to be resubmitted."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8732,
+    "output": 676
+  }
+}

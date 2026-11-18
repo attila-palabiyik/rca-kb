@@ -1,0 +1,7 @@
+# Traffic light green-entry reload grading
+
+TopModule is a traffic-light controller with a countdown and pedestrian requests. The submitted rewrite made the light phases and timer update together and asserted red immediately on reset. Its Icarus testbench passed the cycle, request, and reset behavior it was written to expect. Grading still reported 220 mismatches out of 517 samples. The testbench encoded the rewrite's timing assumptions and missed the original pipeline's externally visible timing.
+
+The supplied correct fix changes the original green timer reload from `green && p_green` to `!green && p_green`. The original predicate is true while both pipeline stages show green, so it repeatedly reloads 60 when the higher-priority request condition does not fire. The corrected predicate detects green entry while the upstream stage is already high and the public output is still low. It matches the adjacent yellow and red reload predicates. The reference patch preserves the original reset behavior, pipelined outputs, transition timing, and request priority. Its only other change removes the trailing timing comment.
+
+For debugging pipelined RTL with repeated phase or channel logic, compare neighboring predicates first. Trace the pre-edge values each nonblocking assignment samples and check the outputs edge by edge around reset and phase entry. A bench derived from prose can pass even when a rewrite changes behavior the grader expects the patch to preserve.

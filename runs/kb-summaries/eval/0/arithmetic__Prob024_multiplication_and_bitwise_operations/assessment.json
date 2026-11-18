@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "the partial product selected by multiplier bit i was shifted by i-1",
+      "note": "The entry concerned a shift-offset bug in a pipelined multiplier and offered no task-specific guidance for the wrong sign in this combinational multiplier."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7160,
+    "output": 172
+  }
+}

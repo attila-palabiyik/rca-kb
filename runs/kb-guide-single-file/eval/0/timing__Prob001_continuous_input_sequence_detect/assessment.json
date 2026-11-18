@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 10,
+      "quote": "asserts as soon as a rising edge shifts `0111_0001` into `a_tem`",
+      "note": "The edit changed simulation startup behavior but left `match` combinational, so it asserts one clock earlier than the required registered comparison of the pre-edge `a_tem`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test compared `match` against the already-shifted value, so it validated the agent\u2019s immediate-match assumption and would reject the correct registered timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7194,
+    "output": 305
+  }
+}

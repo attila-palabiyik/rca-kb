@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "rempty <= (rptr_next == wptr_syn);",
+      "note": "The rewrite fixes the write-pointer increment but changes the cycle-by-cycle timing of both status flags by using next-state Gray pointers and registered flags instead of preserving the original pointer pipeline and combinational comparisons."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 226,
+      "quote": "if (!done && wrstn && winc && !wfull) begin",
+      "note": "The scoreboard uses the DUT\u2019s own flags to decide which transfers occurred, so it can verify ordering and capacity without detecting that the flags assert or clear on different cycles from the expected design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 40577,
+    "output": 261
+  }
+}

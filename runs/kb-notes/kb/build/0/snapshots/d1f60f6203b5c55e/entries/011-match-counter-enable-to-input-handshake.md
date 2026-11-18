@@ -1,0 +1,7 @@
+# Match the counter enable to the input handshake
+
+In the one-bit-to-six-bit serial-to-parallel `TopModule`, the shift register captured on `ready_a && valid_a`, but the counter held on `~ready_a && ~valid_a`. With either input low by itself, the counter advanced or wrapped without capturing a bit. The reference changed only the counter's hold condition to `~ready_a || ~valid_a`, the complement of the shift register's capture condition.
+
+The submission corrected the counter behavior as part of a rewrite that also tied `ready_a` high and pulsed `valid_b` only when the sixth bit was accepted. Its Icarus test passed all 64 word patterns with gaps and reset, but the grader reported 16 mismatches in 151 samples. The test encoded the rewritten timing. The reference leaves `ready_a` low during reset and raises it on the first rising clock edge after release. It also keeps `valid_b <= cnt == 5`, so an idle edge with a pre-edge count of five asserts `valid_b` even though `data_b` holds. The grading result gives the aggregate mismatch count without a per-signal breakdown.
+
+When a counter tracks accepted inputs, compare its hold and advance predicates with the storage enable before changing output logic. Exercise each case where exactly one handshake signal is low. For a localized repair, check the existing output timing at reset release and during a gap at the terminal count, since a test based only on the prose can validate a different interface contract.

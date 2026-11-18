@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wave <= (square_count >= 5'd9 && square_count < 5'd19)",
+      "note": "The patch fixed the combinational counter but also forced the output low on entry to square mode instead of holding the previous sample until the first threshold, and changed the triangle's startup sequence from 0 \u2192 31 to 0 \u2192 1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "tick(phase <= 20 ? phase : 40 - phase);",
+      "note": "The test encoded the rewritten triangle startup and square-mode transition as expected behavior, so it passed without detecting either regression."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -l -m 1 'wave_choice|triangular wave' /kb/sessions",
+      "note": "The knowledge-base search returned no matches, so it supplied no guidance for the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8756,
+    "output": 322
+  }
+}

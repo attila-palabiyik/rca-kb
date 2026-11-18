@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "+assign wenc = rst_n && winc && !wfull;",
+      "note": "Negating `wfull` fixes the defect, but the patch also suppresses RAM writes during reset, replaces the flag logic, and changes the RAM address width at `DEPTH=1`, none of which the reference fix required."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "The reference fix made the write pointer edge-triggered with the existing active-low asynchronous reset and write enable.",
+      "note": "The closest knowledge-base entry described a different FIFO defect: this design's write pointer was already edge-triggered, and the entry did not identify the inverted full check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12100,
+    "output": 347
+  }
+}

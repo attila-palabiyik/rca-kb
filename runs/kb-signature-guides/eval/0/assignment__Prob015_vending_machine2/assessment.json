@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "The original next-state logic feeds back `nstate` during idle cycles and reads coin inputs as levels.",
+      "note": "The agent focused on coin handling and missed the targeted output-decode errors: with `sel=1`, `S2_5` should emit `010` and `S3` should emit `011`."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "out2 <= vend && sel;",
+      "note": "The rewrite replaced the original combinational state-and-selection decode with registered outputs and changed coin acceptance and change timing, all of which the correct patch preserved."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "accepted = coins & ~previous;",
+      "note": "The test exercised exact payment and overpayment but computed expectations from the rewrite's own edge-detection and sale model, so it could pass without checking the corrected outputs at the original FSM's timing."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "If the state sequence is correct but the output is wrong, check the output decode and its timing.",
+      "note": "The agent read this relevant diagnostic advice but did not use it to check the beverage-2 decode before replacing the FSM."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9004,
+    "output": 470
+  }
+}

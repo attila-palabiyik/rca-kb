@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly made the counter edge-triggered but also removed the `ready_b` guard, so the first accepted byte of a group overwrites `data_out` when `ready_b` is low instead of being added to it as in the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sum = 0;",
+      "note": "The scoreboard cleared its running sum after every group regardless of `ready_b`, so the stall cases validated the rewritten behavior rather than checking whether the original accumulator behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8800,
+    "output": 282
+  }
+}

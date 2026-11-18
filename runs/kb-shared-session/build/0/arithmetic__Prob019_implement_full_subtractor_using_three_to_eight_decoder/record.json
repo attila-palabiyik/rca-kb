@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-shared-session/build/0/arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder",
+  "experiment": "kb-shared-session",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "shared-session",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder",
+  "repeat": 0,
+  "position": 38,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "2a0919470bcbb840",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:23:16.808114Z",
+      "ended": "2026-11-18T19:23:42.714510Z",
+      "usage": {
+        "input_uncached": 4931,
+        "input_cached": 459050,
+        "input_cache_write": 4919,
+        "output": 621,
+        "responses": 4
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "cb3b4c762f2549ce",
+    "after": "efbf65926fcc594c",
+    "changed": true
+  }
+}

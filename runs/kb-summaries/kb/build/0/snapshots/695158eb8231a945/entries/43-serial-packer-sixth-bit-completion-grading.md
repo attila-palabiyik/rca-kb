@@ -1,0 +1,7 @@
+# Grading result for the six-bit serial packer counter wrap
+
+The submission differed from the reference on 16 of 151 samples. The published fix made a single change to the original TopModule: the counter wraps at 5 instead of 4. The counter and shift register already shared the input acceptance condition, and the output data register already captured at count 5 with valid input. Wrapping at 4 prevented that count from being reached. The count-5 wrap lets the sixth accepted bit complete the word.
+
+The submitted rewrite also tied ready_a high and made valid_b pulse only when the sixth bit was accepted. Its Icarus test passed all 64 words, but assumed those interface changes. The published fix preserved the original registered ready_a, which is low during reset and rises at the first clock after release. It also kept valid_b registered from cnt == 5 alone, so an idle edge at count 5 asserts valid_b while data_b holds. The grading report did not identify which samples differed.
+
+For similar RTL repairs, trace whether the counter can reach the existing datapath's completion condition before changing surrounding handshake logic. Once a local defect explains the failure, test the minimal patch using cases that distinguish existing timing from a broader rewrite, such as valid input at the first clock after reset and a gap before the terminal transfer. See entry 42 for the pre-grading submission.

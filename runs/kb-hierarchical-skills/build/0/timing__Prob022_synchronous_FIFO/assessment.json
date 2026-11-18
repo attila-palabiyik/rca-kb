@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the write-pointer timing but also suppressed RAM writes during reset, whereas the original and the reference fix leave the RAM write enable ungated by reset."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "If a fix changes clocked outputs to a combinational state decode",
+      "note": "The knowledge base focused on state-machine debugging, and its reset guidance did not apply to this FIFO\u2019s combinational write-pointer update."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8633,
+    "output": 313
+  }
+}

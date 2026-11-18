@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll keep the registered beverage timing",
+      "note": "The defect was the registered output decode: all three outputs should respond combinationally to the current state, selection, and active-low reset, but the rewrite still updates them on the rising edge."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "const sale = credit >= price;",
+      "note": "The test generated its expected outputs from the rewrite\u2019s own credit model and never changed selection between clock edges to check whether the outputs responded immediately."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "Argument list too long (os error 7)",
+      "note": "Two simulation attempts failed before Icarus ran\u2014first because of the cleanup command, then because the generated shell argument was too long\u2014requiring a third attempt."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "If a fix changes clocked outputs to a combinational state decode",
+      "note": "The knowledge-base index pointed to a branch for converting clocked outputs to a combinational state decode, but the agent did not open it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10815,
+    "output": 564
+  }
+}

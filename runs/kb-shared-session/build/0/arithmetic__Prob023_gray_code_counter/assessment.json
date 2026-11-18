@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 182,
+      "quote": "if (advance)",
+      "note": "The rewrite fixed the Gray-code shift and passed grading, but it also replaced the original registered feedback stages with an explicit toggle, removing the simulator-order-dependent timing that the one-line fix leaves in place."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 37701,
+    "output": 402
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign div_flag = (cyc_cnt >= c89);",
+      "note": "The frame-count decode removes the feedback loop and matches the default waveform, but it changes how overrides such as `c89 = 0` behave compared with a registered toggle; the patch also widens the counters for some overrides."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "divider_check #(8, 9, 0, 7) odd_only(clk, rst);",
+      "note": "The override test assumed that `c89 = 0` means divide by 9 throughout, so it validated the rewrite's behavior rather than checking whether the mode still toggled at frame wrap."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced a retry of the test setup, after an earlier failed Git check had already forced a retry of the source inspection."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9325,
+    "output": 606
+  }
+}

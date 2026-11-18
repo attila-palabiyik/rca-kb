@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The toggle preserves the original one-output-per-pair behavior instead of letting the counter reach phase 2 and emit `{data_lock[3:0], data_in}` on the third valid input."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(1, a[7:0], 0, last);",
+      "note": "The test expects no output on the first byte of every pair, so it would pass the original buggy module and reject the required output on the third valid byte."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "verify their bit slices and comparison constants against the pattern before changing the pipeline",
+      "note": "The skill offered a relevant check, but the rewrite did not use it to reconcile the counter wrap condition with the phase-2 valid check and the unreachable phase-3 data check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6989,
+    "output": 366
+  }
+}

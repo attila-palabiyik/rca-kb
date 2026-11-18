@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "expected 0110, got 0111",
+      "note": "After two launch failures caused by a blocked cleanup command and a missing `python` executable, the next attempt failed because its packed expected-state literal was wrong, so the agent had to rerun verification without changing the already-correct RTL."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8787,
+    "output": 171
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry in terms of G, P, and the input carry.",
+      "note": "The agent fixed the XOR-to-AND defect but also replaced the reference fix\u2019s cascaded carry path with parallel look-ahead logic, changing gate depth while preserving all settled binary outputs."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "\"exit_code\":1,\"original_token_count\":0,\"output\":\"\"",
+      "note": "The targeted knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6827,
+    "output": 280
+  }
+}

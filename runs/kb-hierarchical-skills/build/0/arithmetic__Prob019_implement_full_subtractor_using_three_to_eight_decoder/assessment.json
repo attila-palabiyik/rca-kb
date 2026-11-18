@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Diagnose incorrect carry logic, Gray-code conversion errors, and arithmetic pipeline bugs involving partial products or output timing",
+      "note": "The arithmetic skill had no guidance on combining active-low decoder outputs, so it did not inform the one-line fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10648,
+    "output": 112
+  }
+}

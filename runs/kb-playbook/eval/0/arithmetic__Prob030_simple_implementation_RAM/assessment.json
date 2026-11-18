@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "end else if (write_en) begin",
+      "note": "The polarity fix passed grading, but replacing the ternary with an if changes four-state simulation: an X or Z write enable now holds the addressed word instead of propagating X to bits where the old and new data differ."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6131,
+    "output": 333
+  }
+}

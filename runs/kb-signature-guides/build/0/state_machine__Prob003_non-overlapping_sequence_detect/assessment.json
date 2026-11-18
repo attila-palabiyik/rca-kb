@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "idle, s6, sf6:",
+      "note": "The shared ternary fixes the exit from `sf6`, but it also changes how `idle` handles an unknown `data` bit in simulation: the original goes to `sf1`, while the ternary produces a partially unknown next state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8667,
+    "output": 288
+  }
+}

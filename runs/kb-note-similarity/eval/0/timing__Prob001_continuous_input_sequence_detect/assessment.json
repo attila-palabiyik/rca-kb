@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling a blocked cleanup command with the edit and test prevented the whole batch from running, so the agent had to resubmit it with a different cleanup method."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match <= (a_tem == 8'b0111_0001);",
+      "note": "The fix matches the reference for binary inputs, but in four-state simulation it can assign X to `match` when the comparison is indeterminate, whereas the original and reference `if/else` drive it low."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7069,
+    "output": 387
+  }
+}

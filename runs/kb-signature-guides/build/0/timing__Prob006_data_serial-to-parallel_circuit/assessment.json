@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite registered `valid_b` but also made `ready_a` high during reset and accepted input on the first edge after reset release, changing the original handshake behavior."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (valid_a) begin",
+      "note": "The rewrite gated `valid_b` with `valid_a`, so it stayed low during a stall at count five, whereas the reference registers `cnt == 5` independently of `valid_a`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "if (input_valid) begin",
+      "note": "The test exercised reset and stalls before the sixth bit, but its scoreboard assumed immediate input acceptance after reset and expected valid only when the sixth bit arrived, so it confirmed the rewrite rather than catching either timing mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6907,
+    "output": 368
+  }
+}

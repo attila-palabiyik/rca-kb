@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "match = (pstate == s6);",
+      "note": "The combinational decode fixes the one-cycle delay, but it removes the explicit reset override and lets an unknown state propagate to the outputs instead of defaulting both to zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "#1; rst_n = 0;\n        #1; check(0);",
+      "note": "The test first checks the outputs after reset has already driven the state to idle, so it cannot distinguish explicit output reset and default behavior from a decode that relies on the state register alone."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9413,
+    "output": 236
+  }
+}

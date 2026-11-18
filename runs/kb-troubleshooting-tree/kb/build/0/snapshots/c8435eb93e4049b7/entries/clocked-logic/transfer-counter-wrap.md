@@ -1,0 +1,8 @@
+# Check whether a transfer counter reaches the completion count
+
+**Check** the count immediately before and after each accepted transfer from reset through the first complete word. Include a stall before the final transfer. In a zero-based counter of prior transfers, the edge accepting transfer `N` samples `N - 1` before advancing or wrapping. Compare that pre-edge count with the wrap condition and the registered output predicates.
+
+- **The counter wraps before or after the completing transfer.** Fix the wrap condition to match the intended transfer. Verify that the next word starts at the reset count and that a stall holds the terminal count.
+- **The counter wraps on the completing transfer.** If the data and valid registers still disagree, [check their output enables](output-valid-enable.md). If the issue is the cycle in which the flag appears, [check which cycle the flag reports](output-flag-timing.md).
+
+**Observed in `TopModule.sv`**, a six-bit serial-to-parallel converter with an early counter wrap. The fifth accepted bit sampled count 4 and returned the counter to 0, so both output registers' count-5 conditions were unreachable. Changing the wrap comparison from 4 to 5 was the complete reference fix. The reference kept registered `ready_a`, which first became high on the first rising edge after reset release, and the count-only `valid_b` predicate, which asserts on an edge sampling count 5 even if the input stalls. The submitted fix changed the wrap and also tied `ready_a` high and gated `valid_b` with `valid_a`. Its local tests passed with those expectations, but 16 of 151 graded samples differed from the reference. The grading did not identify how many mismatches came from each extra change.

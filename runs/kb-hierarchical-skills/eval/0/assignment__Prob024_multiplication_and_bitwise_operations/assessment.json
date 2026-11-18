@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "trace each multiplier bit from its gating expression through the registered sums to the output",
+      "note": "The skill focused on variable multipliers with registered partial products and did not contribute to the fix for this combinational constant multiplier."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 4850,
+    "output": 115
+  }
+}

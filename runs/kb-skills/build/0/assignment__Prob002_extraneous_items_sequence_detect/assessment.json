@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "tb.sv:7: syntax error",
+      "note": "Verification took three attempts because the first command's cleanup was rejected and the second used the reserved SystemVerilog keyword `matches` as a variable name; neither failure involved the design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8008,
+    "output": 137
+  }
+}

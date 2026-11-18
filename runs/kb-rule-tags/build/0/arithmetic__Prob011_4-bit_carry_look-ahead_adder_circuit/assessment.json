@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Check that each multiplier bit contributes its shifted partial product exactly once",
+      "note": "The entries on multipliers, counters, and submodule ports offered no guidance on the adder\u2019s carry-generation defect."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7506,
+    "output": 225
+  }
+}

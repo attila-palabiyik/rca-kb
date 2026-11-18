@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 11,
+      "quote": "cnt        ==20? 0:",
+      "note": "The square-wave counter and falling-edge comparison both still use 20 instead of 19, leaving an 11-clock high phase and a 10-clock low phase."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "triangle_rising <= 1'b1;",
+      "note": "The triangle rewrite changed the direction after reset and on mode entry, whereas the reference preserves that behavior and only moves the upper direction-change threshold to 19 to account for the registered flag."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(i % 21 >= 10 ? 20 : 0);",
+      "note": "The test explicitly expected the buggy 21-clock square-wave period and likewise encoded the rewritten triangle startup, so its pass did not establish that the intended behavior was preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "An inclusive threshold includes count zero and the threshold itself.",
+      "note": "The knowledge-base search surfaced directly relevant advice about counting registered pulse widths, but the agent left the off-by-one square-wave comparisons untouched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8844,
+    "output": 395
+  }
+}

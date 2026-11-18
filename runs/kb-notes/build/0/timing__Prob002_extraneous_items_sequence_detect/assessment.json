@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "(next_history[8:6] == 3'b011)",
+      "note": "The rewrite aligned the prefix and suffix checks but used the window including the new input bit, moving detection one clock earlier than the intended check of the pre-edge shift register and adding an unnecessary startup counter."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = count >= 9 && ((observed & 9'b111000111) == 9'b011000110);",
+      "note": "The test updated its expected window with the incoming bit before checking the output, so even exhaustive pattern coverage validated the same incorrect clock timing as the rewrite."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Duplicate state encodings in a Verilog FSM",
+      "note": "The only knowledge-base entry concerned duplicate FSM state encodings and offered no guidance on aligning the two pattern checks."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7827,
+    "output": 346
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "clk_out_r <= clk_cnt < (div_o >> 1);",
+      "note": "The default waveform matches the intended fix, but the agent also rewrote the already-correct odd-mode pulse-width rule and resized both counters, changing behavior for some parameter overrides."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = phase < period / 2;",
+      "note": "The test could catch the original default-width bug, but its wider configuration expected the agent's new half-period rule rather than checking that the existing parameterized pulse-width behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Two unrelated command failures caused retries: the failed Git check blocked simulator discovery, and the rejected cleanup command forced the agent to resubmit the entire test invocation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8733,
+    "output": 363
+  }
+}

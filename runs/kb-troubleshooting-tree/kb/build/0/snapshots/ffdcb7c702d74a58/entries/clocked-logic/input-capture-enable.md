@@ -1,0 +1,11 @@
+# Check how a valid input is captured
+
+**Check** whether saved input data updates on the acceptance edge and holds its value during invalid cycles. Inspect the event control and, for a ternary assignment, evaluate both branches. If a later clocked assignment consumes the register on an edge that also updates it, trace the value from before that edge.
+
+- **A combinational block assigns the saved value back to itself when disabled.** If the interface accepts data on a clock edge, use edge-triggered storage with a nonblocking assignment and the acceptance enable. Exercise consecutive accepted inputs with distinct values so the test can detect when a live input replaces the saved value before the consumer samples it.
+- **The register captures on invalid cycles and holds on valid cycles.** Correct the branch selection. Exercise consecutive accepted inputs and a pair separated by invalid cycles with changing input data.
+- **The register captures on acceptance and holds during invalid cycles.** Trace which saved value the consumer reads on its load edge. If the data and its valid pulse disagree, [check their shared enable](output-valid-enable.md).
+
+**Observed in `TopModule.sv`**, an 8-bit to 16-bit valid-only converter. The byte register held its value when `valid_in` was high and loaded `data_in` when it was low. The reference fix swapped the ternary branches so the register captured every valid byte. The output read the saved first byte before the nonblocking update on the second byte's edge. The submitted fix captured only the first valid byte of each pair and matched all 141 graded samples. The reference fix shows that the pair flag was unnecessary in the byte register's capture enable for this design.
+
+**Observed in another `TopModule.sv` task for the same width converter**, the byte capture condition already selected `data_in` when `valid_in` was high, but combinational feedback let the second byte replace the saved first byte before the output edge. The reference fix moved the capture to a rising-edge block with active-low asynchronous reset and nonblocking assignments. It captured every valid byte. The submitted fix used the same clock and reset and captured only the first byte of each pair. All 141 graded samples matched the reference.

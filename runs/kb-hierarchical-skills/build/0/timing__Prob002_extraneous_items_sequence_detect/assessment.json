@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (sample_count == 4'd8)\n                     && (next_history[8:6] == 3'b011)\n                     && (next_history[2:0] == 3'b110);",
+      "note": "The rewrite aligned the prefix and suffix checks but moved detection one clock earlier than the existing registered suffix check and added a sample-count gate that suppresses matches using reset-initialized history."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = samples >= 9 && ((history & 9'b111000111) == 9'b011000110);",
+      "note": "The test passed because its expected-value model used the same just-shifted window and nine-sample gate as the rewrite, rather than checking the required pre-shift timing and reset behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "If an expected state is unreachable or an output associated with it never asserts, inspect the [state encodings](state-encoding/SKILL.md) before editing the transition table.",
+      "note": "The consulted skill addressed FSM state encodings and offered no specific guidance on aligning the two shift-register comparisons without changing output latency."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8385,
+    "output": 367
+  }
+}

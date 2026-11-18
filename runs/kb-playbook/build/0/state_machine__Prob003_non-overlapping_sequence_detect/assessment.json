@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "nstate = data ? sf1 : s1;",
+      "note": "Reusing this ternary for `idle` changes four-state simulation behavior: an unknown first bit now produces a partially unknown state that can disrupt group alignment, whereas the original and reference enter `sf1` and skip the rest of the group."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8777,
+    "output": 385
+  }
+}

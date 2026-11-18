@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite aligned light changes with timer reloads, but it also bypassed the existing output pipeline and changed startup from all lights off with an idle-to-red sequence to immediate red."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(R, 10);",
+      "note": "The test required red during reset and assumed the rewritten countdown sequence after release, so it passed without checking the original startup and registered-output timing."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "cat /kb/entries/fsm-output-reset.md /kb/entries/fsm-transition-tables.md /kb/entries/shift-register-output-timing.md",
+      "note": "The agent consulted relevant timing guidance but did not use it to trace the buffered lights and counter reload edge by edge before replacing the pipeline."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10815,
+    "output": 443
+  }
+}

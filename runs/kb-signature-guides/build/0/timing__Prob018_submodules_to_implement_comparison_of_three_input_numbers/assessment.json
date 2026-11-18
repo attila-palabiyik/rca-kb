@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 8,
+      "quote": "+    input [7:0] data_a,\\n+    input [7:0] data_b,",
+      "note": "The agent fixed the pipeline alignment but renamed the existing `slave_mod` ports `a` and `b`, breaking compatibility with any caller that uses the original named connections."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule dut(.*);",
+      "note": "The test exercised the original timing bug, but it instantiated only `TopModule`, whose internal connections were renamed along with the helper ports, so it could not catch the interface regression."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "cat /kb/entries/width-converter-input-capture.md",
+      "note": "The agent read the width-converter guide but skipped the indexed cycle-alignment guide, whose signature matched the mix of combinational and clocked paths in this design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7583,
+    "output": 466
+  }
+}

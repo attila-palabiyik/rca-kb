@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "valid_b <= valid_a && cnt == 3'd5;",
+      "note": "The patch correctly changed the counter wrap threshold from 4 to 5, but it also gated valid_b with valid_a and tied ready_a high, changing the original behavior during stalls, reset, and the first clock after reset."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, complete, expected_data})",
+      "note": "The test asserted the rewrite\u2019s assumptions\u2014ready_a always high and valid_b asserted only when the sixth bit arrived\u2014so its passing result did not verify that the original reset and stall behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8057,
+    "output": 302
+  }
+}

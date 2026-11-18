@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (valid_in && !flag)",
+      "note": "The extra flag check makes the internal byte register skip the second valid byte of each pair, whereas the reference fix preserves capture on every valid input; this difference does not affect the outputs."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6841,
+    "output": 343
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "(clk_cnt < (div_o >> 1))",
+      "note": "The fix matched the reference waveform at the default settings, but it also changed the pulse-width formulas for parameter overrides and widened the counters instead of changing only the erroneous even-mode shift."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "Preserve explicit reset gating when converting FSM outputs to combinational logic",
+      "note": "The notes consulted concerned registered counter timing and FSM reset gating, and neither helped identify the incorrect pulse-width shift."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8272,
+    "output": 392
+  }
+}

@@ -1,0 +1,9 @@
+- Added [FSM state encodings](fsm-state-encodings.md) from the five-state Moore `TopModule` grading result (261 of 261 samples matched).
+- Added [Shift-register output timing](shift-register-output-timing.md) from the nine-bit `TopModule` grading result (16 of 237 samples differed after using the next window).
+- Added [FSM output timing and reset](fsm-output-reset.md) from the six-bit `TopModule` grading result (one of 1,215 samples differed after removing the direct output reset check).
+- Added [FSM transition tables](fsm-transition-tables.md) from the five-state Moore `TopModule` task with a wrong `S4` exit (261 of 261 grading samples matched after the one-line fix).
+- Added [FIFO pointer clocking](fifo-pointer-clocking.md) from the synchronous FIFO `TopModule` task (327 of 327 grading samples matched).
+- Added [Width converter output validity](width-converter-valid.md) from the 24-to-128-bit `TopModule` task (261 of 261 grading samples matched after qualifying the boundary with `valid_in`).
+- Added [Multiplier partial products](multiplier-partial-products.md) from the 4-bit pipelined `TopModule` task (43 of 43 grading samples matched after correcting the duplicated term) and linked it to shift-register output timing.
+- Extended [FSM transition tables](fsm-transition-tables.md) with the six-bit `TopModule` failure-state exit fix and group-boundary checks (1,215 of 1,215 grading samples matched).
+- Extended [Width converter output validity](width-converter-valid.md) with the reversed byte-register mux in the 8-to-16-bit `TopModule` packer (141 of 141 grading samples matched with first-byte-only capture).

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "else nstate = s2_d01;",
+      "note": "The agent correctly preserved `011` across invalid cycles, but also changed two exits from `s4_d0110` to retain prefixes for overlapping matches where the original and reference both return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "expected = count >= 4 && window == 4'b0110;",
+      "note": "The test's sliding window retained the final zero after a match, so it accepted overlapping detections instead of catching the unintended change to the post-match behavior."
+    },
+    {
+      "category": "kb_misled",
+      "step": 8,
+      "quote": "check the longest prefix that survives each mismatch as well as each transition after a complete match.",
+      "note": "The agent applied advice from an explicitly overlapping detector to this task's match-state exits, even though the reference preserves the original return to idle."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10351,
+    "output": 313
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en && read_addr < 8'd8)",
+      "note": "The agent correctly registered the read output but also made enabled out-of-range reads hold the previous value, whereas the reference preserves the array access and returns an unknown value in simulation."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "read_addr = 8'h83;\n        tick(12);",
+      "note": "The test could expose the original read-timing bug, but its out-of-range check asserted the agent\u2019s new hold behavior instead of detecting the difference from the reference."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8247,
+    "output": 311
+  }
+}

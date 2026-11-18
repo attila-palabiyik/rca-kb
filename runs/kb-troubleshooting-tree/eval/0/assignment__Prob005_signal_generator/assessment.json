@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? WAVE_MAX : 5'd0;",
+      "note": "The rewrite fixed the steady-state timing but also cleared the output on entry to square mode instead of holding the previous sample until count 9, and made the triangle rise immediately from reset instead of preserving the original direction state."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sample((i % 40 <= 20) ? i % 40 : 40 - i % 40);",
+      "note": "The testbench assumed the rewritten triangle would rise immediately from reset and explicitly expected square mode to clear a carried-over nonzero sample, so it accepted both behavior changes rather than detecting them."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8493,
+    "output": 305
+  }
+}

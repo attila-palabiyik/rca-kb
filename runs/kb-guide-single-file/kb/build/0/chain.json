@@ -94,7 +94,229 @@
       "before": "5440849fa730aafe",
       "after": "bb3c5bca6ccc689f",
       "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+      "before": "bb3c5bca6ccc689f",
+      "after": "552158e25d6e5e07",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+      "before": "552158e25d6e5e07",
+      "after": "6d802d8a5663adf6",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob028_up_and_down_counter",
+      "before": "6d802d8a5663adf6",
+      "after": "c2e9e3b6117e50a5",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob002_extraneous_items_sequence_detect",
+      "before": "c2e9e3b6117e50a5",
+      "after": "7ecbc19deaf7f12a",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob028_up_and_down_counter",
+      "before": "7ecbc19deaf7f12a",
+      "after": "8dd3a4fbf136a2d9",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob008_non-integer_data_width_conversion_24to128",
+      "before": "8dd3a4fbf136a2d9",
+      "after": "e6934d4ba41b9fd3",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit",
+      "before": "e6934d4ba41b9fd3",
+      "after": "34e104735d346c14",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob002_extraneous_items_sequence_detect",
+      "before": "34e104735d346c14",
+      "after": "7b094833b356ba01",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob006_data_serial-to-parallel_circuit",
+      "before": "7b094833b356ba01",
+      "after": "c57ad29abfb2a7c6",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob022_synchronous_FIFO",
+      "before": "c57ad29abfb2a7c6",
+      "after": "2923952160735d3f",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob023_gray_code_counter",
+      "before": "2923952160735d3f",
+      "after": "3faf83b6d05bee5f",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob008_non-integer_data_width_conversion_24to128",
+      "before": "3faf83b6d05bee5f",
+      "after": "2b8b934d02bf9109",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob017_arbitrary_fractional_frequency_division",
+      "before": "2b8b934d02bf9109",
+      "after": "e3bc7750e3f466cf",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob022_synchronous_FIFO",
+      "before": "e3bc7750e3f466cf",
+      "after": "6aa8e1ea3a5317db",
+      "status": "completed"
+    },
+    {
+      "task_id": "state_machine__Prob033_traffic_lights",
+      "before": "6aa8e1ea3a5317db",
+      "after": "415af29383efd2fc",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob003_non-overlapping_sequence_detect",
+      "before": "415af29383efd2fc",
+      "after": "b1dbd727739b9e15",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob006_data_serial-to-parallel_circuit",
+      "before": "b1dbd727739b9e15",
+      "after": "25903ca29cc22b7f",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob032_pipeline_multiplier",
+      "before": "25903ca29cc22b7f",
+      "after": "25903ca29cc22b7f",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob017_arbitrary_fractional_frequency_division",
+      "before": "25903ca29cc22b7f",
+      "after": "b803a2dc78c7edf4",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob033_traffic_lights",
+      "before": "b803a2dc78c7edf4",
+      "after": "f492589d1535a473",
+      "status": "completed"
+    },
+    {
+      "task_id": "state_machine__Prob012_state_machine_overlapping_sequence_detection",
+      "before": "f492589d1535a473",
+      "after": "76c0074b4b5dc8de",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob012_state_machine_overlapping_sequence_detection",
+      "before": "76c0074b4b5dc8de",
+      "after": "08f97f9043aaf7ed",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+      "before": "08f97f9043aaf7ed",
+      "after": "54e89f14e83071a0",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob012_state_machine_overlapping_sequence_detection",
+      "before": "54e89f14e83071a0",
+      "after": "54e89f14e83071a0",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+      "before": "54e89f14e83071a0",
+      "after": "54e89f14e83071a0",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob027_settable_counter",
+      "before": "54e89f14e83071a0",
+      "after": "1665ab8c7876298d",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob032_pipeline_multiplier",
+      "before": "1665ab8c7876298d",
+      "after": "c85095d95a6f6128",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob023_gray_code_counter",
+      "before": "c85095d95a6f6128",
+      "after": "f5c40fa6627b107b",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob023_gray_code_counter",
+      "before": "f5c40fa6627b107b",
+      "after": "c5a93f1fbbb1e367",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob028_up_and_down_counter",
+      "before": "c5a93f1fbbb1e367",
+      "after": "5c2f2e3a26bed100",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob019_implement_full_subtractor_using_three_to_eight_decoder",
+      "before": "5c2f2e3a26bed100",
+      "after": "72c37b427b604ba0",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob033_traffic_lights",
+      "before": "72c37b427b604ba0",
+      "after": "916025c6ae24c2fc",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob006_data_serial-to-parallel_circuit",
+      "before": "916025c6ae24c2fc",
+      "after": "e0acecf499c3bfeb",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob017_arbitrary_fractional_frequency_division",
+      "before": "e0acecf499c3bfeb",
+      "after": "acdeeb3637a8c86f",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob027_settable_counter",
+      "before": "acdeeb3637a8c86f",
+      "after": "23fecd4da859219b",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob011_4-bit_carry_look-ahead_adder_circuit",
+      "before": "23fecd4da859219b",
+      "after": "997a2290296bd1a6",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob033_traffic_lights",
+      "before": "997a2290296bd1a6",
+      "after": "56c16ec84ca032b7",
+      "status": "completed"
     }
   ],
-  "final": null
+  "final": "56c16ec84ca032b7"
 }

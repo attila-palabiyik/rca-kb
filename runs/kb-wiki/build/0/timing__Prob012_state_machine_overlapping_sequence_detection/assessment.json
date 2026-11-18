@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "cat AGENTS.md",
+      "note": "The agent read the knowledge-base index but edited the module without opening the relevant pages on FSM output timing and overlapping transitions."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "nstate = S0;",
+      "note": "The flag fix was correct, but the patch also changed every next-state assignment from nonblocking to blocking, altering simulation scheduling that the reference fix preserves."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the shell to reject the entire verification command before simulation, so the agent had to submit the full command again with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7623,
+    "output": 517
+  }
+}

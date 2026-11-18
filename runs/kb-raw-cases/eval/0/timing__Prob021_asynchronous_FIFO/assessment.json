@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite registered the write-side Gray pointer but used the next binary value for both Gray pointers, changing when full and empty assert or clear compared with the reference, which registers the current value and leaves the read path unchanged."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (rempty !== 1'b1 || writes != reads || reads < 100)",
+      "note": "The test checked that data stayed in order and the FIFO eventually drained, but it did not check the clock edges on which full and empty changed, so the timing regression passed."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 9,
+      "quote": "assign wfull = (fifo_cnt == DEPTH);",
+      "note": "The knowledge-base hits concerned a single-clock FIFO that used the same RAM, not the Gray-pointer crossing or status timing in this design."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "if payload.get('type')=='message':",
+      "note": "After the first follow-up search hid every matching line, this second pass returned only the same filenames, so neither pass surfaced any usable guidance."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 14255,
+    "output": 597
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When a detector combines predicates on different slices of a shift register, trace the input bits each predicate sees at the same clock edge.",
+      "note": "The consulted notes covered state encoding, output timing, and reset, but none helped identify the incorrect S4 transition, which was evident from the supplied table."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7385,
+    "output": 187
+  }
+}

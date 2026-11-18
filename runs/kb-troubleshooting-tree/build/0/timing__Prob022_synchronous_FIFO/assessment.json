@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The agent fixed the write-pointer timing but also suppressed RAM writes during reset and changed the RAM sizing for DEPTH=1, neither of which the reference fix changes."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test submission to be rejected before simulation, so the agent had to resubmit the full testbench with a different cleanup method."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The conditions use different windows for a single detection.",
+      "note": "The consulted entry addressed misaligned checks in a shift-register detector and did not guide the fix for the FIFO's combinational write pointer."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10158,
+    "output": 424
+  }
+}

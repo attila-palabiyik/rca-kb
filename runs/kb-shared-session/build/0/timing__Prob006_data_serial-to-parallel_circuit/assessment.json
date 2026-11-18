@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 204,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite removed the original reset and startup behavior of `ready_a`, allowing the first post-reset edge to accept a bit that the reference would not accept."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 204,
+      "quote": "valid_b <= word_complete;",
+      "note": "The agent registered `valid_b` but also gated it with input acceptance, whereas the reference registers `cnt == 5` alone and therefore keeps `valid_b` asserted on stalled cycles once the count reaches five."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 204,
+      "quote": "tick(1, word[i], i == 5, word);",
+      "note": "The testbench assumed immediate readiness and a completion-only pulse, so its reset and gap cases validated the rewrite rather than checking the expected startup and count-five stall behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38982,
+    "output": 311
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "if (rst_n) begin",
+      "note": "The output rewrite also changed four-state simulation behavior: with an unknown reset and a terminal state, it clears both outputs, whereas the original and reference still decode the terminal state."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9622,
+    "output": 220
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 143,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite stopped the repeated green reload, but it also asserted red immediately on reset and removed the original registered light pipeline, changing startup and transition timing that the one-line green-edge fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 144,
+      "quote": "else if (remaining == 1) begin",
+      "note": "The testbench assumed immediate red on reset and mirrored the rewrite\u2019s transition at countdown 1, so its 3,515 passing cycles could not reveal the mismatch with the original reset and startup behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39295,
+    "output": 173
+  }
+}

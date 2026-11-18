@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "//The final 0 and this 1 form the prefix 01",
+      "note": "The patch fixed the duplicate state encoding but also changed the post-match transitions for a valid 1 and an invalid sample, retaining the final 0 where the original FSM returned to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = count >= 4 && history == 4'b0110;",
+      "note": "The test exercised overlapping sequences but used a rolling-history oracle that expected overlap, so it accepted the extra detections that the original FSM's return to idle would suppress."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rejected: rm -f style commands are not permitted.",
+      "note": "The failed Git check also skipped simulator discovery, and the rejected cleanup command forced the agent to redo the test invocation before it could run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9014,
+    "output": 356
+  }
+}

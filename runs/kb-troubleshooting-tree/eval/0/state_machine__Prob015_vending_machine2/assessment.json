@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll track the balance in half-yuan units and keep pending change so each coin gets its own pulse.",
+      "note": "The balance arithmetic fixes the two incorrect 1-yuan transitions in isolation, but the rewrite also replaces the FSM\u2019s input priority, combinational beverage outputs, and state-based change timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "credit = credit + (rise1 ? 1 : 0) + (rise2 ? 2 : 0);",
+      "note": "The passing test used the rewrite\u2019s own assumptions about edge detection, simultaneous deposits, and queued change, so it could not detect departures from the original FSM behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected and resubmitted, adding shell rework alongside an unsuccessful Git status check and a redundant compile."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10458,
+    "output": 538
+  }
+}

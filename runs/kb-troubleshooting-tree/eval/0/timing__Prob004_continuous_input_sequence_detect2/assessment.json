@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "nstate = data ? s2_d01 : s1_d0;",
+      "note": "The patch fixed the late match pulse but also changed the post-match transitions to reuse the final zero, allowing overlapping detections that the reference FSM does not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = (history == 4'b0110);",
+      "note": "The exhaustive test used a rolling history that expected overlapping matches, so it validated the agent's changed behavior instead of catching the divergence from the original FSM."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "Find the longest suffix of that result that is also a prefix of the target pattern, and compare it with the match length represented by the destination state.",
+      "note": "The agent applied guidance from an explicitly overlapping detector to this timing fix, changing post-match behavior that the reference preserves."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9213,
+    "output": 334
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-wiki/build/0/arithmetic__Prob032_pipeline_multiplier",
+  "experiment": "kb-wiki",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "wiki",
+    "snapshot": null
+  },
+  "task_id": "arithmetic__Prob032_pipeline_multiplier",
+  "repeat": 0,
+  "position": 34,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fdd463af2b4f876e",
+    "harness_commit": "939025fea10c6672407855a8b1f648a1d133bcdd",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T20:30:22.841605Z",
+      "ended": "2026-11-18T20:30:51.444032Z",
+      "usage": {
+        "input_uncached": 19061,
+        "input_cached": 80506,
+        "input_cache_write": 19043,
+        "output": 1517,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:31:45.160760Z",
+      "ended": "2026-11-18T20:32:07.437963Z",
+      "usage": {
+        "input_uncached": 3100,
+        "input_cached": 59545,
+        "input_cache_write": 3091,
+        "output": 833,
+        "responses": 3
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "9c0c9044bf0e22cd",
+    "after": "1356bda396025fa8",
+    "changed": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "I\u2019ll fix both conditions and preserve the existing handshake timing.",
+      "note": "The counter change correctly makes count 3 reachable, but removing the `ready_b` guard also changes `data_out` when a group starts while downstream is not ready, behavior the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumes every group starts from zero regardless of `ready_b`, so its passing result validates the extra change rather than checking that the original accumulator behavior is preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "repair the wrap if needed, and check edge-by-edge behavior at reset release and during a stall at the terminal count before making any further changes.",
+      "note": "The agent read relevant advice to isolate the wrap fix, but it did not affect the patch: the agent changed both conditions before testing either change in isolation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8408,
+    "output": 332
+  }
+}

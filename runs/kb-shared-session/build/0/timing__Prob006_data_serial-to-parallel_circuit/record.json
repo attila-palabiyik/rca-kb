@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-shared-session/build/0/timing__Prob006_data_serial-to-parallel_circuit",
+  "experiment": "kb-shared-session",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "shared-session",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob006_data_serial-to-parallel_circuit",
+  "repeat": 0,
+  "position": 40,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "2a0919470bcbb840",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:26:49.212716Z",
+      "ended": "2026-11-18T19:27:16.357297Z",
+      "usage": {
+        "input_uncached": 2496,
+        "input_cached": 363224,
+        "input_cache_write": 2487,
+        "output": 1106,
+        "responses": 3
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "480e674c24916a33",
+    "after": "9c6d940879afec2b",
+    "changed": true
+  }
+}

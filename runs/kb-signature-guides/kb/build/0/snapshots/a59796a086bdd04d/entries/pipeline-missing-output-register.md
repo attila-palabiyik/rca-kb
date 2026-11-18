@@ -1,0 +1,9 @@
+# Missing output register in a pipelined datapath
+
+Use this guide when a datapath produces the correct values one clock early. Check the intended latency against the stage boundaries before changing the arithmetic.
+
+1. Drive distinct operands on consecutive cycles and sample after each rising edge settles. For a two-stage multiplier starting from reset, drive `3 * 4` on the first edge and `7 * 5` on the second. A registered final stage gives outputs of 0 and 12 on those edges, with 35 on the third. A combinational final sum of the first stage registers settles to 12 and 35 on the first two edges.
+2. Trace the register boundaries from the inputs to the output. In this multiplier, both partial sums captured the same inputs, and the two sums together used all four partial products once. The wiring check found no arithmetic fault. The output block summed the newly updated registers as soon as they changed. A rising-edge output register with nonblocking assignments instead captures the pre-edge partial sums, adding the intended stage while still accepting new inputs on every edge.
+3. Check asynchronous reset separately from latency. An explicit combinational reset check can clear the original output, so passing that check alone misses the absent register. Assert reset between edges while the output is nonzero and another result is pending. Check that the output clears before the next rising edge and that the first edge after release produces zero while the first new sample enters the pipeline.
+
+The source task was a 4-bit unsigned pipelined multiplier in `TopModule.sv`. Its specification did not state an exact latency. The supplied reference confirmed a registered final sum with a falling-edge reset event and nonblocking assignments. The submitted change matched all 43 grading samples. The local Icarus Verilog simulation checked all 256 operand pairs on consecutive cycles and verified asynchronous reset with a product pending.

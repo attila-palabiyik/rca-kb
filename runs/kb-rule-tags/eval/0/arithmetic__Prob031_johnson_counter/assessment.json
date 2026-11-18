@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "Applies to serial sequence detectors that compare fixed register slices.",
+      "note": "The entry covered shift direction, which was already correct, and did not address the missing feedback inversion."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the shell to reject the entire script before simulation, so the agent had to resubmit the unchanged test with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6323,
+    "output": 322
+  }
+}

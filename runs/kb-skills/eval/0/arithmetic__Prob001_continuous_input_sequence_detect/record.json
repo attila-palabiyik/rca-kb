@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-skills/eval/0/arithmetic__Prob001_continuous_input_sequence_detect",
+  "experiment": "kb-skills",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "skills",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob001_continuous_input_sequence_detect",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "52859c2c02c34720",
+    "harness_commit": "968e0751fdb6db4bd9a6af11f35121363df7e591",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:06:28.545503Z",
+      "ended": "2026-11-18T21:07:09.103220Z",
+      "usage": {
+        "input_uncached": 21627,
+        "input_cached": 73049,
+        "input_cache_write": 21612,
+        "output": 1619,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5feb92bd7dbfd12e",
+    "after": "5feb92bd7dbfd12e",
+    "changed": false
+  }
+}

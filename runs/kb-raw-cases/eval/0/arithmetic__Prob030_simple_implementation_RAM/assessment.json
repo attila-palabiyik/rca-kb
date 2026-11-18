@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "else if (read_en)",
+      "note": "Replacing the enable ternaries with procedural `if` statements fixed the write polarity but changed four-state simulation behavior: an unknown enable now holds the prior value instead of merging it with the candidate value."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "jsonl:12:dual-port RAM",
+      "note": "The search found prior dual-port RAM transcripts, but the agent moved on without inspecting any of the matching passages."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7327,
+    "output": 337
+  }
+}

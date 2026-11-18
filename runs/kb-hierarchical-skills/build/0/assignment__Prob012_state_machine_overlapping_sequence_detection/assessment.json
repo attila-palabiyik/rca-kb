@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "integer matches;",
+      "note": "The verification command had to be submitted three times: the first was rejected for its cleanup command, and the second used the reserved SystemVerilog keyword `matches` as a variable name."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8735,
+    "output": 86
+  }
+}

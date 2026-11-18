@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The counter change fixes the premature wrap, but removing the `ready_b` guard also changes `data_out` when the first input of a group is accepted while `ready_b` is low."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard starts each group from zero regardless of `ready_b`, so the test passes the extra behavior change rather than detecting the mismatch with the original accumulation logic."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire first test launch to be rejected before simulation, so the agent had to submit the same test again with a different wrapper."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8128,
+    "output": 321
+  }
+}

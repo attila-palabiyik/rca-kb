@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "out2 <= vend && sel;",
+      "note": "Instead of correcting just the `S2_5` and `S3` output codes for beverage 2, the rewrite replaced the FSM with a credit counter, changing coin-input priority, when `sel` affects the outputs, and how change is paid out."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "balance = balance + rise1 + 2 * rise2;",
+      "note": "The testbench used the rewrite\u2019s edge-detected, additive credit rules as its oracle, so even 10,021 passing cycles could not establish that the fix preserved the original FSM behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 11,
+      "quote": "wire d1_pulse = d1_sampled & ~d1_previous;",
+      "note": "The agent implemented the half-cycle pulse signals twice, but neither version fed those signals into the credit or dispensing logic or helped correct the two output-table entries."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9536,
+    "output": 527
+  }
+}

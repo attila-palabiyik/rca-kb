@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The edit corrected the pattern but compared the newly shifted value instead of the pre-edge register value, moving the match pulse one clock earlier than the original design and the reference fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (window == 113)",
+      "note": "The test updated its expected window before checking the post-edge output, so it validated the agent\u2019s same-edge assumption rather than detecting the change to the original one-cycle delay."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7258,
+    "output": 243
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "I\u2019ll register both Gray pointers alongside their binary addresses",
+      "note": "The fix needed to register only the write Gray pointer from the current binary address, matching the existing read path; using next addresses for both pointers changed when the full and empty flags transition."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "repeat (DEPTH+8) @(negedge wclk);",
+      "note": "The test checked settled flags and FIFO ordering but did not assert the exact cycles on which full and empty should change, so it passed despite the timing mismatch."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "When a register is missing from one path, match the clock and reset of the parallel stage.",
+      "note": "The agent read relevant guidance about matching the existing register stage but rewrote both pointer paths rather than using that guidance to make a local fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12156,
+    "output": 387
+  }
+}

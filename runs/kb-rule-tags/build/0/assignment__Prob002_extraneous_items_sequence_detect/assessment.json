@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "warning: Not a git repository.",
+      "note": "The first verification command had to be rewritten because its cleanup was rejected, and the retry ran two inapplicable Git checks after the simulation passed, requiring a separate source check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8155,
+    "output": 121
+  }
+}

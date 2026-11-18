@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 11,
+      "quote": "wptr <= waddr_next ^ (waddr_next >> 1);",
+      "note": "The rewrite fixed the inverted RAM read enable but also advanced both Gray-pointer updates by one local clock edge, changing the timing of `wfull` and `rempty` that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide when transfers should occur, so it verified ordering and capacity but did not independently check the cycle on which either flag changed."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The shell cleanup wrapper caused the entire verification command to be rejected and resubmitted, and a later Git check also failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12458,
+    "output": 472
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "SQUARE:   wave <= (next_square_count >= 5'd10) ? PEAK : 5'd0;",
+      "note": "The rewrite fixes the steady-state waveform periods but changes behavior the reference preserves: square mode now forces zero on entry instead of holding the previous output, and triangle mode starts by incrementing from reset instead of decrementing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "tick(2, 1);",
+      "note": "The testbench explicitly expects the rewritten triangle to produce 1 on the first clock after reset, so it passes rather than exposing the reference mismatch, which produces 31 on that clock."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38305,
+    "output": 243
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-summaries/build/0/assignment__Prob017_arbitrary_fractional_frequency_division",
+  "experiment": "kb-summaries",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "summaries",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob017_arbitrary_fractional_frequency_division",
+  "repeat": 0,
+  "position": 26,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3fef61bdcc196f64",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:57:07.227482Z",
+      "ended": "2026-11-18T19:58:08.187349Z",
+      "usage": {
+        "input_uncached": 19889,
+        "input_cached": 110572,
+        "input_cache_write": 19865,
+        "output": 2963,
+        "responses": 8
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T20:00:25.402791Z",
+      "ended": "2026-11-18T20:00:55.474259Z",
+      "usage": {
+        "input_uncached": 1413,
+        "input_cached": 60691,
+        "input_cache_write": 1404,
+        "output": 480,
+        "responses": 3
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "c27419f4ba5c95e1",
+    "after": "a90b91a513b95209",
+    "changed": true
+  }
+}

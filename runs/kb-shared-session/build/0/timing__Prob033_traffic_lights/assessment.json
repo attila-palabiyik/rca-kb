@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 200,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite makes red active during reset and removes the staged startup sequence, whereas the reference fix only registers the light outputs so the existing counter reload logic works."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 200,
+      "quote": "phase = 0;",
+      "note": "The testbench assumes the rewrite\u2019s immediate-red reset timing, so its passing result cannot expose the mismatch with the original all-off reset and delayed red assertion."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39728,
+    "output": 223
+  }
+}

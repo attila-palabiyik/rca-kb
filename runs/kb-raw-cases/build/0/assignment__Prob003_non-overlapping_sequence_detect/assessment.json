@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "idle, s6, sf6:",
+      "note": "Merging the idle branch with the terminal states changed how the FSM handles X or Z on the first input bit after reset, whereas fixing the duplicate state encoding did not require changing that behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9825,
+    "output": 264
+  }
+}

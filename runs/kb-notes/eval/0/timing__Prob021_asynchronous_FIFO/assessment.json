@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "rptr <= to_gray(raddr_next);",
+      "note": "The rewrite fixed the unregistered write-side CDC pointer, but computing Gray pointers from the next addresses changed the cycle timing of `wfull` and `rempty` instead of preserving the existing read path and making the analogous write-side register change."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "repeat (DEPTH+5) @(negedge rclk);",
+      "note": "The scoreboard used the DUT's own flags to decide which transfers counted and checked boundary flags only after several clocks, so it could pass without verifying the exact cycles when those flags should change."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the full command with different cleanup."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "The self-written test had encoded the original output phase",
+      "note": "The agent read a directly relevant warning about cycle-level timing mismatches but did not turn it into an edge-by-edge check or use it to preserve the existing pointer timing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12869,
+    "output": 470
+  }
+}

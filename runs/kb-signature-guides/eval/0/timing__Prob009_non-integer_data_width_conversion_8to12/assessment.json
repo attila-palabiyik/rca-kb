@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_ignored",
+      "step": 7,
+      "quote": "ready-valid-word-counters.md /kb/entries/width-converter-input-capture.md /kb/entries/output-valid-word-completion.md",
+      "note": "The agent consulted handshake and packing guides but skipped the indexed combinational-feedback guide, which was relevant to the self-referential phase counter it correctly fixed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9013,
+    "output": 371
+  }
+}

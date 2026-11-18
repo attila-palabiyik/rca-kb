@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "(remain == 10'd0)",
+      "note": "The boost threshold was fixed, but replacing the normal-mode less-than comparison with equality also changes simulation behavior: a balance containing both a known 1 and an unknown bit can now produce red = 0 instead of X."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38197,
+    "output": 348
+  }
+}

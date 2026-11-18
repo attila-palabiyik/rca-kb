@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "other",
+      "step": 6,
+      "quote": "sed -n '1,220p' TopModule.sv",
+      "note": "The agent inspected the RTL before consulting the knowledge base, contrary to the requested order, though it read the relevant note before editing."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7755,
+    "output": 284
+  }
+}

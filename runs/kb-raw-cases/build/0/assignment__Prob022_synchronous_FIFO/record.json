@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/assignment__Prob022_synchronous_FIFO",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob022_synchronous_FIFO",
+  "repeat": 0,
+  "position": 21,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "1852b5620a66fcd011882fa4df232efb30f733ab",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:58:44.816134Z",
+      "ended": "2026-11-18T18:59:34.507341Z",
+      "usage": {
+        "input_uncached": 24106,
+        "input_cached": 93663,
+        "input_cache_write": 24088,
+        "output": 3299,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5cfe594703654a95",
+    "after": "70f089c6d1176e85",
+    "changed": true
+  }
+}

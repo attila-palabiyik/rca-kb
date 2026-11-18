@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "localparam ADDR_WIDTH = (DEPTH > 1) ? $clog2(DEPTH) : 1",
+      "note": "The patch fixed the read-pointer wrap comparison but also changed the supplied RAM\u2019s address-port widths at DEPTH=1, adding support that the reference fix leaves unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10027,
+    "output": 106
+  }
+}

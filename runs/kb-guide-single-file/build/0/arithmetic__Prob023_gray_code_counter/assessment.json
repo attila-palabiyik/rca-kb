@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "advance <= ~advance;",
+      "note": "The agent fixed the incorrect Gray-code shift but also replaced the registered conversion and increment stages with combinational feedback and a toggle, changing the internal clocking even though all graded output samples matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7736,
+    "output": 312
+  }
+}

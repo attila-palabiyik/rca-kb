@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "and (carry4_terms[3], P[3], P[2], P[1], P[0], C_1);",
+      "note": "The agent fixed the generate equation but also replaced the existing carry chain with expanded look-ahead logic, changing carry-path depth while preserving the settled arithmetic results."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup wrapper caused the first verification command to be rejected before simulation, so the agent had to resubmit it with different cleanup after an earlier Git check had also failed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6606,
+    "output": 392
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-signature-guides/build/0/assignment__Prob006_data_serial-to-parallel_circuit",
+  "experiment": "kb-signature-guides",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "signature-guides",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob006_data_serial-to-parallel_circuit",
+  "repeat": 0,
+  "position": 24,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "8ad76bbfb20bd30f",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:46:23.974883Z",
+      "ended": "2026-11-18T19:47:10.841611Z",
+      "usage": {
+        "input_uncached": 17727,
+        "input_cached": 61043,
+        "input_cache_write": 17712,
+        "output": 1811,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T19:49:12.228956Z",
+      "ended": "2026-11-18T19:49:41.565846Z",
+      "usage": {
+        "input_uncached": 2424,
+        "input_cached": 74242,
+        "input_cache_write": 2412,
+        "output": 1141,
+        "responses": 4
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "0b8de9d1b9918830",
+    "after": "4d90c22475610049",
+    "changed": true
+  }
+}

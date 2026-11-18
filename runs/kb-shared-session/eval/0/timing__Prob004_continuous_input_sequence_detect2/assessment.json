@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 225,
+      "quote": "s1_d0, s4_d0110: nstate = (data_valid && data) ? s2_d01 : s1_d0;",
+      "note": "The agent fixed the one-cycle delay on `match` but also changed the post-match transitions so the final `0` could start an overlapping match, which the reference FSM does not allow."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "if (hits != 2) $fatal(1, \"Expected two overlapping matches\");",
+      "note": "The test required a second match that reused the first match\u2019s final `0`, so it passed the changed behavior instead of catching the regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 39318,
+    "output": 220
+  }
+}

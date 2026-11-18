@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed counting across invalid cycles but also made ready_a high during reset and changed valid_b from a registered count check to a pulse only when the sixth bit is accepted."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
+      "note": "The test passed because it expected ready_a to stay high through reset and valid_b to assert only on sixth-bit acceptance, so it could not flag either departure from the reference behavior."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "rg -l -i 'serial.to.parallel|ready_a.{0,40}valid_b' /kb/sessions",
+      "note": "The knowledge-base search returned no matches and did not inform the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8360,
+    "output": 327
+  }
+}

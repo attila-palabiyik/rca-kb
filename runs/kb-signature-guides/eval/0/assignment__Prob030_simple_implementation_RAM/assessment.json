@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "The patch correctly clears all eight RAM words, but unnecessarily replaces both enable ternaries with procedural conditionals, changing simulation behavior for X or Z enables from merging the two possible values to holding the old value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "warning: Not a git repository.",
+      "note": "The agent had to resubmit the test command after its cleanup command was rejected, then an inapplicable Git check returned an error even though the simulation passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7972,
+    "output": 264
+  }
+}

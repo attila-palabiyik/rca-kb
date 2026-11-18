@@ -1,0 +1,9 @@
+# Repeated partial products in a multiplier
+
+Use this guide when a shift-and-add multiplier produces incorrect values at the expected pipeline latency, especially when the error depends on which bits of one operand are set.
+
+1. Hold the multiplicand at 1 and drive one-hot values on the multiplier operand. Compare each result with its corresponding power of two after the declared pipeline latency. Back-to-back vectors distinguish a value error from comparing the output against the wrong input cycle. In a pipeline with registered partial sums and a registered final sum, the output after a rising edge corresponds to the inputs sampled on the preceding rising edge.
+2. Trace the failing bit from partial-product generation through the adder tree. Check the shift, the width of the shifted value, and how many times each generated term appears in the sum. A repeated array index can double one contribution and omit another even when generation and stage boundaries are correct.
+3. After correcting the operand reference, verify back-to-back inputs and assert reset between clock edges with a product pending. Check that the output clears immediately and that the pending product does not appear after reset. For a 4-bit multiplier, all 256 input pairs fit in a short simulation.
+
+The source task used `TopModule.sv`, a two-stage 4-bit unsigned multiplier. The generator made four shifted terms, but the second registered sum used `temp[2] + temp[2]`. With a multiplicand of 1, that expression gives 8 for multiplier value 4 and 0 for multiplier value 8. The generator, pipeline registers, and reset logic needed no changes. Replacing the second `temp[2]` with `temp[3]` matched the reference fix and passed all 43 grading samples. The local Icarus simulation passed all 256 input pairs on consecutive cycles and verified asynchronous reset with a product pending.

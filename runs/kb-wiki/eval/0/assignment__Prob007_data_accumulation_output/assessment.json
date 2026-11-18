@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch fixed the premature counter wrap but also removed the original `ready_b` guard, so the first accepted input of a group replaces `data_out` instead of adding to it when downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "(pending && data_out !== output_sum[9:0])",
+      "note": "The test ignored `data_out` while invalid and expected a fresh sum for each group regardless of `ready_b`, so its backpressure cases did not detect the departure from the reference behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10000,
+    "output": 313
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly made the counter advance only on a handshake, but also removed the downstream-ready check from the accumulator, changing a first transfer with ready_b low from adding to the previous sum to starting a fresh one."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sum = 0;",
+      "note": "The scoreboard cleared its expected sum after every group of four regardless of ready_b, so it treated the extra behavior change as correct rather than checking that the original accumulation behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8263,
+    "output": 283
+  }
+}

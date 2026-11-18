@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The fix corrected the full-flag polarity but also gated both RAM enables with reset, suppressing writes during reset that the reference fix still permits."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9001,
+    "output": 314
+  }
+}

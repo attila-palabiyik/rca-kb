@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the premature counter wrap, but it also made `ready_a` high during reset and gated `valid_b` on acceptance of the sixth bit, whereas the reference preserves registered ready and asserts valid at count five even during an input gap."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== output_due || data_b !== held)",
+      "note": "The test covered reset and gaps before the sixth bit, but its expected results required the rewritten handshake behavior rather than checking that the original timing was preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "The published fix preserves the registered `ready_a`, which is low during reset and rises on the first clock after release.",
+      "note": "The agent read a closely related entry that explicitly warned against changing ready and valid timing, but made both changes anyway."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8582,
+    "output": 351
+  }
+}

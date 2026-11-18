@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "always @* begin",
+      "note": "The rewrite bypassed the original edge detector instead of restoring the registered light-output stage that lets the counter detect a new phase and reload."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "clock <= pass_request ? REQUEST_TIME : GREEN_TIME;",
+      "note": "The replacement FSM applies a held request on the green-entry edge, asserts red during reset instead of clearing all lights, and eliminates the original cycle at count zero before reload."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "phase(G, 10);\\n        pass_request = 0;",
+      "note": "The test encoded the rewrite's immediate green shortening, red-on-reset behavior, and direct phase transitions rather than checking the registered-output and counter-reload timing the fix needed to preserve."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "preserve the established output latency and reset values unless the specification explicitly changes them",
+      "note": "The agent read relevant timing guidance but did not use it to check how the light-output stage and counter reload depend on each other."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The test command had to be resubmitted because of its cleanup command, and an earlier Git check in a non-repository had already forced a separate retry of simulator discovery."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10235,
+    "output": 530
+  }
+}

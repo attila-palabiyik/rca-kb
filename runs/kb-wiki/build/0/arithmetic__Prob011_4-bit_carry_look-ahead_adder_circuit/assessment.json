@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "// Expand each carry in terms of G, P, and the input carry.",
+      "note": "The rewrite fixed the generate term but also changed the carry propagation depth by replacing the original carry chain with parallel look-ahead logic; the reference fix preserves the chain."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "When a pipelined shift-and-add multiplier gives wrong products",
+      "note": "The consulted entry covered missing or duplicated multiplier terms and did not help diagnose the adder's incorrect carry-generate operator."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation, so the agent had to resubmit it with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8070,
+    "output": 419
+  }
+}

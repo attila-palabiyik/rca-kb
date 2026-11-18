@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-skills/eval/0/arithmetic__Prob030_simple_implementation_RAM",
+  "experiment": "kb-skills",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "skills",
+    "snapshot": "build"
+  },
+  "task_id": "arithmetic__Prob030_simple_implementation_RAM",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "52859c2c02c34720",
+    "harness_commit": "968e0751fdb6db4bd9a6af11f35121363df7e591",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T21:06:28.631564Z",
+      "ended": "2026-11-18T21:07:14.591461Z",
+      "usage": {
+        "input_uncached": 15806,
+        "input_cached": 68731,
+        "input_cache_write": 15788,
+        "output": 1980,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "5feb92bd7dbfd12e",
+    "after": "5feb92bd7dbfd12e",
+    "changed": false
+  }
+}

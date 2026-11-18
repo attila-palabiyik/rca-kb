@@ -1,0 +1,52 @@
+{
+  "kb-notes/build/0/arithmetic__Prob002_extraneous_items_sequence_detect": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/arithmetic__Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16, timing__Prob010_integer_multiple_data_bit_width_conversion_8to16), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/assignment__Prob002_extraneous_items_sequence_detect": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/assignment__Prob017_arbitrary_fractional_frequency_division": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited content is the KB's own entry from an earlier task of the same module on set A (arithmetic__Prob017_arbitrary_fractional_frequency_division), whose result and fix the build had been shown. Leakage within A, disclosed in the report; not an outside answer.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/build/0/timing__Prob032_pipeline_multiplier": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/eval/0/arithmetic__Prob014_sequence_generator": {
+    "decision": "cleared",
+    "note": "Cleared on review: the trajectory was read in full. The cited steps read or edit TopModule.sv in /app or read /kb as instructed. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/eval/0/arithmetic__Prob034_gaming_machine_billing_program": {
+    "decision": "cleared",
+    "note": "Cleared on review: the cited step is the agent reading, or declining to read, its KB at /kb or the CLI's own skill folder, as the approach's instructions direct. The workspace rule conflicts with the KB's location. No grading file or network access.",
+    "date": "2026-11-18"
+  },
+  "kb-notes/eval/0/timing__Prob021_asynchronous_FIFO": {
+    "decision": "cleared",
+    "note": "Cleared on review: the trajectory was read in full. The cited steps read or edit TopModule.sv in /app or read /kb as instructed. No grading file or network access.",
+    "date": "2026-11-18"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "advance <= 1'b1;",
+      "note": "The rewrite made the output clocked but replaced the existing two-stage datapath with an enable that advances on the first rising edge after reset, one edge earlier than the correct fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "index = ((cycle + 1) / 2) % 16;",
+      "note": "The test verified the sequence, wraparound, and reset but hard-coded the rewrite\u2019s first-edge advance, so it passed despite the one-cycle timing error."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "check the final arithmetic stage against the required output edge",
+      "note": "The agent read the Gray-conversion branch but did not follow the linked registered-output timing guidance, even though both conversion expressions in the original code were already correct."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8245,
+    "output": 434
+  }
+}

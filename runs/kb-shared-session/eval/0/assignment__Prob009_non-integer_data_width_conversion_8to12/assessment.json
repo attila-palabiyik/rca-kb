@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 225,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite kept the effective two-input cycle instead of restoring the three-input cycle that emits two 12-bit words and carries the second byte\u2019s low nibble into the second word."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 225,
+      "quote": "tick(1, pair[7:0], 1, pair[15:4]);",
+      "note": "The test exhaustively checked the assumed byte-pair behavior, so it never expected an output on the third accepted byte or checked that the leftover nibble was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 38639,
+    "output": 176
+  }
+}

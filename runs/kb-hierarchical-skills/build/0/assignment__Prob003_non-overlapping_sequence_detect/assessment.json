@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "if (rst_n) begin",
+      "note": "The rewritten reset guard forces both outputs low when `rst_n` is X or Z, whereas the original and reference still decode `s6` and `sf6` in that case."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8731,
+    "output": 357
+  }
+}

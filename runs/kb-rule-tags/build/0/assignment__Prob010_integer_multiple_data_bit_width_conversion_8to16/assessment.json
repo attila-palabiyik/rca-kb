@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 6,
+      "quote": "updated only when `valid_in` was high and the pre-edge count was 5, 10, or 15.",
+      "note": "The timing entries covered output-update alignment, which was already correct here, and did not identify the inverted byte-capture condition."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6188,
+    "output": 243
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite registered `valid_b` but also tied `ready_a` high through reset and suppressed `valid_b` on idle clocks at count five, whereas the correct fix preserves registered `ready_a` and registers `cnt == 5` without gating it on `valid_a`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid ||",
+      "note": "The test exercised reset and gaps after five bits, but its expectations encoded the rewrite\u2019s always-high ready and completion-only valid, so passing all 64 data patterns did not verify the timing the fix needed to preserve."
+    },
+    {
+      "category": "kb_misled",
+      "step": 7,
+      "quote": "The fix ties ready high, keeps the first five accepted bits in a shift register, and captures the output with a one-cycle valid pulse when the sixth bit arrives.",
+      "note": "The agent followed this earlier serial-packer recipe even though another entry it read explicitly warned that tying ready high and pulsing valid only on acceptance had caused grading mismatches."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8395,
+    "output": 371
+  }
+}

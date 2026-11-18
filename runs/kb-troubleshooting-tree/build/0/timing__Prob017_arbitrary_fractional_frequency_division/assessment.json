@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign div_flag = (cyc_cnt >= c89);",
+      "note": "The threshold decode fixes the feedback and matches the default waveform, but it changes parameterized behavior: when `c89 == M_N`, it never selects odd mode, whereas the registered fix toggles mode at each frame wrap."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (phase < split)",
+      "note": "The test modeled the threshold decode and used only configurations where it agrees with the registered toggle, so it could not catch the behavior change when the switch and wrap coincide."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first verification batch produced no results because its cleanup command was rejected and its Git diff ran outside a repository, so the simulation had to be relaunched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8805,
+    "output": 427
+  }
+}

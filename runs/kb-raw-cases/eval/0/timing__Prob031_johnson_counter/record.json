@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/eval/0/timing__Prob031_johnson_counter",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "raw-cases",
+    "snapshot": "build"
+  },
+  "task_id": "timing__Prob031_johnson_counter",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T20:03:42.574210Z",
+      "ended": "2026-11-18T20:04:20.380744Z",
+      "usage": {
+        "input_uncached": 15262,
+        "input_cached": 68026,
+        "input_cache_write": 15244,
+        "output": 1393,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "87e764977b435fe3",
+    "after": "87e764977b435fe3",
+    "changed": false
+  }
+}

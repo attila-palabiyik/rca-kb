@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/eval/0/assignment__Prob014_sequence_generator",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "eval",
+    "mode": "eval",
+    "kb": "raw-cases",
+    "snapshot": "build"
+  },
+  "task_id": "assignment__Prob014_sequence_generator",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:55:35.152191Z",
+      "ended": "2026-11-18T19:56:07.343147Z",
+      "usage": {
+        "input_uncached": 14697,
+        "input_cached": 66939,
+        "input_cache_write": 14679,
+        "output": 918,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "87e764977b435fe3",
+    "after": "87e764977b435fe3",
+    "changed": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "For a pipelined design, compare consecutive outputs against the corresponding earlier inputs.",
+      "note": "The entries offered general timing and reset advice, but did not change the agent\u2019s stated test plan or help identify the incorrect Gray-to-binary XOR."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8133,
+    "output": 233
+  }
+}

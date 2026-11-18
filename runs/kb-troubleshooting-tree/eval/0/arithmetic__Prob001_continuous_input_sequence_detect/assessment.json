@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The patch fixed the shift direction but also made `match` report the newly shifted value instead of the pre-edge register value, moving the output pulse one clock earlier."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test compared `match` against the already-shifted expected value, so it validated the patch\u2019s timing assumption rather than checking that the original one-cycle latency was preserved."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "preserve their timing and reset behavior.",
+      "note": "The agent read the relevant timing guidance, but it did not prevent the unnecessary change to which cycle `match` reports."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6847,
+    "output": 314
+  }
+}

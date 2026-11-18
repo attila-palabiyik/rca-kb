@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite asserted red immediately on reset and replaced the staged light-output path with a direct state decode, whereas the targeted fix registers the light outputs and preserves the original idle startup and transition timing."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test required red during reset and expected the countdown to start immediately after release, so it validated the rewrite's startup behavior rather than detecting the mismatch with the registered-output design."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "The agent submitted the test harness three times because the first command used a prohibited cleanup flag and the second invoked an unavailable Python executable."
+    },
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "/kb/entries/verilog-registered-counter-zero-flag.md",
+      "note": "The agent opened a note about which values registered outputs sample, but did not apply that check to the existing state, buffered-light, and output stages before replacing them."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10100,
+    "output": 447
+  }
+}

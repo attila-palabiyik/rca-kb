@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/timing__Prob027_settable_counter",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob027_settable_counter",
+  "repeat": 0,
+  "position": 33,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "92cc04d316664abf286aad27871454166d43e2ee",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T19:21:31.677546Z",
+      "ended": "2026-11-18T19:22:09.328874Z",
+      "usage": {
+        "input_uncached": 17432,
+        "input_cached": 59946,
+        "input_cache_write": 17417,
+        "output": 1752,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "e732971f60bf1c43",
+    "after": "2fa6ee2cde5275e2",
+    "changed": true
+  }
+}

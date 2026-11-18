@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "I\u2019ll preserve the registered beverage timing",
+      "note": "The extra output register was the defect: the outputs should decode the current state and `sel` combinationally, not wait for another rising clock edge."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "credit <= (out1 || out2) ? inserted : credit + inserted;",
+      "note": "The rewrite moved credit updates to the falling edge, counted simultaneous coin inputs together instead of prioritizing `d1`, and added a multi-cycle refund queue, none of which the correct output-decode fix changes."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "sel = choice;\n            #2;\n            check_outputs();",
+      "note": "The test checked for the previous registered output after changing `sel` and before the next clock edge, so it validated the rewrite\u2019s timing assumption instead of checking for the required combinational response."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7740,
+    "output": 536
+  }
+}

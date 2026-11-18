@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = (pstate == s6);",
+      "note": "The combinational decode fixes the one-cycle delay, but drops the explicit reset override and propagates unknown state bits to the outputs instead of defaulting both outputs to zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "rst_n = 0;\n            #1;\n            if ({match, not_match} !== 2'b00)",
+      "note": "The reset check waits for the FSM state to settle before checking the outputs, so it passes even without the explicit reset override and never checks the unknown-state default."
+    },
+    {
+      "category": "kb_ignored",
+      "step": 6,
+      "quote": "use the knowledge-base summaries you provided",
+      "note": "The agent relied on the index summary without opening the linked output-timing entry, whose advice on checking when outputs become valid was relevant to the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8171,
+    "output": 484
+  }
+}

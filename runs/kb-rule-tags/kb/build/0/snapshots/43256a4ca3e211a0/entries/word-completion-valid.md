@@ -1,0 +1,3 @@
+In a registered valid-only width converter, register the output-valid pulse on the same clock edge as the output data update, using the same accepted-beat condition and pre-edge word-boundary checks.
+
+Applies to clocked width converters whose input count holds during stalls. In one 24-to-128-bit `TopModule` variant, `data_out` updated on valid input at counts 5, 10, and 15, while `valid_out` checked 12 for the middle boundary. Changing that literal from 12 to 10 matched all 261 reference samples. In another variant, `valid_out` already checked the correct counts but drove the result combinationally. Registering that result on the rising clock edge and clearing it on the same asynchronous active-low reset as `data_out` matched all 261 reference samples.

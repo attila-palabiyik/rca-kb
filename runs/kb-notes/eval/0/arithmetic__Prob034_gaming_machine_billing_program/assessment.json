@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 7,
+      "quote": "# Register a status flag specified for the next cycle",
+      "note": "The note addressed status-flag timing, not the normal-mode balance guard that caused the bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7031,
+    "output": 165
+  }
+}

@@ -1,0 +1,5 @@
+# Check generate and propagate operators before rewriting carry logic
+
+In the 4-bit `TopModule` adder, both `G` and `P` used XOR. The reference fix changed only `G` to `A_in & B_in`. At a bit where both operands are 1 and the incoming carry is 0, the bit must generate a carry, so this input exposes the XOR error immediately. `P` remains XOR in the specified equations because it also feeds the sum.
+
+The submitted fix also used explicit gate primitives and expanded the carry equations so no carry depended on the preceding carry output. It passed all 425 graded samples and a local Icarus Verilog check of all 512 binary input combinations. The one-line reference fix shows that the structural rewrite was unnecessary for the functional correction. When debugging similar arithmetic, isolate the incorrect operator first, then check the requested implementation structure separately. An arithmetic simulation checks output values and cannot establish that the design uses look-ahead logic or explicit gate primitives.

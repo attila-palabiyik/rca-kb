@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "kb_no_help",
+      "step": 8,
+      "quote": "## Check that the wrap bit toggles with the address",
+      "note": "The FIFO wrap-bit guidance did not help diagnose the divider\u2019s invalid output driver."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command forced the agent to resubmit the simulation, and a later Git check failed because the workspace was not a repository, requiring a separate file check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9413,
+    "output": 254
+  }
+}
