@@ -6,7 +6,18 @@
 
 <div class="summary" markdown="1">
 
-_Pending: the summary is written when the frozen runs on B have finished._
+Thirteen ways of keeping what a debugging agent learns were each built over
+45 ChipBench tasks and then frozen and tested on 41 tasks from 15 modules the
+KB had never seen. With no KB, the agent (Codex CLI, `gpt-6.2-sol`) passed
+39% of the test set. Every approach did better, by @SUM_RANGE@ points, and
+@SUM_EXCL@ of the 13 differences have 95% intervals that exclude zero; no
+approach made a single task worse. The largest gains came from @SUM_TOP@,
+at @SUM_COST@ the tokens; recalling earlier transcripts gained least. Each KB was built once
+and run once, after the agent had been shown each result during the build, and
+the gains are of a size this benchmark resolves only coarsely: differences
+under about 10 points cannot be told from noise, and a gain shared by every
+approach could also come from the added instructions or from the hours
+between the baseline and these runs.
 
 </div>
 
@@ -410,7 +421,35 @@ since; the predictions have not.
 
 ## 5. Results
 
-_Pending: written when the frozen runs on B have finished._
+Every approach passed more of B than the agent with no KB (Figure 1,
+Table 6). The differences run from @RES_MIN@ to @RES_MAX@ points, and @SUM_EXCL@
+of the 13 intervals exclude zero, where about one would by chance. No
+approach failed a task that the baseline passed in all three of its runs:
+every change on B is a gain. Most approaches passed at least one task in a
+module the baseline never passed, and the guide read on every task passed
+tasks in four of those seven modules (Figure 8).
+
+The approaches cannot be ranked with confidence. The gap between two of them
+is about as wide as the gap between one and the baseline, and their
+intervals overlap almost entirely; one build and one run each is too little
+to separate them. What the data do show is the cost. A KB raised the tokens
+per run by a factor of 1.2 to 1.8, the cost by less (1.1 to 1.4), because most
+of the extra input is cached, and the time by about a third. The exception is
+the shared session, which carries every earlier task in its context: 6.7
+times the tokens of a run with no KB, at nearly the same cost. Building a KB
+added $0.50 to $2.10 and 4 to 30 minutes to the 45 tasks of A (Table B3).
+Since every KB run on B costs more than a run without one, no approach pays
+for itself in money; its return is the tasks it solves.
+
+The gains go with the limitation the baseline showed most. Against the
+baseline on the same tasks, the KBs removed "changed more than the bug" from
+15% to 35% of B's tasks and introduced it almost nowhere (Table B6).
+
+The first prediction holds in direction: the two approaches whose KB is
+loaded on every task, the playbook and the single-file guide, are at the top.
+The second does not. The shared session, which recalls earlier tasks whole,
+gained as much as most; only raw cases, the same transcripts searched by
+text, gained least. Neither comparison is large against the noise.
 
 <p class="caption"><b>Table 6.</b> Each approach on B with its frozen KB, against the baseline on the same tasks. A task is helped if its pass rate in the one run with the KB is higher than in the baseline's three runs, and harmed if lower. Only 4 of B's tasks are mixed in the baseline, so nearly every change is a task that flipped.</p>
 
@@ -470,7 +509,47 @@ rules to 79 files of task summaries (Table B4): collections of cases, whatever
 their entry type was meant to be. The difference between
 approaches is then mostly how many cases the agent reads, and how.
 
-_Pending: what worked, what failed, and how the choice of A affects B._
+### What worked
+
+What carried from A to B is not a module's fix but a way of working on any
+module. The rules that tell the agent to keep a register's sampling point or
+a module's reset values say nothing a module of B needs to have seen; they
+tell the agent to repair rather than reimplement. The approaches that put
+such statements in front of the agent on every task, without the agent
+having to look for them, gained most, and those whose KB had to be searched
+by text gained least.
+
+### What failed
+
+Nothing failed outright, which is itself informative: no KB misled the agent
+into breaking a task it could otherwise solve. Two things limited the gains.
+The first is that the agents did not distil. Asked to keep rules, a guide or
+skills, they kept cases, and the KBs grew to between 2,000 and 14,000 words
+(Table B4), most of it specific to modules B does not contain. The second is
+that the rule to work only inside the workspace led some agents not to open
+their KB at all, most often for the summaries (section 7).
+
+### How the choice of A affects B
+
+Three things tie the result to this A. The first is overlap: B shares no
+module with A, so nothing a KB records about a module can be reused, and the
+gains on B must come from what generalises. On A itself, where most tasks
+follow an earlier task of the same module, the build's runs gained most on
+exactly those tasks (Figure 9), which is leakage through the shared correct
+file and says nothing about B.
+
+The second is composition. With no KB the agent passes 70% of A and 39% of
+B, so a KB built on A learns mostly from runs that passed and from the fixes
+it is shown; and the kinds of failure differ, with "missed the bug" in 3% of
+A's runs and 12% of B's. A KB holds only what A's failures exposed. A's new
+modules leave little room to gain, since most of them already pass, which is
+why the build shows no gain on them while B, where most modules fail, shows
+the most.
+
+The third is order. Each KB saw A in one order, and what it recorded from
+the first tasks shaped how it recorded the rest. Whether a different order
+gives a different KB, and a different result on B, is the first thing
+another run of this design should measure.
 
 ## 7. What these results do not show
 

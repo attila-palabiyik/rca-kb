@@ -438,7 +438,7 @@ def _body_sections(report: dict) -> list[str]:
                          _range(versus["pass_rate_difference"], signed=True),
                          versus["helped"], versus["harmed"],
                          _num(versus["token_ratio"]["value"], 2), _num(versus["time_ratio"]["value"], 2),
-                         _share(own.get("kb_use"))])
+                         _share(own.get("kb_use")) if own.get("kb_use") is not None else "in context"])
         out += _table(["Approach", "Runs passed", "Pass rate, %", "Difference, points", "95% interval",
                        "Tasks helped", "Tasks harmed", "Tokens, × no KB", "Time, × no KB", "Runs that read the KB, %"],
                       body)

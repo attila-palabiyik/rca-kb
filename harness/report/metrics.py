@@ -128,6 +128,9 @@ def load(experiment_dirs: list[Path], root: Path) -> Loaded:
             task = dataset.tasks[run.task_id]
             setup = setups.get(run.record["provenance"]["setup_hash"], {})
             continued = (setup.get("agent_memory") or {}).get("session") == "continue"
+            # A KB the CLI loads into context by itself is never opened, so
+            # whether it was read cannot be seen, and is not reported.
+            loaded = "do not need to open it" in (setup.get("instructions") or "")
             tools, kb_used = _tools_and_kb_use(run, _kb_markers(setup))
             outcome = run.result if pending == 0 else run.verdict_result
             assessment = run.assessment
@@ -140,7 +143,7 @@ def load(experiment_dirs: list[Path], root: Path) -> Loaded:
                 usage=run.usage("solve"), seconds=run.seconds("solve"),
                 update_usage=run.usage("update"), update_seconds=run.seconds("update"),
                 tools=tools, kb_changed=bool(run.record["kb"].get("changed")),
-                kb_used=None if continued else kb_used,
+                kb_used=None if continued or loaded else kb_used,
                 limitations=(frozenset(item["category"] for item in assessment["limitations"])
                              if assessment else None),
                 monitor_status=(run.monitor or {}).get("status"),
