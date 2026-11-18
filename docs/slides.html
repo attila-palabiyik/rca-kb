@@ -38,7 +38,6 @@ code { font-family: var(--mono); font-size: 0.86em; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .wide-narrow { display: grid; grid-template-columns: 2fr 1fr; gap: 56px; }
 .chart svg { display: block; width: 100%; height: auto; }
-.chart text { font-family: var(--sans) !important; }
 
 /* Title slide */
 .title { grid-template-rows: 1fr auto 52px; }
@@ -131,6 +130,15 @@ ul.limits { padding-left: 22px; margin: 0; }
     <p class="small" style="margin-top: 36px; color: var(--slate); max-width: 1100px;">Fixed for every run: Codex CLI 0.170.0, headless, <code>gpt-6.2-sol</code> at medium effort, web search and the CLI's memory off, a fresh container. The answer is graded afterwards, in a second container that holds the testbench and the reference.</p>
   </div>
   <div class="foot"><span>ChipBench Verilog debugging: 86 usable tasks in 32 modules, split by module from a fixed seed.</span></div>
+</section>
+
+<!-- 3b -->
+<section class="slide">
+  <h1>An approach is data on one base setup, and the KB is a directory the harness snapshots but never reads</h1>
+  <div class="body">
+    <div class="chart" style="width: 1136px;"><img src="figures/architecture.svg" alt="One run and the KB across a chain"></div>
+  </div>
+  <div class="foot"><span>Seven components share only sixteen contracts, defined once in <code>docs/spec.md</code>. Only the converter is specific to ChipBench, only the executor to Harbor and Codex.</span></div>
 </section>
 
 <!-- 4 -->

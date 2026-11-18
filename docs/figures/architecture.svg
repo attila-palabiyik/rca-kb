@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" font-family="'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#1a1f24">
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0.5 L7,4 L0,7.5" fill="none" stroke="#5c6770" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <!-- column heads -->
+  <text x="0" y="12" font-weight="700">Prepare</text>
+  <text x="156" y="12" font-weight="700">Agent container</text>
+  <text x="380" y="12" font-weight="700">Grader container</text>
+  <text x="520" y="12" font-weight="700">Records</text>
+
+  <!-- prepare -->
+  <text x="0" y="40">Task</text>
+  <text x="0" y="52" fill="#5c6770">specification and the</text>
+  <text x="0" y="63" fill="#5c6770">module with one bug</text>
+  <text x="0" y="88">Setup</text>
+  <text x="0" y="100" fill="#5c6770">base, plus the approach's</text>
+  <text x="0" y="111" fill="#5c6770">overlay of instructions</text>
+  <text x="0" y="136" fill="#0b7a75">KB</text>
+  <text x="0" y="148" fill="#5c6770">a private copy of the</text>
+  <text x="0" y="159" fill="#5c6770">current snapshot</text>
+
+  <!-- agent container -->
+  <rect x="156.5" y="24.5" width="196" height="148" fill="none" stroke="#1a1f24"/>
+  <text x="168" y="44" font-family="'IBM Plex Mono', Consolas, monospace" font-size="9.5">/app</text>
+  <text x="200" y="44" fill="#5c6770">workspace, the module to edit</text>
+  <text x="168" y="60" font-family="'IBM Plex Mono', Consolas, monospace" font-size="9.5" fill="#0b7a75">/kb</text>
+  <text x="200" y="60" fill="#5c6770">the KB copy; some files linked</text>
+  <text x="200" y="71" fill="#5c6770">to where the CLI looks itself</text>
+  <text x="168" y="92">Codex CLI, Icarus Verilog,</text>
+  <text x="168" y="104">a local similarity search</text>
+  <line x1="168" y1="118.5" x2="341" y2="118.5" stroke="#d9d9d9"/>
+  <text x="168" y="135" font-weight="700">Solve</text>
+  <text x="200" y="135" fill="#5c6770">turn one</text>
+  <text x="168" y="155" font-weight="700" fill="#0b7a75">Update</text>
+  <text x="208" y="155" fill="#5c6770">same session, after the result</text>
+  <text x="208" y="166" fill="#5c6770">and the fix; build runs only</text>
+
+  <!-- arrows prepare -> agent -->
+  <line x1="122" y1="58" x2="152" y2="58" stroke="#5c6770" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="122" y1="106" x2="152" y2="106" stroke="#5c6770" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="122" y1="154" x2="152" y2="154" stroke="#0b7a75" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- answer to grader -->
+  <line x1="353" y1="58" x2="376" y2="58" stroke="#5c6770" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="366.5" y="53" font-size="7.5" fill="#5c6770" text-anchor="middle">answer</text>
+
+  <!-- grader container -->
+  <rect x="380.5" y="24.5" width="116" height="96" fill="none" stroke="#1a1f24"/>
+  <text x="392" y="44">Testbench and</text>
+  <text x="392" y="56">reference module</text>
+  <text x="392" y="74" fill="#5c6770">never in the agent's</text>
+  <text x="392" y="85" fill="#5c6770">container</text>
+  <text x="392" y="100" font-weight="700">Verdict</text>
+  <text x="392" y="112" fill="#5c6770">pass on no mismatch</text>
+
+  <!-- verdict back to update -->
+  <path d="M438.5 119 V150 H357" fill="none" stroke="#0b7a75" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="372" y="143" font-size="8.5" fill="#0b7a75">shown on A</text>
+
+  <!-- records -->
+  <line x1="497" y1="70" x2="516" y2="70" stroke="#5c6770" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="520" y="40">One record per run</text>
+  <text x="520" y="52" fill="#5c6770">answer, verdict, tokens,</text>
+  <text x="520" y="63" fill="#5c6770">time, trajectory</text>
+  <text x="520" y="88">Monitor</text>
+  <text x="520" y="100" fill="#5c6770">a judge and a pattern</text>
+  <text x="520" y="111" fill="#5c6770">match read every run</text>
+  <text x="520" y="136">Review, then report</text>
+  <text x="520" y="148" fill="#5c6770">a person clears or</text>
+  <text x="520" y="159" fill="#5c6770">voids each flagged run</text>
+
+  <!-- KB chain -->
+  <text x="0" y="206" font-weight="700" fill="#0b7a75">The KB across a chain</text>
+  <g font-family="'IBM Plex Mono', Consolas, monospace" font-size="9">
+    <rect x="156.5" y="218.5" width="62" height="22" fill="#cfe6e4" stroke="none"/>
+    <text x="164" y="233">seed</text>
+    <rect x="246.5" y="218.5" width="62" height="22" fill="#cfe6e4" stroke="none"/>
+    <text x="254" y="233">08f97f</text>
+    <rect x="336.5" y="218.5" width="62" height="22" fill="#cfe6e4" stroke="none"/>
+    <text x="344" y="233">54e89f</text>
+    <rect x="456.5" y="218.5" width="62" height="22" fill="#cfe6e4" stroke="none"/>
+    <text x="464" y="233">final</text>
+  </g>
+  <line x1="219" y1="229.5" x2="243" y2="229.5" stroke="#0b7a75" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="309" y1="229.5" x2="333" y2="229.5" stroke="#0b7a75" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="414" y="233" fill="#5c6770">…</text>
+  <line x1="429" y1="229.5" x2="453" y2="229.5" stroke="#0b7a75" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="222" y="214" font-size="8.5" fill="#5c6770">task 1</text>
+  <text x="312" y="214" font-size="8.5" fill="#5c6770">task 2</text>
+  <text x="432" y="214" font-size="8.5" fill="#5c6770">task 45</text>
+  <text x="0" y="228" fill="#5c6770">a snapshot is named by</text>
+  <text x="0" y="239" fill="#5c6770">a hash of its contents</text>
+  <text x="530" y="226" fill="#5c6770">frozen: each run on B</text>
+  <text x="530" y="237" fill="#5c6770">gets a copy of it, which</text>
+  <text x="530" y="248" fill="#5c6770">is then discarded</text>
+  <text x="156" y="264" fill="#5c6770">On A, the copy a build run leaves becomes the next snapshot; a run that changed nothing</text>
+  <text x="156" y="276" fill="#5c6770">keeps the same name. Runs in parallel never share a copy.</text>
+</svg>

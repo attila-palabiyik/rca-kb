@@ -66,7 +66,6 @@ table:has(th:nth-child(5)) { width: 100%; }
 figure { margin: 14pt 0; break-inside: avoid; }
 figcaption { margin-top: 7pt; }
 figure .chart svg { display: block; width: 100%; height: auto; }
-figure .chart text { font-family: var(--sans) !important; }
 
 /* The approaches, drawn as a grid. */
 .matrix { width: 100%; table-layout: fixed; border: 0; margin: 0; font-size: 7.5pt; line-height: 1.2; }

@@ -35,7 +35,7 @@ The tasks are ChipBench's Verilog debugging cases [1]: 89 cases over 33
 modules, each module carrying up to four injected bugs of different kinds
 (arithmetic, assignment, state machine, timing). A task gives the agent a
 written specification and the module with one bug. The agent edits the module
-in place. The three cases of one module are unusable (section 6), which
+in place. The three cases of one module are unusable (section 7), which
 leaves 86 tasks in 32 modules.
 
 Set A (45 tasks, 17 modules) builds a KB and set B (41 tasks, 15 modules)
@@ -76,7 +76,7 @@ reference with the same inputs and counts the samples on which their outputs
 differ. An answer passes on zero mismatches.
 
 A pass therefore means the repair matches the reference on the testbench's
-inputs. It does not mean that the agent identified the root cause. Section 2
+inputs. It does not mean that the agent identified the root cause. Section 3
 labels each trajectory for, among other things, whether the agent missed the
 bug.
 
@@ -105,7 +105,81 @@ From that, a paired difference on B has to be about 9.5 points, four tasks of
 41, to be detected with 80% power. Smaller differences cannot be told from
 noise here.
 
-## 2. The baseline
+## 2. How the harness works
+
+The harness has seven components, each a package under `harness/`: the
+dataset, configuration and KB, the runner, the grader, run records, the
+monitor, and reporting. They share nothing but sixteen contracts, data
+structures each defined once in `docs/spec.md` (a Task, a Setup, a KB state,
+a Verdict, a run record and so on). A component can be replaced without
+touching the others: only the dataset's converter is specific to ChipBench,
+and only the runner's executor is specific to Harbor and Codex.
+
+<figure>
+<img src="figures/architecture.svg" alt="One run: the task, the Setup and a copy of the KB go into the agent's container; the answer is graded in a second container; with a build run the verdict and fix are shown and the agent updates its KB copy, which becomes the next snapshot; every run is recorded, monitored and reviewed.">
+<figcaption><b>Figure 3.</b> One run, and the KB across a chain. The accent marks what belongs to the KB.</figcaption>
+</figure>
+
+### One run
+
+A run starts in a new container with the task's workspace at `/app` and the
+Setup applied: the base configuration, plus the approach's overlay. The
+overlay is data, not code. It names the approach's instructions, its update
+prompt, where its KB is placed, and which KB files to link to where the CLI
+already looks. It may not change the model, the effort, the rules, the
+limits or the network, and loading fails if it tries. That is what makes the
+difference between a baseline run and a KB run exactly the approach.
+
+The agent solves the task in one turn. Its answer, the files the task names
+and nothing else, is copied out and graded in a second container that holds
+the testbench and the reference. In a build run, the agent is then resumed in
+the same session, shown the verdict and the correct fix, and asked to update
+its KB. Each turn has a time limit, ten minutes to solve and five to update.
+
+### The KB as data
+
+To the harness a KB is a directory it never reads. It needs four operations
+of it and nothing else: snapshot, restore, freeze and identify. A snapshot is
+named by a hash of its contents, so two runs that leave the KB unchanged share
+a name, and a chain of 45 build runs is a list of names. Every run works on a
+private copy of a snapshot, so runs in parallel cannot touch one another's
+KB. After a build run the copy becomes the next snapshot; after a frozen run
+it is discarded. The frozen state of every approach is committed with its
+runs, under `runs/kb-*/kb/`.
+
+How the agent reaches the KB is the overlay's business and is kept apart from
+where it is stored. The approaches here use what the CLI already does: a file
+linked as `AGENTS.md` is loaded into context at the start of every task, a
+folder linked as the CLI's skills folder is listed by name and description,
+and a saved session can be resumed. For the two transcript approaches the
+harness copies the CLI's own session file into the KB when a run ends; that
+file, written by the CLI and not by the agent, is the one exception to the
+rule that the harness never writes KB content.
+
+### What the agent works with
+
+The agent has a shell, the files under `/app` and `/kb`, Icarus Verilog, and
+one tool added for this work: `kbsearch`, a similarity search over a folder
+of files, run on a small embedding model inside the container, with no
+network and no tokens spent. It is in the image for every condition, and
+only the approach that indexes by similarity is told about it. No approach
+needs a server or a new interface; each is a combination of instruction
+pieces and the CLI's own mechanisms, which is why 51 of them could be
+defined and any of them run with one command.
+
+### Checking the runs
+
+Before any agent ran, every task was run with a known-good answer, which has
+to pass, and with its module untouched, which has to fail. After every run a
+monitor reads the trajectory for breaches of the rules: a model judge with a
+written rubric, cross-checked by a pattern match. Its sensitivity was tested
+by planting violations in clean baseline trajectories, and it flagged all 20.
+A flagged run does not count until a person clears or voids it (appendix E).
+Every experiment records the commit of the harness that ran it and every run
+the hash of its Setup, and regrading every baseline answer from its record
+gave the same verdict for all 258.
+
+## 3. The baseline
 
 <p class="caption"><b>Table 2.</b> The agent with no KB, three runs per task. The interval is on the pass rate. The next two columns count a task as passing if any of its runs passes, and only if every run does.</p>
 
@@ -118,7 +192,7 @@ noise here.
 
 <figure>
 <img src="../reports/main/figures/baseline_tasks.svg" alt="Grid of every baseline task: one column per module, one row per kind of bug, shaded by how many of three runs passed, for set A and set B.">
-<figcaption><b>Figure 3.</b> Every baseline task. A column is a module, labelled with its ChipBench problem number; a row is the kind of bug injected. Columns are sorted by pass rate; a blank cell is a kind of bug that module does not carry. Most columns are one shade from top to bottom: a module passes or fails whichever bug it carries.</figcaption>
+<figcaption><b>Figure 4.</b> Every baseline task. A column is a module, labelled with its ChipBench problem number; a row is the kind of bug injected. Columns are sorted by pass rate; a blank cell is a kind of bug that module does not carry. Most columns are one shade from top to bottom: a module passes or fails whichever bug it carries.</figcaption>
 </figure>
 
 <!-- generated: Baseline outcomes -->
@@ -154,7 +228,7 @@ the labels.
 
 <figure>
 <img src="../reports/main/figures/baseline_limitations.svg" alt="For set A and set B, the share of failed runs and of passed runs showing each limitation.">
-<figcaption><b>Figure 4.</b> Share of baseline runs showing each limitation, for runs that failed and runs that passed. A run can show several. Almost every failed run changed more than the bug; few missed it. "Own test missed the fault" is close to true by definition of a failed run, since an agent that saw its test fail would rarely submit.</figcaption>
+<figcaption><b>Figure 5.</b> Share of baseline runs showing each limitation, for runs that failed and runs that passed. A run can show several. Almost every failed run changed more than the bug; few missed it. "Own test missed the fault" is close to true by definition of a failed run, since an agent that saw its test fail would rarely submit.</figcaption>
 </figure>
 
 <!-- generated: Baseline limitations -->
@@ -166,13 +240,13 @@ Labelling 30 runs a second time, the model gave the same set of limitations for 
 <!-- /generated -->
 
 Few failed runs missed the bug: 4 of 41 on A and 15 of 75 on B. Most
-repaired it and then changed something else. Figure 5 shows one.
+repaired it and then changed something else. Figure 6 shows one.
 
 <figure>
 <div class="code">
 <div>
 <h4>The whole fix</h4>
-<pre><span class="dim">always @(posedge clk or negedge rst_n)
+<pre><span class="dim">always (posedge clk or negedge rst_n)
     if (!rst_n)
         begin
             match_f &lt;= 1'b0;
@@ -189,7 +263,7 @@ repaired it and then changed something else. Figure 5 shows one.
 <pre>reg [8:0] a_tem;
 wire [8:0] next_window = {a_tem[7:0], a};
 
-always @(posedge clk or negedge rst_n) begin
+always (posedge clk or negedge rst_n) begin
     if (!rst_n) begin
 <span class="extra">        a_tem &lt;= 9'b111111111;</span>
         match &lt;= 1'b0;
@@ -202,7 +276,7 @@ end</pre>
 <p>The constant is corrected, inside a rewrite of the module. Marked: lines changed beyond the fix. The rewrite resets the register to ones and compares its next value, so <code>match</code> rises a cycle early: 16 mismatches in 237 samples. The agent's own testbench passed. (<code>match</code> is <code>match_f &amp;&amp; match_b</code> in the given module.)</p>
 </div>
 </div>
-<figcaption><b>Figure 5.</b> One baseline run on set A (<code>assignment__Prob002_extraneous_items_sequence_detect</code>, first repeat). Indentation is normalised and a comment is left out; the code is otherwise as given and as submitted.</figcaption>
+<figcaption><b>Figure 6.</b> One baseline run on set A (<code>assignment__Prob002_extraneous_items_sequence_detect</code>, first repeat). Indentation is normalised and a comment is left out; the code is otherwise as given and as submitted.</figcaption>
 </figure>
 
 The specification for this task describes the pattern to detect. It does not
@@ -226,11 +300,11 @@ filled with the wrong lessons. And the most common failure is not specific
 to any module, so a lesson about it can transfer from A to modules A never
 contained.
 
-## 3. Approaches and predictions
+## 4. Approaches and predictions
 
 An approach is two choices. The entry type is what one unit of the KB holds,
 which answers what to store. The index is how entries are arranged and
-found, which answers how to organise and how to retrieve. Figure 6 sets one
+found, which answers how to organise and how to retrieve. Figure 7 sets one
 against the other.
 
 <figure>
@@ -250,7 +324,7 @@ against the other.
 <tr><th>Step</th><td class="open"></td><td class="none"></td><td class="none"></td><td class="open"></td><td class="none"></td><td class="run">Trouble&shy;shooting tree</td><td class="open"></td><td class="none"></td></tr>
 </tbody>
 </table>
-<figcaption><b>Figure 6.</b> The approaches. Rows are grouped by what an entry records: what happened in a task, what is true, or what to do. Filled: the thirteen approaches run. The wiki fills two cells, as a catalogue of pages that also link to one another. Outlined: defined, not run. No cell: the combination makes no sense; for example, a rule is too small to be a file, a step is nothing without the steps it leads to, and a transcript or summary records one task and does not link to others. The 52 cells that make sense give 51 approaches.</figcaption>
+<figcaption><b>Figure 7.</b> The approaches. Rows are grouped by what an entry records: what happened in a task, what is true, or what to do. Filled: the thirteen approaches run. The wiki fills two cells, as a catalogue of pages that also link to one another. Outlined: defined, not run. No cell: the combination makes no sense; for example, a rule is too small to be a file, a step is nothing without the steps it leads to, and a transcript or summary records one task and does not link to others. The 52 cells that make sense give 51 approaches.</figcaption>
 </figure>
 
 <p class="caption"><b>Table 4.</b> Entry types and indexes. "Loaded" means placed in the agent's context at the start of every task, as the <code>AGENTS.md</code> file the CLI reads.</p>
@@ -301,13 +375,13 @@ about how to debug.
 
 After each task on A, the agent is shown how its answer was graded and the
 correct fix, as a change to the given module. It then updates the KB.
-Section 2 is the reason: without this step a KB would record failures as
+Section 3 is the reason: without this step a KB would record failures as
 successes. It is also how a KB is fed in practice, since the fix for a closed
 bug is known. Only A's results are ever shown. On B nothing is shown and
 nothing a run writes is kept.
 
 This is feedback from the grader, and every result here depends on it
-(section 6). The instructions also tell the agent that earlier and later
+(section 7). The instructions also tell the agent that earlier and later
 tasks are different designs. That is true on B but not of most of the build:
 28 of A's 45 tasks follow a task of the same module, whose correct file they
 share.
@@ -334,7 +408,7 @@ module of B appears in A. Both were committed before any frozen run (commit
 `1852b56`, 18 November, 13:46 US Eastern). The wording here has been edited
 since; the predictions have not.
 
-## 4. Results
+## 5. Results
 
 _Pending: written when the frozen runs on B have finished._
 
@@ -355,7 +429,7 @@ _Pending: written when the frozen runs on B have finished._
 
 <figure>
 <img src="../reports/main/figures/tasks_by_approach.svg" alt="Every task on set B under the baseline and each approach, marked by whether it passed more often, as often or less often than with no KB.">
-<figcaption><b>Figure 7.</b> Every task on set B. The top row is the baseline, shaded as in Figure 3; below it each approach's run is marked against the baseline's three runs. Columns are grouped by module, labelled with its problem number, and sorted as in Figure 3.</figcaption>
+<figcaption><b>Figure 8.</b> Every task on set B. The top row is the baseline, shaded as in Figure 4; below it each approach's run is marked against the baseline's three runs. Columns are grouped by module, labelled with its problem number, and sorted as in Figure 4.</figcaption>
 </figure>
 
 <p class="caption"><b>Table 7.</b> Build runs on A against the baseline on A, split by whether the KB had already been shown a task of the same module, with B for comparison. Each build task is solved before its own result is shown. A task of a module met before shares its correct file with that earlier task, whose fix the KB was shown, and it comes later in the order, when the KB is larger.</p>
@@ -374,15 +448,15 @@ _Pending: written when the frozen runs on B have finished._
 
 <figure>
 <img src="../reports/main/figures/seen_and_unseen.svg" alt="For each approach, the change in pass rate against no KB on set A for modules the KB had met before, on set A for modules new to it, and on set B.">
-<figcaption><b>Figure 8.</b> The change in pass rate against no KB on the same tasks, for build runs on set A whose module the KB had met before, build runs whose module was new to it, and the frozen runs on set B. Rows as in Figure 1. On set A each task is solved before its own result is shown.</figcaption>
+<figcaption><b>Figure 9.</b> The change in pass rate against no KB on the same tasks, for build runs on set A whose module the KB had met before, build runs whose module was new to it, and the frozen runs on set B. Rows as in Figure 1. On set A each task is solved before its own result is shown.</figcaption>
 </figure>
 
-## 5. Discussion
+## 6. Discussion
 
 ### What the KBs came to hold
 
-Section 3 expected a KB read on every task to carry general rules, above all
-the lesson of section 2: repair the bug and keep the rest of the module. The
+Section 4 expected a KB read on every task to carry general rules, above all
+the lesson of section 3: repair the bug and keep the rest of the module. The
 agents wrote something else. The playbook, a single file of rules, ended the
 build with 32 rules, and each names one kind of design and its fix:
 
@@ -398,13 +472,13 @@ approaches is then mostly how many cases the agent reads, and how.
 
 _Pending: what worked, what failed, and how the choice of A affects B._
 
-## 6. What these results do not show
+## 7. What these results do not show
 
 - _Root cause._ The grader checks the repair, not the diagnosis. Whether the
   agent found the cause comes only from a model's reading of the trajectory.
 - _A KB built without feedback._ Every KB here was written by an agent that
   had just been shown the verdict and the correct fix. Without it, a KB would
-  likely record failed runs as successes (section 2).
+  likely record failed runs as successes (section 3).
 - _Variation between builds._ Each KB comes from one order of A and each
   approach was run once on B. The baseline's repeats differ little
   (section 1, Measures), but a gap between two approaches may reflect one
@@ -440,7 +514,7 @@ Three tasks are left out: the three cases of `Prob013_least_common_multiple`.
 Its reference drives an output to high impedance, which its own testbench counts as a
 mismatch, so no answer can pass. The check described in section 1 found it.
 
-## 7. Further work
+## 8. Further work
 
 - Three builds per approach, each over a different order of A, to measure
   how much a KB depends on what it met first.
@@ -635,7 +709,7 @@ after review, with a note in the experiment's `reviews.json`. In the first,
 the agent read its KB at `/kb`, or declined to, and the judge counted the
 path as outside the workspace. In the second, a build task's KB already
 held the fix because an earlier task of the same module had been shown it
-(section 3). One flag of the second kind was labelled as targeting the
+(section 4). One flag of the second kind was labelled as targeting the
 grader: the agent kept a traffic-light module's reset timing against the
 written specification because its KB recorded three earlier fixes of the same
 module that kept it. The runs whose evidence did not explain itself were read
