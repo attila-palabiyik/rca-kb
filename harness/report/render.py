@@ -275,6 +275,68 @@ def _table(header: list[str], body: list[list]) -> list[str]:
     return lines + [""]
 
 
+def _label(category: str) -> str:
+    return category.replace("_", " ")
+
+
+def _body_sections(report: dict) -> list[str]:
+    """The narrow tables the written report's body uses. The wide ones follow."""
+    out = []
+    baseline = next((sides for sides in report["conditions"].values()
+                     if any(m["mode"] == "baseline" for m in sides.values())), None)
+    if baseline:
+        out += ["## Baseline", ""]
+        body = []
+        for side, m in sorted(baseline.items()):
+            k = m["repeats"]
+            body.append([side, m["tasks"], m["runs"], _interval(m["pass_rate_interval"]),
+                         _pct(m[f"pass@{k}"]), _pct(m[f"pass^{k}"]),
+                         f"{m['tokens_per_run_total'] / 1000:.0f}k", f"${m['cost_per_run']:.3f}",
+                         f"{m['seconds_mean']:.0f} s"])
+        out += _table(["Side", "Tasks", "Runs", "Pass rate (95% interval)", "pass@3", "pass^3",
+                       "Tokens per run", "Cost per run", "Time to solution"], body)
+        for side, m in sorted(baseline.items()):
+            k = m["repeats"]
+            always, ever = m[f"pass^{k}"], m[f"pass@{k}"]
+            out += [f"On side {side}, {_pct(always)} of tasks pass in every repeat, "
+                    f"{_pct(1 - ever)} in none, and {_pct(ever - always)} in some but not all.", ""]
+
+        rated = {side: m["limitation_rates"] for side, m in sorted(baseline.items())
+                 if m.get("limitation_rates")}
+        if rated:
+            out += ["## Baseline limitations", ""]
+            categories = sorted({c for rates in rated.values() for c in rates},
+                                key=lambda c: -max(r.get(c, 0) for r in rated.values()))
+            out += _table(["Limitation", *[f"Side {side}" for side in rated]],
+                          [[_label(c), *[_pct(rates.get(c, 0.0)) for rates in rated.values()]]
+                           for c in categories])
+            for name, measured in report["trust"]["assessment_self_agreement"].items():
+                if measured.get("runs") and name == "baseline":
+                    out += [f"Share of runs showing each limitation, from a model's reading of every run. "
+                            f"Read twice, the reader named the same set of limitations for "
+                            f"{_pct(measured['same_set'])} of {measured['runs']} runs.", ""]
+
+    compared = [(name, entry["vs_baseline"]) for name, entry in report["comparisons"].items()
+                if (entry.get("vs_baseline") or {}).get("tasks")]
+    if compared:
+        out += ["## Results on B", ""]
+        compared.sort(key=lambda item: -(item[1]["pass_rate_difference"]["value"] or 0))
+        body = []
+        for name, versus in compared:
+            sides = report["conditions"].get(f"{name}/eval", {})
+            own = sides.get("B", {})
+            body.append([name.removeprefix("kb-"),
+                         _pct(own.get("pass_rate")) if own else "",
+                         _interval(versus["pass_rate_difference"], signed=True),
+                         f"{versus['helped']} / {versus['harmed']}",
+                         _interval(versus["token_ratio"], pct=False),
+                         _interval(versus["time_ratio"], pct=False)])
+        out += _table(["Approach", "Pass rate", "Difference from baseline (95% interval)",
+                       "Tasks helped / harmed", "Tokens, ratio to baseline", "Time, ratio to baseline"],
+                      body)
+    return out
+
+
 def _markdown(report: dict) -> str:
     out = ["# Report", ""]
     if report["provisional"]:
@@ -282,6 +344,8 @@ def _markdown(report: dict) -> str:
                 "by Verdict alone.", ""]
     out += [f"Experiments: {', '.join(report['experiments'])}. Model: `{report['model']}`. "
             f"Prices: {report['prices']['source']}, {report['prices']['date']}.", ""]
+
+    out += _body_sections(report)
 
     out += ["## Conditions", ""]
     body = []

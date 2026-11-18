@@ -1,0 +1,4 @@
+- Added [FSM state encodings](fsm-state-encodings.md) from the five-state Moore `TopModule` grading result (261 of 261 samples matched).
+- Added [Shift-register output timing](shift-register-output-timing.md) from the nine-bit `TopModule` grading result (16 of 237 samples differed after using the next window).
+- Added [FSM output timing and reset](fsm-output-reset.md) from the six-bit `TopModule` grading result (one of 1,215 samples differed after removing the direct output reset check).
+- Added [FSM transition tables](fsm-transition-tables.md) from the five-state Moore `TopModule` task with a wrong `S4` exit (261 of 261 grading samples matched after the one-line fix).

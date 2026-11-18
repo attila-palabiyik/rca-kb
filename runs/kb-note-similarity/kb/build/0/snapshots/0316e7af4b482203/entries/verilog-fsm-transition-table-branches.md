@@ -1,0 +1,5 @@
+# Check both input branches against the FSM transition table
+
+When a Verilog FSM uses a ternary for each state's transitions, check the true and false destinations separately against the input columns of the specification. Identical destinations can be intentional, so use the transition table to decide. Tests that only drive the high input can miss an incorrect low-input destination. For a Moore machine, check the destination state or continue far enough to distinguish it through the outputs. Two different destinations can produce the same output immediately after the transition.
+
+In the five-state Moore `TopModule` task, `S4` used `data ? S1 : S1`, so the high-input transition was correct but the low-input transition also entered `S1`. Changing only the false branch to `S0` matched all 261 grading samples. A local Icarus Verilog test checked both input values from every state, the state-dependent `flag`, and active-low reset from `S4`. Checking `flag` alone immediately after leaving `S4` would miss the bug because both `S0` and `S1` drive it low.

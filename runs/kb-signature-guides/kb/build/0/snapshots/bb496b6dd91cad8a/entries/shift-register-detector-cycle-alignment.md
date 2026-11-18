@@ -1,0 +1,9 @@
+# Cycle alignment in a shift-register sequence detector
+
+Applies when a detector combines comparisons on different parts of a shift register and misses matches, reports false matches, or pulses one cycle away from the expected edge.
+
+1. Trace the shift register and each comparison immediately before and after a rising edge. A clocked comparison reading the shift register sees its pre-edge value because the shift uses a nonblocking assignment. A combinational comparison settles using the post-edge value. In the original detector, the suffix flag was clocked and the prefix flag was combinational, so their AND combined two different windows.
+2. Use any existing clocked comparison as evidence of the intended output stage. Write down which edge captures the last bit and which edge reports the match. In this task the correct fix clocked the prefix flag with the same active-low asynchronous reset as the suffix flag. Both compared the pre-edge register, so their AND reported the match one rising edge after the last bit was sampled.
+3. Drive an isolated match followed by a bit that makes the new window fail. Check the output after both edges, and check reset while the output is high. For exhaustive tests, calculate the expected match from the appropriate window before updating the testbench history when the output is defined to report the pre-edge register.
+
+Source task involved `TopModule.sv`, a 9-bit detector for `011XXX110` with mixed combinational and registered comparisons. The submitted fix registered a comparison of the incoming window and reported the match on the same edge as the last bit. Its Icarus test passed all 512 windows, overlapping matches, and reset, but the testbench shifted its history before computing the expected output and therefore encoded the same latency assumption as the fix. The grader reported 16 mismatches in 237 samples and supplied the prefix-only clocking change above.

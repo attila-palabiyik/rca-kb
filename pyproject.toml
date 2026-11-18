@@ -9,7 +9,10 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = [
+    "markdown>=3.11.3",
+    "pytest>=8",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

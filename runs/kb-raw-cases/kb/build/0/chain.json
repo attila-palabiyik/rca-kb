@@ -88,6 +88,54 @@
       "before": "3699b1100ec941c0",
       "after": "4bd92d1a2e993cdb",
       "status": "completed"
+    },
+    {
+      "task_id": "state_machine__Prob003_non-overlapping_sequence_detect",
+      "before": "4bd92d1a2e993cdb",
+      "after": "14025f1b592a5d98",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+      "before": "14025f1b592a5d98",
+      "after": "f411599b1c7d662e",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+      "before": "f411599b1c7d662e",
+      "after": "5a8e536c49957bfd",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob028_up_and_down_counter",
+      "before": "5a8e536c49957bfd",
+      "after": "d2afd39f0a32dc0c",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob002_extraneous_items_sequence_detect",
+      "before": "d2afd39f0a32dc0c",
+      "after": "ff6b9a98696c4ae3",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob028_up_and_down_counter",
+      "before": "ff6b9a98696c4ae3",
+      "after": "90e7b78b46d4df22",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob008_non-integer_data_width_conversion_24to128",
+      "before": "90e7b78b46d4df22",
+      "after": "2a278437ad984094",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit",
+      "before": "2a278437ad984094",
+      "after": "e36eb864034e98f5",
+      "status": "completed"
     }
   ],
   "final": null

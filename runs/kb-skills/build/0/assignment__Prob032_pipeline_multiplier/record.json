@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-skills/build/0/assignment__Prob032_pipeline_multiplier",
+  "experiment": "kb-skills",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "skills",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob032_pipeline_multiplier",
+  "repeat": 0,
+  "position": 6,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "52859c2c02c34720",
+    "harness_commit": "ee8407eccbd079aefd8f4fc9d8f9b33d1e81529b",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:40:59.140916Z",
+      "ended": "2026-11-18T18:41:28.795725Z",
+      "usage": {
+        "input_uncached": 17027,
+        "input_cached": 73300,
+        "input_cache_write": 17009,
+        "output": 1480,
+        "responses": 6
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T18:42:29.663900Z",
+      "ended": "2026-11-18T18:42:56.889677Z",
+      "usage": {
+        "input_uncached": 4792,
+        "input_cached": 118686,
+        "input_cache_write": 4774,
+        "output": 878,
+        "responses": 6
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "0e93e6220aa79ea2",
+    "after": "367eeb50a694d1cf",
+    "changed": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-summaries/build/0/state_machine__Prob020_write_state_machine_two_stage",
+  "experiment": "kb-summaries",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "summaries",
+    "snapshot": null
+  },
+  "task_id": "state_machine__Prob020_write_state_machine_two_stage",
+  "repeat": 0,
+  "position": 3,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "3fef61bdcc196f64",
+    "harness_commit": "ee8407eccbd079aefd8f4fc9d8f9b33d1e81529b",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:29:50.973962Z",
+      "ended": "2026-11-18T18:30:24.310902Z",
+      "usage": {
+        "input_uncached": 16258,
+        "input_cached": 86239,
+        "input_cache_write": 16237,
+        "output": 1451,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T18:31:37.083991Z",
+      "ended": "2026-11-18T18:31:57.827141Z",
+      "usage": {
+        "input_uncached": 1338,
+        "input_cached": 49859,
+        "input_cache_write": 1329,
+        "output": 394,
+        "responses": 3
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "3ac3dd5b1abdeb29",
+    "after": "e4a02ad937fc4eb4",
+    "changed": true
+  }
+}

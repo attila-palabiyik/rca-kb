@@ -64,6 +64,30 @@
       "before": "5bb2ce4f961a4bb7",
       "after": "ba4a7a6776d8391d",
       "status": "completed"
+    },
+    {
+      "task_id": "state_machine__Prob020_write_state_machine_two_stage",
+      "before": "ba4a7a6776d8391d",
+      "after": "f7a47f54a27738ab",
+      "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob022_synchronous_FIFO",
+      "before": "f7a47f54a27738ab",
+      "after": "fcea061eb1ba3526",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob008_non-integer_data_width_conversion_24to128",
+      "before": "fcea061eb1ba3526",
+      "after": "f6e69d4795a74e92",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob032_pipeline_multiplier",
+      "before": "f6e69d4795a74e92",
+      "after": "fba2fbd1def30a7a",
+      "status": "completed"
     }
   ],
   "final": null

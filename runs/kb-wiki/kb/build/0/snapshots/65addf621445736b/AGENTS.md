@@ -1,0 +1,5 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Diagnose aliased state constants that make an expected Moore output unreachable.
+- [Shift-register output timing](entries/shift-register-output-timing.md) — Align slice predicates to the same sampled window and verify the expected output latency.
+- [FSM output timing and reset](entries/fsm-output-reset.md) — Decode terminal states at the intended edge and give reset priority in combinational Moore outputs.
+- [FSM transition tables](entries/fsm-transition-tables.md) — Check each state and input combination, including both exits from a Moore output state.
+- [FIFO pointer clocking](entries/fifo-pointer-clocking.md) — Advance each stored pointer on the same clock edge as its RAM operation.
