@@ -11,12 +11,19 @@ from __future__ import annotations
 import math
 import random
 from collections import defaultdict
-from statistics import mean, pstdev
+from statistics import pstdev
 
 from .metrics import Row, by_task, cost, task_rate, total_tokens
 
 RESAMPLES = 2000
 SEED = 1
+
+
+def mean(values) -> float:
+    """The arithmetic mean of floats. statistics.mean computes in exact
+    fractions, which made the 2,000-draw bootstraps take many minutes."""
+    values = list(values)
+    return math.fsum(values) / len(values)
 
 
 def bootstrap(per_task: dict[str, float], group_of: dict[str, str], statistic=mean,
