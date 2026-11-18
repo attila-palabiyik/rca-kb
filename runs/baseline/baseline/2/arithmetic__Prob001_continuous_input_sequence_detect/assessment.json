@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "match <= ({a_tem[6:0], a} == 8'b0111_0001);",
-      "note": "The patch fixed the shift direction but also made match compare the newly shifted value instead of the pre-edge register value, advancing the output by one clock cycle."
+      "note": "The patch fixed the shift direction but also made `match` compare the newly shifted value, moving the output pulse one clock edge earlier than the original registered comparison."
     },
     {
       "category": "test_did_not_test",
       "step": 8,
       "quote": "match !== (expected == 8'h71)",
-      "note": "The test updated expected before checking match, so it enforced the agent's same-edge timing assumption rather than catching the change from the original registered timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "word_index < 256",
-      "note": "Sweeping all 256 histories was unnecessary for this fix; a directed pattern followed by one more clock edge could distinguish the shift direction and both match timings."
+      "note": "The test checked `match` against the updated history, so it confirmed the agent's same-edge assumption instead of detecting the regression in output timing."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5551,
-    "output": 240
+    "input": 5583,
+    "output": 173
   }
 }

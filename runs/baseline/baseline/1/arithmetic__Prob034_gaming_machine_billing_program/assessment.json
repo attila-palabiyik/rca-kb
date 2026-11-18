@@ -3,14 +3,8 @@
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "The cleanup command caused the tool to reject the entire first test invocation, so the agent had to resubmit the testbench."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "warning: Not a git repository.",
-      "note": "The trailing Git check could not run in this workspace and gave the overall command a nonzero exit status even though the simulation passed."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the agent to resubmit the test with a different temporary-file wrapper, and the follow-up Git check also failed because the workspace was not a Git repository."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7624,
-    "output": 144
+    "input": 7656,
+    "output": 96
   }
 }

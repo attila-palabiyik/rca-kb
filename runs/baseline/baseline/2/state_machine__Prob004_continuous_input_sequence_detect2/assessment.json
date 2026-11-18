@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "The final 0 of 0110 and the new 1 form 01",
+      "note": "The patch correctly preserves `s3_d011` on invalid cycles, but also changes two post-match transitions to reuse the final zero, producing overlapping matches that the original and reference FSMs do not report."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test exercised overlapping inputs but used a rolling-history oracle that expected the agent's new overlap behavior, so it passed despite the regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup wrapper forced the simulation command to be resubmitted, and the retry appended a Git check that failed because the workspace was not a repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8873,
+    "output": 367
+  }
+}

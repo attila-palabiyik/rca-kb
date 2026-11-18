@@ -1,34 +1,16 @@
 {
   "limitations": [
     {
-      "category": "missed_the_bug",
-      "step": 8,
-      "quote": "out2 <= vend && sampled_sel;",
-      "note": "The rewrite did not restore the required output decode: with beverage 2 selected, `S2_5` should produce `010` and `S3` should produce `011`."
-    },
-    {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "always @(negedge clk or negedge rst) begin",
-      "note": "The rewrite moved dispensing outputs from combinational decoding of the rising-edge FSM to falling-edge registers and introduced new coin-counting and change-queue behavior."
+      "quote": "out2 <= vend && sampled_sel;",
+      "note": "The rewrite corrected beverage 2\u2019s exact-payment and overpayment outputs, but it also replaced the original rising-edge FSM and combinational output decoding with edge-filtered coin inputs, sampled selection, and falling-edge output registers."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "new_coins = coins & ~last_coins;",
-      "note": "The testbench mirrored the rewrite\u2019s edge-counting and change-queue rules and checked dispensing only after the falling edge, so it could pass without detecting the required FSM output mismatch."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 7,
-      "quote": "tools.clock__curr_time({})",
-      "note": "Checking the wall-clock time did not help diagnose or verify the Verilog defect."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 10,
-      "quote": "assert change < 8",
-      "note": "The exhaustive width check validated arithmetic introduced by the rewrite rather than the two incorrect output encodings."
+      "quote": "if ({out1, out2, out3} !== expected)",
+      "note": "The testbench modeled the rewrite\u2019s coin and change rules and checked outputs only after the falling edge, so its passing result could not detect the regression in when the original FSM presents a vend."
     }
   ],
   "judge": {
@@ -36,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7741,
-    "output": 438
+    "input": 7773,
+    "output": 368
   }
 }

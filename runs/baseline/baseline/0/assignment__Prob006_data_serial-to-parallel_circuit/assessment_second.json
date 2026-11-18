@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter rollover but also made `ready_a` high during reset and gated `valid_b` with `valid_a`, changing the original behavior when input stalls before the sixth bit."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (ready_a !== 1 || valid_b !== expect_valid || data_b !== previous_output)",
+      "note": "The test exercised reset and sixth-bit stalls, but its expected outputs encoded the rewrite's always-high `ready_a` and sixth-bit-only `valid_b`, so it could not flag either deviation from the reference behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7465,
+    "output": 190
+  }
+}

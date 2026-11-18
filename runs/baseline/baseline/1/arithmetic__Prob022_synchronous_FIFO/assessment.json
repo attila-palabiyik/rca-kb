@@ -3,20 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "wire wenc = rst_n && winc && !wfull;",
-      "note": "The rewrite fixed the inverted full check but also inhibited RAM writes during reset, whereas the reference fix leaves reset handling unchanged."
+      "quote": "wire renc = rst_n && rinc && !rempty;",
+      "note": "The rewrite fixed the inverted write enable but also gated both RAM enables with reset, changing how the RAM handles a request when reset is asserted at a clock edge."
     },
     {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "The Git status check failed and prevented the chained AGENTS.md lookup from running, so the agent checked for that file in a separate call."
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (wfull !== 0 || rempty !== 1) $fatal(1, \"Mid-run reset flags\");",
+      "note": "The reset test asserted reset on a falling edge and checked only the flags, so it could not detect the changed RAM behavior when reset and an eligible request coincide with a rising edge."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the test with a different temporary-file approach."
+      "note": "The prohibited cleanup command caused the entire test invocation to be rejected before simulation, requiring the harness setup to be resubmitted with a different cleanup method."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 10663,
-    "output": 315
+    "input": 10695,
+    "output": 401
   }
 }

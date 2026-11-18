@@ -3,14 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "match = rst_n && (pstate == s6);",
-      "note": "The patch fixed the state collision and used the requested wildcard sensitivity list, but it also changed four-state simulation behavior: the new output expressions can propagate unknowns where the original decoder returned zero, and the merged terminal transitions handle unknown data differently."
+      "quote": "idle, s6, sf6:",
+      "note": "The `sf6` encoding fix was correct, but merging the terminal transitions also changed how unknown input bits are handled: the new `if` selects `sf1`, whereas the original ternary propagates uncertainty into the next state."
     },
     {
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation, so the agent had to submit it again."
+      "note": "The cleanup command caused the entire test setup to be rejected before simulation, so the agent had to resubmit it with different cleanup."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8291,
-    "output": 259
+    "input": 8323,
+    "output": 461
   }
 }

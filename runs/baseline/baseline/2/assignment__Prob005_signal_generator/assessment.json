@@ -4,31 +4,19 @@
       "category": "missed_the_bug",
       "step": 7,
       "quote": "cnt == 5'd20",
-      "note": "The square-wave counter still wraps at 20 instead of 19, leaving the incorrect 21-clock period in place."
+      "note": "The square-wave counter still runs through 20, producing a 21-clock period instead of the expected 20-clock period with 10 clocks high and 10 clocks low."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "(cnt >= 5'd9 && cnt < 5'd20) ? PEAK : 5'd0",
-      "note": "The rewrite forces the square-wave output low on entry instead of holding the prior output until a transition, and the new triangle logic changes the first post-reset sample from 31 to 1."
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd20) ? PEAK : 5'd0;",
+      "note": "The rewrite forces the output low on entry to square mode instead of holding the previous sample until the next scheduled transition, and it changes the triangle's first post-reset step from a decrement to an increment."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "phase = i % 21;",
-      "note": "The testbench treated the wrong 21-clock square period and the rewritten triangle startup and mode-switch behavior as expected, so passing did not validate the required timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire simulation invocation, so the agent had to resubmit the test."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The Git status check could not provide any information in this workspace."
+      "note": "The test treats the faulty 21-clock square period as correct, so it passes with the off-by-one bug still present."
     }
   ],
   "judge": {
@@ -36,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6908,
-    "output": 413
+    "input": 6940,
+    "output": 338
   }
 }

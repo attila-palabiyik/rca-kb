@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "always @* begin",
+      "note": "The patch fixed the normal-mode deduction guard but made the warning lights combinational instead of preserving their rising-edge updates based on the pre-edge balance."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "rst_n = 1;\n        check(0, 2'b01);",
+      "note": "The passing test expected red to turn on immediately after reset release, so it validated the new combinational behavior rather than checking that red stayed off until the next rising edge."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6920,
+    "output": 165
+  }
+}

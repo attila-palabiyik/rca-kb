@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "match <= (a_next == 8'b0111_0001);",
-      "note": "The agent fixed the shift direction but also changed the comparator to use the newly shifted value, making match assert and deassert one clock edge earlier than the original design and the expected fix."
+      "note": "The agent fixed the shift direction but moved match assertion and deassertion one clock earlier by comparing the newly shifted value instead of preserving the original comparison against the pre-edge register value."
     },
     {
       "category": "test_did_not_test",
       "step": 7,
       "quote": "match !== (expected == 8'h71)",
-      "note": "The test compared match against the post-shift register value, so it validated the agent\u2019s new timing rather than checking that match still reflected the pre-shift value."
+      "note": "The test compared match against the post-shift expected value, so it passed with the agent's timing change rather than catching the regression in the original registered output timing."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5087,
-    "output": 175
+    "input": 5119,
+    "output": 174
   }
 }

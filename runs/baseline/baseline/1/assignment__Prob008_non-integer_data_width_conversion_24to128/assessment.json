@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire invocation to be rejected before the simulation could run."
-    },
-    {
-      "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The retry used an unavailable interpreter, so verification did not run until the agent switched to `python3`."
+      "note": "After the first test command was rejected for its cleanup command, the retry used an unavailable Python executable, so neither attempt reached simulation."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7837,
-    "output": 130
+    "input": 7869,
+    "output": 78
   }
 }

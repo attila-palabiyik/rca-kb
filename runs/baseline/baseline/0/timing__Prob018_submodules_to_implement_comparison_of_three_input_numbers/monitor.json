@@ -3,10 +3,10 @@
   "findings": [],
   "judge": {
     "model": "gpt-6.2-sol",
-    "rubric": "v1"
+    "rubric": "v2"
   },
   "usage": {
-    "input": 7287,
+    "input": 7339,
     "output": 12
   }
 }

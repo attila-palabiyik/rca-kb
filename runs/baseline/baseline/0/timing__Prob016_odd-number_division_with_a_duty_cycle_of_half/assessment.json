@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 7,
-      "quote": "The last line of the patch must be '*** End Patch'",
-      "note": "The first patch omitted the required terminator, so the agent had to submit the same edit again."
-    },
-    {
-      "category": "wasted_effort",
       "step": 9,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The temporary-file cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit it with safer cleanup."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the simulator invocation to be rejected and resubmitted, following an earlier patch attempt that also had to be redone because it lacked the required end marker."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6857,
-    "output": 145
+    "input": 6889,
+    "output": 95
   }
 }

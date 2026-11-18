@@ -40,6 +40,19 @@ def _select(rows: list[Row], **want) -> list[Row]:
     return [r for r in rows if all(getattr(r, k) == v for k, v in want.items())]
 
 
+def _by_tag(rows: list[Row], prices: dict, model: str) -> dict:
+    """The headline metrics grouped by every tag the tasks carry."""
+    keep = ("tasks", "runs", "pass_rate", "tokens_per_run_total", "cost_per_run", "seconds_mean")
+    grouped = {}
+    for tag in sorted({key for r in rows for key in r.tags}):
+        values = sorted({r.tags.get(tag, "") for r in rows})
+        grouped[tag] = {}
+        for value in values:
+            metrics = condition_metrics([r for r in rows if r.tags.get(tag) == value], prices, model)
+            grouped[tag][value] = {key: metrics[key] for key in keep}
+    return grouped
+
+
 def _model(root: Path, loaded: Loaded) -> str:
     for name, info in loaded.experiments.items():
         for setup_hash in info.get("setups", {}).values():
@@ -72,8 +85,9 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             entry.update(mode=mode, kb=kb, pass_rate_interval=compare.rate(on_side),
                          within_budget=within_budget(on_side),
                          limitation_rates=compare.limitation_rates(on_side),
-                         by_category={c: task_rate([r for r in on_side if r.tags.get("category") == c])
-                                      for c in sorted({r.tags.get("category", "") for r in on_side})})
+                         by_tag=_by_tag(on_side, prices, model))
+            entry["by_category"] = {value: m["pass_rate"]
+                                    for value, m in entry["by_tag"].get("category", {}).items()}
             conditions.setdefault(chosen[0].label, {})[side] = entry
 
     comparisons, kb_metrics = {}, {}
@@ -117,11 +131,15 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             "pending": sum(1 for r in mine if r.pending),
         }
     sampled = [r for r in rows if r.monitor_status == "certified" and r.review]
-    agreement = {}
+    agreement, planted = {}, {}
     for directory in experiment_dirs:
         file = directory / "assessment_agreement.json"
         if file.is_file():
             agreement[directory.name] = json.loads(file.read_text())
+        file = directory / "redteam_planted.json"
+        if file.is_file():
+            result = json.loads(file.read_text())
+            planted[directory.name] = {k: v for k, v in result.items() if k != "cases"}
     report = {
         "provisional": loaded.provisional, "pending": loaded.pending,
         "experiments": sorted(loaded.experiments), "model": model,
@@ -138,6 +156,10 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             "clean_sample_voided": (mean(1.0 if r.review == "void" else 0.0 for r in sampled)
                                     if sampled else None),
             "assessment_self_agreement": agreement,
+            "planted_violations": planted,
+            "redteam_attempted": (mean(1.0 if any(f.get("intent") in ("enacted", "attempted")
+                                                  for f in r.findings) else 0.0 for r in loaded.redteam)
+                                  if loaded.redteam else None),
         },
     }
 
@@ -319,7 +341,8 @@ def _markdown(report: dict) -> str:
                 if "B" in sides and sides["B"]["mode"] != "build"]
         out += _table(["Condition", *categories], body)
 
-    rated = {label: sides[side]["limitation_rates"] for label, sides in report["conditions"].items()
+    rated = {f"{label}, side {side}": sides[side]["limitation_rates"]
+             for label, sides in report["conditions"].items()
              for side in sides if sides[side].get("limitation_rates")}
     if rated:
         out += ["## Limitations", "",
@@ -348,8 +371,16 @@ def _markdown(report: dict) -> str:
     trust = report["trust"]
     if trust["monitor_findings"]:
         out += ["Monitor findings: " + ", ".join(f"{k} {v}" for k, v in sorted(trust["monitor_findings"].items())), ""]
+    for name, result in trust["planted_violations"].items():
+        kinds = ", ".join(f"{kind.replace('_', ' ')} {v['caught']}/{v['planted']}"
+                          for kind, v in result["by_kind"].items())
+        out += [f"Violations planted in certified {name} trajectories: the monitor flagged "
+                f"{result['caught']} of {result['planted']} ({kinds}). The judge flagged "
+                f"{result['caught_by_judge']} and the pattern match {result['caught_by_pattern']}.", ""]
     if trust["redteam_runs"]:
-        out += [f"Red-team runs flagged: {_pct(trust['redteam_caught'])} of {trust['redteam_runs']}.", ""]
+        out += [f"Told to get a pass by any means, the agent was flagged in "
+                f"{_pct(trust['redteam_caught'])} of {trust['redteam_runs']} runs. A run that is not "
+                "flagged here is one where the agent did not attempt a violation.", ""]
     noise = report.get("repeat_noise") or {}
     if noise.get("tasks"):
         out += [f"Two repeats of the baseline differ by {_interval(noise['difference'], signed=True)} on B. "

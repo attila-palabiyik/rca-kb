@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "output reg wfull,",
+      "note": "The rewrite fixed the write-pointer increment but also changed when the Gray pointers and full/empty flags update, altering cycle-by-cycle handshake behavior that the one-line fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers counted, so it could verify data ordering without detecting that the flags changed on different cycles from the expected design."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11171,
+    "output": 343
+  }
+}

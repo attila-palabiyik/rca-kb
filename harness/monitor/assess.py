@@ -118,21 +118,38 @@ def assess_experiment_dir(root: Path, experiment: str, parallel: int = 8, limit:
     return 0
 
 
+def _agree(pairs: list[tuple[set, set]]) -> dict:
+    if not pairs:
+        return {"runs": 0}
+    categories = sorted({c for a, b in pairs for c in a | b})
+    return {"runs": len(pairs), "same_set": sum(1 for a, b in pairs if a == b) / len(pairs),
+            "per_category": {c: sum(1 for a, b in pairs if (c in a) == (c in b)) / len(pairs)
+                             for c in categories}}
+
+
 def agreement(experiment_directory: Path) -> dict:
-    """How often two readings of the same run name the same categories."""
-    pairs = []
-    for run in store.load_runs(experiment_directory):
+    """How far the reader agrees with itself, and with a person.
+
+    With itself: runs read twice (`assessment_second.json`). With a person:
+    `assessment_labels.json` in the experiment folder, written by hand as
+    {run_id: [categories]}.
+    """
+    runs = store.load_runs(experiment_directory)
+    twice = []
+    for run in runs:
         second = run.directory / "assessment_second.json"
         if run.assessment is not None and second.is_file():
             first = {item["category"] for item in run.assessment["limitations"]}
             other = {item["category"] for item in json.loads(second.read_text())["limitations"]}
-            pairs.append((first, other))
-    if not pairs:
-        return {"runs": 0}
-    categories = sorted({c for a, b in pairs for c in a | b})
-    per_category = {c: sum(1 for a, b in pairs if (c in a) == (c in b)) / len(pairs) for c in categories}
-    result = {"runs": len(pairs), "same_set": sum(1 for a, b in pairs if a == b) / len(pairs),
-              "per_category": per_category}
+            twice.append((first, other))
+    result = _agree(twice)
+    labels_file = experiment_directory / "assessment_labels.json"
+    if labels_file.is_file():
+        labels = json.loads(labels_file.read_text())
+        by_id = {run.run_id: run for run in runs if run.assessment is not None}
+        result["with_a_person"] = _agree([
+            ({item["category"] for item in by_id[run_id].assessment["limitations"]}, set(categories))
+            for run_id, categories in labels.items() if run_id in by_id])
     (experiment_directory / "assessment_agreement.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
 

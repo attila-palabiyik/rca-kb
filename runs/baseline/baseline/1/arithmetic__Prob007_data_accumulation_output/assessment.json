@@ -3,26 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
-      "note": "The agent fixed the counter handshake but also removed the original `ready_b` guard, so the first accepted word replaces the accumulator when `ready_b` is low instead of being added to it."
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The patch correctly gated the counter on an input handshake, but also removed the original `ready_b` gate on loading the first value, changing `data_out` when a group starts with downstream not ready."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "sum = 0;",
-      "note": "The scoreboard assumed each group starts from zero regardless of `ready_b`, so it exercised the disputed case but treated the extra behavior change as correct."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rejected: rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire test invocation to be rejected before compilation."
+      "note": "The scoreboard assumed each group starts from zero regardless of `ready_b`, so it endorsed the extra behavior change instead of detecting the mismatch."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The second test attempt used an unavailable interpreter and had to be repeated with `python3`."
+      "note": "The same testbench was submitted three times because the first wrapper used a rejected cleanup command and the second invoked an unavailable `python` executable."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8803,
-    "output": 285
+    "input": 8835,
+    "output": 235
   }
 }

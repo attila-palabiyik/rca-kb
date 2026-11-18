@@ -3,26 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "have_first_byte <= !have_first_byte;",
-      "note": "The rewrite stopped idle cycles from advancing the state, but replaced the original three-valid-byte packing sequence with disjoint pairs, dropping the output that combines the second byte\u2019s low nibble with the third byte."
+      "quote": "valid_out <= valid_in && have_first_byte;",
+      "note": "The rewrite counts only valid inputs, fixing the inverted enable, but changes the output cadence from two words per three accepted bytes to one word per pair and drops the word packed from the previous byte\u2019s low nibble and the full current byte."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "step(1, 8'h12, 0, 12'habc);",
-      "note": "The test expected no output on the third accepted byte, so it validated the rewrite\u2019s pairing assumption instead of checking for the required second packed word, 12'hd12."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire first simulation invocation to be rejected, so the test had to be resubmitted."
+      "note": "The passing test explicitly expects no output on the third accepted byte, when the original packing logic with the corrected counter would assert valid and emit 12'hd12."
     },
     {
       "category": "wasted_effort",
       "step": 10,
       "quote": "warning: Not a git repository.",
-      "note": "Running `git diff --check` outside a repository produced usage output and a failing exit status without checking the file."
+      "note": "The first verification command had to be reissued because its cleanup was rejected, and the retried command\u2019s Git check failed outside a repository and had to be replaced with a standalone whitespace check."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8109,
-    "output": 338
+    "input": 8141,
+    "output": 303
   }
 }

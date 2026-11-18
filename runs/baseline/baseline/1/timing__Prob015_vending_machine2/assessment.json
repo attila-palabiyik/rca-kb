@@ -4,31 +4,25 @@
       "category": "missed_the_bug",
       "step": 8,
       "quote": "out1 <= vend && !sel;",
-      "note": "The rewrite still registers the dispense outputs on the rising clock edge instead of decoding them combinationally from the current state and selection."
+      "note": "The rewrite still registered the outputs on the rising edge, so it missed the required combinational response to the current state and selection."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "wire [2:0] change_due = pending_change + new_change;",
-      "note": "The rewrite replaced the original FSM with falling-edge credit accounting and queued change, altering simultaneous-coin handling and change dispensing that the correct fix leaves intact."
+      "note": "Instead of limiting the edit to output decoding, the rewrite replaced the FSM\u2019s coin priority, state transitions, and fixed change outputs with simultaneous coin accumulation and a multi-cycle change queue."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "if (balance >= price) begin",
-      "note": "The testbench used the rewrite\u2019s own balance-and-change model and checked outputs after rising edges, so it could pass without verifying that outputs respond to selection changes between edges."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "git status --short && cat TopModule.sv",
-      "note": "The Git check failed because the workspace was not a repository, preventing the file read and forcing a second command."
+      "note": "The passing test modeled the rewrite\u2019s vend-before-deposit ordering and checked outputs after the rising edge, so it could not catch the missing response to a selection change between edges."
     },
     {
       "category": "wasted_effort",
       "step": 9,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test with different temporary-file handling."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the test setup to be redone, just as the earlier failed Git check forced a separate file-read command."
     }
   ],
   "judge": {
@@ -36,7 +30,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 9015,
-    "output": 494
+    "input": 9047,
+    "output": 491
   }
 }

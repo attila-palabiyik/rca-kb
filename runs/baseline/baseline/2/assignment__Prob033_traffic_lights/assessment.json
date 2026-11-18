@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "{red, yellow, green, clock} <= {3'b100, RED_TIME};",
+      "note": "The rewrite eliminated the erroneous red/green overlap, but it also asserted red during reset and removed the original idle-to-red startup delay, shifting the output sequence the reference preserves."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "localparam [7:0] RED_TIME = 8'd10;",
+      "note": "The rewrite kept the port list but removed the original public state parameters, so existing instantiations that override those parameters no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test expected red to be asserted immediately on reset, so its passing result confirmed the rewrite's timing rather than checking that the original reset and startup behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9262,
+    "output": 438
+  }
+}

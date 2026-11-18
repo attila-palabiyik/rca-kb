@@ -3,26 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "wfull     <= (full_match == rptr_syn);",
-      "note": "The agent fixed the inverted RAM read enable but also rewrote the pointer logic, registered both status flags, and gated RAM enables with reset, changing cycle-by-cycle behavior that the one-line fix preserves."
+      "quote": "rempty    <= (rptr_next == wptr_syn);",
+      "note": "The agent fixed the inverted RAM read enable but also replaced the original pointer and flag logic with registered next-pointer comparisons, changing when wfull and rempty update."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "if (rrstn && rinc && !rempty) begin",
-      "note": "The scoreboard used the DUT\u2019s own flags to decide when transfers occurred and checked flag values only at coarse checkpoints, so it verified FIFO ordering without detecting the altered flag timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The failed Git check prevented the chained file search from running, so the agent had to issue that search separately."
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to expect and checked flag values only after settling, so it verified data ordering but missed the cycle-by-cycle flag timing changes."
     },
     {
       "category": "wasted_effort",
       "step": 9,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "The cleanup trap caused the tool to reject the entire invocation, so no simulation ran and the testbench had to be submitted again."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire simulation command to be rejected and resubmitted, after an earlier failed Git check had already forced a separate file lookup."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 11426,
-    "output": 369
+    "input": 11458,
+    "output": 382
   }
 }

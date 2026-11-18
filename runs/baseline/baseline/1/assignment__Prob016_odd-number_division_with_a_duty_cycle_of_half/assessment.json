@@ -4,25 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clkn <= clkp;",
-      "note": "Replacing the falling-edge counter comparison with a delayed copy of `clkp` restored the 50% duty cycle but shifted both output edges half an input cycle later than the one-line threshold fix."
+      "note": "Copying the positive-edge register on the falling edge fixes the duty cycle but shifts both output transitions half an input cycle later than the intended waveform."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "if ($time % 5 != 0)",
-      "note": "The test checked that transitions landed on some input edge, but never checked which edge they should land on after reset, so it passed despite the phase shift."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation could run."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "for (genvar n = 1; n <= 40; n = n + 1) begin : dividers",
-      "note": "Sweeping 40 divisors tested the rewrite's expanded parameter support rather than focusing on the required divide-by-seven timing."
+      "note": "The test checked pulse widths and periods but accepted transitions on either input edge, so it passed without detecting the half-cycle phase error after reset."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7500,
-    "output": 445
+    "input": 7532,
+    "output": 223
   }
 }

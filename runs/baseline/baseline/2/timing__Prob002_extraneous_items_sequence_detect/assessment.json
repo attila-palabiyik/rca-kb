@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (sample_count == 4'd8) &&",
+      "note": "The rewrite aligned the two comparisons but used the newly shifted window, moving detection one clock earlier for fully sampled patterns and adding a sample-count gate that excludes reset-padded windows."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected = count >= 9 && ((samples & 9'b111000111) == 9'b011000110);",
+      "note": "The test computed its expectation after shifting in the new bit and required nine samples, so even exhaustive pattern coverage validated the rewrite's assumptions rather than checking the original registered timing and reset behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5843,
+    "output": 275
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clkn <= clkp;",
+      "note": "Sampling clkp on the falling edge fixes the duty cycle but shifts both output transitions half an input cycle later than the expected waveform; changing only the clkn threshold from N>>2 to N>>1 preserves the expected phase."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if ($time % 5 != 0)",
+      "note": "The passing test checked pulse widths, period, reset clearing, and alignment to either input edge, but never checked which edge should carry each transition or when the first pulse should start after reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6973,
+    "output": 230
+  }
+}

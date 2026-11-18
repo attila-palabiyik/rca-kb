@@ -3,26 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "wfull <= wfull_next;",
-      "note": "The rewrite fixed the unregistered write-side Gray pointer but also registered the status flags using next-pointer logic and gated RAM enables with reset, changing cycle-by-cycle behavior that the reference fix preserves."
+      "quote": "wgray <= wgray_next;",
+      "note": "The rewrite fixed the unregistered write-side Gray pointer but used next-state Gray pointers and registered the status flags, changing when `wfull` and `rempty` assert and clear compared with the targeted fix."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "if (wrstn && winc && !wfull) begin",
-      "note": "The scoreboard used the DUT's own flags to decide which transfers to expect and checked fill and drain only after waiting several cycles, so it could pass despite incorrect flag and transfer timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "The failed Git status check provided no information about the fix and prevented the chained directory listing from running."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "reads < 400",
-      "note": "An arbitrary minimum read count stopped the sweep at depth 1 even though the unchanged RTL passed that case with 361 ordered reads after the threshold was lowered."
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers to count and checked fill and drain only after settling, so it could pass without detecting the cycle-by-cycle status timing mismatch."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 10843,
-    "output": 358
+    "input": 10875,
+    "output": 180
   }
 }

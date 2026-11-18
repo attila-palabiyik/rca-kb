@@ -2,21 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire invocation before the simulation could run."
-    },
-    {
-      "category": "wasted_effort",
       "step": 9,
-      "quote": "python: command not found",
-      "note": "The retry could not start the simulation because it relied on an unavailable `python` executable."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "warning: Not a git repository.",
-      "note": "The `git diff` command ran despite the failed simulation attempt and produced usage output instead of verifying the edit."
+      "quote": "/bin/bash: line 1: python: command not found",
+      "note": "After the first test command was blocked by its cleanup command, the retry used an unavailable Python executable and ran `git diff` outside a Git repository, so neither attempt reached simulation."
     }
   ],
   "judge": {
@@ -24,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6462,
-    "output": 192
+    "input": 6494,
+    "output": 95
   }
 }

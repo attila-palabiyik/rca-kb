@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "{red, yellow, green} <= 3'b100;",
-      "note": "The rewrite fixes the repeated green reload but also asserts red immediately on reset and removes the original startup delay, whereas the reference fix changes only the green reload condition."
-    },
-    {
-      "category": "broke_the_interface",
-      "step": 7,
-      "quote": "localparam [7:0] RED_TIME = 8'd10;",
-      "note": "The rewrite keeps the ports but removes the original public state parameters, so existing instantiations that override them would no longer compile."
+      "note": "The rewrite eliminated the repeated green reload but also made red assert immediately on reset, removing the all-lights-off startup interval that the one-line fix preserves and shifting the subsequent countdown and light timing."
     },
     {
       "category": "test_did_not_test",
       "step": 7,
       "quote": "check_state(3'b100, 10);",
-      "note": "The test expects the rewrite's immediate red assertion, so it passes without catching the reset and startup timing mismatch with the reference."
+      "note": "The test required red to be active during reset and assumed the rewrite\u2019s startup timing, so passing it did not verify that the fix preserved the original cycle-by-cycle behavior."
     },
     {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "The Git status check failed and provided no information useful to the fix."
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "localparam [7:0] RED_TIME = 8'd10;",
+      "note": "The rewrite removed the original public state parameters, so an existing instantiation that overrides one of them would no longer elaborate."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7645,
-    "output": 361
+    "input": 7677,
+    "output": 383
   }
 }

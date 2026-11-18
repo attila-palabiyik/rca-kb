@@ -1,16 +1,16 @@
 {
   "limitations": [
     {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The Git status check failed because the workspace was not a repository and contributed nothing to the fix."
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (valid_in) begin",
+      "note": "The rewrite preserves behavior for 0/1 inputs but changes X propagation in simulation: at a word boundary, an unknown valid_in now clears valid_out and holds data_out instead of propagating uncertainty as the reference fix does."
     },
     {
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation, so the agent had to submit it again."
+      "note": "The cleanup command caused the entire verification invocation to be rejected before simulation, so the agent had to resubmit the full test command with different cleanup."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7958,
-    "output": 136
+    "input": 7990,
+    "output": 497
   }
 }

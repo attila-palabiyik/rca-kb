@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clk_out_r <= (clk_cnt < (use_div_e ? HIGH_E : HIGH_O));",
-      "note": "The rewrite removed the faulty combinational feedback but also changed the duty-cycle formula and counter sizing, preserving the default waveform while changing behavior for some parameter overrides."
+      "note": "The rewrite fixed the divider selection but also changed the pulse-width rule for parameter overrides; for example, a divisor of 2 now gives one high cycle instead of the two preserved by the reference fix."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "(phase % even_div) < (even_div / 2)",
-      "note": "The testbench assumed the rewrite\u2019s half-period pulse widths, so its passing override tests did not verify that the original duty-cycle behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The recursive cleanup command caused the entire first test invocation to be rejected before compilation."
+      "note": "The test checked the rewritten half-period rule, so it passed without detecting that the patch changed the original output timing for parameter overrides."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "error: Invalid module instantiation",
-      "note": "The second test attempt used the reserved Verilog keyword `small` as an instance name, so compilation failed before simulation."
+      "note": "The agent had to submit the simulation command three times because the first attempt used a rejected cleanup command and the second hit a testbench syntax error before the design could be exercised."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8988,
-    "output": 357
+    "input": 9020,
+    "output": 375
   }
 }

@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "{red, yellow, green} <= 3'b100;",
-      "note": "The rewrite eliminated the simultaneous red and green outputs, but it also made red assert immediately on reset and replaced the original pipelined transition timing, both of which the one-line fix preserves."
+      "note": "The rewrite eliminated the red/green overlap but also made red active during reset and removed the original idle and output pipeline stages, changing the observable startup timing that the one-line fix preserves."
     },
     {
       "category": "test_did_not_test",
       "step": 7,
-      "quote": "for (int n = 9; n >= 1; n--) step(3'b100, n);",
-      "note": "The test assumed red was already active and counting down immediately after reset, so its pass confirmed the rewrite's timing rather than checking that the fix preserved the original startup sequence."
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test asserted the rewrite's immediate-red reset behavior, so its passing result could not establish that the patch preserved the original reset and startup timing."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7565,
-    "output": 269
+    "input": 7597,
+    "output": 275
   }
 }

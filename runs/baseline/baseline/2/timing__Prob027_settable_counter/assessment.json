@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "number <= next_number;",
+      "note": "The rewrite aligned the outputs by making them report the new count rather than the pre-edge count, exposing increments and set values one cycle earlier than intended and changing the reset value of `zero` from 0 to 1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "tick(i[3:0]);",
+      "note": "The test expected each increment or set value on the same edge and derived `zero` solely from the expected number, so it passed the rewrite without checking the intended one-cycle output delay or the low reset value of `zero`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5411,
+    "output": 224
+  }
+}

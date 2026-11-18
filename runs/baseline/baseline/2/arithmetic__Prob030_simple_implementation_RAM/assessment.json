@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "else if (read_en)",
-      "note": "Rewriting the read logic changed four-state simulation behavior: an X or Z on read_en now holds read_data, whereas the original and reference ternary merge the old and addressed values."
+      "note": "The patch also rewrote the read logic, so an X or Z on read_en now holds read_data instead of merging the stored word with the previous output as the original and reference do."
     },
     {
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation, so the agent had to resubmit the testbench using a different temporary-directory approach."
+      "note": "The cleanup command caused the tool to reject the entire verification script before simulation, so the agent had to resubmit the testbench with a different wrapper."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6705,
-    "output": 219
+    "input": 6737,
+    "output": 392
   }
 }

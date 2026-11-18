@@ -3,26 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "wire [PTR_WIDTH-1:0] wptr_next = waddr_next ^ (waddr_next >> 1);",
-      "note": "The rewrite fixed the write increment but also used next-state Gray pointers and registered status flags, changing the cycle-by-cycle timing of wfull and rempty that the one-line fix preserves."
-    },
-    {
-      "category": "changed_more_than_the_bug",
-      "step": 7,
-      "quote": "wire wen = wrstn && winc && !wfull;",
-      "note": "The rewrite also gated RAM access with reset, whereas the original and correct fix leave RAM enables controlled by the request and status flags."
+      "quote": "output reg wfull,",
+      "note": "The rewrite fixed the write-pointer increment but also changed the cycle-by-cycle timing of `wfull` and `rempty` by registering the flags and deriving the Gray pointers from next addresses, whereas the correct fix preserves the original status logic."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "if (writes != D || wfull !== 1)",
-      "note": "The test checked status after allowing several extra cycles and used the DUT's own flags to decide which transfers to score, so it could verify FIFO ordering without detecting the changed flag timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire first simulation attempt to be rejected, so the testbench had to be submitted again."
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard used the DUT\u2019s own flags to decide which transfers counted and checked flag values after fill and drain had settled, so it could pass despite cycle-by-cycle flag timing mismatches."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 11268,
-    "output": 411
+    "input": 11300,
+    "output": 269
   }
 }

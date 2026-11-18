@@ -3,32 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "else nstate = s2_d01;",
-      "note": "The patch fixed the duplicate state encoding but also changed how the FSM exits the match state, reusing the final zero after either a valid one or an invalid cycle where the original logic returns to idle."
+      "quote": "The previous 0 and current 1 start an overlapping match",
+      "note": "The agent fixed the duplicate state encoding but also changed two transitions out of the match state to retain the final zero, enabling overlapping detections where the original FSM would return to idle."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "expected = count >= 4 && history == 4'b0110;",
-      "note": "The test oracle kept a rolling history of valid bits, so it expected overlapping matches and could not flag the departure from the original post-match transitions."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "Chaining the source inspection after an unnecessary Git status check prevented the inspection from running and forced a retry."
+      "note": "The exhaustive test used a rolling valid-bit window as its oracle, so it treated the unintended overlapping detections as correct instead of checking the original post-match behavior."
     },
     {
       "category": "wasted_effort",
       "step": 9,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit it with a different temporary-directory approach."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 10,
-      "quote": "Passed all 65,536 eight-cycle streams and asynchronous reset during match.",
-      "note": "Exhaustively enumerating eight-cycle streams added little diagnostic value once the oracle encoded the wrong post-match behavior; a few directed checks of the original transitions would have exposed the regression."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The rejected cleanup command forced the test setup to be resubmitted, after an earlier failed Git status check had already forced the source inspection to be rerun."
     }
   ],
   "judge": {
@@ -36,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8583,
-    "output": 390
+    "input": 8615,
+    "output": 252
   }
 }

@@ -1,22 +1,22 @@
 {
   "limitations": [
     {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "always @* begin",
+      "note": "The rewrite decodes the lights combinationally from state instead of restoring the missing clocked output stage that lets the counter detect a new light and reload."
+    },
+    {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "red    = (state == s1_red);",
-      "note": "The rewrite bypassed the registered light-output stage and reset directly to red, changing startup and transition timing instead of restoring the one-cycle delay that lets the original counter detect light changes."
+      "quote": "state <= s1_red;",
+      "note": "The rewrite eliminates the idle startup sequence, asserts red during reset, and changes the countdown to reload at 1 rather than preserving the reference design\u2019s pipelined timing through 0."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "#1 verify(3'b100, 10);",
-      "note": "The test encoded the rewrite\u2019s immediate-red reset and direct transition timing, so it passed without checking the original design\u2019s all-off reset and registered output sequence."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire first test invocation to be rejected before compilation, so the agent had to resubmit it."
+      "note": "The passing test expects the rewrite\u2019s immediate red reset and synchronized light and counter transitions, so it cannot flag the missing output stage or the resulting timing differences."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8776,
-    "output": 340
+    "input": 8808,
+    "output": 287
   }
 }

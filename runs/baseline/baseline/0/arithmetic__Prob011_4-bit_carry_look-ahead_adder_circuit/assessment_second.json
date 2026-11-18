@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry in terms of G, P, and the input carry.",
+      "note": "The rewrite fixed the generate equation and satisfied the primitive requirement, but it also replaced the original carry chain with parallel logic, changing the carry propagation path that the reference fix preserves."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The blocked cleanup command forced the combined edit-and-test command to be resubmitted, and a later Git check failed because the workspace was not a repository and had to be replaced with a direct file check."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7438,
+    "output": 221
+  }
+}

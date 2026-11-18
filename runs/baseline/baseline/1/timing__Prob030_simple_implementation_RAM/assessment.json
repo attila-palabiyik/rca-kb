@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "read_data <= (read_addr < 8'd8) ? myRAM[read_addr[2:0]] : 4'b0000;",
-      "note": "The agent fixed the read timing but also made out-of-range reads return zero, whereas the original and reference implementations leave those reads unknown in simulation."
+      "note": "The patch correctly registered the read output but also made out-of-range reads return zero, whereas the reference preserves the original array lookup, which returns an unknown value in simulation."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "read_addr = 9;\\n        step(0);",
-      "note": "The test checked the main timing fix, but its out-of-range case asserted the newly chosen zero result rather than detecting the change from the original behavior."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The first simulation never ran because the cleanup command was rejected, so the agent had to resubmit the test with a different cleanup method."
+      "note": "The out-of-range check asserted the patch's own zero-return assumption, so it passed without detecting the behavior change."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6674,
-    "output": 369
+    "input": 6706,
+    "output": 209
   }
 }

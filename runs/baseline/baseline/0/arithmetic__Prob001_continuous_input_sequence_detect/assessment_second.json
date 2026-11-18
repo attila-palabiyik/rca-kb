@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but changed `match` to compare the newly shifted value, moving the output pulse one clock earlier than the original registered comparison."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test compared `match` against the already-updated expected register, baking in the new timing instead of checking that `match` still reflects the pre-edge register value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5119,
+    "output": 170
+  }
+}

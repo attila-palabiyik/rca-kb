@@ -108,6 +108,8 @@ def load(experiment_dirs: list[Path], root: Path) -> Loaded:
         experiments[info["name"]] = info
         runs_by_experiment[info["name"]] = (directory, info, store.load_runs(directory))
 
+    # Pending: recorded runs without a final result. A planned run that has not
+    # been recorded yet is counted below, once the plan is known.
     pending = sum(1 for _, info, runs in runs_by_experiment.values() if info.get("kind") != "redteam"
                   for run in runs if run.result == "pending")
     for name, (directory, info, runs) in runs_by_experiment.items():
@@ -146,7 +148,10 @@ def load(experiment_dirs: list[Path], root: Path) -> Loaded:
                 review=(run.review or {}).get("decision"),
             )
             (redteam if info.get("kind") == "redteam" else rows).append(row)
-    return Loaded(rows, experiments, pending > 0, pending, planned, redteam)
+    recorded = Counter((r.experiment, r.condition) for r in rows)
+    not_run = sum(max(count - recorded.get(key, 0), 0) for key, count in planned.items()
+                  if experiments[key[0]].get("kind") != "redteam")
+    return Loaded(rows, experiments, pending + not_run > 0, pending + not_run, planned, redteam)
 
 
 def by_task(rows: list[Row]) -> dict[str, list[Row]]:

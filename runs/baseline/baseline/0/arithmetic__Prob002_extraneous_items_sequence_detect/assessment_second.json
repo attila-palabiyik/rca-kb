@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (samples == 4'd8) &&",
+      "note": "The agent fixed the shift direction but compared the incoming window instead of the pre-edge register contents, moving match one clock earlier and adding a sample-count gate that suppresses matches using reset-initialized history."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = count >= 9 && ((history & 9'b111000111) == 9'b011000110);",
+      "note": "The test computed its expectation after inserting the new bit and imposed the same nine-sample gate, so it passed without detecting either departure from the original registered behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6685,
+    "output": 190
+  }
+}

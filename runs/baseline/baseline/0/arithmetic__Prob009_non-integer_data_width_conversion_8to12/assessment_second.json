@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite stopped counting invalid cycles, but it also replaced the original three-byte packing sequence with independent pairs, dropping the output that combines the second byte\u2019s low nibble with the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "step(1, 8'h12, 0, 12'habc);",
+      "note": "The test expected no output on the third accepted byte, so it treated the missing second packed word as a pass."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The rejected cleanup command forced the test launcher to be rewritten, and the subsequent Git check also had to be replaced because the workspace was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8141,
+    "output": 273
+  }
+}

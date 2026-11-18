@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire invocation to be rejected before the simulator could run."
-    },
-    {
-      "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The retry used an unavailable executable, so the test command had to be submitted again with python3."
+      "note": "The test launch had to be retried twice for reasons unrelated to the design: the shell cleanup was rejected, then the replacement wrapper invoked unavailable `python` before succeeding with `python3`."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7442,
-    "output": 128
+    "input": 7474,
+    "output": 91
   }
 }

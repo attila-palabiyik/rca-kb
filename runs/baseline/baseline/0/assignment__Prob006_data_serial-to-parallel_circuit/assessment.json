@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "assign ready_a = 1'b1;",
-      "note": "The rewrite fixed the counter rollover but also made `ready_a` high during reset and allowed input on the first clock after reset release, changing the original handshake timing."
+      "note": "The rewrite fixed the counter wrap but also made `ready_a` high during reset and allowed input acceptance on the first clock after reset, while the original kept `ready_a` low until that clock edge."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "valid_b <= word_complete;",
-      "note": "The rewrite gated `valid_b` with `valid_a`, whereas the expected fix preserves the count-only assertion when the input stalls after five accepted bits."
+      "note": "Gating `valid_b` with `valid_a` changed its timing when input stalls after five accepted bits; the original asserted it whenever the counter was at five."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "if (ready_a !== 1 || valid_b !== expect_valid || data_b !== previous_output)",
-      "note": "The test exercised reset and stalls before the sixth bit, but its checks required the rewritten handshake and valid timing instead of checking that the original behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "The recursive cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit the test with safer cleanup."
+      "note": "The test exercised reset and stalls but expected the rewrite\u2019s always-high readiness and sixth-bit-only valid pulse, so it could not catch either timing regression."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7433,
-    "output": 306
+    "input": 7465,
+    "output": 377
   }
 }

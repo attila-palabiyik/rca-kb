@@ -3,20 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
-      "note": "The rewrite fixed the divider\u2019s switching defect and passed grading at the default settings, but it also replaced the original pulse-width formula and changed behavior for parameter overrides."
+      "quote": "wire use_odd_period = (cyc_cnt >= c89);",
+      "note": "The rewrite matches the default waveform but changes behavior under parameter overrides: with `c89=0`, it starts in odd mode instead of preserving the original even-mode reset state."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
-      "quote": "wide_expected = wide_frame < 180 ? (wide_frame % 18 < 9) :",
-      "note": "The override test assumed the rewrite\u2019s nine-cycle high pulse for divide-by-18 instead of checking that the original six-cycle pulse was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test."
+      "quote": "odd_out !== (i % 9 < 4)",
+      "note": "The override test assumes that `c89=0` means odd mode from the first cycle, so it accepts the rewrite's behavior rather than catching the change from the original reset and switching behavior."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8218,
-    "output": 361
+    "input": 8250,
+    "output": 294
   }
 }

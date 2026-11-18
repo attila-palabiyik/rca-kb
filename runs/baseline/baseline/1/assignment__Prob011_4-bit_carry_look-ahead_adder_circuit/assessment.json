@@ -4,13 +4,7 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "// Expand each carry in terms of G, P, and the input carry.",
-      "note": "The agent fixed the propagate operand but also replaced the original carry chain with parallel look-ahead logic, changing the carry path depth while preserving the arithmetic results."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected because of its cleanup trap, so the agent had to submit the same test again using a Python temporary directory."
+      "note": "The patch fixed the propagate operand and met the gate-primitive requirement, but it also replaced the original stage-by-stage carry network with parallel logic, changing the carry path depth that the reference fix preserves."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6358,
-    "output": 224
+    "input": 6390,
+    "output": 348
   }
 }

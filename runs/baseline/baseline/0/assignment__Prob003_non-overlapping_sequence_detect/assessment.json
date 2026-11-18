@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "if (rst_n) begin",
-      "note": "The output rewrite also changes four-state simulation behavior: with reset unknown and the FSM in a result state, the new logic drives both outputs low, while the original still decodes the result state."
+      "note": "The output rewrite suppresses both outputs when reset is X or Z, whereas the original decoder can still report a terminal state; timing and outputs are unchanged for valid reset levels."
     },
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "The cleanup command caused the entire test invocation to be rejected before compilation, so the agent had to resubmit the test."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "PASS: all 4096 ordered group pairs and asynchronous resets",
-      "note": "Testing every ordered pair repeated equivalent boundary cases; all 64 individual patterns plus targeted transitions out of the match and mismatch states would have covered the fix."
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup trap caused the tool to reject the entire verification command before simulation, so the agent had to repackage the same test with Python-managed cleanup."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8226,
-    "output": 352
+    "input": 8258,
+    "output": 372
   }
 }

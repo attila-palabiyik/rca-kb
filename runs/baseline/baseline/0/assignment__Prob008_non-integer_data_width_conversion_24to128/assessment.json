@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "The Git status check failed and provided no information needed for the fix."
-    },
-    {
-      "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the test with a different cleanup method."
+      "note": "The cleanup command caused the entire verification script to be rejected before simulation, so the agent had to resubmit it with Python-managed temporary files."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7151,
-    "output": 151
+    "input": 7183,
+    "output": 152
   }
 }

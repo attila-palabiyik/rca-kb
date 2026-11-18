@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the early assertion by registering `valid_b`, but also made `ready_a` high during reset and before the first post-reset clock, and gated `valid_b` with `valid_a` instead of preserving the count-only condition."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expect_valid = valid && count == 5;",
+      "note": "The test exercised stalls before the sixth bit and checked reset, but its expectations mirrored the rewrite: it required `valid_b` to be low during those stalls and `ready_a` to be high during reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6674,
+    "output": 229
+  }
+}

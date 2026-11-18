@@ -4,19 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clkn <= clkp;",
-      "note": "The rewrite fixed the duty cycle but replaced the falling-edge counter decode with a delayed copy of clkp, shifting both divide-by-7 output edges half an input cycle later than the OR-only fix."
+      "note": "The OR corrected the duty cycle, but replacing the falling-edge counter decode with a delayed copy of clkp shifted both output edges half an input cycle later than the minimal fix."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "if (clk !== 1'b1 || ($time % 10) != 5)",
-      "note": "The test required the rewrite\u2019s rising-edge phase, so it passed the shifted waveform and would have rejected the correct falling-edge rise."
+      "note": "The test required the rewritten divider's rising-edge phase instead of checking that the original counter-based phase was preserved, so it passed the timing change that caused the mismatch."
     },
     {
       "category": "wasted_effort",
-      "step": 8,
-      "quote": "N=6 wrong high duration",
-      "note": "Testing divisors 2, 6, and 17 led to extra debugging of even-divisor behavior introduced by the rewrite rather than helping fix the requested divide-by-7 circuit."
+      "step": 9,
+      "quote": "(N - 1) / 2",
+      "note": "A separate edit corrected even-divisor behavior introduced by the rewrite, which was unnecessary to fix the requested divide-by-7 circuit."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6839,
-    "output": 326
+    "input": 6871,
+    "output": 430
   }
 }

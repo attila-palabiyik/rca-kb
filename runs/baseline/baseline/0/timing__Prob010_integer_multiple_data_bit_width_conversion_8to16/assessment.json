@@ -1,10 +1,10 @@
 {
   "limitations": [
     {
-      "category": "wasted_effort",
+      "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "cat > TopModule.sv",
-      "note": "The agent rewrote the whole module and renamed its internal registers, although the fix only required replacing the latch-like byte storage with a clocked register using nonblocking assignments."
+      "quote": "if (valid_in) begin",
+      "note": "The rewrite passes for 0/1 inputs but changes four-state simulation behavior: when valid_in is X, it holds the pairing flag, whereas the original and reference ternary assignments propagate X."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5609,
-    "output": 233
+    "input": 5641,
+    "output": 248
   }
 }

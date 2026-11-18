@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire invocation before simulation could run."
-    },
-    {
-      "category": "wasted_effort",
       "step": 9,
-      "quote": "32'h173FEC80",
-      "note": "The packed expected-state constant swapped 0111 and 0011, causing a false failure and an extra simulation run."
+      "quote": "Expected 0011, got 0111",
+      "note": "Verification took three attempts because the first command was rejected for its cleanup syntax and the second swapped two expected states, producing a false failure before the corrected test passed."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6127,
-    "output": 133
+    "input": 6159,
+    "output": 150
   }
 }

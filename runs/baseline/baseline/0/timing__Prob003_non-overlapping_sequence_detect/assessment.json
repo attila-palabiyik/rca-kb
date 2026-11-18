@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "case (pstate)",
-      "note": "The combinational decode fixes the one-cycle output delay but drops explicit reset gating, so asserting reset cannot clear the outputs until the state register updates and triggers the decode."
+      "note": "The combinational decode fixes the one-cycle delay but removes the explicit reset check, so the outputs can remain uninitialized if reset starts low and the state has not yet updated."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "rst_n = 0;\n        #1;\n        check(2'b00);",
-      "note": "The reset check waits for the state register and output decode to settle, so it cannot distinguish direct reset gating from outputs that clear only through the state update."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire invocation before compilation, so the agent had to submit the test again."
+      "quote": "reg rst_n = 1;",
+      "note": "The test always asserts reset with a falling edge and waits before checking, so it misses startup with reset already low, where the missing reset check can matter."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8043,
-    "output": 367
+    "input": 8075,
+    "output": 328
   }
 }

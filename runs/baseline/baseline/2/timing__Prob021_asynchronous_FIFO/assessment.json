@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "I\u2019ll update both pointer representations together and account for depths that aren\u2019t powers of two.",
+      "note": "The rewrite fixed the combinational write-pointer crossing, but also changed when the Gray pointers and status flags update, altering cycle-by-cycle behavior that the targeted fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "repeat (DEPTH + 8) @(negedge rclk);",
+      "note": "The test used the DUT\u2019s own flags to decide which transfers counted and checked the final drain state only after several cycles, so it could pass despite the flag and read-data timing mismatch."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10929,
+    "output": 259
+  }
+}

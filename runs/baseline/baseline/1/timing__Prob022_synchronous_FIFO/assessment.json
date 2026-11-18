@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "wire wenc = rst_n && winc && !wfull;",
-      "note": "The rewrite fixed the write pointer but also gated the RAM enables with reset, suppressing writes during reset that the original and reference enable logic would allow."
+      "note": "The rewrite fixed the write pointer but also gated both RAM enables with reset, suppressing writes during reset that the original enable logic and the reference fix leave enabled when the FIFO is not full."
     },
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup trap caused the entire test command to be rejected before simulation, so the agent had to resubmit the test with safer cleanup."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the full testbench with a different cleanup command."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 9810,
-    "output": 311
+    "input": 9842,
+    "output": 393
   }
 }

@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "// Reuse the final zero as the first bit of a possible next match.",
-      "note": "The agent fixed the duplicate state encoding but also changed the post-match transitions to reuse the final zero, enabling overlapping matches that the original FSM and reference do not report."
+      "note": "The agent fixed the duplicate state encoding but also changed the post-match transitions, preserving the final zero across invalid cycles and reusing it for overlaps that the original FSM discards."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "expected = data_valid && valid_count >= 4 && history == 4'b0110;",
-      "note": "The test's sliding-window oracle expected overlapping matches, so it passed the rewrite without checking whether the original post-match behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire invocation to be rejected before simulation, so the agent had to rerun the test with a different temporary-directory mechanism."
+      "note": "The test used a sliding window of valid bits as its oracle, so it accepted the new overlap behavior instead of checking that the original post-match transitions were preserved."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8317,
-    "output": 246
+    "input": 8349,
+    "output": 215
   }
 }

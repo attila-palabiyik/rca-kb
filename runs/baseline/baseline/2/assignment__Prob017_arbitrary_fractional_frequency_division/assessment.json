@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire [PERIOD_BITS:0] period_length = (cyc_cnt < c89) ? div_e : div_o;",
+      "note": "The rewrite passed grading for the default configuration, but it changed behavior under parameter overrides: with c89=0 it starts with div_o, whereas the original and the minimal fix start with div_e."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7859,
+    "output": 197
+  }
+}

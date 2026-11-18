@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Reuse the final zero as the first bit of a possible next match.",
+      "note": "The agent fixed the duplicate state encoding but changed the post-match transitions: an invalid cycle now goes to `s1_d0` and a valid one goes to `s2_d01`, whereas the original and reference designs return to `idle` in both cases."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = data_valid && valid_count >= 4 && history == 4'b0110;",
+      "note": "The exhaustive test used a sliding window that assumed overlapping matches, so it exercised the disputed transitions but treated the regression as correct."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8349,
+    "output": 191
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The patch fixed counting on idle cycles but also made `ready_a` high during reset and changed `valid_b` to pulse only on the sixth accepted bit, instead of preserving the original registered `cnt == 5` behavior during gaps."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid || data_b !== expected_data)",
+      "note": "The test exercised gaps and reset but expected the rewrite's always-high `ready_a` and sixth-bit-only `valid_b` pulse, so it passed without catching either change from the required behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7757,
+    "output": 197
+  }
+}

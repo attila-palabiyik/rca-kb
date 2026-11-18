@@ -3,20 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "+    always @* begin",
-      "note": "The balance fix correctly prevents underflow, but the warning lights were changed from registered outputs that sample the pre-edge balance to combinational outputs that respond immediately to changes in balance, mode, or reset."
+      "quote": "always @* begin",
+      "note": "The balance fix prevents normal-mode underflow and lets the last yuan be spent, but the patch also replaces registered warning lights with combinational ones that can change between clock edges."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "boost = 0;\n        check(1, 2'b10);",
-      "note": "The test expected the red light to change when boost changed without a clock edge, so it validated the timing regression instead of checking that the warning lights stayed registered."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The first simulation command was rejected before the test ran because its cleanup used `rm -rf`, so the agent had to retry with a different cleanup command."
+      "quote": "check(0, 2'b01);",
+      "note": "The check immediately after reset release, before any clock edge, expects red to assert, encoding the patch\u2019s combinational timing instead of verifying that the warning light retains its reset value until the next rising edge."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6888,
-    "output": 245
+    "input": 6920,
+    "output": 208
   }
 }

@@ -2,15 +2,9 @@
   "limitations": [
     {
       "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The Git status check failed because the workspace was not a Git repository and provided no information needed for the fix."
-    },
-    {
-      "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The tool rejected the initial test command because of its cleanup trap, so the agent had to resubmit the same test with a different cleanup command."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The initial workspace check invoked Git outside a repository, and the test command was then rejected because of its cleanup trap, requiring the same test to be resubmitted with safer cleanup."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6512,
-    "output": 144
+    "input": 6544,
+    "output": 96
   }
 }

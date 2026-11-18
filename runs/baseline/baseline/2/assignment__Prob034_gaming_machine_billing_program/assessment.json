@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "red    <= next_remain < rate;",
+      "note": "The rewrite corrected the boost threshold but made both warning lights use the updated balance instead of sampling the pre-edge balance as the original design did."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "tick(0, 0, 0, 9, 1, 0);",
+      "note": "The test expected yellow to turn on as soon as the balance dropped from 10 to 9, so it endorsed the rewrite\u2019s timing instead of catching the change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6091,
+    "output": 169
+  }
+}

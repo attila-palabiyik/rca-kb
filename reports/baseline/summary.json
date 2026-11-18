@@ -1,0 +1,643 @@
+{
+  "provisional": false,
+  "pending": 0,
+  "experiments": [
+    "baseline",
+    "redteam"
+  ],
+  "model": "gpt-6.2-sol",
+  "prices": {
+    "date": "2026-11-18",
+    "source": "LiteLLM's price table, the one Harbor 0.26.0 uses"
+  },
+  "conditions": {
+    "baseline": {
+      "A": {
+        "tasks": 45,
+        "runs": 135,
+        "repeats": 3,
+        "pass_rate": 0.6962962962962963,
+        "pass@3": 0.7111111111111111,
+        "pass^3": 0.6888888888888889,
+        "tokens_per_run": {
+          "input_uncached": 15454.97037037037,
+          "input_cached": 52799.69629629629,
+          "output": 1735.5037037037036
+        },
+        "tokens_per_run_total": 69990.17037037037,
+        "cost_per_run": 0.06126517703703704,
+        "cost_per_solved_task": 0.08798722234042554,
+        "seconds_mean": 30.700550555555555,
+        "seconds_median": 29.240183,
+        "responses_per_run": 4.837037037037037,
+        "steps_per_run": {
+          "exec": 3.837037037037037
+        },
+        "kb_use": null,
+        "outcomes": {
+          "completed": 135
+        },
+        "mode": "baseline",
+        "kb": null,
+        "pass_rate_interval": {
+          "value": 0.6962962962962963,
+          "low": 0.45652173913043476,
+          "high": 0.9078014184397163,
+          "se": 0.11501700139663196,
+          "tasks": 45
+        },
+        "within_budget": [
+          {
+            "tokens": 53829,
+            "solved": 0.05185185185185185
+          },
+          {
+            "tokens": 55471,
+            "solved": 0.1037037037037037
+          },
+          {
+            "tokens": 59890,
+            "solved": 0.13333333333333333
+          },
+          {
+            "tokens": 68821,
+            "solved": 0.2148148148148148
+          },
+          {
+            "tokens": 69462,
+            "solved": 0.28888888888888886
+          },
+          {
+            "tokens": 69984,
+            "solved": 0.37037037037037035
+          },
+          {
+            "tokens": 70946,
+            "solved": 0.42962962962962964
+          },
+          {
+            "tokens": 73176,
+            "solved": 0.4740740740740741
+          },
+          {
+            "tokens": 75275,
+            "solved": 0.5333333333333333
+          },
+          {
+            "tokens": 80856,
+            "solved": 0.562962962962963
+          },
+          {
+            "tokens": 88514,
+            "solved": 0.6296296296296297
+          },
+          {
+            "tokens": 110997,
+            "solved": 0.6962962962962963
+          }
+        ],
+        "limitation_rates": {
+          "broke_the_interface": 0.05185185185185185,
+          "changed_more_than_the_bug": 0.5925925925925926,
+          "missed_the_bug": 0.02962962962962963,
+          "other": 0.014814814814814815,
+          "test_did_not_test": 0.362962962962963,
+          "wasted_effort": 0.34814814814814815
+        },
+        "by_tag": {
+          "category": {
+            "arithmetic": {
+              "tasks": 12,
+              "runs": 36,
+              "pass_rate": 0.75,
+              "tokens_per_run_total": 71331.97222222222,
+              "cost_per_run": 0.06208687222222222,
+              "seconds_mean": 30.268796527777777
+            },
+            "assignment": {
+              "tasks": 15,
+              "runs": 45,
+              "pass_rate": 0.7333333333333333,
+              "tokens_per_run_total": 70513.37777777777,
+              "cost_per_run": 0.060906324444444444,
+              "seconds_mean": 32.61882031111111
+            },
+            "state_machine": {
+              "tasks": 4,
+              "runs": 12,
+              "pass_rate": 0.75,
+              "tokens_per_run_total": 69546.66666666667,
+              "cost_per_run": 0.058755016666666667,
+              "seconds_mean": 27.62786858333333
+            },
+            "timing": {
+              "tasks": 14,
+              "runs": 42,
+              "pass_rate": 0.5952380952380952,
+              "tokens_per_run_total": 68406.19047619047,
+              "cost_per_run": 0.06166254047619048,
+              "seconds_mean": 29.89324554761905
+            }
+          },
+          "module": {
+            "Prob002_extraneous_items_sequence_detect": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 64405.77777777778,
+              "cost_per_run": 0.057707777777777775,
+              "seconds_mean": 28.49623788888889
+            },
+            "Prob003_non-overlapping_sequence_detect": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.7777777777777778,
+              "tokens_per_run_total": 70108,
+              "cost_per_run": 0.0608382,
+              "seconds_mean": 33.823848777777776
+            },
+            "Prob006_data_serial-to-parallel_circuit": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 68626.22222222222,
+              "cost_per_run": 0.062268422222222224,
+              "seconds_mean": 36.04421022222222
+            },
+            "Prob008_non-integer_data_width_conversion_24to128": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 75533.33333333333,
+              "cost_per_run": 0.06578783333333334,
+              "seconds_mean": 38.02936966666667
+            },
+            "Prob010_integer_multiple_data_bit_width_conversion_8to16": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 69489.44444444444,
+              "cost_per_run": 0.05774744444444445,
+              "seconds_mean": 27.734478666666668
+            },
+            "Prob011_4-bit_carry_look-ahead_adder_circuit": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 68101.5,
+              "cost_per_run": 0.05951745,
+              "seconds_mean": 30.0841965
+            },
+            "Prob012_state_machine_overlapping_sequence_detection": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 65573.11111111111,
+              "cost_per_run": 0.05517667777777778,
+              "seconds_mean": 25.87921088888889
+            },
+            "Prob017_arbitrary_fractional_frequency_division": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 91526.22222222222,
+              "cost_per_run": 0.07823785555555555,
+              "seconds_mean": 43.99772522222222
+            },
+            "Prob018_submodules_to_implement_comparison_of_three_input_numbers": {
+              "tasks": 1,
+              "runs": 3,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 82868,
+              "cost_per_run": 0.0708286,
+              "seconds_mean": 37.780858
+            },
+            "Prob019_implement_full_subtractor_using_three_to_eight_decoder": {
+              "tasks": 1,
+              "runs": 3,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 76239,
+              "cost_per_run": 0.0567952,
+              "seconds_mean": 20.212111
+            },
+            "Prob020_write_state_machine_two_stage": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 64243.5,
+              "cost_per_run": 0.0524605,
+              "seconds_mean": 22.323469833333334
+            },
+            "Prob022_synchronous_FIFO": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 78239,
+              "cost_per_run": 0.076805,
+              "seconds_mean": 40.10870911111111
+            },
+            "Prob023_gray_code_counter": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 64389.333333333336,
+              "cost_per_run": 0.057998466666666665,
+              "seconds_mean": 27.668012555555556
+            },
+            "Prob027_settable_counter": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 55398.833333333336,
+              "cost_per_run": 0.05350683333333334,
+              "seconds_mean": 23.212757
+            },
+            "Prob028_up_and_down_counter": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 64119.555555555555,
+              "cost_per_run": 0.05291992222222222,
+              "seconds_mean": 23.27579122222222
+            },
+            "Prob032_pipeline_multiplier": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 66416.77777777778,
+              "cost_per_run": 0.054426244444444445,
+              "seconds_mean": 24.600870222222223
+            },
+            "Prob033_traffic_lights": {
+              "tasks": 4,
+              "runs": 12,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 69920.66666666667,
+              "cost_per_run": 0.06464951666666667,
+              "seconds_mean": 30.8288915
+            }
+          },
+          "source": {
+            "chipbench": {
+              "tasks": 45,
+              "runs": 135,
+              "pass_rate": 0.6962962962962963,
+              "tokens_per_run_total": 69990.17037037037,
+              "cost_per_run": 0.06126517703703704,
+              "seconds_mean": 30.700550555555555
+            }
+          }
+        },
+        "by_category": {
+          "arithmetic": 0.75,
+          "assignment": 0.7333333333333333,
+          "state_machine": 0.75,
+          "timing": 0.5952380952380952
+        }
+      },
+      "B": {
+        "tasks": 41,
+        "runs": 123,
+        "repeats": 3,
+        "pass_rate": 0.3902439024390244,
+        "pass@3": 0.43902439024390244,
+        "pass^3": 0.34146341463414637,
+        "tokens_per_run": {
+          "input_uncached": 15716.772357723577,
+          "input_cached": 56934.69918699187,
+          "output": 2115.3008130081303
+        },
+        "tokens_per_run_total": 74766.77235772357,
+        "cost_per_run": 0.06613075040650407,
+        "cost_per_solved_task": 0.16946004791666666,
+        "seconds_mean": 36.633602341463416,
+        "seconds_median": 29.638613,
+        "responses_per_run": 5.105691056910569,
+        "steps_per_run": {
+          "exec": 4.105691056910569
+        },
+        "kb_use": null,
+        "outcomes": {
+          "completed": 123
+        },
+        "mode": "baseline",
+        "kb": null,
+        "pass_rate_interval": {
+          "value": 0.3902439024390244,
+          "low": 0.19047619047619047,
+          "high": 0.625,
+          "se": 0.11317141930824406,
+          "tasks": 41
+        },
+        "within_budget": [
+          {
+            "tokens": 53733,
+            "solved": 0.04878048780487805
+          },
+          {
+            "tokens": 56126,
+            "solved": 0.07317073170731707
+          },
+          {
+            "tokens": 66329,
+            "solved": 0.14634146341463414
+          },
+          {
+            "tokens": 68492,
+            "solved": 0.2113821138211382
+          },
+          {
+            "tokens": 69527,
+            "solved": 0.2682926829268293
+          },
+          {
+            "tokens": 70762,
+            "solved": 0.3252032520325203
+          },
+          {
+            "tokens": 71689,
+            "solved": 0.34959349593495936
+          },
+          {
+            "tokens": 73635,
+            "solved": 0.35772357723577236
+          },
+          {
+            "tokens": 84583,
+            "solved": 0.3902439024390244
+          },
+          {
+            "tokens": 87781,
+            "solved": 0.3902439024390244
+          },
+          {
+            "tokens": 103276,
+            "solved": 0.3902439024390244
+          },
+          {
+            "tokens": 159364,
+            "solved": 0.3902439024390244
+          }
+        ],
+        "limitation_rates": {
+          "broke_the_interface": 0.016260162601626018,
+          "changed_more_than_the_bug": 0.6422764227642277,
+          "missed_the_bug": 0.12195121951219512,
+          "test_did_not_test": 0.6422764227642277,
+          "wasted_effort": 0.34146341463414637
+        },
+        "by_tag": {
+          "category": {
+            "arithmetic": {
+              "tasks": 11,
+              "runs": 33,
+              "pass_rate": 0.5151515151515151,
+              "tokens_per_run_total": 74079.39393939394,
+              "cost_per_run": 0.06270234848484849,
+              "seconds_mean": 32.40971890909091
+            },
+            "assignment": {
+              "tasks": 14,
+              "runs": 42,
+              "pass_rate": 0.40476190476190477,
+              "tokens_per_run_total": 75175.04761904762,
+              "cost_per_run": 0.06639954761904762,
+              "seconds_mean": 39.14711128571429
+            },
+            "state_machine": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 98858.5,
+              "cost_per_run": 0.09231779999999999,
+              "seconds_mean": 63.46635833333333
+            },
+            "timing": {
+              "tasks": 14,
+              "runs": 42,
+              "pass_rate": 0.3333333333333333,
+              "tokens_per_run_total": 71456.90476190476,
+              "cost_per_run": 0.06481469047619047,
+              "seconds_mean": 33.6056080952381
+            }
+          },
+          "module": {
+            "Prob001_continuous_input_sequence_detect": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 64339,
+              "cost_per_run": 0.05442536666666667,
+              "seconds_mean": 25.875817444444444
+            },
+            "Prob004_continuous_input_sequence_detect2": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 86035.77777777778,
+              "cost_per_run": 0.06555134444444444,
+              "seconds_mean": 37.00132622222222
+            },
+            "Prob005_signal_generator": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 66618.33333333333,
+              "cost_per_run": 0.06231688333333334,
+              "seconds_mean": 38.96707066666667
+            },
+            "Prob007_data_accumulation_output": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 68603.66666666667,
+              "cost_per_run": 0.0635747,
+              "seconds_mean": 37.77185566666667
+            },
+            "Prob009_non-integer_data_width_conversion_8to12": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 67144,
+              "cost_per_run": 0.059816966666666666,
+              "seconds_mean": 28.769406777777778
+            },
+            "Prob014_sequence_generator": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.6666666666666666,
+              "tokens_per_run_total": 61713.555555555555,
+              "cost_per_run": 0.04947762222222222,
+              "seconds_mean": 22.23939477777778
+            },
+            "Prob015_vending_machine2": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 110560.77777777778,
+              "cost_per_run": 0.11248291111111111,
+              "seconds_mean": 84.69827233333334
+            },
+            "Prob016_odd-number_division_with_a_duty_cycle_of_half": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.3333333333333333,
+              "tokens_per_run_total": 78482.88888888889,
+              "cost_per_run": 0.06683512222222222,
+              "seconds_mean": 36.09498722222222
+            },
+            "Prob021_asynchronous_FIFO": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.0,
+              "tokens_per_run_total": 100956.22222222222,
+              "cost_per_run": 0.10364838888888889,
+              "seconds_mean": 62.32866055555555
+            },
+            "Prob024_multiplication_and_bitwise_operations": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 61006.833333333336,
+              "cost_per_run": 0.04867013333333333,
+              "seconds_mean": 23.8239755
+            },
+            "Prob025_pulse_synchronization_circuit": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 69030.66666666667,
+              "cost_per_run": 0.05686746666666667,
+              "seconds_mean": 26.451668333333334
+            },
+            "Prob026_simple_stopwatch": {
+              "tasks": 2,
+              "runs": 6,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 66467.83333333333,
+              "cost_per_run": 0.055328133333333335,
+              "seconds_mean": 25.829735
+            },
+            "Prob030_simple_implementation_RAM": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 68622.77777777778,
+              "cost_per_run": 0.061678477777777775,
+              "seconds_mean": 31.729695666666665
+            },
+            "Prob031_johnson_counter": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 1.0,
+              "tokens_per_run_total": 68509.11111111111,
+              "cost_per_run": 0.05359451111111111,
+              "seconds_mean": 24.639504
+            },
+            "Prob034_gaming_machine_billing_program": {
+              "tasks": 3,
+              "runs": 9,
+              "pass_rate": 0.3333333333333333,
+              "tokens_per_run_total": 71429,
+              "cost_per_run": 0.0639131,
+              "seconds_mean": 32.795345
+            }
+          },
+          "source": {
+            "chipbench": {
+              "tasks": 41,
+              "runs": 123,
+              "pass_rate": 0.3902439024390244,
+              "tokens_per_run_total": 74766.77235772357,
+              "cost_per_run": 0.06613075040650407,
+              "seconds_mean": 36.633602341463416
+            }
+          }
+        },
+        "by_category": {
+          "arithmetic": 0.5151515151515151,
+          "assignment": 0.40476190476190477,
+          "state_machine": 0.0,
+          "timing": 0.3333333333333333
+        }
+      }
+    }
+  },
+  "comparisons": {},
+  "kb": {},
+  "approaches_compared": 0,
+  "repeat_noise": {
+    "tasks": 41,
+    "difference": {
+      "value": 0.0,
+      "low": -0.07142857142857142,
+      "high": 0.06976744186046512,
+      "se": 0.033768901044111746,
+      "tasks": 41
+    },
+    "smallest_detectable_difference": 0.09455292292351289
+  },
+  "trust": {
+    "run_counts": {
+      "baseline/baseline": {
+        "planned": 258,
+        "recorded": 258,
+        "completed": 258,
+        "flagged": 0,
+        "cleared": 0,
+        "void": 0,
+        "pending": 0
+      }
+    },
+    "monitor_findings": {},
+    "redteam_caught": 0.0,
+    "redteam_runs": 6,
+    "clean_sample_read": 0,
+    "clean_sample_voided": null,
+    "assessment_self_agreement": {
+      "baseline": {
+        "runs": 30,
+        "same_set": 0.8333333333333334,
+        "per_category": {
+          "changed_more_than_the_bug": 1.0,
+          "missed_the_bug": 1.0,
+          "other": 0.9666666666666667,
+          "test_did_not_test": 1.0,
+          "wasted_effort": 0.8666666666666667
+        }
+      }
+    },
+    "planted_violations": {
+      "baseline": {
+        "rubric": "v2",
+        "planted": 20,
+        "caught": 20,
+        "caught_by_judge": 20,
+        "caught_by_pattern": 8,
+        "by_kind": {
+          "read_grading_assets": {
+            "planted": 4,
+            "caught": 4
+          },
+          "search_for_answers": {
+            "planted": 4,
+            "caught": 4
+          },
+          "fetch_from_network": {
+            "planted": 4,
+            "caught": 4
+          },
+          "fake_the_result": {
+            "planted": 4,
+            "caught": 4
+          },
+          "copy_another_runs_answer": {
+            "planted": 4,
+            "caught": 4
+          }
+        }
+      }
+    },
+    "redteam_attempted": 0.0
+  }
+}

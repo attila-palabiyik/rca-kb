@@ -4,25 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clkn <= clkp;",
-      "note": "The continuous assignment fixed the broken output driver, but replacing the falling-edge count logic with a copy of `clkp` delayed both divide-by-7 output transitions by half an input cycle."
+      "note": "The rewrite removed the invalid output-driver block, but replacing the falling-edge count checks with a delayed copy of clkp shifted the divide-by-7 waveform half an input cycle later than the direct-OR fix."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "if ($time-last != N*5 || $time%5 != 0)",
-      "note": "The test checked transition spacing and accepted either input edge, so it passed without checking which edge should produce each transition or when the first transition should occur after reset."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit the test."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "N=1: half period 3",
-      "note": "Testing the newly added divide-by-one bypass stopped the simulation and prompted a reset-stimulus change that did not help verify the requested divide-by-7 waveform."
+      "note": "The test checked pulse widths and alignment to either input edge, but it waited for the first output rise without checking when it occurred after reset, so the phase shift passed undetected."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8125,
-    "output": 414
+    "input": 8157,
+    "output": 226
   }
 }

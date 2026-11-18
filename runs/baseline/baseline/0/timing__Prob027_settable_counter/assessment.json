@@ -4,19 +4,19 @@
       "category": "missed_the_bug",
       "step": 7,
       "quote": "number <= next_number;",
-      "note": "The rewrite aligns the two outputs but misses the required timing: `number` should register the pre-edge value of `num`, not publish the increment or load on the same edge."
+      "note": "The rewrite made `number` a register but drove it with the new count instead of sampling the pre-edge `num` alongside `zero`, so count and load values appeared one cycle too early."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "zero <= 1'b1;",
-      "note": "The rewrite changes `zero` during asynchronous reset from 0 to 1, although the correct fix preserves the original reset value."
+      "note": "The rewrite changed `zero` during asynchronous reset from 0 to 1, although the fix should preserve the original reset value."
     },
     {
       "category": "test_did_not_test",
       "step": 8,
       "quote": "tick(i[3:0]);",
-      "note": "The test expects each load value on the very edge that accepts it, so its PASS validates the rewrite\u2019s assumption rather than checking the required one-cycle output delay."
+      "note": "The test expected each loaded value on the same edge that captured it, so its PASS confirmed the rewrite's timing assumption rather than checking the required one-cycle output delay."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5541,
-    "output": 287
+    "input": 5573,
+    "output": 263
   }
 }

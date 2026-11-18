@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Bundling the source edit and simulation with a prohibited cleanup command caused the entire batch to be rejected, so the agent had to resubmit both operations."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5949,
+    "output": 152
+  }
+}

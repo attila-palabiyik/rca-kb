@@ -4,25 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "wave <= (cnt >= 5'd9 && cnt < 5'd19) ? PEAK : 5'd0;",
-      "note": "The agent fixed the counter but also made square mode immediately overwrite the previous output on entry, rather than hold it until the counter reaches 9 or 19."
-    },
-    {
-      "category": "changed_more_than_the_bug",
-      "step": 7,
-      "quote": "wave <= descending ? wave - 5'd1 : wave + 5'd1;",
-      "note": "The triangle rewrite changed the initial direction and reversal logic, so the first clock after reset produces 1 rather than the original 5-bit wrap to 31."
+      "note": "The agent fixed the counter but also made square mode force zero on entry instead of holding the previous output until count 9, and rewrote triangle mode to count up from reset instead of preserving the original decrement and wraparound."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "step(phase <= 20 ? phase : 40 - phase);",
-      "note": "The test asserted the rewrite\u2019s triangle startup sequence and immediate square-mode clearing instead of checking that the fix preserved the original behavior."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first test invocation was rejected because of its cleanup command, so the agent had to submit the test again."
+      "quote": "step(i == 10 ? 20 : 0);",
+      "note": "The passing test expected an immediate zero on entry to square mode and an idealized triangle starting upward from reset, so it confirmed the rewrite rather than checking that the counter fix preserved the original output behavior."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7120,
-    "output": 326
+    "input": 7152,
+    "output": 203
   }
 }

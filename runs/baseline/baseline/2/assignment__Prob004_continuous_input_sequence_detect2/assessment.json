@@ -4,37 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 11,
       "quote": "// The final 0 can start another match, even across invalid cycles.",
-      "note": "The edit fixed the duplicate state encoding but also reused the final zero after a match, enabling overlapping detections that the original FSM's post-match transitions did not allow."
+      "note": "The agent fixed the duplicate state encoding but also changed the post-match transitions to retain the final zero, allowing overlapping matches where the original FSM would return to idle."
     },
     {
       "category": "test_did_not_test",
       "step": 12,
       "quote": "expected = count >= 4 && history == 4'b0110;",
-      "note": "The testbench's rolling history expected overlapping matches, so it passed the changed behavior instead of checking that the original post-match transitions were preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "apply_patch verification failed: Failed to find expected lines in /app/TopModule.sv:",
-      "note": "Two whitespace-sensitive patch attempts failed without changing the file."
+      "note": "The exhaustive test used a rolling history that assumed overlapping matches were correct, so it passed without catching the regression in the original post-match behavior."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The next edit attempt used an unavailable Python executable and then tried to run Git diff outside a Git repository."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 10,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire combined edit-and-test invocation to be rejected before it ran."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 12,
-      "quote": "Passed all 65536 eight-cycle input patterns and reset checks",
-      "note": "A few directed cases covering the premature match after `01`, completion of `0110`, and post-match behavior would have been more focused than sweeping all 65,536 patterns."
+      "note": "Two patch attempts failed to match the file\u2019s whitespace, and the fallback used an unavailable Python command and tried Git outside a repository, forcing another edit attempt."
     }
   ],
   "judge": {
@@ -42,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 9993,
-    "output": 426
+    "input": 10025,
+    "output": 236
   }
 }

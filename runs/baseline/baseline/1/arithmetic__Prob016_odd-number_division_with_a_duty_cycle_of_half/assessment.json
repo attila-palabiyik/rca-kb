@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clkp <= cnt < HALF_COUNT;",
-      "note": "The rewrite fixed the duty cycle but made the divide-by-7 output rise on the first input rising edge after reset release, rather than on the falling edge after the third rising edge as in the one-line AND-to-OR fix."
+      "note": "The rewrite fixed the duty cycle but changed the output phase: for N=7 the first rising edge moved from the falling input edge after the third rising edge out of reset to the very first rising edge, whereas changing only AND to OR preserves the intended timing."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "@(posedge divided);",
-      "note": "The test used the first output rise as its starting point and checked only subsequent pulse widths and reset levels, so it passed without detecting the changed output phase."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected, so the agent had to submit it again."
+      "note": "The test waited for the first output rise before measuring pulse widths, so it passed without checking when that rise occurred relative to reset release and the input clock."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6878,
-    "output": 336
+    "input": 6910,
+    "output": 212
   }
 }

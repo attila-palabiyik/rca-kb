@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if(data_cnt == 2'd0)",
+      "note": "The patch fixed the counter handshake but also removed the downstream-ready condition for starting a new sum, changing what gets accumulated when the first input is accepted with `ready_b` low."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b`, so it validated the new accumulator behavior rather than detecting the difference from the original behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Putting the cleanup trap in the test command caused the tool to reject the entire invocation before simulation, forcing the agent to resubmit the test setup with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7961,
+    "output": 481
+  }
+}

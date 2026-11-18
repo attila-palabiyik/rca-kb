@@ -1,0 +1,12 @@
+{
+  "status": "certified",
+  "findings": [],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v2"
+  },
+  "usage": {
+    "input": 7659,
+    "output": 12
+  }
+}

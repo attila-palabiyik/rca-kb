@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The rewrite registers `match` but compares the newly shifted value, so the output still asserts and deasserts one clock early relative to the required comparison of the pre-edge `a_tem`."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test updates `expected` before the rising edge and uses that same value to check `match`, so it passes the incorrect same-edge timing rather than detecting it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6139,
+    "output": 176
+  }
+}

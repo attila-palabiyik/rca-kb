@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "read_data <= (read_addr < 8'd8) ? myRAM[read_addr[2:0]] : 4'b0000;",
+      "note": "The agent fixed the read timing but also made out-of-range reads return zero instead of preserving the original array access, which returns unknown in simulation."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "read_addr = 255;\\n        tick();\\n        check(0);",
+      "note": "The test checked the clocked-read fix, but its out-of-range assertion encoded the agent\u2019s new zero-return rule, so it accepted the extra behavior change."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6954,
+    "output": 357
+  }
+}

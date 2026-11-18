@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "assign ready_a = 1'b1;",
-      "note": "The rewrite fixed the counter wrap but also made `ready_a` high during reset and gated `valid_b` on acceptance of the sixth bit, whereas the reference preserves reset-low readiness and asserts `valid_b` whenever the pre-edge count is five, even during an input stall."
+      "note": "The rewrite fixed the counter rollover but also made `ready_a` high during reset and before the first post-reset clock edge, and suppressed `valid_b` during stalls at count 5; the reference preserves both original behaviors."
     },
     {
       "category": "test_did_not_test",
       "step": 8,
       "quote": "if ({ready_a, valid_b, data_b} !== {1'b1, expected_valid, expected_data})",
-      "note": "The test exercised reset and a stall before the sixth bit, but its expected values encoded the rewrite\u2019s handshake behavior, so passing those checks did not verify that the original behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "word_index < 64",
-      "note": "Exhaustively cycling through all 64 payloads added little value for a counter and handshake defect that a few representative words could exercise."
+      "note": "The test exercised reset and stalls before the sixth bit, but its expected values encoded the rewrite's always-high `ready_a` and sixth-bit-only `valid_b`, so passing did not establish compatibility with the reference."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6300,
-    "output": 309
+    "input": 6332,
+    "output": 200
   }
 }

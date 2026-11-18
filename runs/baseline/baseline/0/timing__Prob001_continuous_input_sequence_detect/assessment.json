@@ -4,19 +4,13 @@
       "category": "missed_the_bug",
       "step": 7,
       "quote": "match <= (next_a_tem == 8'b0111_0001);",
-      "note": "The agent registered `match` but compared the newly shifted value, so it still asserted and deasserted one clock edge earlier than the required comparison against the pre-edge value of `a_tem`."
+      "note": "The agent registered `match` but compared the newly shifted value instead of the pre-edge value of `a_tem`, so `match` still asserted and deasserted one clock too early."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "match !== (history == 8'h71)",
-      "note": "The test updated `history` before checking `match`, so it enforced the same incorrect timing as the implementation and could pass the original combinational logic too."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected because of its cleanup command, so no test ran until the agent retried with safer cleanup."
+      "note": "The test updated `history` before checking `match`, so it expected the same too-early timing as the implementation and would reject the reference behavior."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6079,
-    "output": 246
+    "input": 6111,
+    "output": 173
   }
 }

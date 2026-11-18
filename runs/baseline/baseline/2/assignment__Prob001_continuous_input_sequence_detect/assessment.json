@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "match <= (next_a_tem == 8'b0111_0001);",
-      "note": "The agent corrected the pattern but compared the post-shift value instead of the pre-shift register value, moving the match pulse one clock earlier than the original design and the reference."
+      "note": "The patch corrected the pattern but compared the incoming register value instead of the pre-edge value, making the match pulse arrive one clock earlier than intended."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "match !== (expected == 8'h71)",
-      "note": "The test updated `expected` before checking `match` after the edge, so it validated the agent\u2019s new timing rather than detecting the change from the original timing."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the first simulation invocation to be rejected before it could run, so the agent had to reissue the test with a different temporary-directory setup."
+      "note": "The test updated `expected` before checking `match`, so it validated the patch\u2019s same-edge timing rather than checking that `match` reflected the pre-edge register value."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6649,
-    "output": 252
+    "input": 6681,
+    "output": 169
   }
 }

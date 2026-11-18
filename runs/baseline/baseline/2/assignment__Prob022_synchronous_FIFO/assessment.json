@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign wenc = rst_n & winc & (!wfull);",
+      "note": "The patch fixes the read-pointer wrap condition but also suppresses RAM writes during reset, whereas the original and reference implementations leave the RAM write enable ungated by reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10429,
+    "output": 210
+  }
+}

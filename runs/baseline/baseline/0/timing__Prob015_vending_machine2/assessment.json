@@ -4,31 +4,25 @@
       "category": "missed_the_bug",
       "step": 8,
       "quote": "out1 <= vend && !sel;",
-      "note": "The rewrite still registers the dispensing outputs on the rising edge instead of decoding the current state and selection combinationally."
+      "note": "The rewrite still registers the outputs on the rising edge instead of decoding them combinationally from the current FSM state, selection, and reset."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "credit <= inserted; // New coins start the next purchase.",
-      "note": "Replacing the FSM with a credit counter and change queue altered transaction behavior, including counting both simultaneous inputs instead of giving d1 priority and carrying coins from the dispensing edge into the next purchase."
+      "note": "The rewrite changed transaction behavior beyond output timing: it counts simultaneous coins instead of prioritizing d1, carries coins received during a sale into the next purchase, and can queue change across cycles."
     },
     {
       "category": "test_did_not_test",
       "step": 11,
-      "quote": "expected = {vend && !selection, vend && selection, change > 0};",
-      "note": "The test used the rewrite\u2019s own balance and change rules as its oracle and checked dispensing only after rising edges, so its pass did not verify that the outputs respond to a selection change between edges."
+      "quote": "if ({out1, out2, out3} !== expected || dut.coin_pulse !== pulse)",
+      "note": "The testbench used the rewrite\u2019s own balance and change rules as its oracle and checked vend outputs only after rising edges, so its passing result did not verify the required combinational response."
     },
     {
       "category": "wasted_effort",
       "step": 7,
-      "quote": "if next_states == states:",
-      "note": "Enumerating the reachable credit and change states sized the replacement design but did not help diagnose the original output-timing defect."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 10,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire simulation invocation, so the test had to be submitted again."
+      "quote": "total_change = change + (credit - price if vend else 0)",
+      "note": "The agent explored reachable values for a new change queue and later widened its counter, even though the output-timing fix needed no change queue."
     }
   ],
   "judge": {
@@ -36,7 +30,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 9333,
-    "output": 482
+    "input": 9365,
+    "output": 521
   }
 }

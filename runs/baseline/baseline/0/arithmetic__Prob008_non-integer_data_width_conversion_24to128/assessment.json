@@ -1,16 +1,10 @@
 {
   "limitations": [
     {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository (or any of the parent directories): .git",
-      "note": "The Git status check failed because the workspace was not a Git repository and did not contribute to the fix."
-    },
-    {
-      "category": "wasted_effort",
+      "category": "other",
       "step": 8,
       "quote": "Packing or validity mismatch at time 2396",
-      "note": "The first simulation failed because the testbench left `valid_in` high when releasing reset, so the DUT accepted an input the scoreboard did not count."
+      "note": "The first testbench left valid_in high after the midstream reset, so the DUT accepted an input the scoreboard did not count, causing a false failure."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7003,
-    "output": 155
+    "input": 7035,
+    "output": 257
   }
 }

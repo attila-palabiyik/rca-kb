@@ -4,7 +4,7 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "or  (CO, G[3], g2_term, g1_terms[1], g0_terms[2], carry_in_terms[3]);",
-      "note": "The rewrite fixed carry generation and preserved the arithmetic outputs, but it also replaced the original chained carry network with direct look-ahead logic, changing the gate-level propagation paths that the one-line fix would have preserved."
+      "note": "The agent fixed the generate signal but also replaced the original carry chain with expanded look-ahead logic, changing the carry path depth while preserving the tested arithmetic behavior."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5042,
-    "output": 161
+    "input": 5074,
+    "output": 175
   }
 }

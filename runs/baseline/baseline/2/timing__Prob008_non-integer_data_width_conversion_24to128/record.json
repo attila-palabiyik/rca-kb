@@ -1,0 +1,42 @@
+{
+  "run_id": "baseline/baseline/2/timing__Prob008_non-integer_data_width_conversion_24to128",
+  "experiment": "baseline",
+  "condition": {
+    "name": "baseline",
+    "mode": "baseline",
+    "kb": null,
+    "snapshot": null
+  },
+  "task_id": "timing__Prob008_non-integer_data_width_conversion_24to128",
+  "repeat": 2,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "1d5ffed1353b46d8",
+    "harness_commit": "1dcb4ee4e294c0324a4b2a733b15e2dc5c346b4d",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T17:37:31.873519Z",
+      "ended": "2026-11-18T17:38:04.211713Z",
+      "usage": {
+        "input_uncached": 15786,
+        "input_cached": 54477,
+        "output": 2162,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": null,
+    "after": null,
+    "changed": false
+  }
+}

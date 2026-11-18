@@ -4,7 +4,7 @@
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected because of its cleanup trap, so the agent had to submit the test again using a Python temporary directory."
+      "note": "The cleanup command caused the shell to reject the entire test setup before simulation, so the agent had to resubmit the same test in a Python wrapper."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6576,
-    "output": 87
+    "input": 6608,
+    "output": 229
   }
 }

@@ -4,7 +4,7 @@
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted",
-      "note": "The first simulation command was rejected before it ran because its cleanup trap used `rm -f`, so the agent had to resubmit the test with different cleanup."
+      "note": "The cleanup clause caused the entire verification command to be rejected before simulation, so the agent had to resubmit the unchanged testbench with a different cleanup command."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6209,
-    "output": 87
+    "input": 6241,
+    "output": 205
   }
 }

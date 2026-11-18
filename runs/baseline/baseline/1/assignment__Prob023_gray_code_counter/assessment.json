@@ -1,18 +1,11 @@
 {
-  "limitations": [
-    {
-      "category": "changed_more_than_the_bug",
-      "step": 7,
-      "quote": "advance <= ~advance;",
-      "note": "The agent corrected the Gray-to-binary calculation but replaced the original registered feedback pipeline with a toggle-controlled update, changing the internal clocking and feedback behavior even though the graded outputs matched."
-    }
-  ],
+  "limitations": [],
   "judge": {
     "model": "gpt-6.2-sol",
     "rubric": "v1"
   },
   "usage": {
-    "input": 6082,
-    "output": 498
+    "input": 6114,
+    "output": 57
   }
 }

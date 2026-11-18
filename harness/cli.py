@@ -105,14 +105,24 @@ def cmd_run(args) -> int:
 def cmd_monitor(args) -> int:
     from harness.monitor.monitor import monitor_experiment_dir
 
-    return monitor_experiment_dir(ROOT, args.experiment, args.parallel, args.limit)
+    return monitor_experiment_dir(ROOT, args.experiment, args.parallel, args.limit, args.force,
+                                  args.rubric)
 
 
 def cmd_assess(args) -> int:
     from harness.monitor.assess import assess_experiment_dir
 
-    return assess_experiment_dir(ROOT, args.experiment, args.parallel, args.limit,
+    return assess_experiment_dir(ROOT, args.experiment, args.parallel, args.limit, args.force,
                                  second_reading=args.second_reading)
+
+
+def cmd_redteam(args) -> int:
+    """Plant known violations in certified trajectories and count what the monitor flags."""
+    from harness.monitor.redteam import run_planted
+
+    result = run_planted(ROOT, args.experiment, args.per_kind, args.parallel, args.rubric)
+    print(json.dumps({k: v for k, v in result.items() if k != "cases"}, indent=2))
+    return 0 if result["caught"] == result["planted"] else 1
 
 
 def cmd_notes(args) -> int:
@@ -128,6 +138,34 @@ def cmd_notes(args) -> int:
     notes = notes_for_sample(ROOT, args.experiment, split.a, out, args.sample, args.parallel)
     print(f"{len(notes)} notes written to {out}")
     return 0
+
+
+def cmd_regrade(args) -> int:
+    """Grade every stored Submission again and compare with the stored Verdict."""
+    from harness.grader.regrade import regrade, same_verdict
+    from harness.records import store
+
+    directory = ROOT / "runs" / args.experiment
+    info = store.load_experiment_info(directory)
+    dataset = load_dataset(ROOT / "datasets" / info["dataset"])
+    image = load_base(ROOT / "configs").image
+    runs = [r for r in store.load_runs(directory) if r.status != "error"]
+
+    def one(run) -> bool:
+        verdict = regrade(dataset.tasks[run.task_id], run.directory / "submission", image)
+        identical = same_verdict(run.verdict, verdict)
+        if not identical:
+            print(f"DIFFERS {run.run_id}: stored {(run.verdict or {}).get('result')}/"
+                  f"{(run.verdict or {}).get('reason')}, now {verdict['result']}/{verdict['reason']}",
+                  flush=True)
+            if args.replace:
+                store.write_derived(run, "verdict.json", verdict)
+        return identical
+
+    with ThreadPoolExecutor(max_workers=args.parallel) as pool:
+        outcomes = list(pool.map(one, runs))
+    print(f"{args.experiment}: {sum(outcomes)} of {len(outcomes)} Submissions regraded to an identical Verdict")
+    return 0 if all(outcomes) else 1
 
 
 def cmd_flagged(args) -> int:
@@ -226,16 +264,33 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("experiment")
         sub.add_argument("--parallel", type=int, default=8)
         sub.add_argument("--limit", type=int)
+        sub.add_argument("--force", action="store_true", help="redo runs that already have one")
+        if name == "monitor":
+            sub.add_argument("--rubric", help="use this rubric version instead of the experiment's")
         if name == "assess":
             sub.add_argument("--second-reading", type=int, default=0,
                              help="read this many runs twice, to measure the reader's agreement with itself")
         sub.set_defaults(run=function)
+
+    redteam = commands.add_parser("redteam", help="test the monitor with planted violations")
+    redteam.add_argument("experiment")
+    redteam.add_argument("--per-kind", type=int, default=3)
+    redteam.add_argument("--parallel", type=int, default=8)
+    redteam.add_argument("--rubric")
+    redteam.set_defaults(run=cmd_redteam)
 
     notes = commands.add_parser("notes", help="free-text notes on a sample of A's runs")
     notes.add_argument("experiment")
     notes.add_argument("--sample", type=int, default=30)
     notes.add_argument("--parallel", type=int, default=8)
     notes.set_defaults(run=cmd_notes)
+
+    regrade = commands.add_parser("regrade", help="grade stored Submissions again and compare")
+    regrade.add_argument("experiment")
+    regrade.add_argument("--parallel", type=int, default=8)
+    regrade.add_argument("--replace", action="store_true",
+                         help="store the new Verdict where it differs")
+    regrade.set_defaults(run=cmd_regrade)
 
     flagged = commands.add_parser("flagged", help="list flagged runs awaiting a person's review")
     flagged.add_argument("experiment")

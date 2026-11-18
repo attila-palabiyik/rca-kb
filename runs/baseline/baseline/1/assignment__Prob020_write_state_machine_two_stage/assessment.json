@@ -1,18 +1,11 @@
 {
-  "limitations": [
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The recursive cleanup command caused the tool to reject the entire simulation invocation, so the agent had to rerun it with safer cleanup."
-    }
-  ],
+  "limitations": [],
   "judge": {
     "model": "gpt-6.2-sol",
     "rubric": "v1"
   },
   "usage": {
-    "input": 6636,
-    "output": 81
+    "input": 6668,
+    "output": 10
   }
 }

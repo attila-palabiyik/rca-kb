@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "else if (read_en)",
-      "note": "Replacing the read and write ternaries with procedural `if` statements fixes the write-enable polarity but changes four-state simulation behavior: an X or Z enable now holds the previous value instead of propagating uncertainty where the two possible values differ."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The Git status check failed and provided no information useful to the fix."
+      "note": "Replacing the read ternary with an if changes four-state simulation behavior: an X or Z on read_en now holds read_data instead of merging the old and addressed values as the original and reference do."
     },
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire first simulation invocation to be rejected, so the agent had to submit the testbench again with a different cleanup method."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup wrapper caused the first verification command to be rejected and resubmitted, and an earlier Git status check also failed because the workspace was not a repository."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6614,
-    "output": 310
+    "input": 6646,
+    "output": 277
   }
 }

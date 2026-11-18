@@ -1,28 +1,22 @@
 {
   "limitations": [
     {
-      "category": "missed_the_bug",
+      "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "if (valid_a) begin",
-      "note": "The rewrite registers valid_b but incorrectly gates it with valid_a, so it stays low during a stall at count 5 instead of reflecting the count sampled at the clock edge."
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite made `ready_a` high during reset and allowed input capture on the first clock after reset release, whereas the reference keeps `ready_a` low until that clock."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "assign ready_a = 1'b1;",
-      "note": "Tying ready_a high changes the original reset behavior and lets the module accept a bit on the first clock after reset, when the original design only raises ready_a."
+      "quote": "if (valid_a) begin",
+      "note": "The fix registered `valid_b` but also gated it with `valid_a`, so it stays low when input stalls at count five instead of registering the count-five condition independently."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "cycle(0, 1, 0);",
-      "note": "The test exercised a stall at count 5 but expected valid_b to stay low, so it confirmed the rewrite's assumption rather than catching the mismatch."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 7,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the combined edit-and-test invocation to be rejected before either action ran, forcing both to be resubmitted."
+      "note": "The passing test expected `valid_b` to be low during a stall at count five and explicitly required `ready_a` to be high during reset, encoding the rewrite\u2019s assumptions rather than detecting either mismatch."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7530,
-    "output": 370
+    "input": 7562,
+    "output": 375
   }
 }

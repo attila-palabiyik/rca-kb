@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "reg advance;",
+      "note": "The agent replaced the clocked Gray-to-binary and increment stages with combinational logic and a toggle bit, changing the internal pipeline even though simply registering gray_out was sufficient and the rewrite passed grading."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6880,
+    "output": 350
+  }
+}

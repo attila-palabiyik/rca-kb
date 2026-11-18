@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "out1 <= vend && !sel;",
+      "note": "The rewrite kept the outputs registered on the rising edge instead of decoding them combinationally from the current state, selection, and reset, and replaced the original FSM with different deposit and change rules."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sale = balance >= price;",
+      "note": "The testbench mirrored the rewrite\u2019s credit model and checked outputs only after rising edges, so it could pass without verifying that a selection change updates the outputs between clock edges."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9039,
+    "output": 244
+  }
+}

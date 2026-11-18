@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "if(data_cnt == 2'd0)",
-      "note": "The patch fixed the counter handshake but also removed the `ready_b` condition from the accumulator's first-value load, changing `data_out` when a new group starts while downstream is not ready."
+      "note": "The patch fixed the counter\u2019s handshake condition but also removed the `ready_b` requirement for starting a fresh sum, changing `data_out` when the first input of a group is accepted while downstream is not ready."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "sum = 0;",
-      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b`, so it exercised downstream stalls but validated the changed behavior rather than checking that the original accumulator behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire invocation before the test could compile or run, forcing a retry."
+      "note": "The scoreboard assumed an unconditional fresh sum for each group and checked `data_out` only when a result was pending, so it validated the new behavior rather than detecting the change to the original `ready_b`-dependent accumulation."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7929,
-    "output": 230
+    "input": 7961,
+    "output": 218
   }
 }

@@ -3,26 +3,20 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "wire ren = rrstn && rinc && !rempty;",
-      "note": "The rewrite fixed the inverted RAM read enable but also added reset gating and replaced the original pointer and flag logic, changing the cycles on which `wfull` and `rempty` update."
+      "quote": "wire [PTR_WIDTH-1:0] wbin_next = wbin + wen;",
+      "note": "The rewrite fixed the inverted RAM read enable but also changed the Gray-pointer pipeline, full and empty flag timing, and RAM access during reset, whereas the correct patch changes only the read-enable polarity."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "if (rrstn && rinc && !rempty) begin",
-      "note": "The scoreboard checked data on transfers admitted by the DUT\u2019s own flags, so it could pass without detecting that the flags admitted transfers on different cycles than the original design."
+      "note": "The scoreboard used the DUT\u2019s flags to decide which transfers to check, so it verified data ordering without checking whether the flags changed on the required cycles."
     },
     {
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to submit the test again."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 10,
-      "quote": "iverilog -g2012 -Wall -tnull -s TopModule TopModule.sv",
-      "note": "The agent repeated a successful compile after adding only a comment, without adding any behavioral coverage."
+      "note": "The cleanup trap caused the entire verification command to be rejected before simulation, forcing the agent to resubmit the test with different cleanup."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 11570,
-    "output": 509
+    "input": 11602,
+    "output": 557
   }
 }

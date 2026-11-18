@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 10,
+      "quote": "out3 = rst && clk && dispense_change;",
+      "note": "Instead of correcting only the two beverage-2 output entries, the rewrite made change a half-cycle pulse, sampled selection, and counted simultaneous coin inputs together, altering behavior the reference preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 13,
+      "quote": "expected3 = change > 0;",
+      "note": "The passing test used the rewrite\u2019s change-queue model as its oracle and expected out3 to fall with the clock, so it could not flag the departure from the original state-based output timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 12,
+      "quote": "python: command not found",
+      "note": "The same bench command had to be submitted three times because the first attempt used a rejected cleanup command and the second invoked an unavailable Python executable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10375,
+    "output": 386
+  }
+}

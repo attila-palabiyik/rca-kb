@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clkn <= clkp;",
+      "note": "The rewrite fixed the duty cycle but replaced the original falling-edge counter comparison with a delayed copy of clkp, shifting both divide-by-7 output edges half an input cycle later than the one-line AND-to-OR fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (clk !== 1'b1 || ($time % 10) != 5)",
+      "note": "The test required the output to rise on an input rising edge, baking in the rewrite's phase and rejecting the correct fix, whose output rises on an input falling edge."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6871,
+    "output": 310
+  }
+}

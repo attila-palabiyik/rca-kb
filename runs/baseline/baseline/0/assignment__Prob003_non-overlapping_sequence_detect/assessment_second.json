@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (rst_n) begin",
+      "note": "The state encoding fix is correct, but rewriting the reset guard changes four-state simulation behavior: an X or Z on rst_n now suppresses both outputs, whereas the original guard falls through to the state decode."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8258,
+    "output": 325
+  }
+}

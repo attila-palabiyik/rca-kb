@@ -3,20 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 8,
-      "quote": "advance <= ~advance;",
-      "note": "Instead of changing only the Gray-encoding shift from two to one, the agent replaced the registered feedback pipeline with a toggle-controlled output register, changing the original RTL's scheduling behavior even though all graded samples matched."
+      "quote": "if (advance)",
+      "note": "The agent corrected the shift but also replaced the original registered feedback path with an explicit clock enable, changing the internal timing structure even though all graded outputs matched."
     },
     {
       "category": "wasted_effort",
       "step": 7,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the combined edit-and-test invocation to be rejected before either operation ran."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "Cycle 20: got 1111, expected 1110",
-      "note": "The testbench's hard-coded Gray sequence swapped two expected values, causing a false failure and an extra simulation run."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire edit-and-test batch to be rejected and resubmitted, and a transposed pair in the expected Gray sequence caused another avoidable rerun."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7807,
-    "output": 467
+    "input": 7839,
+    "output": 458
   }
 }

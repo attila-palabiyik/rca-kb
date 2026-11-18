@@ -3,20 +3,20 @@
     {
       "category": "broke_the_interface",
       "step": 7,
-      "quote": ".data_a(a)",
-      "note": "Renaming the existing `slave_mod` ports `a` and `b` broke compatibility with any named-port instantiations that still use the original names, which could explain the grading compile error despite the top-level simulation passing."
+      "quote": "input [7:0] data_a,",
+      "note": "Renaming the existing `slave_mod` ports `a` and `b` broke compatibility with callers that still use the original named ports, even though both local instances were updated."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "c_out <= (data_a > data_b) ? data_b : data_a;",
-      "note": "The ternary rewrite was unnecessary for the `c` pipeline fix and changes four-state simulation behavior: an unknown comparison now merges the two operands instead of taking the original `else` branch."
+      "note": "Replacing the original `if` with a ternary was unnecessary for cycle alignment and changes simulation behavior when the comparison evaluates to X."
     },
     {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire first simulation invocation to be rejected, so the agent had to submit the test again with a different cleanup mechanism."
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule dut(.clk(clk), .rst_n(rst_n), .a(a), .b(b), .c(c), .d(d));",
+      "note": "The test exercised pipeline alignment and reset but instantiated only `TopModule`, so it could not catch the compile-time incompatibility with callers using the original `slave_mod` ports."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7588,
-    "output": 427
+    "input": 7620,
+    "output": 416
   }
 }

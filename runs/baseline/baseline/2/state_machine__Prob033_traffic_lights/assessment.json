@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "{red, green, yellow} <= RED;",
+      "note": "The rewrite corrected the light sequence but also asserted red during reset and removed the original startup delay, changing behavior that the two-transition fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check(RED, 10);",
+      "note": "The test caught sequence and countdown errors but expected the rewrite\u2019s red-on-reset behavior, so it passed without detecting the reset and startup timing regression."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8899,
+    "output": 256
+  }
+}

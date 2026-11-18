@@ -3,32 +3,20 @@
     {
       "category": "broke_the_interface",
       "step": 7,
-      "quote": "+        .data_a(a),",
-      "note": "Renaming the existing `slave_mod` inputs from `a` and `b` to `data_a` and `data_b` broke compatibility with any caller using the original named ports, a plausible cause of the grading compile error."
+      "quote": ".data_a(a),",
+      "note": "Renaming the existing slave_mod ports from a and b to data_a and data_b broke compatibility with callers using the original named ports, which the TopModule-only simulation did not check."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "+            c_out <= (data_a > data_b) ? data_b : data_a;",
-      "note": "Replacing the comparator's `if/else` with a ternary was unnecessary for the pipeline fix and changes simulation behavior when the comparison evaluates to unknown."
-    },
-    {
-      "category": "test_did_not_test",
-      "step": 10,
-      "quote": "TopModule dut(.*);",
-      "note": "The passing test exercised the pipeline and reset through `TopModule` but never instantiated `slave_mod` using its original named ports, so it could not catch the interface regression."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire first simulation attempt to be rejected before compilation."
+      "quote": "c_out <= (data_a > data_b) ? data_b : data_a;",
+      "note": "Replacing the comparator's if/else with a ternary changed four-state simulation behavior: when the comparison is unknown, the ternary can propagate X bits where the original selected a."
     },
     {
       "category": "wasted_effort",
       "step": 9,
-      "quote": "/bin/bash: line 1: python: command not found",
-      "note": "The second simulation attempt also stopped before compilation because it invoked `python` rather than the available `python3`."
+      "quote": "python: command not found",
+      "note": "The test launcher had to be submitted three times: the first attempt used a disallowed cleanup command, and the second invoked an unavailable Python executable."
     }
   ],
   "judge": {
@@ -36,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7674,
-    "output": 424
+    "input": 7706,
+    "output": 321
   }
 }

@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "have_first_byte <= !have_first_byte;",
-      "note": "The rewrite stopped idle cycles from advancing the state, but replaced the original three-phase packing sequence with non-overlapping pairs, dropping the second output word that uses the previous byte\u2019s low nibble and the current full byte."
+      "note": "The rewrite advances state only on valid inputs, but replaces the original three-phase packing sequence with disjoint pairs, dropping the output formed from the second byte\u2019s low nibble and the full third byte."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "step(1, 8'h34, 0, 0);",
-      "note": "The test expected no output on the third accepted byte, so it passed the rewrite instead of detecting the missing valid word `12'hD34`."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The first simulation command was rejected before it ran because of its cleanup command, so the agent had to submit the test again."
+      "note": "The test explicitly expects no output on the third valid byte, so it passes the rewrite while rejecting the intended second packed word, 12'hD34."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7286,
-    "output": 243
+    "input": 7318,
+    "output": 260
   }
 }

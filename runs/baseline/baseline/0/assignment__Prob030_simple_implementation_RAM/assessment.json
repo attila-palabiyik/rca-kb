@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "else if (read_en && read_addr < 8'd8)",
-      "note": "The patch fixed the reset loop but also made enabled out-of-range reads hold the previous output instead of returning the unknown value produced by the original and reference implementations."
+      "note": "The reset fix clears all eight entries, but the new read guard makes an enabled out-of-range read hold the previous value instead of returning unknown as the original and reference implementations do in simulation."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "write_data = 15;\n        tick(8);",
-      "note": "The test expected the previous output during an enabled read of address 8, so it validated the patch\u2019s new out-of-range behavior rather than detecting the regression, although its reset checks did exercise the actual defect."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected before it ran because of its cleanup command, so the agent had to resubmit the test using a temporary-directory helper."
+      "quote": "read_addr = 8;\n        write_addr = 8;\n        write_data = 15;\n        tick(8);",
+      "note": "The test meaningfully checks the reset fix, but its out-of-range case expects the newly introduced hold behavior, so it cannot catch that change from the original behavior."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6788,
-    "output": 255
+    "input": 6820,
+    "output": 314
   }
 }

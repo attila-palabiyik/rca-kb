@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "The reset fix also replaced both enable ternaries with if statements, changing four-state simulation behavior: an X or Z enable now holds the old value instead of merging it with the candidate value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6412,
+    "output": 229
+  }
+}

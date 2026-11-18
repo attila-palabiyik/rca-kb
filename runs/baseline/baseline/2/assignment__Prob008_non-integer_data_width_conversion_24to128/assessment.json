@@ -3,8 +3,8 @@
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the first simulation invocation to be rejected before compilation, so the agent had to resubmit the test with different cleanup."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire verification script to be rejected before simulation, so the agent had to resubmit it with a different cleanup method."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6986,
-    "output": 90
+    "input": 7018,
+    "output": 165
   }
 }

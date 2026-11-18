@@ -1,0 +1,11 @@
+{
+  "runs": 30,
+  "same_set": 0.8333333333333334,
+  "per_category": {
+    "changed_more_than_the_bug": 1.0,
+    "missed_the_bug": 1.0,
+    "other": 0.9666666666666667,
+    "test_did_not_test": 1.0,
+    "wasted_effort": 0.8666666666666667
+  }
+}

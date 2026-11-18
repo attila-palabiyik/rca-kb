@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "else if (read_en)",
-      "note": "The reset fix clears all eight entries, but replacing both enable ternaries with if statements also changes four-state simulation behavior: an X or Z enable now holds the previous value instead of merging it with the candidate value."
+      "note": "The reset fix was correct, but replacing both enable ternaries with procedural `if` statements also changed four-state simulation behavior: an X or Z enable now holds the old value instead of merging it with the candidate value."
     },
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The first verification command was rejected before simulation because of its cleanup trap, so the agent had to resubmit the testbench using a different temporary-directory setup."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire verification invocation to be rejected before simulation, so the agent had to resubmit the test using a different temporary-file wrapper."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6693,
-    "output": 222
+    "input": 6725,
+    "output": 407
   }
 }

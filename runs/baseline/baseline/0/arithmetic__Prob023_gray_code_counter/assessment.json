@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "advance <= ~advance;",
-      "note": "The agent corrected the Gray-code shift but also replaced the original clocked conversion stages with an explicit two-cycle enable, changing the update logic even though all graded output samples matched."
+      "note": "The agent fixed the Gray-code shift but also replaced the original registered conversion and increment stages with combinational feedback and an explicit clock divider, changing internal clock-edge behavior even though all graded output samples matched."
     },
     {
       "category": "wasted_effort",
       "step": 7,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "Bundling the edit and simulation with a prohibited cleanup command caused the entire invocation to be rejected, so neither the edit nor the test ran on that attempt."
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling cleanup with the edit and test caused the tool to reject the entire command before execution, so both the edit and the test setup had to be resubmitted."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6989,
-    "output": 385
+    "input": 7021,
+    "output": 347
   }
 }

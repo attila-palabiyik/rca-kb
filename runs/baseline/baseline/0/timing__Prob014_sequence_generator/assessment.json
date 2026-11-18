@@ -4,25 +4,19 @@
       "category": "missed_the_bug",
       "step": 7,
       "quote": "+    always @(posedge clk) begin",
-      "note": "The patch clocked only the shift register and left `data` combinational, so after each rising edge `data` reflects the newly rotated `q[5]` rather than capturing its pre-edge value."
+      "note": "The patch clocked the rotation register but left `data` combinational, so it reflects the newly rotated state instead of capturing the pre-rotation bit on each rising edge."
     },
     {
       "category": "changed_more_than_the_bug",
-      "step": 10,
-      "quote": "A rising edge with `rst_n` low reloads `001011`",
-      "note": "The patch made the shift register's reset synchronous, so a reset pulse entirely between rising edges no longer restarts the sequence."
+      "step": 7,
+      "quote": "+    always @(posedge clk) begin",
+      "note": "The patch made the sequence state reload only on a rising clock edge, losing the immediate reset reload that the original code had and the correct implementation preserves."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "if (data !== PATTERN[5 - (i % 6)])",
-      "note": "The test counted the sample before the first post-reset rising edge as bit zero and held reset across a rising edge, masking both the output phase error and the missing asynchronous reset."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected because of its cleanup command, so the agent had to submit the test again with a different cleanup method."
+      "note": "The test started checking the pattern immediately after reset release, before the first rising edge, so it accepted the patch\u2019s one-cycle-early output phase and never checked a reset pulse that ended before a rising edge."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5156,
-    "output": 427
+    "input": 5188,
+    "output": 339
   }
 }

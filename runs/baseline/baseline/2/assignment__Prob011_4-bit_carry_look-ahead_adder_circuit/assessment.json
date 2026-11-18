@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry directly in terms of G, P, and the carry input.",
+      "note": "The rewrite corrected the propagate input but also replaced the original cascaded carry path with an expanded look-ahead network, changing the gate-level propagation depth that the reference fix preserves."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5312,
+    "output": 184
+  }
+}

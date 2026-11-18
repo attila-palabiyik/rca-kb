@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "if (valid_in) begin",
-      "note": "The rewrite preserved behavior for known inputs but changed four-state simulation behavior: at a word boundary, an unknown `valid_in` now forces `valid_out` low instead of propagating the unknown as the minimal fix would."
+      "note": "The rewrite preserves behavior for 0 and 1 but changes four-state simulation: an X or Z on valid_in now holds the counter and data registers instead of allowing the original ternary assignments to propagate uncertainty."
     },
     {
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire invocation before Icarus Verilog could run."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "mismatch at 120 accepted bits",
-      "note": "The testbench left `valid_in` high when releasing the midstream reset, so the DUT accepted an input the scoreboard did not count and the test had to be rerun."
+      "note": "Verification took three attempts: the first command was rejected before simulation, and the second reported a false mismatch because the testbench left valid_in high across reset release and failed to count an accepted word."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8548,
-    "output": 341
+    "input": 8580,
+    "output": 468
   }
 }

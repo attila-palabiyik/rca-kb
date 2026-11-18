@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// The final 0 of a match is also the start of a new prefix.",
+      "note": "The switch to `nstate` fixed the one-cycle match delay, but the patch also changed what happens after a match: a valid `1` or an invalid cycle now carries a prefix forward instead of returning to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test oracle assumed a rolling window of valid bits, so it treated the added overlapping matches as correct instead of checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The test harness had to be resubmitted twice before it ran: first because the cleanup command was rejected, then because the retry used an unavailable Python executable."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9203,
+    "output": 257
+  }
+}

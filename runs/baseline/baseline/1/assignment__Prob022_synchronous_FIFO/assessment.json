@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "wire wenc = rst_n && winc && !wfull;",
-      "note": "The rewrite fixed the read-pointer wrap but also gated the RAM enables with reset, suppressing writes during reset that the original code and reference fix allow."
+      "note": "The rewrite fixed read-pointer wraparound but also disabled RAM writes during reset, whereas the original and reference leave the RAM write enable ungated by reset."
     },
     {
       "category": "wasted_effort",
       "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit the test."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "warning: Not a git repository.",
-      "note": "The Git whitespace check produced no useful result because the workspace was not a Git repository."
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire first simulation command to be rejected and rerun, while the parallel diff check failed because the workspace was not a Git repository."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 11072,
-    "output": 271
+    "input": 11104,
+    "output": 268
   }
 }

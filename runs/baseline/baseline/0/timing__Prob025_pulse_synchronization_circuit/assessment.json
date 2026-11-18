@@ -1,18 +1,11 @@
 {
-  "limitations": [
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected before it ran, so the agent had to resubmit the test with safer cleanup."
-    }
-  ],
+  "limitations": [],
   "judge": {
     "model": "gpt-6.2-sol",
     "rubric": "v1"
   },
   "usage": {
-    "input": 7060,
-    "output": 171
+    "input": 7092,
+    "output": 75
   }
 }

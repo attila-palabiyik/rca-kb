@@ -4,7 +4,7 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "wire wenc = rst_n && winc && !wfull;",
-      "note": "The rewrite gates both RAM enables with reset, suppressing writes during reset that the original permits, even though the defect only required changing the read-pointer wrap comparison to `DEPTH-1`."
+      "note": "The rewrite fixed the read-pointer wrap condition but also suppressed RAM writes during reset, whereas the original and reference implementations allow them when `winc` is high and the FIFO is not full."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8906,
-    "output": 276
+    "input": 8938,
+    "output": 224
   }
 }

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
+      "note": "The synchronous update fixes the switching bug, but the rewrite also changes the duty cycle for nondefault periods and the divider mode at reset when c89 is zero, neither of which the reference fix changes."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected_out = (phase % expected_period) < (expected_period / 2);",
+      "note": "The test hard-coded the rewrite\u2019s half-period duty cycle, so its passing results for nondefault parameters could not catch the change from the original output timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "error: Invalid module instantiation",
+      "note": "Two verification attempts had to be redone for issues unrelated to the divider: a rejected cleanup command and use of the Verilog keyword `small` as an instance name."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9156,
+    "output": 386
+  }
+}

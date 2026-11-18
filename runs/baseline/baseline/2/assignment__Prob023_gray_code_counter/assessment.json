@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "advance <= ~advance;",
+      "note": "The agent fixed the incorrect Gray-to-binary XOR but also replaced the original registered conversion and increment stages with combinational feedback and a toggle, changing internal timing even though the graded output matched."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6332,
+    "output": 226
+  }
+}

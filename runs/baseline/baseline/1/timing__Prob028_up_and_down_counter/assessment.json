@@ -4,7 +4,7 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "zero <= (number == 4'd0);",
-      "note": "The fix gives `zero` the correct one-cycle delay, but it propagates an unknown count to `zero` in simulation, whereas the original and reference `if`/`else` logic drive `zero` low when the comparison is unknown."
+      "note": "This fixes the timing, but in four-state simulation it can assign X to zero when the count is unknown, whereas the original and reference if/else logic assign 0 in that case."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5457,
-    "output": 284
+    "input": 5489,
+    "output": 162
   }
 }

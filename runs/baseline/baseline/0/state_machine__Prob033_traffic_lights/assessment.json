@@ -4,19 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "{red, yellow, green} <= 3'b100;",
-      "note": "The rewrite fixed the red-to-green and green-to-yellow transitions but also asserted red during reset and removed the original startup pipeline, shifting the visible light and countdown timing that the reference fix preserves."
+      "note": "The rewrite corrected the light sequence but also asserted red during reset and removed the startup delay, whereas the reference fix preserves the original all-off reset and delayed red assertion."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "#1 check(RED, 10);",
-      "note": "The test required red to be lit during reset, so its passing result confirmed the rewrite's timing assumptions rather than checking that the original reset and startup behavior was preserved."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the tool to reject the entire invocation before simulation, so the agent had to rerun the test using a different temporary-directory mechanism."
+      "note": "The test expected the rewrite\u2019s immediate red output during reset, so its passing result did not establish that the fix preserved the original reset and startup timing."
     }
   ],
   "judge": {
@@ -24,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8650,
-    "output": 353
+    "input": 8682,
+    "output": 283
   }
 }

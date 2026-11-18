@@ -4,13 +4,7 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "assign wenc = rst_n & winc & !wfull;",
-      "note": "The polarity fix was sufficient; the patch also changed RAM enable behavior during reset, rewrote the full and empty logic, and changed RAM port widths for DEPTH=1."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The recursive cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit the test with safer cleanup."
+      "note": "The fix correctly inverted the full check, but it also gated both RAM enables with reset, changing whether the RAM can write while reset is asserted; the reference fix leaves reset handling unchanged."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 10326,
-    "output": 318
+    "input": 10358,
+    "output": 177
   }
 }

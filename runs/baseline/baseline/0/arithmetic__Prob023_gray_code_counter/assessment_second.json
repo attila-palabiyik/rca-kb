@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "advance <= ~advance;",
+      "note": "The agent fixed the Gray conversion but also replaced the original registered pipeline with a toggle-controlled output update, changing how update timing is implemented even though all 421 graded samples matched."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling the source edit and simulation with a disallowed cleanup command caused the entire operation to be rejected, so both the edit and the test had to be resubmitted."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7021,
+    "output": 411
+  }
+}

@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "match <= (next_window[8:6] == 3'b011)",
-      "note": "The rewrite corrected the prefix to `011` but checked the newly shifted window instead of the pre-edge register, asserting `match` one clock earlier than the original timing."
-    },
-    {
-      "category": "changed_more_than_the_bug",
-      "step": 8,
-      "quote": "a_tem <= 9'b111111111;",
-      "note": "Changing the shift-register reset value from zeros to ones suppressed startup matches that the original zero-filled window could produce."
+      "note": "The rewrite corrected the prefix but checked the newly shifted window instead of the stored window, asserting match one clock early, and changed the shift register's reset value from zeros to ones."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
       "quote": "expected = samples >= 9 && ((history & 9'b111000111) == 9'b011000110);",
-      "note": "The test used the just-updated history and required nine post-reset samples, so its passing result validated the agent\u2019s new timing and startup assumptions rather than checking that the fix preserved the original behavior."
+      "note": "The test updated its history before computing the expected output and blocked matches before nine samples, so it validated the rewrite's timing and startup assumptions rather than checking that the original behavior was preserved."
     },
     {
       "category": "wasted_effort",
       "step": 7,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "Bundling the edit and simulation with a rejected cleanup command prevented either from running and forced the agent to retry both."
+      "note": "Bundling the edit and simulation with a prohibited cleanup command caused the entire first attempt to be rejected before execution, forcing both operations to be resubmitted."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6835,
-    "output": 326
+    "input": 6867,
+    "output": 343
   }
 }

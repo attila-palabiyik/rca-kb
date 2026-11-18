@@ -2,33 +2,15 @@
   "limitations": [
     {
       "category": "changed_more_than_the_bug",
-      "step": 12,
-      "quote": "The binary and Gray-code pointers advance together, and each clock domain registers its status flag",
-      "note": "The read-enable polarity was fixed, but advancing the Gray pointers with the binary pointers and registering the flags changed cycle-by-cycle `wfull` and `rempty` behavior that the correct patch preserves."
-    },
-    {
-      "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "wire wen = wrstn && winc && !wfull;\\nwire ren = rrstn && rinc && !rempty;",
-      "note": "The rewrite also gated RAM accesses with the local resets, changing reset-time behavior beyond the read-enable fix."
+      "quote": "wire ren = rrstn && rinc && !rempty;",
+      "note": "The agent corrected the read-enable polarity but also gated RAM access during reset, advanced the Gray pointers with the binary pointers, and registered the status flags, changing cycle-by-cycle behavior that the reference fix preserves."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "if (rrstn && rinc && !rempty) begin",
-      "note": "The scoreboard used the DUT's own flags to decide which transfers to expect, so it could check data ordering without detecting changes to the cycles on which the flags assert or deassert."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "single_entry",
-      "note": "Reworking the special-case depth-one logic did not contribute to correcting the inverted RAM read enable."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire simulation invocation to be rejected, so the agent had to resubmit the test."
+      "note": "The scoreboard checked data ordering and capacity using the DUT\u2019s own flags to decide when transfers occurred, so it could pass without detecting that those flags changed on different cycles from the reference."
     }
   ],
   "judge": {
@@ -36,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 11584,
-    "output": 384
+    "input": 11616,
+    "output": 183
   }
 }

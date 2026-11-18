@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "match <= (next_a_tem == 8'b0111_0001);",
-      "note": "The agent fixed the shift direction but also changed the registered comparison to use the newly shifted value, moving the match pulse one clock earlier and causing the grading mismatches."
+      "note": "The agent fixed the shift direction but made match assert and deassert one clock earlier by comparing the newly shifted value instead of the pre-edge register value."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "match !== (history == 8'h71)",
-      "note": "The test checked against history after shifting, so it confirmed the agent's same-cycle assumption rather than checking that match still reflected the pre-edge register value."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 7,
-      "quote": "rm -f style commands are not permitted",
-      "note": "Bundling the edit and simulation with a prohibited cleanup command caused the entire invocation to be rejected before either could run."
+      "note": "The test compared match against history after shifting it, so it passed the agent\u2019s same-edge implementation rather than detecting the change to the original output timing."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The replacement test runner relied on an unavailable Python executable, so the agent had to submit the testbench again in a shell-only command."
+      "note": "The first combined edit-and-test command was rejected because of its cleanup command, and the Python retry failed because the executable was missing, so the agent had to resubmit the edit and repackage the test."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6815,
-    "output": 296
+    "input": 6847,
+    "output": 244
   }
 }

@@ -4,7 +4,7 @@
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test with a different cleanup routine."
+      "note": "The cleanup trap caused the shell to reject the entire simulation script before it ran, so the agent had to change the cleanup and resubmit the test."
     }
   ],
   "judge": {
@@ -12,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 5354,
-    "output": 90
+    "input": 5386,
+    "output": 372
   }
 }

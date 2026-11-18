@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = rst_n && (pstate == s6);",
+      "note": "The fix passed grading, but rewriting the output decoder and merging the idle transition also changed how unknown values propagate in four-state simulation, which the reference fix leaves unchanged."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7164,
+    "output": 153
+  }
+}

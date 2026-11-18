@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixes the write pointer but also gates both RAM enables with reset, suppressing writes during reset that the original and reference designs permit."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8473,
+    "output": 211
+  }
+}

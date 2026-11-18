@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_window[8:6] == 3'b011) &&",
+      "note": "The rewrite corrected the prefix to `011` but advanced `match` by one clock by checking the incoming bit and changed the shift-register reset value from zeros to ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = samples >= 9 && ((history & 9'b111000111) == 9'b011000110);",
+      "note": "The test checked the window after shifting in the current bit and required nine post-reset samples, so its passing result validated the rewrite's assumptions rather than checking the original timing and zero-filled startup behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling a rejected cleanup command with the file edit and verification setup blocked the entire command, forcing the agent to resubmit the edit and repackage the setup separately."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6867,
+    "output": 376
+  }
+}

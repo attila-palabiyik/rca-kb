@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "always @(*) begin",
+      "note": "The patch left yellow and red combinational instead of registering them on the rising clock edge using the pre-edge balance, with asynchronous reset."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "remain <= available[9:0] - charge;",
+      "note": "The rewrite changed recharge cycles to deduct a fee after adding money, whereas the original and correct code give recharge priority and skip the fee when set is high."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "#1 check(1, 1, 0);",
+      "note": "This check expected red to change immediately after boost changed without a clock edge, so the passing test endorsed the combinational behavior it needed to catch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The test never started on two attempts: the shell wrapper was rejected for its cleanup command, then the retry used an unavailable Python executable before a third attempt ran it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7881,
+    "output": 295
+  }
+}

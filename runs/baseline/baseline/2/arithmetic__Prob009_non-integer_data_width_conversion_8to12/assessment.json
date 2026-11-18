@@ -4,13 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "have_first_byte <= !have_first_byte;",
-      "note": "The rewrite correctly advances state only on valid input, but replaces the original three-byte packing sequence with disjoint two-byte pairs, dropping the second byte\u2019s low nibble and suppressing the output that should combine it with the third byte."
+      "note": "The rewrite stopped idle cycles from advancing the state, but it also replaced the original three-input packing cycle with disjoint pairs, dropping the second output word formed from the second byte\u2019s low nibble and the full third byte."
     },
     {
       "category": "test_did_not_test",
       "step": 7,
       "quote": "step(1, 8'h12, 0, 12'habc);",
-      "note": "The test expects no output on the third accepted byte, so it passes the rewrite while rejecting the correct behavior of asserting valid_out and emitting 12'h712."
+      "note": "The test expected no valid output on the third accepted byte, so it passed by encoding the rewrite\u2019s assumption instead of checking for the original packing cycle\u2019s second output."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6117,
-    "output": 229
+    "input": 6149,
+    "output": 184
   }
 }

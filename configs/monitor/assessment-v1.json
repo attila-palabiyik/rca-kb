@@ -20,7 +20,7 @@
     },
     {
       "id": "wasted_effort",
-      "definition": "Work that did not bear on the fix: failed tool invocations, redundant or needlessly exhaustive runs, or rebuilding something it already had."
+      "definition": "A clear share of the run went on work that did not bear on the fix: commands that failed for reasons unrelated to the design and had to be redone, or repeated runs that added nothing. Do not report a single stray command, and do not report writing or running a test as waste."
     },
     {
       "id": "kb_ignored",

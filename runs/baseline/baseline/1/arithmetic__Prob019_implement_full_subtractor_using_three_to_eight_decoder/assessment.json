@@ -1,18 +1,11 @@
 {
-  "limitations": [
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted",
-      "note": "The cleanup command caused the tool to reject the entire invocation before simulation, so the agent had to resubmit the same test using Python\u2019s temporary-directory cleanup."
-    }
-  ],
+  "limitations": [],
   "judge": {
     "model": "gpt-6.2-sol",
     "rubric": "v1"
   },
   "usage": {
-    "input": 10294,
-    "output": 86
+    "input": 10326,
+    "output": 45
   }
 }

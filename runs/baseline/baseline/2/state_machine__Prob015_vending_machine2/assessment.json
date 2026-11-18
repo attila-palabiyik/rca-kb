@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "out1 <= vend && !sel;",
+      "note": "Instead of correcting the 1-yuan transitions from S1 to S2 and S1_5 to S2_5 in place, the rewrite registered the outputs, counted simultaneous inputs together rather than prioritizing d1, and queued change across cycles."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 12,
+      "quote": "if (outputs !== expected || dut.coin_pulse !== edges)",
+      "note": "The test compared the rewrite against a model with the same edge detection, credit arithmetic, and queued-change rules, so passing did not establish that the original FSM\u2019s cycle-by-cycle behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9143,
+    "output": 372
+  }
+}

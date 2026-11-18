@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "clk_out_r <= clk_cnt < (period_length >> 1);",
-      "note": "The rewrite matches the expected waveform at the default settings but changes the pulse widths for some parameter overrides, whereas the targeted fix only changes the even-branch shift from `>>3` to `>>2`."
+      "note": "The rewrite matches the corrected default waveform but replaces the original pulse-width rule for nondefault parameters: a 20-cycle period now stays high for 10 ticks instead of 7."
     },
     {
-      "category": "wasted_effort",
-      "step": 6,
-      "quote": "fatal: not a git repository",
-      "note": "The Git status check produced no useful information because the workspace was not a Git repository."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "The cleanup command caused the tool to reject the entire invocation before the test could run."
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "wide_phase % 20 < 10",
+      "note": "The default waveform check could catch the original bug, but the nondefault check encoded the rewrite\u2019s half-period assumption and therefore passed despite the pulse-width regression."
     },
     {
       "category": "wasted_effort",
       "step": 9,
       "quote": "python: command not found",
-      "note": "The first retry also failed to run the test because it used `python` instead of the installed `python3`."
+      "note": "The test command had to be resubmitted twice for reasons unrelated to the RTL: first because its cleanup command was rejected, then because it invoked `python` instead of the available `python3`."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 9040,
-    "output": 517
+    "input": 9072,
+    "output": 311
   }
 }

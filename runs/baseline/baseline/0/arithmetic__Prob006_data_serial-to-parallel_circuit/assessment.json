@@ -4,19 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "assign ready_a = 1'b1;",
-      "note": "The rewrite fixed the counter\u2019s idle-cycle advance but also made `ready_a` high during reset and changed `valid_b` to pulse only on the sixth accepted bit, rather than preserving the registered ready signal and count-based valid timing."
+      "note": "The rewrite fixed the counter advancing on idle cycles, but it also made ready_a high during reset and allowed the first post-reset edge to accept a bit that the original logic would not accept."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "valid_b <= 1'b1;",
+      "note": "The rewrite asserted valid_b only when the sixth bit was accepted, whereas the reference preserves assertion whenever the pre-edge count is five, including cycles stalled before the sixth bit."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "if (ready_a !== 1'b1 || valid_b !== 1'b0 || data_b !== 6'b0)",
-      "note": "The test required `ready_a` to be high during reset and expected `valid_b` only on the sixth accepted bit, so it passed by treating both timing changes as correct."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The cleanup trap caused the first simulation command to be rejected before it ran, so the agent had to resubmit the test with a different temporary-directory mechanism."
+      "quote": "if (ready_a !== 1'b1 || valid_b !== expected_valid || data_b !== expected_data)",
+      "note": "The passing testbench encoded the rewrite's assumptions that ready_a is high in reset and valid_b pulses only on the sixth accepted bit, so its reset and stall cases could not expose either mismatch."
     }
   ],
   "judge": {
@@ -24,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7725,
-    "output": 273
+    "input": 7757,
+    "output": 261
   }
 }

@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "-        if(~rst)\n-            nstate <= S0;",
+      "note": "The patch fixed the flag timing but also removed the next-state reset guard, so internal nstate can select S1 while reset is asserted and data is high, whereas the reference keeps it at S0."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6457,
+    "output": 225
+  }
+}

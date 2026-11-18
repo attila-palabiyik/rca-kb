@@ -4,25 +4,19 @@
       "category": "changed_more_than_the_bug",
       "step": 8,
       "quote": "match <= (next_window[8:6] == 3'b011) &&",
-      "note": "The rewrite aligned the prefix and suffix checks but evaluated the post-shift window, asserting match one clock earlier than the fix that registers both checks from the pre-shift window."
+      "note": "The rewrite aligned the two comparisons but moved detection one clock earlier by checking the window that includes the incoming bit instead of preserving the existing registered check of the stored window."
     },
     {
       "category": "changed_more_than_the_bug",
       "step": 9,
       "quote": "a_tem <= 9'b111111111;",
-      "note": "Changing the shift register's reset value from all zeros to all ones suppressed startup matches that the zero-filled design would report."
+      "note": "Changing the reset value from all zeros to all ones suppressed startup matches that the original zero-filled register could produce."
     },
     {
       "category": "test_did_not_test",
       "step": 10,
       "quote": "expected = count >= 9 && ((window & 9'b111000111) == 9'b011000110);",
-      "note": "The testbench checked the just-shifted window and required nine samples after reset, so its exhaustive pass confirmed the rewrite's assumptions rather than checking the required timing and startup behavior."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 7,
-      "quote": "rm -f style commands are not permitted.",
-      "note": "Including a rejected cleanup command prevented both the edit and the simulation from running, forcing the agent to resubmit them."
+      "note": "The test checked the just-shifted window and required nine post-reset samples, so it validated the rewrite's assumptions rather than catching the timing and startup mismatches."
     }
   ],
   "judge": {
@@ -30,7 +24,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 7660,
-    "output": 408
+    "input": 7692,
+    "output": 314
   }
 }

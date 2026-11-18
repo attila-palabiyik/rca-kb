@@ -4,25 +4,13 @@
       "category": "changed_more_than_the_bug",
       "step": 7,
       "quote": "{red, green, yellow} <= 3'b100;",
-      "note": "The rewrite eliminated the repeated green reload but also turned red on immediately at reset and removed the original startup delay, whereas the reference fix only corrects the green rising-edge check."
-    },
-    {
-      "category": "broke_the_interface",
-      "step": 7,
-      "quote": "output reg green\n);",
-      "note": "The replacement kept the signal ports but removed the four public state parameters, so existing instantiations that override them would no longer compile."
+      "note": "The rewrite eliminated the repeated green reload, but it also asserted red immediately on reset and removed the original startup pipeline, changing when the first red and green phases begin."
     },
     {
       "category": "test_did_not_test",
       "step": 9,
-      "quote": "check(3'b100, 10);",
-      "note": "The test asserted the rewrite\u2019s immediate-red reset behavior instead of checking that the original reset and startup timing were preserved, so it passed despite the regression."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 8,
-      "quote": "rejected: rm -f style commands are not permitted",
-      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to submit it again."
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test required immediate red on reset and checked the rewrite\u2019s startup sequence, so it passed without detecting the timing change from the original controller."
     }
   ],
   "judge": {
@@ -30,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 8769,
-    "output": 333
+    "input": 8801,
+    "output": 235
   }
 }

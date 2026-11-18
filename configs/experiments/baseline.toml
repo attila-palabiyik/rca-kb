@@ -9,7 +9,7 @@ retries = 2
 
 [monitor]
 judge_model = "gpt-6.2-sol"
-rubric      = "v1"
+rubric      = "v2"
 assessment  = "v1"
 
 [[conditions]]

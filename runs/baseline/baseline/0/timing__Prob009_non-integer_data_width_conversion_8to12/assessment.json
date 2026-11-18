@@ -3,14 +3,14 @@
     {
       "category": "changed_more_than_the_bug",
       "step": 7,
-      "quote": "have_first_byte <= !have_first_byte;",
-      "note": "The rewrite removed the faulty combinational counter but replaced its intended three-state sequence with disjoint pairs, suppressing the output on the third accepted byte and dropping the packing branch that combines the previous byte\u2019s low nibble with the current byte."
+      "quote": "valid_out <= valid_in && have_first_byte;",
+      "note": "The rewrite eliminated the faulty combinational counter but replaced the original three-input, two-output packing sequence with one output per pair, dropping the output that combines the second byte\u2019s low nibble with the third byte."
     },
     {
       "category": "test_did_not_test",
       "step": 7,
       "quote": "tick(1, 8'h12, 0, 12'hABC);",
-      "note": "The test expected no valid output on the third accepted byte, so it passed by enforcing the rewrite\u2019s assumption rather than checking that this byte produces a second packed output."
+      "note": "The test expected no output on the third accepted byte, so it passed the rewrite instead of catching the missing valid output with data 12'h312."
     }
   ],
   "judge": {
@@ -18,7 +18,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6104,
-    "output": 187
+    "input": 6136,
+    "output": 179
   }
 }

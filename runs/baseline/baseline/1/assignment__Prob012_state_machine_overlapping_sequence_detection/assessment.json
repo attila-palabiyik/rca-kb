@@ -4,13 +4,7 @@
       "category": "wasted_effort",
       "step": 8,
       "quote": "rm -f style commands are not permitted. Use a safer approach",
-      "note": "The first simulation command was rejected because of its cleanup command, so the agent had to repackage and resubmit the testbench."
-    },
-    {
-      "category": "wasted_effort",
-      "step": 9,
-      "quote": "stream < 4096",
-      "note": "Enumerating every 12-bit stream was more verification than the one-line encoding fix needed; a short set of vectors could cover all FSM transitions, overlapping matches, and flag timing."
+      "note": "The cleanup trap caused the shell to reject the entire verification command before simulation, so the agent had to resubmit the test using a different temporary-directory mechanism."
     }
   ],
   "judge": {
@@ -18,7 +12,7 @@
     "rubric": "v1"
   },
   "usage": {
-    "input": 6281,
-    "output": 279
+    "input": 6313,
+    "output": 203
   }
 }

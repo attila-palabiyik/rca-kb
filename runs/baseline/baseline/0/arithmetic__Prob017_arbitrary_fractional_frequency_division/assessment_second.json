@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= clk_cnt < (period_len >> 1);",
+      "note": "This matches the correct waveform for the default 8/9 periods, but replacing both pulse-width expressions changes output timing for parameter overrides that the one-line fix would preserve."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "phase < 33 ? phase < 16 : (phase - 33) % 57 < 28",
+      "note": "The default test could catch the original bug, but the override test expected the rewritten pulse widths and therefore could not catch the change to existing override behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7979,
+    "output": 276
+  }
+}

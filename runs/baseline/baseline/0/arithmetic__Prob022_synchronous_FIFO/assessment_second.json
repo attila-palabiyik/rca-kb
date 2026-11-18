@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign wenc = rst_n & winc & !wfull;",
+      "note": "The patch fixed the inverted full check but also suppressed RAM accesses during reset and changed address sizing for DEPTH=1, neither of which was needed to fix the write-enable bug."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10358,
+    "output": 180
+  }
+}

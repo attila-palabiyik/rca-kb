@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "state <= s1_red;",
+      "note": "The rewrite enters red immediately on reset, whereas the targeted fix preserves the original all-off reset and startup delay while restoring the registered light outputs."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "input clk,\n    input rst_n,",
+      "note": "Swapping the first two ports reverses clock and reset for positional instantiations of the original module."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "#1 check(3'b100, 10);",
+      "note": "The test asserted the rewrite\u2019s immediate-red reset behavior instead of checking the original reset and startup timing, and its named port connections hid the swapped port order."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8019,
+    "output": 378
+  }
+}
