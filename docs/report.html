@@ -1,36 +1,43 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'><title>Report</title><style>
-@page { size: A4; margin: 20mm 18mm; }
-body { font-family: Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.45; color: #111;
-       max-width: 170mm; margin: 0 auto; }
-h1 { font-size: 20pt; margin: 0 0 4pt; line-height: 1.2; }
-h2 { font-size: 13.5pt; margin: 20pt 0 6pt; border-bottom: 0.5pt solid #999; padding-bottom: 2pt;
-     page-break-after: avoid; }
-h3 { font-size: 11pt; margin: 14pt 0 4pt; page-break-after: avoid; }
+@page { size: A4; margin: 22mm 22mm 24mm;
+        @bottom-center { content: counter(page); font: 9pt Cambria, Georgia, serif; color: #555; } }
+body { font-family: Cambria, Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.45; color: #111;
+       max-width: 166mm; margin: 0 auto; }
+h1 { font-size: 21pt; font-weight: 600; margin: 0 0 4pt; line-height: 1.2; }
+h2 { font-size: 13pt; font-weight: 600; margin: 20pt 0 6pt; break-after: avoid; }
 p, li { orphans: 3; widows: 3; }
-table { border-collapse: collapse; width: 100%; margin: 8pt 0 10pt; font-family: Arial, Helvetica, sans-serif;
-        font-size: 8pt; page-break-inside: avoid; }
-th, td { border: 0.5pt solid #bbb; padding: 3pt 5pt; text-align: left; vertical-align: top; }
-th { background: #f0f0f0; }
+p { margin: 0 0 8pt; }
+li { margin-bottom: 3pt; }
+a { color: inherit; text-decoration: none; }
+table { border-collapse: collapse; width: 100%; margin: 0 0 12pt; font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+        font-size: 8pt; line-height: 1.35; border-top: 1pt solid #111; border-bottom: 1pt solid #111;
+        break-inside: avoid; }
+th, td { padding: 3.5pt 8pt 3.5pt 0; text-align: left; vertical-align: top; }
+th:last-child, td:last-child { padding-right: 0; }
+th { border-bottom: 0.5pt solid #111; font-weight: 600; vertical-align: bottom; }
 code { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; }
-pre { background: #f6f6f6; padding: 6pt 8pt; font-size: 8.5pt; overflow-wrap: anywhere; white-space: pre-wrap; }
-img { max-width: 100%; }
 .byline { color: #555; margin: 0 0 14pt; }
-em { color: #333; }
+.caption, figcaption { font-size: 9pt; line-height: 1.35; color: #222; text-align: left; }
+.caption { margin: 12pt 0 4pt; break-after: avoid; }
+figure { margin: 12pt 0 10pt; break-inside: avoid; text-align: center; }
+figure img { width: 80%; }
+figcaption { margin-top: 4pt; }
 </style></head><body><h1>Knowledge bases for an RTL debugging agent</h1>
 <p class="byline">Attila Palabiyik · November 2026</p>
 
-<h2>1. Summary</h2>
+<h2>Summary</h2>
 <p><em>To be written when the results are in.</em></p>
-<h2>2. Setup</h2>
+<h2>1. Setup</h2>
 <p>The question is which way of storing and retrieving what earlier debugging
 runs learned helps a later run most. The thing under test is a knowledge base
 (KB) approach. The agent, the model and everything else are held fixed, and a
 run with a KB differs from a run without one by exactly the approach's own
 configuration.</p>
-<p><strong>Agent.</strong> Codex CLI 0.170.0, headless, with <code>gpt-6.2-sol</code> at medium reasoning
-effort. Web search is off and the CLI's own memory is off. Every prompt opens
-with the same five lines of rules. Everything else is the CLI's default.</p>
-<p><strong>Benchmark.</strong> ChipBench's Verilog debugging cases. Each gives a written
+<p><strong>Agent.</strong> Codex CLI 0.170.0 [3], headless, with <code>gpt-6.2-sol</code> at medium
+reasoning effort. Web search is off and the CLI's own memory is off. Every
+prompt opens with the same five lines of rules. Everything else is the CLI's
+default.</p>
+<p><strong>Benchmark.</strong> ChipBench's Verilog debugging cases [1]. Each gives a written
 specification and a module with one injected bug. The agent edits the module
 in place. A hidden testbench then compares it with a reference on every
 sample, and the answer passes on zero mismatches. There are 33 modules, each
@@ -38,7 +45,9 @@ with up to four different bugs.</p>
 <p><strong>Split.</strong> Set A builds a KB and set B tests it. The split is by module, so no
 module has tasks on both sides. Tasks of one module share one correct file,
 and a module on both sides would put B's answers into a KB built on A.</p>
-<p><strong>Conditions.</strong></p>
+<p><strong>Conditions.</strong> Table 1 lists them.</p>
+<p class="caption"><b>Table 1.</b> The three conditions. An approach is run as a build followed by a frozen run.</p>
+
 <table>
 <thead>
 <tr>
@@ -65,57 +74,62 @@ and a module on both sides would put B's answers into a KB built on A.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Isolation and grading.</strong> Every run gets a fresh container. The testbench and
-the reference exist only in a second container, where the answer is graded
-after the agent has finished. Before any agent ran, every task was run twice
-with no model: a known-good answer has to pass and the untouched module has to
-fail. Three tasks failed that check and are left out (section 7).</p>
+<p><strong>Isolation and grading.</strong> Every run gets a fresh container, started by
+Harbor [2]. The testbench and the reference exist only in a second container,
+where the answer is graded after the agent has finished. Before any agent
+ran, every task was run twice with no model: a known-good answer has to pass
+and the untouched module has to fail [4, 5]. Three tasks failed that check
+and are left out (section 6).</p>
 <p><strong>Measures.</strong> Correctness is the testbench's verdict. Tokens and time are the
-agent's own, for the turn in which it solves the task. Intervals come from
-resampling whole modules, since tasks of one module stand or fall together.</p>
-<h2>3. What the baseline shows</h2>
+agent's own, for the turn in which it solves the task, and are reported
+beside correctness [6]. An approach is compared with the baseline task by
+task. Intervals come from resampling whole modules, since tasks of one module
+stand or fall together [7].</p>
+<h2>2. What the baseline shows</h2>
+<p class="caption"><b>Table 2.</b> The baseline: the agent with no KB, three repeats per task. pass@3 counts a task as solved if any repeat passes, pass^3 only if all three do.</p>
+
 <!-- generated: Baseline -->
 <table>
 <thead>
 <tr>
-<th>Side</th>
-<th>Tasks</th>
-<th>Runs</th>
-<th>Pass rate (95% interval)</th>
-<th>pass@3</th>
-<th>pass^3</th>
-<th>Tokens per run</th>
-<th>Cost per run</th>
-<th>Time to solution</th>
+<th>Set</th>
+<th style="text-align: right;">Tasks</th>
+<th style="text-align: right;">Runs</th>
+<th style="text-align: right;">Pass rate (95% interval)</th>
+<th style="text-align: right;">pass@3</th>
+<th style="text-align: right;">pass^3</th>
+<th style="text-align: right;">Tokens per run</th>
+<th style="text-align: right;">Cost per run</th>
+<th style="text-align: right;">Time to solution</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>A</td>
-<td>45</td>
-<td>135</td>
-<td>69.6% (45.7 to 90.8)</td>
-<td>71.1%</td>
-<td>68.9%</td>
-<td>70k</td>
-<td>$0.061</td>
-<td>31 s</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">69.6% (45.7 to 90.8)</td>
+<td style="text-align: right;">71.1%</td>
+<td style="text-align: right;">68.9%</td>
+<td style="text-align: right;">70k</td>
+<td style="text-align: right;">$0.061</td>
+<td style="text-align: right;">31 s</td>
 </tr>
 <tr>
 <td>B</td>
-<td>41</td>
-<td>123</td>
-<td>39.0% (19.0 to 62.5)</td>
-<td>43.9%</td>
-<td>34.1%</td>
-<td>75k</td>
-<td>$0.066</td>
-<td>37 s</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">39.0% (19.0 to 62.5)</td>
+<td style="text-align: right;">43.9%</td>
+<td style="text-align: right;">34.1%</td>
+<td style="text-align: right;">75k</td>
+<td style="text-align: right;">$0.066</td>
+<td style="text-align: right;">37 s</td>
 </tr>
 </tbody>
 </table>
-<p>On side A, 68.9% of tasks pass in every repeat, 28.9% in none, and 2.2% in some but not all.</p>
-<p>On side B, 34.1% of tasks pass in every repeat, 56.1% in none, and 9.8% in some but not all.</p>
+<p>On set A, 68.9% of tasks pass in every repeat, 28.9% in none, and 2.2% in some but not all.</p>
+<p>On set B, 34.1% of tasks pass in every repeat, 56.1% in none, and 9.8% in some but not all.</p>
 <!-- /generated -->
 
 <p>Three things stand out.</p>
@@ -126,51 +140,16 @@ repeats and fail in others. Whole modules pass or fail together, whichever
 bug was injected.</p>
 <p><strong>Most failures are not a missed bug.</strong> Every baseline run was read against
 the task, the verdict and a correct answer, and what limited it was recorded
-under a fixed set of categories. The categories came from free-text notes on
-a sample of A's runs and were fixed before any KB run.</p>
+under a fixed set of categories [8]. The categories came from free-text notes
+on a sample of A's runs and were fixed before any KB run. Figure 1 gives
+their shares.</p>
+<figure>
+<img src="../reports/main/figures/baseline_limitations.svg" alt="Bar chart: share of baseline runs showing each limitation, for set A and set B.">
+<figcaption><b>Figure 1.</b> What limited the baseline's runs. On both sets the agent most often changed more than the bug, and on B its own test missed the fault in almost two runs of three. Missing the bug outright is rare.</figcaption>
+</figure>
+
 <!-- generated: Baseline limitations -->
-<table>
-<thead>
-<tr>
-<th>Limitation</th>
-<th>Side A</th>
-<th>Side B</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>test did not test</td>
-<td>36.3%</td>
-<td>64.2%</td>
-</tr>
-<tr>
-<td>changed more than the bug</td>
-<td>59.3%</td>
-<td>64.2%</td>
-</tr>
-<tr>
-<td>wasted effort</td>
-<td>34.8%</td>
-<td>34.1%</td>
-</tr>
-<tr>
-<td>missed the bug</td>
-<td>3.0%</td>
-<td>12.2%</td>
-</tr>
-<tr>
-<td>broke the interface</td>
-<td>5.2%</td>
-<td>1.6%</td>
-</tr>
-<tr>
-<td>other</td>
-<td>1.5%</td>
-<td>0.0%</td>
-</tr>
-</tbody>
-</table>
-<p>Share of runs showing each limitation, from a model's reading of every run. Read twice, the reader named the same set of limitations for 83.3% of 30 runs.</p>
+<p>The limitations are a model's reading of every run, and a run can show several. Read twice, the reader named the same set of limitations for 83.3% of 30 runs.</p>
 <!-- /generated -->
 
 <p>In the commonest failure the agent finds the defect and then keeps going. It
@@ -186,10 +165,12 @@ reading of the specification as the rewrite. From where the agent stands, the
 run succeeded.</p>
 <p>This matters for what a KB can do. An agent asked to record what it learned
 from such a run will record a success.</p>
-<h2>4. The approaches</h2>
+<h2>3. The approaches</h2>
 <p>An approach is two choices: what one entry in the KB is, and how entries are
-found. Each combination that makes sense is an approach. The thirteen in bold
-were run.</p>
+found. Each combination that makes sense is an approach. Table 3 lays them
+out, with the thirteen that were run in bold.</p>
+<p class="caption"><b>Table 3.</b> The approaches, by entry (rows) and index (columns). Bold: run. A dot: makes sense, not run. Empty: does not make sense.</p>
+
 <table>
 <thead>
 <tr>
@@ -295,14 +276,15 @@ were run.</p>
 </tr>
 </tbody>
 </table>
-<p>A dot is a combination that makes sense and was not run. An empty cell is one
-that does not: a rule is too small to be a file of its own, and a step means
-nothing without the steps it leads to.</p>
+<p>An empty cell is a combination that means nothing: a rule is too small to be
+a file of its own, and a step means nothing without the steps it leads to.</p>
 <p>The rows run from records of what happened (transcripts, summaries), through
 statements of what is true (notes, rules, pages), to instructions for what to
 do (skills, guides, steps). The columns run from no structure at all to the
 most. A single file is read whole on every task. A catalogue is one line per
-entry. A signature key maps what a failure looks like to the entries for it.</p>
+entry. A signature key maps what a failure looks like to the entries for it.
+Some cells take their form from published designs: the playbook from [10],
+skills from [11], and the troubleshooting tree from [9].</p>
 <p><strong>What is the same in all of them.</strong> The agent manages its KB itself, in its
 own session, with the tools it already has. The harness never writes KB
 content. An approach's instructions are assembled from shared pieces, one for
@@ -310,14 +292,16 @@ the entry type and one for the index, so two approaches differ only in the
 pieces they name. No piece says anything about how to debug.</p>
 <p><strong>The result is shown before the update.</strong> After each task on A the agent is
 told how its answer was graded and shown the correct fix, as a change to the
-original module. It then updates the KB. Section 3 is the reason: without
+original module. It then updates the KB. Section 2 is the reason: without
 this, most of what the KB recorded would be failures written down as
 successes. It is also how a KB is fed in practice, since once a bug is closed
 its fix is known. Only A's results are ever shown, and B's modules do not
 appear in A.</p>
 <p><strong>Why these thirteen.</strong> They were chosen for two things. Together they cover
 every kind of entry and every kind of index. And they include the approaches
-that A's baseline points to:</p>
+that A's baseline points to (Table 4).</p>
+<p class="caption"><b>Table 4.</b> What A's baseline suggests a KB should hold, and the approaches that hold it most directly.</p>
+
 <table>
 <thead>
 <tr>
@@ -354,26 +338,30 @@ on every task should gain most. Those that recall earlier cases (the shared
 session, raw cases, summaries) should gain least, because none of B's modules
 appears in A. That expectation was written down before any approach had been
 run on B.</p>
-<h2>5. Results</h2>
+<h2>4. Results</h2>
+<p><em>To be written when the results are in.</em></p>
+<p class="caption"><b>Table 5.</b> Each approach on B with its frozen KB, against the baseline on the same tasks.</p>
+
 <!-- generated: Results on B -->
 <p><em>Not available yet.</em></p>
 <!-- /generated -->
 
-<p><em>To be written when the results are in.</em></p>
+<p class="caption"><b>Table 6.</b> What building each KB cost over solving A with no KB.</p>
+
 <!-- generated: Cost of building -->
 <p><em>Not available yet.</em></p>
 <!-- /generated -->
 
-<h2>6. What worked, what failed, and why</h2>
+<h2>5. What worked, what failed, and why</h2>
 <p><em>To be written when the results are in.</em></p>
-<h2>7. Limits</h2>
+<h2>6. Limits</h2>
 <ul>
 <li><strong>One build and one run per approach.</strong> Each KB comes from a single order
   of A, and each approach was run once on B. The baseline suggests repeats
   add little, since few tasks change outcome between them, but the effect of
   the order in which A is seen is not measured.</li>
-<li><strong>A small benchmark.</strong> B has 41 tasks in 16 modules. The figure below gives
-  the smallest difference it can tell from chance.</li>
+<li><strong>A small benchmark.</strong> B has 41 tasks in 15 modules. The last line of this
+  section gives the smallest difference it can tell from chance.</li>
 <li><strong>Thirteen approaches of 51.</strong> The rest are defined and can be run with the
   same command.</li>
 <li><strong>The KBs were built with the result shown.</strong> These results say nothing
@@ -395,43 +383,44 @@ run on B.</p>
   for every run.</li>
 <li><strong>Limitations are a model's reading.</strong> They describe; they are not scores.</li>
 </ul>
+<p class="caption"><b>Table 7.</b> Every planned run and what became of it. A flagged run is one a reviewer has to clear or void before it counts.</p>
+
 <!-- generated: Trust -->
 <table>
 <thead>
 <tr>
 <th>Condition</th>
-<th>Planned</th>
-<th>Recorded</th>
-<th>Completed</th>
-<th>Timed out</th>
-<th>Errored</th>
-<th>Flagged</th>
-<th>Cleared</th>
-<th>Void</th>
-<th>Pending</th>
+<th style="text-align: right;">Planned</th>
+<th style="text-align: right;">Recorded</th>
+<th style="text-align: right;">Completed</th>
+<th style="text-align: right;">Timed out</th>
+<th style="text-align: right;">Errored</th>
+<th style="text-align: right;">Flagged</th>
+<th style="text-align: right;">Cleared</th>
+<th style="text-align: right;">Void</th>
+<th style="text-align: right;">Pending</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>baseline/baseline</td>
-<td>258</td>
-<td>258</td>
-<td>258</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
 <p>Violations planted in certified baseline trajectories: the monitor flagged 20 of 20 (read grading assets 4/4, search for answers 4/4, fetch from network 4/4, fake the result 4/4, copy another runs answer 4/4). The judge flagged 20 and the pattern match 8.</p>
-<p>Told to get a pass by any means, the agent was flagged in 0.0% of 6 runs. A run that is not flagged here is one where the agent did not attempt a violation.</p>
 <p>Two repeats of the baseline differ by +0.0% (-7.1 to +7.0) on B. The smallest difference in pass rate this benchmark can tell from chance is about 9.5%.</p>
 <!-- /generated -->
 
-<h2>8. Further work</h2>
+<h2>7. Further work</h2>
 <ul>
 <li><strong>Repeats and orders.</strong> Three chains per approach, each over a different
   order of A, would show how much a KB depends on what it happened to see
@@ -446,40 +435,42 @@ run on B.</p>
   worth having.</li>
 <li><strong>A harder benchmark.</strong> Only the adapter is specific to ChipBench.</li>
 </ul>
-<h2>Sources</h2>
-<ul>
-<li>ChipBench, https://github.com/zhongkaiyu/ChipBench</li>
-<li>Harbor, https://docs.harborframework.com</li>
-<li>Codex CLI, https://developers.openai.com/codex</li>
-<li>Establishing Best Practices for Building Rigorous Agentic Benchmarks, https://arxiv.org/abs/2507.02825</li>
-<li>BenchJack: Systematically Auditing AI Agent Benchmarks, https://arxiv.org/abs/2605.12673</li>
-<li>AI Agents That Matter, https://arxiv.org/abs/2407.01502</li>
-<li>Miller, Adding Error Bars to Evals, https://arxiv.org/abs/2411.00640</li>
-<li>Why Do Multi-Agent LLM Systems Fail?, https://arxiv.org/abs/2503.13657</li>
-<li>Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures, https://arxiv.org/abs/2511.17833</li>
-<li>Agentic Context Engineering, https://arxiv.org/abs/2510.04618</li>
-<li>Agent Skills, https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</li>
-<li>The full list is in <code>docs/spec.md</code>, section 11.</li>
-</ul>
+<h2>References</h2>
+<ol>
+<li>ChipBench. https://github.com/zhongkaiyu/ChipBench</li>
+<li>Harbor. https://docs.harborframework.com</li>
+<li>Codex CLI. https://developers.openai.com/codex</li>
+<li>Establishing Best Practices for Building Rigorous Agentic Benchmarks. https://arxiv.org/abs/2507.02825</li>
+<li>BenchJack: Systematically Auditing AI Agent Benchmarks. https://arxiv.org/abs/2605.12673</li>
+<li>AI Agents That Matter. https://arxiv.org/abs/2407.01502</li>
+<li>Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. https://arxiv.org/abs/2411.00640</li>
+<li>Why Do Multi-Agent LLM Systems Fail? https://arxiv.org/abs/2503.13657</li>
+<li>Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures. https://arxiv.org/abs/2511.17833</li>
+<li>Agentic Context Engineering. https://arxiv.org/abs/2510.04618</li>
+<li>Agent Skills. https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</li>
+</ol>
+<p>The full list of what was read is in <code>docs/spec.md</code>, section 11.</p>
 <h2>Appendix: full tables</h2>
-<p>Every table in this report is generated from the stored runs by one command,
-given in the README.</p>
+<p>Every table and figure in this report is generated from the stored runs by
+one command, given in the README.</p>
+<p class="caption"><b>Table A1.</b> Every condition, with tokens split into uncached input, cached input and output.</p>
+
 <!-- generated: Conditions -->
 <table>
 <thead>
 <tr>
 <th>Condition</th>
 <th>Side</th>
-<th>Tasks</th>
-<th>Runs</th>
-<th>Pass rate (95%)</th>
-<th>pass@k</th>
-<th>pass^k</th>
-<th>Tokens per run: uncached / cached / output</th>
-<th>Cost per run</th>
-<th>Cost per solved task</th>
-<th>Time to solution</th>
-<th>Responses</th>
+<th style="text-align: right;">Tasks</th>
+<th style="text-align: right;">Runs</th>
+<th style="text-align: right;">Pass rate (95%)</th>
+<th style="text-align: right;">pass@k</th>
+<th style="text-align: right;">pass^k</th>
+<th style="text-align: right;">Tokens per run: uncached / cached / output</th>
+<th style="text-align: right;">Cost per run</th>
+<th style="text-align: right;">Cost per solved task</th>
+<th style="text-align: right;">Time to solution</th>
+<th style="text-align: right;">Responses</th>
 <th>KB use</th>
 </tr>
 </thead>
@@ -487,59 +478,63 @@ given in the README.</p>
 <tr>
 <td>baseline</td>
 <td>A</td>
-<td>45</td>
-<td>135</td>
-<td>69.6% (45.7 to 90.8)</td>
-<td>71.1%</td>
-<td>68.9%</td>
-<td>15455 / 52800 / 1736</td>
-<td>$0.061</td>
-<td>$0.088</td>
-<td>31s</td>
-<td>4.8</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">69.6% (45.7 to 90.8)</td>
+<td style="text-align: right;">71.1%</td>
+<td style="text-align: right;">68.9%</td>
+<td style="text-align: right;">15455 / 52800 / 1736</td>
+<td style="text-align: right;">$0.061</td>
+<td style="text-align: right;">$0.088</td>
+<td style="text-align: right;">31s</td>
+<td style="text-align: right;">4.8</td>
 <td></td>
 </tr>
 <tr>
 <td>baseline</td>
 <td>B</td>
-<td>41</td>
-<td>123</td>
-<td>39.0% (19.0 to 62.5)</td>
-<td>43.9%</td>
-<td>34.1%</td>
-<td>15717 / 56935 / 2115</td>
-<td>$0.066</td>
-<td>$0.169</td>
-<td>37s</td>
-<td>5.1</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">39.0% (19.0 to 62.5)</td>
+<td style="text-align: right;">43.9%</td>
+<td style="text-align: right;">34.1%</td>
+<td style="text-align: right;">15717 / 56935 / 2115</td>
+<td style="text-align: right;">$0.066</td>
+<td style="text-align: right;">$0.169</td>
+<td style="text-align: right;">37s</td>
+<td style="text-align: right;">5.1</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <!-- /generated -->
 
+<p class="caption"><b>Table A2.</b> Pass rate on B by the kind of bug injected.</p>
+
 <!-- generated: By bug category -->
 <table>
 <thead>
 <tr>
 <th>Condition</th>
-<th>arithmetic</th>
-<th>assignment</th>
-<th>state_machine</th>
-<th>timing</th>
+<th style="text-align: right;">arithmetic</th>
+<th style="text-align: right;">assignment</th>
+<th style="text-align: right;">state_machine</th>
+<th style="text-align: right;">timing</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>baseline</td>
-<td>51.5%</td>
-<td>40.5%</td>
-<td>0.0%</td>
-<td>33.3%</td>
+<td style="text-align: right;">51.5%</td>
+<td style="text-align: right;">40.5%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">33.3%</td>
 </tr>
 </tbody>
 </table>
 <!-- /generated -->
+
+<p class="caption"><b>Table A3.</b> Share of runs showing each limitation.</p>
 
 <!-- generated: Limitations -->
 <p>From a model's reading of each run, so descriptive only.</p>
@@ -548,32 +543,32 @@ given in the README.</p>
 <thead>
 <tr>
 <th>Condition</th>
-<th>broke_the_interface</th>
-<th>changed_more_than_the_bug</th>
-<th>missed_the_bug</th>
-<th>other</th>
-<th>test_did_not_test</th>
-<th>wasted_effort</th>
+<th style="text-align: right;">broke_the_interface</th>
+<th style="text-align: right;">changed_more_than_the_bug</th>
+<th style="text-align: right;">missed_the_bug</th>
+<th style="text-align: right;">other</th>
+<th style="text-align: right;">test_did_not_test</th>
+<th style="text-align: right;">wasted_effort</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>baseline, side A</td>
-<td>5.2%</td>
-<td>59.3%</td>
-<td>3.0%</td>
-<td>1.5%</td>
-<td>36.3%</td>
-<td>34.8%</td>
+<td style="text-align: right;">5.2%</td>
+<td style="text-align: right;">59.3%</td>
+<td style="text-align: right;">3.0%</td>
+<td style="text-align: right;">1.5%</td>
+<td style="text-align: right;">36.3%</td>
+<td style="text-align: right;">34.8%</td>
 </tr>
 <tr>
 <td>baseline, side B</td>
-<td>1.6%</td>
-<td>64.2%</td>
-<td>12.2%</td>
-<td>0.0%</td>
-<td>64.2%</td>
-<td>34.1%</td>
+<td style="text-align: right;">1.6%</td>
+<td style="text-align: right;">64.2%</td>
+<td style="text-align: right;">12.2%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">64.2%</td>
+<td style="text-align: right;">34.1%</td>
 </tr>
 </tbody>
 </table>

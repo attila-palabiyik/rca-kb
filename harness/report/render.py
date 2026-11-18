@@ -167,7 +167,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "summary.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     _per_task(rows, prices, model, out_dir / "per_task.csv")
-    _figure(conditions, out_dir / "figures")
+    _figures(report, out_dir / "figures")
     (out_dir / "report.md").write_text(_markdown(report), encoding="utf-8")
     return report
 
@@ -192,8 +192,25 @@ def _per_task(rows: list[Row], prices: dict, model: str, path: Path) -> None:
                 ])
 
 
-def _figure(conditions: dict, folder: Path) -> None:
-    """Pass rate against tokens per run on B, one point per condition."""
+INK, ACCENT, GREY = "#14212b", "#0b7a75", "#9fb1bd"
+
+
+def _short(label: str) -> str:
+    return label.removeprefix("kb-").removesuffix("/eval").removesuffix("/baseline")
+
+
+def _baseline_sides(report: dict) -> dict:
+    return next((sides for sides in report["conditions"].values()
+                 if any(m["mode"] == "baseline" for m in sides.values())), {})
+
+
+def _figures(report: dict, folder: Path) -> None:
+    """The report's figures, each as PNG and SVG.
+
+    difference_from_baseline: each approach's paired difference in pass rate on B, with its interval.
+    pass_rate_vs_tokens: pass rate against tokens per run on B, one point per condition.
+    baseline_limitations: share of baseline runs showing each limitation, by side.
+    """
     try:
         import matplotlib
 
@@ -201,25 +218,71 @@ def _figure(conditions: dict, folder: Path) -> None:
         import matplotlib.pyplot as plt
     except ImportError:
         return
-    points = [(label, sides["B"]) for label, sides in conditions.items()
-              if "B" in sides and sides["B"].get("mode") != "build"]
-    if not points:
-        return
-    folder.mkdir(parents=True, exist_ok=True)
-    figure, axis = plt.subplots(figsize=(7, 4.5))
-    for label, entry in points:
-        is_baseline = entry["mode"] == "baseline"
-        axis.scatter(entry["tokens_per_run_total"], entry["pass_rate"], s=70 if is_baseline else 40,
-                     marker="s" if is_baseline else "o", color="black" if is_baseline else "tab:blue")
-        axis.annotate(label, (entry["tokens_per_run_total"], entry["pass_rate"]),
-                      textcoords="offset points", xytext=(6, 4), fontsize=7)
-    axis.set_xlabel("Tokens per run")
-    axis.set_ylabel("Pass rate on B")
-    axis.set_ylim(0, 1)
-    axis.grid(alpha=0.3)
-    figure.tight_layout()
-    figure.savefig(folder / "pass_rate_vs_tokens.png", dpi=150)
-    plt.close(figure)
+    style = {"font.size": 9, "axes.spines.top": False, "axes.spines.right": False,
+             "axes.edgecolor": INK, "axes.labelcolor": INK, "xtick.color": INK, "ytick.color": INK,
+             "text.color": INK, "axes.axisbelow": True}
+
+    def save(figure, name: str) -> None:
+        folder.mkdir(parents=True, exist_ok=True)
+        figure.tight_layout()
+        figure.savefig(folder / f"{name}.png", dpi=200)
+        figure.savefig(folder / f"{name}.svg", metadata={"Date": None})
+        plt.close(figure)
+
+    with plt.rc_context(style):
+        compared = sorted(((_short(name), entry["vs_baseline"]["pass_rate_difference"])
+                           for name, entry in report["comparisons"].items()
+                           if (entry.get("vs_baseline") or {}).get("tasks")),
+                          key=lambda item: item[1]["value"] or 0)
+        if compared:
+            figure, axis = plt.subplots(figsize=(6.4, 0.34 * len(compared) + 1.0))
+            for position, (_, d) in enumerate(compared):
+                axis.plot([100 * d["low"], 100 * d["high"]], [position, position], color=ACCENT, linewidth=1.6)
+                axis.plot(100 * d["value"], position, "o", color=ACCENT, markersize=5)
+            axis.axvline(0, color=INK, linewidth=0.8)
+            axis.set_yticks(range(len(compared)), [name for name, _ in compared])
+            axis.set_ylim(-0.6, len(compared) - 0.4)
+            axis.set_xlabel("Difference in pass rate on B from the baseline, percentage points")
+            axis.grid(axis="x", alpha=0.3)
+            axis.tick_params(axis="y", length=0)
+            save(figure, "difference_from_baseline")
+
+        points = [(label, sides["B"]) for label, sides in report["conditions"].items()
+                  if "B" in sides and sides["B"].get("mode") != "build"]
+        if points:
+            figure, axis = plt.subplots(figsize=(6.4, 4.0))
+            for label, entry in points:
+                is_baseline = entry["mode"] == "baseline"
+                axis.scatter(entry["tokens_per_run_total"] / 1000, 100 * entry["pass_rate"],
+                             s=60 if is_baseline else 34, marker="s" if is_baseline else "o",
+                             color=INK if is_baseline else ACCENT, zorder=3)
+                axis.annotate(_short(label), (entry["tokens_per_run_total"] / 1000, 100 * entry["pass_rate"]),
+                              textcoords="offset points", xytext=(6, 4), fontsize=7)
+            axis.set_xlabel("Tokens per run, thousands")
+            axis.set_ylabel("Pass rate on B, %")
+            axis.set_ylim(0, 100)
+            axis.grid(alpha=0.3)
+            save(figure, "pass_rate_vs_tokens")
+
+        rated = {side: m["limitation_rates"] for side, m in sorted(_baseline_sides(report).items())
+                 if m.get("limitation_rates")}
+        if rated:
+            categories = sorted({c for rates in rated.values() for c in rates},
+                                key=lambda c: max(r.get(c, 0) for r in rated.values()))
+            figure, axis = plt.subplots(figsize=(6.4, 0.5 * len(categories) + 0.9))
+            height = 0.8 / len(rated)
+            for index, (side, rates) in enumerate(rated.items()):
+                offsets = [position + 0.4 - height * (index + 0.5) for position in range(len(categories))]
+                values = [100 * rates.get(c, 0.0) for c in categories]
+                bars = axis.barh(offsets, values, height=height * 0.9, label=f"Set {side}",
+                                 color=GREY if index == 0 else ACCENT)
+                axis.bar_label(bars, labels=[f"{v:.0f}%" for v in values], padding=3, fontsize=7)
+            axis.set_yticks(range(len(categories)), [_label(c).capitalize() for c in categories])
+            axis.set_xlabel("Share of baseline runs, %")
+            axis.set_xlim(0, 100)
+            axis.tick_params(axis="y", length=0)
+            axis.legend(frameon=False, loc="lower right")
+            save(figure, "baseline_limitations")
 
 
 def fill_writeup(report_markdown: str, writeup: Path) -> int:
@@ -270,7 +333,13 @@ def _interval(entry: dict, pct: bool = True, signed: bool = False) -> str:
 
 
 def _table(header: list[str], body: list[list]) -> list[str]:
-    lines = ["| " + " | ".join(header) + " |", "|" + "---|" * len(header)]
+    """A markdown table. A column whose cells are all numbers is set to the right."""
+    def numeric(column: int) -> bool:
+        cells = [str(row[column]) for row in body if str(row[column])]
+        return bool(cells) and all(cell[0] in "0123456789+-$" for cell in cells)
+
+    rule = ["---:" if numeric(column) else "---" for column in range(len(header))]
+    lines = ["| " + " | ".join(header) + " |", "|" + "|".join(rule) + "|"]
     lines += ["| " + " | ".join(str(c) for c in row) + " |" for row in body]
     return lines + [""]
 
@@ -282,8 +351,7 @@ def _label(category: str) -> str:
 def _body_sections(report: dict) -> list[str]:
     """The narrow tables the written report's body uses. The wide ones follow."""
     out = []
-    baseline = next((sides for sides in report["conditions"].values()
-                     if any(m["mode"] == "baseline" for m in sides.values())), None)
+    baseline = _baseline_sides(report)
     if baseline:
         out += ["## Baseline", ""]
         body = []
@@ -293,28 +361,25 @@ def _body_sections(report: dict) -> list[str]:
                          _pct(m[f"pass@{k}"]), _pct(m[f"pass^{k}"]),
                          f"{m['tokens_per_run_total'] / 1000:.0f}k", f"${m['cost_per_run']:.3f}",
                          f"{m['seconds_mean']:.0f} s"])
-        out += _table(["Side", "Tasks", "Runs", "Pass rate (95% interval)", "pass@3", "pass^3",
+        out += _table(["Set", "Tasks", "Runs", "Pass rate (95% interval)", "pass@3", "pass^3",
                        "Tokens per run", "Cost per run", "Time to solution"], body)
         for side, m in sorted(baseline.items()):
             k = m["repeats"]
             always, ever = m[f"pass^{k}"], m[f"pass@{k}"]
-            out += [f"On side {side}, {_pct(always)} of tasks pass in every repeat, "
+            out += [f"On set {side}, {_pct(always)} of tasks pass in every repeat, "
                     f"{_pct(1 - ever)} in none, and {_pct(ever - always)} in some but not all.", ""]
 
         rated = {side: m["limitation_rates"] for side, m in sorted(baseline.items())
                  if m.get("limitation_rates")}
         if rated:
+            # The shares themselves are in figures/baseline_limitations and in the Limitations table.
             out += ["## Baseline limitations", ""]
-            categories = sorted({c for rates in rated.values() for c in rates},
-                                key=lambda c: -max(r.get(c, 0) for r in rated.values()))
-            out += _table(["Limitation", *[f"Side {side}" for side in rated]],
-                          [[_label(c), *[_pct(rates.get(c, 0.0)) for rates in rated.values()]]
-                           for c in categories])
+            line = "The limitations are a model's reading of every run, and a run can show several."
             for name, measured in report["trust"]["assessment_self_agreement"].items():
                 if measured.get("runs") and name == "baseline":
-                    out += [f"Share of runs showing each limitation, from a model's reading of every run. "
-                            f"Read twice, the reader named the same set of limitations for "
-                            f"{_pct(measured['same_set'])} of {measured['runs']} runs.", ""]
+                    line += (f" Read twice, the reader named the same set of limitations for "
+                             f"{_pct(measured['same_set'])} of {measured['runs']} runs.")
+            out += [line, ""]
 
     compared = [(name, entry["vs_baseline"]) for name, entry in report["comparisons"].items()
                 if (entry.get("vs_baseline") or {}).get("tasks")]

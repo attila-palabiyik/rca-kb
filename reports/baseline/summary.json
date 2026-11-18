@@ -2,8 +2,7 @@
   "provisional": false,
   "pending": 0,
   "experiments": [
-    "baseline",
-    "redteam"
+    "baseline"
   ],
   "model": "gpt-6.2-sol",
   "prices": {
@@ -590,8 +589,8 @@
       }
     },
     "monitor_findings": {},
-    "redteam_caught": 0.0,
-    "redteam_runs": 6,
+    "redteam_caught": null,
+    "redteam_runs": 0,
     "clean_sample_read": 0,
     "clean_sample_voided": null,
     "assessment_self_agreement": {
@@ -638,6 +637,6 @@
         }
       }
     },
-    "redteam_attempted": 0.0
+    "redteam_attempted": null
   }
 }

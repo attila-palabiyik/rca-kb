@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Knowledge bases for an RTL debugging agent</title>
+<style>
+@page { size: 1280px 720px; margin: 0; }
+:root { --ink: #14212b; --muted: #5b6b78; --line: #d5dce1; --tint: #eef2f4; --accent: #0b7a75;
+        --accent-soft: #cfe6e4; --warm: #b4532a; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { counter-reset: slide; font-family: 'Segoe UI', Arial, Helvetica, sans-serif; color: var(--ink); }
+.slide { width: 1280px; height: 720px; padding: 52px 72px 56px; position: relative; overflow: hidden;
+         page-break-after: always; break-after: page; counter-increment: slide; background: #fff;
+         display: flex; flex-direction: column; }
+.slide > h1 { flex: none; }
+.slide > h1 + * { margin-top: auto; }
+.slide > :last-child { margin-bottom: auto; }
+.slide::after { content: counter(slide); position: absolute; right: 72px; bottom: 24px; font-size: 13px;
+                color: var(--muted); }
+h1 { font-size: 38px; line-height: 1.2; font-weight: 600; margin: 0 0 34px; letter-spacing: -0.2px; }
+p, li, td, th { font-size: 23px; line-height: 1.4; }
+p { margin: 0 0 14px; }
+ul { margin: 0; padding-left: 22px; }
+li { margin-bottom: 12px; }
+.muted { color: var(--muted); }
+.small, .small p, .small li, .small td, .small th { font-size: 19px; }
+.cols { display: flex; gap: 48px; }
+.cols > * { flex: 1; min-width: 0; }
+.label { font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin: 0 0 10px; }
+.card { background: var(--tint); border-radius: 10px; padding: 24px 28px; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 0.92em; }
+
+/* Title slide */
+.title { background: var(--ink); color: #fff; justify-content: center; }
+.title > * { margin-top: 0 !important; }
+.title > :last-child { margin-bottom: 0; }
+.title::after { content: none; }
+.title h1 { font-size: 52px; max-width: 900px; margin-bottom: 22px; }
+.title p { font-size: 24px; color: #c3ced6; max-width: 1000px; }
+.title .by { font-size: 18px; color: #8fa0ad; padding-top: 30px; }
+
+/* Flow boxes */
+.flow { display: flex; align-items: stretch; gap: 0; }
+.flow .box { flex: 1; border: 1.5px solid var(--line); border-radius: 10px; padding: 22px 24px; background: #fff; }
+.flow .box.fill { background: var(--accent); border-color: var(--accent); color: #fff; }
+.flow .box.fill .muted { color: #d6eeec; }
+.flow .box b { display: block; font-size: 26px; margin-bottom: 6px; }
+.flow .box span { font-size: 19px; line-height: 1.35; display: block; }
+.flow .arrow { flex: 0 0 44px; display: flex; align-items: center; justify-content: center; color: var(--muted);
+               font-size: 26px; }
+
+/* Stats */
+.stat b { display: block; font-size: 72px; line-height: 1; font-weight: 600; letter-spacing: -1px; }
+.stat span { display: block; font-size: 18px; color: var(--muted); margin-top: 10px; }
+.tiles { display: flex; gap: 20px; }
+.tiles .card { flex: 1; }
+.tiles .stat b { font-size: 50px; }
+
+/* Bars */
+.bars { display: grid; grid-template-columns: 290px 1fr; row-gap: 24px; column-gap: 16px; align-items: center; }
+.bars .name { font-size: 22px; }
+.bar { height: 19px; border-radius: 3px; background: var(--accent); }
+.bar.a { background: #9fb1bd; margin-bottom: 4px; }
+.barrow { display: flex; align-items: center; gap: 8px; font-size: 16px; color: var(--muted); }
+.key { display: flex; gap: 26px; font-size: 16px; color: var(--muted); margin-top: 22px; white-space: nowrap; }
+.key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.stack { display: flex; height: 44px; border-radius: 5px; overflow: hidden; margin: 6px 0 4px; }
+.stack div { color: #fff; font-size: 17px; display: flex; align-items: center; justify-content: center; }
+
+/* Chart of approaches */
+table { border-collapse: collapse; width: 100%; }
+.chart { table-layout: fixed; }
+.chart th, .chart td { font-size: 14px; line-height: 1.2; text-align: center; padding: 0; height: 53px; border: 3px solid #fff; }
+.chart thead th { font-weight: 600; color: var(--muted); height: 40px; vertical-align: bottom; padding-bottom: 6px; }
+.chart tbody th { text-align: right; padding-right: 12px; font-weight: 600; width: 110px; }
+.chart td { background: var(--tint); color: #9aa8b3; font-size: 20px; }
+.chart td.run { background: var(--accent); color: #fff; font-size: 15px; font-weight: 600; padding: 0 6px; }
+.chart td.none, .key i.hatch { background: repeating-linear-gradient(135deg, #fff, #fff 5px, #d9dfe4 5px, #d9dfe4 6.5px); }
+.grid th, .grid td { text-align: left; vertical-align: top; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--line);
+                     font-size: 21px; }
+.grid th { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+.pending { border: 1.5px dashed var(--warm); color: var(--warm); border-radius: 10px; padding: 26px 28px; font-size: 20px; }
+
+@media screen {
+  body { background: #cfd6db; padding: 24px 0; }
+  .slide { margin: 0 auto 24px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18); }
+}
+</style>
+</head>
+<body>
+
+<section class="slide title">
+  <h1>Knowledge bases for an RTL debugging agent</h1>
+  <p>Which way of storing what earlier debugging runs learned helps a later run most.</p>
+  <p class="by">Attila Palabiyik · November 2026</p>
+</section>
+
+<section class="slide">
+  <h1>One thing varies: the knowledge base</h1>
+  <div class="flow" style="margin-bottom: 30px;">
+    <div class="box"><b>Set A</b><span>45 tasks, 17 modules</span><span class="muted">Solved one after another. The agent updates the KB after each.</span></div>
+    <div class="arrow">→</div>
+    <div class="box fill"><b>KB</b><span>Starts empty</span><span class="muted">Written only by the agent. Frozen when A ends.</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>Set B</b><span>41 tasks, 15 modules</span><span class="muted">Solved with the frozen KB. Nothing a run writes is kept.</span></div>
+  </div>
+  <div class="cols">
+    <div>
+      <p class="label">Held fixed</p>
+      <ul class="small">
+        <li>Codex CLI 0.170.0, headless, <code>gpt-6.2-sol</code> at medium effort</li>
+        <li>ChipBench Verilog debugging: a specification and a module with one injected bug</li>
+        <li>A fresh container for every run; web search and the CLI's own memory off</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">Compared with</p>
+      <ul class="small">
+        <li>The same agent on A and B with no KB, three times over</li>
+        <li>Correctness from a hidden testbench in a second container; tokens and time from the agent's own turn</li>
+        <li>No module is on both sides: tasks of one module share one correct file</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h1>With no KB, the agent passes 70% of A and 39% of B</h1>
+  <div class="cols" style="gap: 64px;">
+    <div style="flex: 0 0 470px;">
+      <div class="cols" style="gap: 36px; margin-bottom: 34px;">
+        <div class="stat"><b>69.6%</b><span>Set A · 45.7 to 90.8</span></div>
+        <div class="stat"><b style="color: var(--accent);">39.0%</b><span>Set B · 19.0 to 62.5</span></div>
+      </div>
+      <p class="small muted">258 runs, three per task. A run takes about 70k tokens, $0.06 and half a minute to reach its answer.</p>
+      <p class="small muted">The split was drawn once, by module, from a fixed seed, and not adjusted afterwards.</p>
+    </div>
+    <div>
+      <p class="label">Tasks by outcome over three repeats</p>
+      <p class="small" style="margin: 14px 0 0;">Set A</p>
+      <div class="stack">
+        <div style="width: 68.9%; background: var(--accent);">68.9% always pass</div>
+        <div style="width: 2.2%; background: #9fb1bd;"></div>
+        <div style="width: 28.9%; background: var(--ink);">28.9% never</div>
+      </div>
+      <p class="small" style="margin: 18px 0 0;">Set B</p>
+      <div class="stack">
+        <div style="width: 34.1%; background: var(--accent);">34.1% always pass</div>
+        <div style="width: 9.8%; background: #9fb1bd;">9.8%</div>
+        <div style="width: 56.1%; background: var(--ink);">56.1% never</div>
+      </div>
+      <p style="margin-top: 30px;">The task settles the outcome, not chance. Whole modules pass or fail together, whichever bug was injected.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h1>Most failures are not a missed bug</h1>
+  <div class="cols" style="gap: 56px;">
+    <div style="flex: 1.25;">
+      <p class="label">Share of baseline runs showing each limitation</p>
+      <div class="bars" style="margin-top: 18px;">
+        <div class="name">Changed more than the bug</div>
+        <div><div class="barrow"><div class="bar a" style="width: 59.3%;"></div>59.3%</div><div class="barrow"><div class="bar" style="width: 64.2%;"></div>64.2%</div></div>
+        <div class="name">Its own test did not test</div>
+        <div><div class="barrow"><div class="bar a" style="width: 36.3%;"></div>36.3%</div><div class="barrow"><div class="bar" style="width: 64.2%;"></div>64.2%</div></div>
+        <div class="name">Wasted effort</div>
+        <div><div class="barrow"><div class="bar a" style="width: 34.8%;"></div>34.8%</div><div class="barrow"><div class="bar" style="width: 34.1%;"></div>34.1%</div></div>
+        <div class="name">Missed the bug</div>
+        <div><div class="barrow"><div class="bar a" style="width: 3.0%;"></div>3.0%</div><div class="barrow"><div class="bar" style="width: 12.2%;"></div>12.2%</div></div>
+        <div class="name">Broke the interface</div>
+        <div><div class="barrow"><div class="bar a" style="width: 5.2%;"></div>5.2%</div><div class="barrow"><div class="bar" style="width: 1.6%;"></div>1.6%</div></div>
+      </div>
+      <div class="key"><span><i style="background: #9fb1bd;"></i>Set A</span><span><i style="background: var(--accent);"></i>Set B</span><span>A model's reading of every run; a run can show several.</span></div>
+    </div>
+    <div class="card small">
+      <p class="label">One run</p>
+      <p>A sequence detector's shift register filled from the wrong end. Swapping two operands was the whole fix.</p>
+      <p>The agent made that swap. It also moved the comparison, so the output rose a cycle earlier than the reference's.</p>
+      <p style="margin-bottom: 0;">Its own testbench passed, because it encoded the same reading of the specification. From where the agent stood, the run succeeded.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h1>The result is shown before the KB is updated</h1>
+  <p style="max-width: 980px; margin-bottom: 30px;">An agent asked what it learned from a run it believes succeeded will record a success. So on A, each task ends like this:</p>
+  <div class="flow" style="margin-bottom: 34px;">
+    <div class="box"><b>Solve</b><span class="muted">With the KB as it stands</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>Grade</b><span class="muted">Hidden testbench, second container</span></div>
+    <div class="arrow">→</div>
+    <div class="box fill"><b>Show</b><span class="muted">The verdict, and the correct fix as a change to the original module</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>Update</b><span class="muted">The agent edits its KB, in the same session</span></div>
+  </div>
+  <div class="cols small">
+    <ul>
+      <li>It is how a KB is fed in practice: once a bug is closed, its fix is known.</li>
+      <li>Only A's results are ever shown, and none of B's modules appears in A.</li>
+    </ul>
+    <ul>
+      <li>The harness never writes KB content. The agent does, with the tools it already has.</li>
+      <li>On B nothing is shown and nothing is kept.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" style="padding-top: 44px;">
+  <h1 style="margin-bottom: 8px;">An approach is two choices: an entry type and an index</h1>
+  <table class="chart" style="margin-top: 0;">
+    <thead><tr><th style="width: 110px;"></th><th>Single file</th><th>Flat files</th><th>Catalogue</th><th>Signature key</th><th>Tags</th><th>Hierarchy</th><th>Graph</th><th>Similarity search</th></tr></thead>
+    <tbody>
+      <tr><th>Transcript</th><td class="run">Shared session</td><td class="run">Raw cases</td><td>·</td><td>·</td><td>·</td><td>·</td><td class="none"></td><td>·</td></tr>
+      <tr><th>Summary</th><td>·</td><td class="run">Summaries</td><td>·</td><td>·</td><td>·</td><td>·</td><td class="none"></td><td>·</td></tr>
+      <tr><th>Note</th><td>·</td><td class="run">Notes</td><td>·</td><td>·</td><td>·</td><td>·</td><td>·</td><td class="run">Notes by similarity</td></tr>
+      <tr><th>Rule</th><td class="run">Playbook</td><td class="none"></td><td class="none"></td><td>·</td><td class="run">Rules by tags</td><td>·</td><td class="none"></td><td>·</td></tr>
+      <tr><th>Page</th><td class="none"></td><td>·</td><td class="run">Wiki</td><td>·</td><td>·</td><td>·</td><td class="run">Wiki</td><td>·</td></tr>
+      <tr><th>Skill</th><td class="none"></td><td class="none"></td><td class="run">Skills</td><td>·</td><td>·</td><td class="run">Hierarchical skills</td><td>·</td><td>·</td></tr>
+      <tr><th>Guide</th><td class="run">Single-file guide</td><td>·</td><td>·</td><td class="run">Signature guides</td><td>·</td><td>·</td><td>·</td><td>·</td></tr>
+      <tr><th>Step</th><td>·</td><td class="none"></td><td class="none"></td><td>·</td><td class="none"></td><td class="run">Troubleshooting tree</td><td>·</td><td class="none"></td></tr>
+    </tbody>
+  </table>
+  <div class="key" style="margin-top: 12px;"><span><i style="background: var(--accent);"></i>Run: thirteen approaches</span><span><i style="background: var(--tint);"></i>Makes sense, not run</span><span><i class="hatch"></i>Does not make sense</span></div>
+  <p class="small muted" style="margin: 10px 0 0;">Rows run from what happened, to what is true, to what to do. Columns run from the least structure to the most.</p>
+</section>
+
+<section class="slide">
+  <h1>A's baseline says where a KB could help</h1>
+  <table class="grid" style="margin-bottom: 20px;">
+    <thead><tr><th style="width: 27%;">Limitation on A</th><th style="width: 31%;">What would address it</th><th>Approaches it favours</th></tr></thead>
+    <tbody>
+      <tr><td>Changed more than the bug</td><td>One general rule, relevant to every task</td><td>Those the agent sees without looking: the playbook, the single-file guide</td></tr>
+      <tr><td>Its own test did not test</td><td>A procedure, possibly with a script</td><td>Skills, hierarchical skills</td></tr>
+      <tr><td>Wasted effort</td><td>Commands and scripts that already work</td><td>Skills</td></tr>
+      <tr><td>Missed the bug</td><td>Diagnosis by symptom</td><td>Signature guides, the troubleshooting tree. Rare on A, so little to gain.</td></tr>
+    </tbody>
+  </table>
+  <div class="cols">
+    <div class="card small"><p class="label">Expected to gain most</p><p style="margin: 0;">Approaches that put a general rule in front of the agent on every task.</p></div>
+    <div class="card small"><p class="label">Expected to gain least</p><p style="margin: 0;">Approaches that recall earlier cases, because none of B's modules appears in A.</p></div>
+  </div>
+  <p class="small muted" style="margin-top: 12px;">Written down before any approach had been run on B.</p>
+</section>
+
+<section class="slide">
+  <h1>Results on B</h1>
+  <div class="pending">Pending: the thirteen approaches are still running.</div>
+</section>
+
+<section class="slide">
+  <h1>What worked, what failed, and how A shapes B</h1>
+  <div class="pending">Pending: written from the results.</div>
+</section>
+
+<section class="slide">
+  <h1>What the numbers can carry, and what comes next</h1>
+  <div class="tiles" style="margin-bottom: 30px;">
+    <div class="card stat"><b>258 / 258</b><span>baseline runs completed, none flagged</span></div>
+    <div class="card stat"><b>20 / 20</b><span>violations planted in clean trajectories, all flagged</span></div>
+    <div class="card stat"><b>9.5 pts</b><span>smallest difference in pass rate B can tell from chance</span></div>
+    <div class="card stat"><b>13 of 51</b><span>approaches run, one build and one run on B each</span></div>
+  </div>
+  <div class="cols small">
+    <div>
+      <p class="label">Limits</p>
+      <ul>
+        <li>The KBs were built with the result shown. Nothing here speaks for a KB whose author never learns whether it was right.</li>
+        <li>A public benchmark, one agent, one model.</li>
+        <li>The network was open: this machine's Docker cannot confine it. Web search was off and every trajectory was read for network use.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">Next</p>
+      <ul>
+        <li>Three builds per approach over different orders of A.</li>
+        <li>The remaining combinations, and one setting changed at a time on the best.</li>
+        <li>Hill climbing on A, a root-cause measure, a harder benchmark.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
