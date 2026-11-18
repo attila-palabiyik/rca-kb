@@ -16,18 +16,18 @@
   <!-- KB row -->
   <text x="0" y="124" font-weight="700">With a KB</text>
   <text x="0" y="137" fill="#5c6770">one approach</text>
-  <polygon points="112,150 364,150 364,100" fill="#0b7a75" fill-opacity="0.22"/>
+  <polygon points="112,150 364,150 364,100" fill="#cfe6e4"/>
   <line x1="112" y1="150.5" x2="364" y2="150.5" stroke="#0b7a75"/>
   <text x="124" y="114">the KB starts empty and grows</text>
-  <text x="112" y="166" fill="#5c6770">each task: solve, grade, show the result, update the KB</text>
+  <text x="112" y="166" fill="#5c6770">each task: solve, grade, see the fix, update the KB</text>
   <line x1="384.5" y1="98" x2="384.5" y2="152" stroke="#1a1f24" stroke-width="1.2"/>
   <text x="384.5" y="92" text-anchor="middle">frozen</text>
-  <rect x="404" y="100" width="197" height="50" fill="#0b7a75" fill-opacity="0.22"/>
+  <rect x="404" y="100" width="197" height="50" fill="#cfe6e4"/>
   <line x1="404" y1="150.5" x2="601" y2="150.5" stroke="#0b7a75"/>
   <text x="416" y="122">each task solved once</text>
   <text x="416" y="136" fill="#5c6770">nothing a run writes is kept</text>
-  <text x="404" y="166" fill="#5c6770">compared with the baseline, task by task</text>
 
   <!-- comparison bracket -->
-  <path d="M606.5 49.5 H616.5 V125.5 H606.5" fill="none" stroke="#1a1f24" stroke-width="0.9"/>
+  <line x1="502.5" y1="74" x2="502.5" y2="98" stroke="#1a1f24" stroke-width="0.9"/>
+  <text x="510" y="90" fill="#5c6770">compared, task by task</text>
 </svg>

@@ -32,22 +32,23 @@ The tasks are ChipBench's Verilog debugging cases [1]: 89 cases over 33
 modules, each module carrying up to four injected bugs of different kinds
 (arithmetic, assignment, state machine, timing). A task gives the agent a
 written specification and the module with one bug. The agent edits the module
-in place. Three cases are unusable (section 6), which leaves 86 tasks in 32
-modules.
+in place. The three cases of one module are unusable (section 6), which
+leaves 86 tasks in 32 modules.
 
 Set A (45 tasks, 17 modules) builds a KB and set B (41 tasks, 15 modules)
-tests it. The split is by module, drawn once from a fixed seed. Tasks of one
+tests it. The split is by module, drawn once with seed 1. Tasks of one
 module share one correct file, so a module on both sides would put B's
 answers into a KB built on A.
 
 ### Agent
 
-The agent is Codex CLI 0.170.0 [3] in headless mode with `gpt-6.2-sol`. It
-has Icarus Verilog in its container and may write and run its own tests. The
-brief asks for default settings. Four things are set, for the baseline and
-for every approach alike: the model and its reasoning effort (medium) are
-pinned; web search is off; the CLI's own memory feature is off; and a
-five-line preamble of rules opens every prompt (appendix C).
+The agent is Codex CLI 0.170.0 [2], run headless (`codex exec`) with
+`gpt-6.2-sol`. It has Icarus Verilog in its container and may write and run
+its own tests. The brief asks for default settings. Four settings depart from
+the defaults, identically for the baseline and every approach: the model and
+its reasoning effort (medium) are pinned; web search is off; the CLI's own
+memory feature is off; and a five-line preamble of rules opens every prompt
+(appendix C).
 
 ### Conditions
 
@@ -60,18 +61,21 @@ five-line preamble of rules opens every prompt (appendix C).
 | Frozen | B | 1 | As the build left it. Each run works on a private copy that is discarded. | No |
 
 The order of A is random, fixed by seed, and the same for every approach.
+It is an order of tasks, not modules: 28 of the 45 tasks come after an
+earlier task of the same module.
 
 ### Grading and isolation
 
-Each run gets a fresh container, started by Harbor [2]. The testbench and the
+Each run gets a fresh container, started by Harbor [3]. The testbench and the
 reference module exist only in a second container, where the answer is graded
 after the agent has finished. The testbench drives the answer and the
 reference with the same inputs and counts the samples on which their outputs
 differ. An answer passes on zero mismatches.
 
-Correct therefore means that the repair restores the reference's behaviour.
-It does not mean that the agent identified the root cause. Section 2 uses a
-reading of each trajectory to tell the two apart.
+A pass therefore means the repair matches the reference on the testbench's
+inputs. It does not mean that the agent identified the root cause. Section 2
+labels each trajectory for, among other things, whether the agent missed the
+bug.
 
 Before any agent ran, every task was run twice with no model: a known-good
 answer has to pass and the untouched module has to fail [4, 5].
@@ -82,20 +86,28 @@ Correctness is the pass rate. Tokens are uncached input, cached input and
 output, summed over the model calls of the turn in which the agent solves the
 task. Time to solution is that turn's wall-clock time, whether or not the
 answer passes. Grading and the KB update are excluded from both and reported
-apart as the cost of building. Cost uses the list prices in
-`configs/prices.toml`.
+separately as the cost of building. Cost uses the list prices in
+`configs/prices.toml`, and is reported beside correctness rather than folded
+into it [6].
 
-An approach is compared with the baseline task by task [7]. Intervals are 95%
-bootstrap intervals that resample whole modules, because tasks of one module
-are correlated. Thirteen approaches are compared with one baseline and no
-correction is made for that.
+Each approach is compared with the baseline paired by task [7]. Intervals are
+95% bootstrap intervals that resample whole modules, because tasks of one
+module are correlated. Thirteen approaches are compared with one baseline and
+no correction is made for that: about one of thirteen intervals would exclude
+zero by chance.
+
+How small a difference can be seen follows from the baseline's own
+variation. Two of its repeats on B differ by 0.0 points (−7.1 to +7.0).
+From that, a paired difference on B has to be about 9.5 points, four tasks of
+41, to be detected with 80% power. Smaller differences cannot be told from
+noise here.
 
 ## 2. The baseline
 
 <p class="caption"><b>Table 2.</b> The agent with no KB, three runs per task. The interval is on the pass rate. The next two columns count a task as passing if any of its runs passes, and only if every run does.</p>
 
 <!-- generated: Baseline -->
-| Set | Tasks | Modules | Runs | Pass rate, % | 95% interval | Tasks passing any run, % | every run, % | Tokens per run | Cost per run, $ | Time to solution, s |
+| Set | Tasks | Modules | Runs | Pass rate, % | 95% interval | Passing any run, % | Passing every run, % | Tokens per run | Cost per run, $ | Time to solution, s |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | A | 45 | 17 | 135 | 69.6 | 45.7 to 90.8 | 71.1 | 68.9 | 70k | 0.061 | 31 |
 | B | 41 | 15 | 123 | 39.0 | 19.0 to 62.5 | 43.9 | 34.1 | 75k | 0.066 | 37 |
@@ -103,7 +115,7 @@ correction is made for that.
 
 <figure>
 <img src="../reports/main/figures/baseline_tasks.svg" alt="Grid of every baseline task: one column per module, one row per kind of bug, shaded by how many of three runs passed, for set A and set B.">
-<figcaption><b>Figure 3.</b> Every baseline task. A column is a module, labelled with its ChipBench problem number; a row is the kind of bug injected. Most columns are one shade from top to bottom: a module passes or fails whichever bug it carries.</figcaption>
+<figcaption><b>Figure 3.</b> Every baseline task. A column is a module, labelled with its ChipBench problem number; a row is the kind of bug injected. Columns are sorted by pass rate; a blank cell is a kind of bug that module does not carry. Most columns are one shade from top to bottom: a module passes or fails whichever bug it carries.</figcaption>
 </figure>
 
 <!-- generated: Baseline outcomes -->
@@ -116,21 +128,30 @@ Outcomes are stable across repeats, and they are settled by the module more
 than by the bug. This is the unit a KB has to move: to raise the pass rate on
 B it has to change the outcome on modules where the agent fails every time.
 
-The baseline passes more of A than of B. The two intervals overlap, and with
-15 to 17 modules a side the difference is within what the draw of modules can
-produce. No other explanation is offered.
+The baseline passes more of A than of B. The two intervals overlap; the
+difference was not tested.
 
 ### What limits a run
 
 Every baseline run was read by a model (`gpt-6.2-sol`, the agent's own)
 against the task, the verdict and a correct answer, and labelled with what
 limited it, from a fixed set of limitations [8]. The set came from free-text
-notes on a sample of A's runs and was fixed before any KB run. No person
-checked the labels.
+notes on 30 of A's runs and was fixed before any KB run. No person checked
+the labels.
+
+<p class="caption"><b>Table 3.</b> The limitations a run can be labelled with.</p>
+
+| Limitation | The run |
+|---|---|
+| Changed more than the bug | addressed the defect but also changed behaviour the given module had and the reference keeps, such as output timing or reset values |
+| Own test missed the fault | passed a test of the agent's own that could not expose the fault |
+| Wasted effort | spent a clear share of its time on work that did not bear on the fix |
+| Missed the bug | did not correct the defect |
+| Broke the interface | changed names, ports or structure so that the answer no longer fits what uses it |
 
 <figure>
 <img src="../reports/main/figures/baseline_limitations.svg" alt="For set A and set B, the share of failed runs and of passed runs showing each limitation.">
-<figcaption><b>Figure 4.</b> Share of baseline runs showing each limitation, for runs that failed and runs that passed. A run can show several. Almost every failed run changed more than the bug; few missed it.</figcaption>
+<figcaption><b>Figure 4.</b> Share of baseline runs showing each limitation, for runs that failed and runs that passed. A run can show several. Almost every failed run changed more than the bug; few missed it. "Own test missed the fault" is close to true by definition of a failed run, since an agent that saw its test fail would rarely submit.</figcaption>
 </figure>
 
 <!-- generated: Baseline limitations -->
@@ -141,8 +162,8 @@ Of the 75 runs that failed on set B: own test missed the fault 75, changed more 
 Labelling 30 runs a second time, the model gave the same set of limitations for 25 of them.
 <!-- /generated -->
 
-Failed runs rarely miss the bug. In nearly all of them the agent finds the
-defect, repairs it, and then changes something else. Figure 5 shows one.
+Few failed runs missed the bug: 4 of 41 on A and 15 of 75 on B. Most
+repaired it and then changed something else. Figure 5 shows one.
 
 <figure>
 <div class="code">
@@ -167,15 +188,15 @@ wire [8:0] next_window = {a_tem[7:0], a};
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-<span class="del">        a_tem &lt;= 9'b111111111;</span>
+<span class="extra">        a_tem &lt;= 9'b111111111;</span>
         match &lt;= 1'b0;
     end else begin
         a_tem &lt;= next_window;
-<span class="del">        match &lt;= (next_window[8:6] == 3'b011) &amp;&amp;
+<span class="extra">        match &lt;= (next_window[8:6] == 3'b011) &amp;&amp;
                  (next_window[2:0] == 3'b110);</span>
     end
 end</pre>
-<p>The constant is corrected, inside a rewrite of the module. The rewrite also resets the register to ones and compares its next value, so <code>match</code> rises a cycle early: 16 mismatches in 237 samples. The agent's own testbench passed.</p>
+<p>The constant is corrected, inside a rewrite of the module. Marked: lines changed beyond the fix. The rewrite resets the register to ones and compares its next value, so <code>match</code> rises a cycle early: 16 mismatches in 237 samples. The agent's own testbench passed. (<code>match</code> is <code>match_f &amp;&amp; match_b</code> in the given module.)</p>
 </div>
 </div>
 <figcaption><b>Figure 5.</b> One baseline run on set A (<code>assignment__Prob002_extraneous_items_sequence_detect</code>, first repeat). Indentation is normalised and a comment is left out; the code is otherwise as given and as submitted.</figcaption>
@@ -187,7 +208,9 @@ given module answers both, and so does the reference, which is the design as
 it was before the bug was put in. The agent's version is a fair reading of
 the prose and a different circuit.
 
-This is the general pattern. The specification under-determines the design,
+The labels suggest this is the common case: 40 of 41 failed runs on A and 70
+of 75 on B changed more than the bug, against 43% and 19% of runs that
+passed. The specification under-determines the design,
 the reference is the original design, and the task is to repair the module
 that was given. An agent that implements the specification afresh changes
 behaviour the specification never pinned down. Its own testbench, written
@@ -218,16 +241,18 @@ against the other.
 <tr><th>Summary</th><td class="open"></td><td class="run">Summaries</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="none"></td><td class="open"></td></tr>
 <tr class="gap"><th class="group" rowspan="3">What is true</th><th>Note</th><td class="open"></td><td class="run">Notes</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Notes by similarity</td></tr>
 <tr><th>Rule</th><td class="run">Playbook</td><td class="none"></td><td class="none"></td><td class="open"></td><td class="run">Rules by tags</td><td class="open"></td><td class="none"></td><td class="open"></td></tr>
-<tr><th>Page</th><td class="none"></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">+ links</td><td class="open"></td></tr>
+<tr><th>Page</th><td class="none"></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Wiki, linked</td><td class="open"></td></tr>
 <tr class="gap"><th class="group" rowspan="3">What to do</th><th>Skill</th><td class="none"></td><td class="none"></td><td class="run">Skills</td><td class="open"></td><td class="open"></td><td class="run">Hierarchical skills</td><td class="open"></td><td class="open"></td></tr>
 <tr><th>Guide</th><td class="run">Single-file guide</td><td class="open"></td><td class="open"></td><td class="run">Signature guides</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td></tr>
 <tr><th>Step</th><td class="open"></td><td class="none"></td><td class="none"></td><td class="open"></td><td class="none"></td><td class="run">Trouble&shy;shooting tree</td><td class="open"></td><td class="none"></td></tr>
 </tbody>
 </table>
-<figcaption><b>Figure 6.</b> The approaches. Filled: built and run, thirteen approaches in fourteen cells, since the wiki is a catalogue of pages that also link to one another. Outlined: defined, not run. No cell: the combination means nothing, as a rule is too small to be a file and a step is nothing without the steps it leads to. The 52 cells that mean something make 51 approaches.</figcaption>
+<figcaption><b>Figure 6.</b> The approaches. Rows are grouped by what an entry records: what happened in a task, what is true, or what to do. Filled: the thirteen approaches run. The wiki fills two cells, as a catalogue of pages that also link to one another. Outlined: defined, not run. No cell: the combination makes no sense; for example, a rule is too small to be a file, a step is nothing without the steps it leads to, and a transcript or summary records one task and does not link to others. The 52 cells that make sense give 51 approaches.</figcaption>
 </figure>
 
-<p class="caption"><b>Table 3.</b> Entry types and indexes. "Loaded" means placed in the agent's context at the start of every task, as the <code>AGENTS.md</code> file the CLI reads.</p>
+<p class="caption"><b>Table 4.</b> Entry types and indexes. "Loaded" means placed in the agent's context at the start of every task, as the <code>AGENTS.md</code> file the CLI reads.</p>
+
+<div class="pair" markdown="1">
 
 | Entry type | One entry is |
 |---|---|
@@ -236,7 +261,7 @@ against the other.
 | Note | A file holding one lesson, in whatever form suits it. |
 | Rule | One sentence saying what to do or check, with when it applies and the task it came from. |
 | Page | A file on one topic, gathering what tasks have taught about it. |
-| Skill | A folder with a procedure and, optionally, scripts, in the form the CLI's own skill mechanism reads [11]. |
+| Skill | A folder with a procedure and, optionally, scripts, in the form the CLI's own skill mechanism reads [9]. |
 | Guide | A file on diagnosing one kind of failure: what to look at, in what order, and what each finding points to. |
 | Step | One check, its possible outcomes, and for each the next step or the conclusion. |
 
@@ -251,18 +276,21 @@ against the other.
 | Graph | Entries link to one another and each link says when to follow it. The first entry is loaded. |
 | Similarity search | A command in the container returns the entries closest in meaning to a query. |
 
+</div>
+
 Three of the thirteen have names that do not say what they are. The shared
 session keeps one CLI session running through every task, so earlier tasks
 are in the agent's context, subject to the CLI's own compaction. The playbook
 is a single file of rules [10]. The troubleshooting tree is a hierarchy of
-steps [9]. Appendix A maps every name to its folder of instructions.
+steps [11]. Appendix A maps every name to its folder of instructions.
 
 ### What every approach shares
 
-The agent manages its KB itself, in its own session, with a shell and the
-files under `/kb`. The harness never writes KB content. An approach's
-instructions are assembled from shared pieces, one for the entry type and one
-for the index, so two approaches differ only in the pieces they name.
+The agent manages its KB itself, in the session that solved the task, with
+a shell and the files under `/kb`. The harness never writes KB content. An
+approach's instructions are assembled from shared pieces: a general one, one
+for the entry type and one for the index. Two approaches differ only in the
+pieces they name.
 Appendix D gives one approach's instructions in full. No piece says anything
 about how to debug.
 
@@ -276,14 +304,17 @@ bug is known. Only A's results are ever shown. On B nothing is shown and
 nothing a run writes is kept.
 
 This is feedback from the grader, and every result here depends on it
-(section 6).
+(section 6). The instructions also tell the agent that earlier and later
+tasks are different designs. That is true on B but not of most of the build:
+28 of A's 45 tasks follow a task of the same module, whose correct file they
+share.
 
 ### Why these thirteen, and what was predicted
 
 The thirteen were chosen to cover every entry type and every index, and to
-include the approaches that A's baseline favours (Table 4).
+include the approaches that A's baseline favours (Table 5).
 
-<p class="caption"><b>Table 4.</b> What A's baseline suggests a KB should hold, and the approaches that hold it most directly.</p>
+<p class="caption"><b>Table 5.</b> What A's baseline suggests a KB should hold, and the approaches that hold it most directly.</p>
 
 | Limitation on A | What would address it | Approaches it favours |
 |---|---|---|
@@ -291,24 +322,26 @@ include the approaches that A's baseline favours (Table 4).
 | Own test missed the fault | A procedure for testing, possibly with a script | Skills, hierarchical skills |
 | Wasted effort | Commands and scripts that already work | Skills |
 | Missed the bug | Diagnosis by symptom | Signature guides, the troubleshooting tree. Rare on A, so little to gain. |
+| Broke the interface | A rule to keep names and ports | The same as for changing more than the bug |
 
 Two predictions follow. Approaches that put general rules in front of the
 agent on every task should gain most. Approaches that recall earlier cases
 (the shared session, raw cases, summaries) should gain least, because no
-module of B appears in A. Both were committed before any frozen run
-(commit `1852b56`, 18 November, 13:46).
+module of B appears in A. Both were committed before any frozen run (commit
+`1852b56`, 18 November, 13:46 US Eastern). The wording here has been edited
+since; the predictions have not.
 
 ## 4. Results
 
 _Pending: written when the frozen runs on B have finished._
 
-<p class="caption"><b>Table 5.</b> Each approach on B with its frozen KB, against the baseline on the same tasks. A task is helped if it passes more often with the KB than without, and harmed if less often.</p>
+<p class="caption"><b>Table 6.</b> Each approach on B with its frozen KB, against the baseline on the same tasks. A task is helped if its pass rate in the one run with the KB is higher than in the baseline's three runs, and harmed if lower. Only 4 of B's tasks are mixed in the baseline, so nearly every change is a task that flipped.</p>
 
 <!-- generated: Results on B -->
 _Not available yet._
 <!-- /generated -->
 
-<p class="caption"><b>Table 6.</b> How A carries to B. During the build each task on A is solved before its own result is shown, so the build's runs can be compared with the baseline as well: apart for tasks whose module the KB had already met and tasks whose module was new to it.</p>
+<p class="caption"><b>Table 7.</b> Build runs on A against the baseline on A, split by whether the KB had already been shown a task of the same module, with B for comparison. Each build task is solved before its own result is shown. A task of a module met before shares its correct file with that earlier task, whose fix the KB was shown, and it comes later in the order, when the KB is larger.</p>
 
 <!-- generated: Seen and unseen modules -->
 _Not available yet._
@@ -323,60 +356,62 @@ _Pending: what worked, what failed, and how the choice of A affects B._
 - _Root cause._ The grader checks the repair, not the diagnosis. Whether the
   agent found the cause comes only from a model's reading of the trajectory.
 - _A KB built without feedback._ Every KB here was written by an agent that
-  had just been shown the verdict and the correct fix. The likely effect of
-  removing that is a worse KB, for the reason in section 2.
+  had just been shown the verdict and the correct fix. Without it, a KB would
+  likely record failed runs as successes (section 2).
 - _Variation between builds._ Each KB comes from one order of A and each
-  approach was run once on B. The baseline's repeats differ little, but a
-  gap between two approaches may reflect one build.
+  approach was run once on B. The baseline's repeats differ little
+  (section 1, Measures), but a gap between two approaches may reflect one
+  build.
 - _Instructions apart from content._ An approach adds instructions as well as
   a KB. The control that separates them, the same instructions with an empty
-  KB, is defined for every approach; section 4 says where it was run.
-- _More than this benchmark._ B has 41 tasks in 15 modules, from a public
+  KB, is defined for every approach but was not run, for lack of time.
+- _Size and contamination._ B has 41 tasks in 15 modules, from a public
   benchmark the model may have seen. That would raise the baseline and leave
   an approach less room to help.
 - _Other agents and models._ One of each was used.
-- _The other 38 approaches._ They are defined and run with the same command.
-  Codex's own memory, a candidate outside the grid, could not be run: the
-  executor recreates the CLI's home directory for every run.
+- _The other 38 approaches._ Each is defined and can be run with the same
+  command; none was. Codex's own memory, a candidate outside the grid, could
+  not be run: Harbor recreates the CLI's home directory for every run.
 - _A confined network._ The harness can restrict the agent to the model's
   API, but the Docker installation used here cannot enforce it. Web search
   was off, the rules forbid network use, and a monitor read every trajectory
   for it (appendix E).
 - _Set B equal to set A,_ which the brief offers as a separate experiment,
-  was not run. Table 6 is the nearest evidence.
+  was not run. Table 7 is the nearest evidence.
 
-Three tasks are left out. The reference for `Prob013_least_common_multiple`
-drives an output to high impedance, which its own testbench counts as a
+Three tasks are left out: the three cases of `Prob013_least_common_multiple`.
+Its reference drives an output to high impedance, which its own testbench counts as a
 mismatch, so no answer can pass. The check described in section 1 found it.
 
 ## 7. Further work
 
 - Three builds per approach, each over a different order of A, to measure
   how much a KB depends on what it met first.
-- The empty-KB control for every approach, and one setting changed at a time
+- The empty-KB control for every approach (defined, not run), and one setting changed at a time
   on the approaches that did best: what the key describes, how entries are
   maintained, whether a count of uses is kept.
 - Repeated passes over A that keep a change to the KB only if it helps, with
   B untouched until the end.
 - A measure of diagnosis apart from repair. It needs a recorded fault
   location for each task.
-- A harder benchmark. Only the adapter is specific to ChipBench.
+- A harder benchmark. Only the converter from ChipBench's format is
+  specific to ChipBench.
 
 ## References
 
 <div class="references" markdown="1">
 
 1. Yu, Z., Zhou, C., Lin, Y., Zhang, H., Ye, H., Cui, J., Pan, Z., Zhao, J., Ding, Y. (2026). ChipBench: A Next-Step Benchmark for Evaluating LLM Performance in AI-Aided Chip Design. arXiv:2601.21448. Tasks from github.com/zhongkaiyu/ChipBench at commit `b4ba3a0`.
-2. Harbor: a framework for evaluating agents in container environments, version 0.26.0. docs.harborframework.com
-3. OpenAI. Codex CLI, version 0.170.0. developers.openai.com/codex
+2. OpenAI (2026). Codex CLI, version 0.170.0. developers.openai.com/codex
+3. Harbor Framework Team (2026). Harbor: a framework for evaluating agents in container environments, version 0.26.0. docs.harborframework.com
 4. Zhu, Y., Jin, T., Pruksachatkun, Y., et al. (2025). Establishing Best Practices for Building Rigorous Agentic Benchmarks. arXiv:2507.02825.
 5. Wang, H., Li, H., Mang, Q., Cheung, A., Sen, K., Song, D. (2026). Do Androids Dream of Breaking the Game? Systematically Auditing AI Agent Benchmarks with BenchJack. arXiv:2605.12673.
 6. Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., Narayanan, A. (2024). AI Agents That Matter. arXiv:2407.01502.
 7. Miller, E. (2024). Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. arXiv:2411.00640.
 8. Cemri, M., Pan, M. Z., Yang, S., et al. (2025). Why Do Multi-Agent LLM Systems Fail? arXiv:2503.13657.
-9. Bai, Y., Ren, H. (2025). Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures. arXiv:2511.17833.
+9. Zhang, B., Lazuka, K., Murag, M. (2025). Equipping agents for the real world with Agent Skills. Anthropic Engineering, 16 October 2025.
 10. Zhang, Q., Hu, C., Upasani, S., et al. (2025). Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models. arXiv:2510.04618.
-11. Zhang, B., Lazuka, K., Murag, M. (2025). Equipping agents for the real world with Agent Skills. Anthropic Engineering, 16 October 2025.
+11. Bai, Y., Ren, H. (2025). Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures. arXiv:2511.17833.
 
 </div>
 
@@ -404,13 +439,13 @@ Everything read for this work is listed in `docs/spec.md`, section 11.
 
 ## Appendix B. Full tables
 
-Every table and figure in this report is generated from the stored runs. The
-README gives the commands.
+Every number in the tables and figures of this report is generated from the
+stored runs. The README gives the commands.
 
-<p class="caption"><b>Table B1.</b> Every condition.</p>
+<p class="caption"><b>Table B1.</b> Every condition. Tokens per run, in thousands: uncached input, cached input and output. Cost in dollars per run and per task solved; time to solution in seconds; model responses per run.</p>
 
 <!-- generated: Conditions -->
-| Condition | Set | Tasks | Runs | Pass rate, % | 95% interval | Input tokens, uncached | cached | Output tokens | Cost per run, $ | Cost per solved task, $ | Time to solution, s | Model responses per run |
+| Condition | Set | Tasks | Runs | Pass rate, % | 95% interval | Uncached in | Cached in | Output | $ / run | $ / solved | Time, s | Responses |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | No KB | A | 45 | 135 | 69.6 | 45.7 to 90.8 | 15.5k | 52.8k | 1.7k | 0.061 | 0.088 | 31 | 4.8 |
 | No KB | B | 41 | 123 | 39.0 | 19.0 to 62.5 | 15.7k | 56.9k | 2.1k | 0.066 | 0.169 | 37 | 5.1 |
@@ -428,22 +463,18 @@ _Not available yet._
 _Not available yet._
 <!-- /generated -->
 
-<p class="caption"><b>Table B4.</b> Pass rate by the kind of bug injected.</p>
+<p class="caption"><b>Table B4.</b> Pass rate in percent by the kind of bug injected, with the number of tasks in brackets.</p>
 
 <!-- generated: By bug category -->
-Pass rate in percent, with the number of tasks in brackets.
-
 | Condition | Set | Arithmetic | Assignment | State machine | Timing |
 |---|---|---:|---:|---:|---:|
 | No KB | A | 75.0 (12) | 73.3 (15) | 75.0 (4) | 59.5 (14) |
 | No KB | B | 51.5 (11) | 40.5 (14) | 0.0 (2) | 33.3 (14) |
 <!-- /generated -->
 
-<p class="caption"><b>Table B5.</b> Limitations, over all runs of each condition.</p>
+<p class="caption"><b>Table B5.</b> Share of all runs of each condition showing each limitation, in percent. A run can show several. Where a KB approach has been assessed, a second table gives the share of B's tasks where a limitation the baseline showed is gone (resolved) or one it did not show has appeared (introduced).</p>
 
 <!-- generated: Limitations -->
-Share of runs showing each limitation, in percent. A run can show several.
-
 | Condition | Set | Changed more than the bug | Own test missed the fault | Wasted effort | Missed the bug | Broke the interface |
 |---|---|---:|---:|---:|---:|---:|
 | No KB | A | 59.3 | 36.3 | 34.8 | 3.0 | 5.2 |
@@ -452,10 +483,10 @@ Share of runs showing each limitation, in percent. A run can show several.
 
 ## Appendix C. The rules that open every prompt
 
-> Work only inside this workspace.
-> The file named in the task is your answer. Edit it in place.
-> You may write and run your own tests with Icarus Verilog.
-> Do not use the network or web search.
+> Work only inside this workspace.<br>
+> The file named in the task is your answer. Edit it in place.<br>
+> You may write and run your own tests with Icarus Verilog.<br>
+> Do not use the network or web search.<br>
 > Do not look for tests, reference solutions or grading files. None are provided.
 
 ## Appendix D. One approach's instructions

@@ -4,7 +4,7 @@ Experiments: baseline. Model: `gpt-6.2-sol`. Prices: LiteLLM's price table, the 
 
 ## Baseline
 
-| Set | Tasks | Modules | Runs | Pass rate, % | 95% interval | Tasks passing any run, % | every run, % | Tokens per run | Cost per run, $ | Time to solution, s |
+| Set | Tasks | Modules | Runs | Pass rate, % | 95% interval | Passing any run, % | Passing every run, % | Tokens per run | Cost per run, $ | Time to solution, s |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | A | 45 | 17 | 135 | 69.6 | 45.7 to 90.8 | 71.1 | 68.9 | 70k | 0.061 | 31 |
 | B | 41 | 15 | 123 | 39.0 | 19.0 to 62.5 | 43.9 | 34.1 | 75k | 0.066 | 37 |
@@ -25,14 +25,12 @@ Labelling 30 runs a second time, the model gave the same set of limitations for 
 
 ## Conditions
 
-| Condition | Set | Tasks | Runs | Pass rate, % | 95% interval | Input tokens, uncached | cached | Output tokens | Cost per run, $ | Cost per solved task, $ | Time to solution, s | Model responses per run |
+| Condition | Set | Tasks | Runs | Pass rate, % | 95% interval | Uncached in | Cached in | Output | $ / run | $ / solved | Time, s | Responses |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | No KB | A | 45 | 135 | 69.6 | 45.7 to 90.8 | 15.5k | 52.8k | 1.7k | 0.061 | 0.088 | 31 | 4.8 |
 | No KB | B | 41 | 123 | 39.0 | 19.0 to 62.5 | 15.7k | 56.9k | 2.1k | 0.066 | 0.169 | 37 | 5.1 |
 
 ## By bug category
-
-Pass rate in percent, with the number of tasks in brackets.
 
 | Condition | Set | Arithmetic | Assignment | State machine | Timing |
 |---|---|---:|---:|---:|---:|
@@ -40,8 +38,6 @@ Pass rate in percent, with the number of tasks in brackets.
 | No KB | B | 51.5 (11) | 40.5 (14) | 0.0 (2) | 33.3 (14) |
 
 ## Limitations
-
-Share of runs showing each limitation, in percent. A run can show several.
 
 | Condition | Set | Changed more than the bug | Own test missed the fault | Wasted effort | Missed the bug | Broke the interface |
 |---|---|---:|---:|---:|---:|---:|

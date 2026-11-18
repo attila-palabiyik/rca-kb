@@ -45,7 +45,7 @@ L 146.989831 36
      </g>
      <g id="line2d_2"/>
      <g id="text_1">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="146.989831" y="142.398242" transform="rotate(-0 146.989831 142.398242)">0</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="146.989831" y="143.462" transform="rotate(-0 146.989831 143.462)">0</text>
      </g>
     </g>
     <g id="xtick_2">
@@ -56,7 +56,7 @@ L 201.905085 36
      </g>
      <g id="line2d_4"/>
      <g id="text_2">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="201.905085" y="142.398242" transform="rotate(-0 201.905085 142.398242)">50</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="201.905085" y="143.462" transform="rotate(-0 201.905085 143.462)">50</text>
      </g>
     </g>
     <g id="xtick_3">
@@ -67,7 +67,7 @@ L 256.820339 36
      </g>
      <g id="line2d_6"/>
      <g id="text_3">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="256.820339" y="142.398242" transform="rotate(-0 256.820339 142.398242)">100%</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="256.820339" y="143.462" transform="rotate(-0 256.820339 143.462)">100%</text>
      </g>
     </g>
    </g>
@@ -75,31 +75,31 @@ L 256.820339 36
     <g id="ytick_1">
      <g id="line2d_7"/>
      <g id="text_4">
-      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="48.759375" transform="rotate(-0 116.4 48.759375)">Own test missed the fault</text>
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="49.584" transform="rotate(-0 116.4 49.584)">Own test missed the fault</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_8"/>
      <g id="text_5">
-      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="68.199375" transform="rotate(-0 116.4 68.199375)">Changed more than the bug</text>
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="69.024" transform="rotate(-0 116.4 69.024)">Changed more than the bug</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_9"/>
      <g id="text_6">
-      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="87.639375" transform="rotate(-0 116.4 87.639375)">Wasted effort</text>
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="88.464" transform="rotate(-0 116.4 88.464)">Wasted effort</text>
      </g>
     </g>
     <g id="ytick_4">
      <g id="line2d_10"/>
      <g id="text_7">
-      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="107.079375" transform="rotate(-0 116.4 107.079375)">Missed the bug</text>
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="107.904" transform="rotate(-0 116.4 107.904)">Missed the bug</text>
      </g>
     </g>
     <g id="ytick_5">
      <g id="line2d_11"/>
      <g id="text_8">
-      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="126.519375" transform="rotate(-0 116.4 126.519375)">Broke the interface</text>
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="127.344" transform="rotate(-0 116.4 127.344)">Broke the interface</text>
      </g>
     </g>
    </g>
@@ -146,67 +146,25 @@ z
      <use xlink:href="#mf15284a9cc" x="157.505517" y="45.72" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_9">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="47.668242" transform="rotate(-0 260.141546 47.668242)">98%</text>
-   </g>
-   <g id="text_10">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="151.505517" y="47.668242" transform="rotate(-0 151.505517 47.668242)">10%</text>
-   </g>
-   <g id="text_11">
-    <text style="font-weight: 700; font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #1a1f24" x="254.141546" y="37.72" transform="rotate(-0 254.141546 37.72)">runs that failed</text>
-   </g>
-   <g id="text_12">
-    <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="157.505517" y="37.72" transform="rotate(-0 157.505517 37.72)">runs that passed</text>
-   </g>
    <g id="line2d_18">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#mf15284a9cc" x="193.726217" y="65.16" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
-   </g>
-   <g id="text_13">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="67.108242" transform="rotate(-0 260.141546 67.108242)">98%</text>
-   </g>
-   <g id="text_14">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="187.726217" y="67.108242" transform="rotate(-0 187.726217 67.108242)">43%</text>
    </g>
    <g id="line2d_19">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#mf15284a9cc" x="196.063036" y="84.6" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_15">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="154.383795" y="86.548242" transform="rotate(-0 154.383795 86.548242)">12%</text>
-   </g>
-   <g id="text_16">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="202.063036" y="86.548242" transform="rotate(-0 202.063036 86.548242)">45%</text>
-   </g>
    <g id="line2d_20">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#mf15284a9cc" x="146.989831" y="104.04" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_17">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="163.705002" y="105.988242" transform="rotate(-0 163.705002 105.988242)">10%</text>
-   </g>
-   <g id="text_18">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="105.988242" transform="rotate(-0 140.989831 105.988242)">0%</text>
-   </g>
    <g id="line2d_21">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#mf15284a9cc" x="146.989831" y="123.48" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
-   </g>
-   <g id="text_19">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="171.741381" y="125.428242" transform="rotate(-0 171.741381 125.428242)">17%</text>
-   </g>
-   <g id="text_20">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="125.428242" transform="rotate(-0 140.989831 125.428242)">0%</text>
-   </g>
-   <g id="text_21">
-    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="140.4" y="12.358008" transform="rotate(-0 140.4 12.358008)">Set A</text>
-   </g>
-   <g id="text_22">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="170.4" y="12.598242" transform="rotate(-0 170.4 12.598242)">41 runs failed, 94 passed</text>
    </g>
    <g id="line2d_22">
     <defs>
@@ -226,25 +184,67 @@ z
      <use xlink:href="#med57297b01" x="254.141546" y="45.72" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="48.6" transform="rotate(-0 260.141546 48.6)">98%</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="151.505517" y="48.6" transform="rotate(-0 151.505517 48.6)">10%</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #1a1f24" x="254.141546" y="37.72" transform="rotate(-0 254.141546 37.72)">runs that failed</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="157.505517" y="37.72" transform="rotate(-0 157.505517 37.72)">runs that passed</text>
+   </g>
    <g id="line2d_23">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#med57297b01" x="254.141546" y="65.16" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="68.04" transform="rotate(-0 260.141546 68.04)">98%</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="187.726217" y="68.04" transform="rotate(-0 187.726217 68.04)">43%</text>
    </g>
    <g id="line2d_24">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#med57297b01" x="160.383795" y="84.6" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="154.383795" y="87.48" transform="rotate(-0 154.383795 87.48)">12%</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="202.063036" y="87.48" transform="rotate(-0 202.063036 87.48)">45%</text>
+   </g>
    <g id="line2d_25">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#med57297b01" x="157.705002" y="104.04" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="163.705002" y="106.92" transform="rotate(-0 163.705002 106.92)">10%</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="106.92" transform="rotate(-0 140.989831 106.92)">0%</text>
+   </g>
    <g id="line2d_26">
     <g clip-path="url(#pc1bfa8a1af)">
      <use xlink:href="#med57297b01" x="165.741381" y="123.48" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="171.741381" y="126.36" transform="rotate(-0 171.741381 126.36)">17%</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="126.36" transform="rotate(-0 140.989831 126.36)">0%</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="140.4" y="12.309" transform="rotate(-0 140.4 12.309)">Set A</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="167.991406" y="12.432" transform="rotate(-0 167.991406 12.432)">41 runs failed, 94 passed</text>
    </g>
   </g>
   <g id="axes_2">
@@ -265,7 +265,7 @@ L 308.989831 36
      </g>
      <g id="line2d_28"/>
      <g id="text_23">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="308.989831" y="142.398242" transform="rotate(-0 308.989831 142.398242)">0</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="308.989831" y="143.462" transform="rotate(-0 308.989831 143.462)">0</text>
      </g>
     </g>
     <g id="xtick_5">
@@ -276,7 +276,7 @@ L 363.905085 36
      </g>
      <g id="line2d_30"/>
      <g id="text_24">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="363.905085" y="142.398242" transform="rotate(-0 363.905085 142.398242)">50</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="363.905085" y="143.462" transform="rotate(-0 363.905085 143.462)">50</text>
      </g>
     </g>
     <g id="xtick_6">
@@ -287,7 +287,7 @@ L 418.820339 36
      </g>
      <g id="line2d_32"/>
      <g id="text_25">
-      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="418.820339" y="142.398242" transform="rotate(-0 418.820339 142.398242)">100%</text>
+      <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="418.820339" y="143.462" transform="rotate(-0 418.820339 143.462)">100%</text>
      </g>
     </g>
    </g>
@@ -338,85 +338,85 @@ L 311.918644 123.48
      <use xlink:href="#mf15284a9cc" x="318.142373" y="45.72" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_26">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="424.820339" y="47.668242" transform="rotate(-0 424.820339 47.668242)">100%</text>
-   </g>
-   <g id="text_27">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="312.142373" y="47.668242" transform="rotate(-0 312.142373 47.668242)">8%</text>
-   </g>
    <g id="line2d_44">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#mf15284a9cc" x="329.583051" y="65.16" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
-   </g>
-   <g id="text_28">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="417.498305" y="67.108242" transform="rotate(-0 417.498305 67.108242)">93%</text>
-   </g>
-   <g id="text_29">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="323.583051" y="67.108242" transform="rotate(-0 323.583051 67.108242)">19%</text>
    </g>
    <g id="line2d_45">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#mf15284a9cc" x="361.616949" y="84.6" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_30">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="330.813559" y="86.548242" transform="rotate(-0 330.813559 86.548242)">25%</text>
-   </g>
-   <g id="text_31">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="367.616949" y="86.548242" transform="rotate(-0 367.616949 86.548242)">48%</text>
-   </g>
    <g id="line2d_46">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#mf15284a9cc" x="308.989831" y="104.04" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
-   <g id="text_32">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="336.955932" y="105.988242" transform="rotate(-0 336.955932 105.988242)">20%</text>
-   </g>
-   <g id="text_33">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="105.988242" transform="rotate(-0 302.989831 105.988242)">0%</text>
-   </g>
    <g id="line2d_47">
-    <g clip-path="url(#p46aad08931)">
-     <use xlink:href="#mf15284a9cc" x="308.989831" y="123.48" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
-    </g>
-   </g>
-   <g id="text_34">
-    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="317.918644" y="125.428242" transform="rotate(-0 317.918644 125.428242)">3%</text>
-   </g>
-   <g id="text_35">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="125.428242" transform="rotate(-0 302.989831 125.428242)">0%</text>
-   </g>
-   <g id="text_36">
-    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="302.4" y="12.358008" transform="rotate(-0 302.4 12.358008)">Set B</text>
-   </g>
-   <g id="text_37">
-    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="332.4" y="12.598242" transform="rotate(-0 332.4 12.598242)">75 runs failed, 48 passed</text>
-   </g>
-   <g id="line2d_48">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#med57297b01" x="418.820339" y="45.72" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
-   <g id="line2d_49">
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="424.820339" y="48.6" transform="rotate(-0 424.820339 48.6)">100%</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="312.142373" y="48.6" transform="rotate(-0 312.142373 48.6)">8%</text>
+   </g>
+   <g id="line2d_48">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#med57297b01" x="411.498305" y="65.16" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
-   <g id="line2d_50">
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="417.498305" y="68.04" transform="rotate(-0 417.498305 68.04)">93%</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="323.583051" y="68.04" transform="rotate(-0 323.583051 68.04)">19%</text>
+   </g>
+   <g id="line2d_49">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#med57297b01" x="336.813559" y="84.6" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
-   <g id="line2d_51">
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="330.813559" y="87.48" transform="rotate(-0 330.813559 87.48)">25%</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="367.616949" y="87.48" transform="rotate(-0 367.616949 87.48)">48%</text>
+   </g>
+   <g id="line2d_50">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#med57297b01" x="330.955932" y="104.04" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
     </g>
    </g>
-   <g id="line2d_52">
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="336.955932" y="106.92" transform="rotate(-0 336.955932 106.92)">20%</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="106.92" transform="rotate(-0 302.989831 106.92)">0%</text>
+   </g>
+   <g id="line2d_51">
     <g clip-path="url(#p46aad08931)">
      <use xlink:href="#med57297b01" x="311.918644" y="123.48" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="text_34">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="317.918644" y="126.36" transform="rotate(-0 317.918644 126.36)">3%</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="126.36" transform="rotate(-0 302.989831 126.36)">0%</text>
+   </g>
+   <g id="text_36">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="302.4" y="12.309" transform="rotate(-0 302.4 12.309)">Set B</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="329.583672" y="12.432" transform="rotate(-0 329.583672 12.432)">75 runs failed, 48 passed</text>
+   </g>
+   <g id="line2d_52">
+    <g clip-path="url(#p46aad08931)">
+     <use xlink:href="#mf15284a9cc" x="308.989831" y="123.48" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
     </g>
    </g>
   </g>

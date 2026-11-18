@@ -341,7 +341,7 @@ def _body_sections(report: dict) -> list[str]:
                          f"{m['tokens_per_run_total'] / 1000:.0f}k", f"{m['cost_per_run']:.3f}",
                          f"{m['seconds_mean']:.0f}"])
         out += _table(["Set", "Tasks", "Modules", "Runs", "Pass rate, %", "95% interval",
-                       f"Tasks passing any run, %", f"every run, %", "Tokens per run",
+                       "Passing any run, %", "Passing every run, %", "Tokens per run",
                        "Cost per run, $", "Time to solution, s"], body)
 
         out += ["## Baseline outcomes", ""]
@@ -434,9 +434,8 @@ def _markdown(report: dict) -> str:
                          "" if m["cost_per_solved_task"] is None else f"{m['cost_per_solved_task']:.3f}",
                          "" if m["seconds_mean"] is None else f"{m['seconds_mean']:.0f}",
                          f"{m['responses_per_run']:.1f}"])
-    out += _table(["Condition", "Set", "Tasks", "Runs", "Pass rate, %", "95% interval", "Input tokens, uncached",
-                   "cached", "Output tokens", "Cost per run, $", "Cost per solved task, $", "Time to solution, s",
-                   "Model responses per run"], body)
+    out += _table(["Condition", "Set", "Tasks", "Runs", "Pass rate, %", "95% interval", "Uncached in",
+                   "Cached in", "Output", "$ / run", "$ / solved", "Time, s", "Responses"], body)
 
     compared = _ordered(report)
     if compared:
@@ -485,7 +484,6 @@ def _markdown(report: dict) -> str:
                 if entry["mode"] == "baseline"]
         body += [[_name(name), "B", *cells(report["conditions"][f"{name}/eval"]["B"])]
                  for name, _ in compared if "B" in report["conditions"].get(f"{name}/eval", {})]
-        out += ["Pass rate in percent, with the number of tasks in brackets.", ""]
         out += _table(["Condition", "Set", *[c.replace("_", " ").capitalize() for c in categories]], body)
 
     rated = {(label, side): sides[side]["limitation_rates"]
@@ -495,7 +493,6 @@ def _markdown(report: dict) -> str:
         out += ["## Limitations", ""]
         categories = sorted({c for rates in rated.values() for c in rates if c != "other"},
                             key=lambda c: (-max(r.get(c, 0) for r in rated.values()), c))
-        out += ["Share of runs showing each limitation, in percent. A run can show several.", ""]
         out += _table(["Condition", "Set", *[figures.limitation_label(c) for c in categories]],
                       [[_name(label), side, *[_share(rates.get(c, 0.0)) for c in categories]]
                        for (label, side), rates in rated.items()])
@@ -504,8 +501,6 @@ def _markdown(report: dict) -> str:
         if any(entry for _, entry in changes):
             out += ["## Limitation changes", ""]
             shown = [c for c in categories if not c.startswith("kb_")][:4]
-            out += ["Share of B's tasks, in percent, where a limitation the baseline showed is gone with the KB "
-                    "(resolved) or one it did not show has appeared (introduced).", ""]
             header = ["Approach"]
             for c in shown:
                 header += [f"{figures.limitation_label(c)}: resolved", "introduced"]

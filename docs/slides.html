@@ -6,8 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=block">
 <style>
-/* One slide is 1280 x 720 px. Four type sizes: 36 title, 24 body, 18 labels and
-   code, 14 source line. Ink, slate and grey carry everything; the accent means
+/* One slide is 1280 x 720 px. Five type sizes: 36 title, 24 body, 20 tables and
+   quotations, 18 labels and code, 14 source line. Ink, slate and grey carry everything; the accent means
    a run with a KB and nothing else. Every slide shares one grid: the title at
    the top, content from y = 168, the source line and page number at the foot. */
 @page { size: 1280px 720px; margin: 0; }
@@ -56,8 +56,9 @@ code { font-family: var(--mono); font-size: 0.86em; }
 
 /* Code */
 pre { font: 18px/27px var(--mono); background: var(--wash); margin: 0; padding: 18px 20px; white-space: pre; }
-pre .del { background: #e3e5e7; }
-pre .add { background: var(--accent-wash); }
+pre .del { color: #8b949b; text-decoration: line-through; }
+pre .add { background: #e3e5e7; }
+pre .extra { background: #e3e5e7; }
 pre .dim { color: #8b949b; }
 .code h2 { font: 600 18px/24px var(--sans); margin: 0 0 10px; }
 .code .note { font-size: 18px; line-height: 26px; color: var(--slate); margin: 14px 0 0; }
@@ -66,14 +67,15 @@ blockquote { margin: 0; padding: 4px 0 4px 20px; border-left: 2px solid var(--ac
 /* The loop */
 .loop { display: flex; align-items: baseline; gap: 18px; font-size: 24px; margin: 0 0 40px; }
 .loop span.arrow { color: var(--grey); }
-.loop .on { font-weight: 600; color: var(--accent); }
+.loop span { color: var(--slate); }
+.loop .on { font-weight: 600; color: var(--ink); }
 
 /* The matrix */
 .matrix { border-collapse: collapse; width: 100%; table-layout: fixed; }
-.matrix th, .matrix td { font-size: 15px; line-height: 18px; padding: 0 4px; height: 40px; text-align: center; vertical-align: middle; }
+.matrix th, .matrix td { font-size: 14px; line-height: 18px; padding: 0 4px; height: 40px; text-align: center; vertical-align: middle; }
 .matrix thead th { font-weight: 400; color: var(--slate); vertical-align: bottom; padding-bottom: 8px; height: auto; }
 .matrix tbody th { text-align: left; font-weight: 600; font-size: 18px; padding: 0; width: 120px; }
-.matrix tbody th.group { font-weight: 400; color: var(--slate); width: 150px; vertical-align: top; padding-top: 10px; font-size: 16px; }
+.matrix tbody th.group { font-weight: 400; color: var(--slate); width: 150px; vertical-align: top; padding-top: 10px; font-size: 18px; }
 .matrix td { border: 3px solid #fff; }
 .matrix td.run { background: var(--accent); color: #fff; font-weight: 600; }
 .matrix td.open { box-shadow: inset 0 0 0 1px var(--grey); }
@@ -86,6 +88,8 @@ table.plain th, table.plain td { text-align: left; vertical-align: top; padding:
 table.plain th { font-size: 16px; font-weight: 600; color: var(--slate); padding-top: 10px; padding-bottom: 10px; }
 table.plain td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
+.wide-narrow .rows > div { grid-template-columns: 200px 1fr; }
+.wide-narrow .rows p { font-size: 20px; line-height: 28px; }
 .limits li { font-size: 20px; line-height: 28px; margin-bottom: 12px; }
 ul.limits { padding-left: 22px; margin: 0; }
 
@@ -144,6 +148,7 @@ ul.limits { padding-left: 22px; margin: 0; }
   <h1>Failed runs rarely miss the bug: they change more than the bug, and the agent's own test passes</h1>
   <div class="body">
     <div class="chart"><img src="../reports/main/figures/baseline_limitations.svg" alt="Limitations in failed and passed baseline runs"></div>
+    <p class="small" style="margin-top: 24px; max-width: 1100px;">On B, all 75 failed runs passed their own test and 70 changed more than the bug; 15 missed it.</p>
   </div>
   <div class="foot"><span>A model read every run against the task, the verdict and a correct answer. Read twice, it gave the same labels for 25 of 30 runs.</span></div>
 </section>
@@ -165,14 +170,14 @@ ul.limits { padding-left: 22px; margin: 0; }
     <div>
       <h2>What the agent submitted</h2>
 <pre>if (!rst_n) begin
-<span class="del">    a_tem &lt;= 9'b111111111;</span>
+<span class="extra">    a_tem &lt;= 9'b111111111;</span>
     match &lt;= 1'b0;
 end else begin
     a_tem &lt;= next_window;
-<span class="del">    match &lt;= (next_window[8:6] == 3'b011)</span>
-<span class="del">          &amp;&amp; (next_window[2:0] == 3'b110);</span>
+<span class="extra">    match &lt;= (next_window[8:6] == 3'b011)</span>
+<span class="extra">          &amp;&amp; (next_window[2:0] == 3'b110);</span>
 end</pre>
-      <p class="note">Right constant, but the reset value changed and <code>match</code> now rises a cycle early. Its own testbench passed. The hidden one found 16 mismatches in 237 samples.</p>
+      <p class="note">Marked: lines changed beyond the fix. Right constant, but the reset value changed and <code>match</code> now rises a cycle early. Its own testbench passed. The hidden one found 16 mismatches in 237 samples.</p>
     </div>
   </div>
   <div class="foot"><span>Set A, <code>assignment__Prob002_extraneous_items_sequence_detect</code>, first baseline run. Code shortened.</span></div>
@@ -180,12 +185,12 @@ end</pre>
 
 <!-- 7 -->
 <section class="slide">
-  <h1>So during the build the agent sees the verdict and the correct fix before it updates the KB</h1>
+  <h1>Because its own test passes, the build shows the agent the verdict and the fix before it updates the KB</h1>
   <div class="body">
     <div class="loop"><span>Solve with the KB</span><span class="arrow">→</span><span>Grade</span><span class="arrow">→</span><span class="on">See the verdict and the fix</span><span class="arrow">→</span><span>Update the KB</span></div>
-    <p class="label" style="margin-bottom: 12px;">After the task on slide 6, the playbook's KB gained two rules, one on the fix and one on what not to change:</p>
-    <blockquote style="margin-bottom: 20px;">When debugging a shift-register detector with wildcard bits, verify each fixed bit slice and comparison literal against the pattern, as in the TopModule <code>011XXX110</code> detector where changing the registered comparison of bits <code>[8:6]</code> from <code>001</code> to <code>011</code> passed all 237 grading samples.</blockquote>
-    <blockquote>When aligning mixed combinational and registered checks in a shift-register detector, preserve the existing registered check's sampling point, as in the TopModule <code>011XXX110</code> detector where registering both comparisons against the pre-edge shift register was the correct fix and comparing the newly shifted window failed 16 of 237 grading samples.</blockquote>
+    <p class="label" style="margin-bottom: 12px;">After the run on slide 6, the playbook's KB gained two rules, one on the fix and one on what not to change:</p>
+    <blockquote style="margin-bottom: 20px;">When debugging a shift-register detector with wildcard bits, <b>verify each fixed bit slice and comparison literal</b> against the pattern, as in the TopModule <code>011XXX110</code> detector where changing the registered comparison of bits <code>[8:6]</code> from <code>001</code> to <code>011</code> passed all 237 grading samples.</blockquote>
+    <blockquote>When aligning mixed combinational and registered checks in a shift-register detector, <b>preserve the existing registered check's sampling point</b>, as in the TopModule <code>011XXX110</code> detector where registering both comparisons against the pre-edge shift register was the correct fix and comparing the newly shifted window failed 16 of 237 grading samples.</blockquote>
   </div>
   <div class="foot"><span>Only set A's results are shown. On B nothing is shown and nothing is kept. The harness writes no KB content. Source: <code>runs/kb-playbook/kb/build/0/</code>.</span></div>
 </section>
@@ -203,14 +208,14 @@ end</pre>
         <tr><th>Summary</th><td class="open"></td><td class="run">Summaries</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td></td><td class="open"></td></tr>
         <tr class="gap"><th class="group" rowspan="3">What is true</th><th>Note</th><td class="open"></td><td class="run">Notes</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Notes by similarity</td></tr>
         <tr><th>Rule</th><td class="run">Playbook</td><td></td><td></td><td class="open"></td><td class="run">Rules by tags</td><td class="open"></td><td></td><td class="open"></td></tr>
-        <tr><th>Page</th><td></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">+ links</td><td class="open"></td></tr>
+        <tr><th>Page</th><td></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Wiki, linked</td><td class="open"></td></tr>
         <tr class="gap"><th class="group" rowspan="3">What to do</th><th>Skill</th><td></td><td></td><td class="run">Skills</td><td class="open"></td><td class="open"></td><td class="run">Hierarchical skills</td><td class="open"></td><td class="open"></td></tr>
         <tr><th>Guide</th><td class="run">Single-file guide</td><td class="open"></td><td class="open"></td><td class="run">Signature guides</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td></tr>
         <tr><th>Step</th><td class="open"></td><td></td><td></td><td class="open"></td><td></td><td class="run">Trouble&shy;shooting tree</td><td class="open"></td><td></td></tr>
       </tbody>
     </table>
   </div>
-  <div class="foot"><span>Columns run from the least structure to the most. Outlined: defined, not run (38). Blank: means nothing. The wiki fills two cells.</span></div>
+  <div class="foot"><span>Columns run from the least structure to the most. Outlined: defined, not run (38). No cell: the combination makes no sense. The wiki fills two cells.</span></div>
 </section>
 
 <!-- 9 -->
@@ -218,7 +223,7 @@ end</pre>
   <h1>Predicted before B was run: rules read on every task gain most, recalled cases least</h1>
   <div class="body">
     <table class="plain">
-      <thead><tr><th style="width: 330px;">What limits runs on A</th><th style="width: 140px; text-align: right;">Failed runs</th><th style="padding-left: 24px;">What would address it</th><th>Approaches that hold it</th></tr></thead>
+      <thead><tr><th style="width: 320px;">What limits runs on A</th><th style="width: 120px; text-align: right;">Failed runs</th><th style="padding-left: 24px; width: 330px;">What would address it</th><th>Approaches that hold it</th></tr></thead>
       <tbody>
         <tr><td>Changed more than the bug</td><td class="num">40 of 41</td><td style="padding-left: 24px;">One general rule, read every time</td><td>Playbook, single-file guide</td></tr>
         <tr><td>Own test missed the fault</td><td class="num">40 of 41</td><td style="padding-left: 24px;">A testing procedure or script</td><td>Skills, hierarchical skills</td></tr>
@@ -227,7 +232,7 @@ end</pre>
     </table>
     <p style="margin-top: 36px;">Recalling earlier cases (shared session, raw cases, summaries) should help least, because no module of B appears in A.</p>
   </div>
-  <div class="foot"><span>Committed before any frozen run: commit <code>1852b56</code>, 18 November, 13:46.</span></div>
+  <div class="foot"><span>Committed before any frozen run: commit <code>1852b56</code>, 18 November, 13:46 US Eastern.</span></div>
 </section>
 
 <!-- 10 -->
@@ -243,7 +248,7 @@ end</pre>
 <section class="slide">
   <h1 class="pending">How set A shapes set B: modules the KB had met against modules it had not</h1>
   <div class="body">
-    <p class="pending">Pending: the build's runs on A, apart for modules met before and modules new to the KB, against every module of B.</p>
+    <p class="pending">Pending: the build's runs on A, split into modules met before and modules new to the KB, against every module of B.</p>
   </div>
   <div class="foot"><span>During the build each task is solved before its own result is shown.</span></div>
 </section>
