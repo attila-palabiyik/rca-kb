@@ -14,6 +14,7 @@ is drawn in ink and grey.
     approaches_vs_baseline_slide  the same, shaped for a slide
     tasks_by_approach           every task on B, with each approach's change against the baseline
     seen_and_unseen             the build's runs on A by whether the module was met before, and B
+    kb_contents                 how much each frozen KB holds
 """
 
 from __future__ import annotations
@@ -134,6 +135,8 @@ def draw(report: dict, rows: list[Row], folder: Path) -> None:
             _approaches_vs_baseline(plt, report, order, save, "approaches_vs_baseline_slide", line=0.15)
             _tasks_by_approach(plt, rows, baseline, order, save)
             _seen_and_unseen(plt, report, order, save)
+            _kb_contents(plt, report, order, save, "kb_contents", WIDTH)
+            _kb_contents(plt, report, order, save, "kb_contents_slide", 4.3)
 
 
 def _order(report: dict) -> list[str]:
@@ -395,3 +398,30 @@ def _seen_and_unseen(plt, report: dict, order: list[str], save) -> None:
         axis.set_yticks(range(len(order)), [approach_name(n) for n in order] if index == 0 else [])
         axes.append(axis)
     save(figure, "seen_and_unseen")
+
+
+def _kb_contents(plt, report: dict, order: list[str], save, name: str, width: float) -> None:
+    """Words in each frozen KB, with its file count; transcripts are counted apart."""
+    states = [(n, (report["kb"].get(n) or {}).get("final_state") or {}) for n in order]
+    if not any(state for _, state in states):
+        return
+    left, right, top, bottom, line = 1.35, 1.45, 0.1, 0.1, 0.2
+    height = top + bottom + line * len(states)
+    figure = plt.figure(figsize=(width, height))
+    axis = figure.add_axes([left / width, bottom / height, (width - left - right) / width, line * len(states) / height])
+    most = max((state.get("words", 0) for _, state in states), default=1) or 1
+    for position, (_, state) in enumerate(states):
+        words, files, sessions = state.get("words", 0), state.get("files", 0), state.get("sessions", 0)
+        if words:
+            axis.barh(position, words / 1000, height=0.55, color=ACCENT)
+            note = f"{words / 1000:.1f}k words in {files} file{'s' if files != 1 else ''}"
+            axis.text(words / 1000 + most / 1000 * 0.015, position, note, va="center", fontsize=LABEL, color=INK)
+        else:
+            note = f"{sessions} session transcript{'s' if sessions != 1 else ''}, kept by the CLI"
+            axis.text(most / 1000 * 0.015, position, note, va="center", fontsize=LABEL, color=SOFT)
+    axis.set_ylim(len(states) - 0.5, -0.5)
+    axis.set_xlim(0, most / 1000 * 1.02)
+    axis.set_yticks(range(len(states)), [approach_name(n) for n in order])
+    axis.set_xticks([])
+    axis.axvline(0, color=INK, linewidth=0.75)
+    save(figure, name)
