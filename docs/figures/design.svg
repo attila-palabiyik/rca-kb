@@ -1,33 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 172" font-family="'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#1a1f24">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 172" font-family="'Figtree', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#0d1117">
   <!-- column heads -->
   <text x="112" y="14" font-weight="700">Set A</text>
-  <text x="143" y="14" fill="#5c6770">45 tasks in 17 modules</text>
+  <text x="143" y="14" fill="#5b6068">45 tasks in 17 modules</text>
   <text x="404" y="14" font-weight="700">Set B</text>
-  <text x="435" y="14" fill="#5c6770">41 tasks in 15 modules, none of them in A</text>
+  <text x="435" y="14" fill="#5b6068">41 tasks in 15 modules, none of them in A</text>
 
   <!-- baseline row -->
   <text x="0" y="50" font-weight="700">No KB</text>
-  <text x="0" y="63" fill="#5c6770">the baseline</text>
-  <rect x="112.5" y="26.5" width="252" height="46" fill="none" stroke="#a9b1b8"/>
-  <rect x="404.5" y="26.5" width="196" height="46" fill="none" stroke="#a9b1b8"/>
-  <text x="124" y="53" fill="#5c6770">each task solved three times</text>
-  <text x="416" y="53" fill="#5c6770">each task solved three times</text>
+  <text x="0" y="63" fill="#5b6068">the baseline</text>
+  <rect x="112.5" y="26.5" width="252" height="46" fill="none" stroke="#aeb2b8"/>
+  <rect x="404.5" y="26.5" width="196" height="46" fill="none" stroke="#aeb2b8"/>
+  <text x="124" y="53" fill="#5b6068">each task solved three times</text>
+  <text x="416" y="53" fill="#5b6068">each task solved three times</text>
 
   <!-- KB row -->
   <text x="0" y="124" font-weight="700">With a KB</text>
-  <text x="0" y="137" fill="#5c6770">one approach</text>
-  <polygon points="112,150 364,150 364,100" fill="#cfe6e4"/>
-  <line x1="112" y1="150.5" x2="364" y2="150.5" stroke="#0b7a75"/>
+  <text x="0" y="137" fill="#5b6068">one approach</text>
+  <polygon points="112,150 364,150 364,100" fill="#ffd9bd"/>
+  <line x1="112" y1="150.5" x2="364" y2="150.5" stroke="#fd6420"/>
   <text x="124" y="114">the KB starts empty and grows</text>
-  <text x="112" y="166" fill="#5c6770">each task: solve, grade, see the fix, update the KB</text>
-  <line x1="384.5" y1="98" x2="384.5" y2="152" stroke="#1a1f24" stroke-width="1.2"/>
+  <text x="112" y="166" fill="#5b6068">each task: solve, grade, see the fix, update the KB</text>
+  <line x1="384.5" y1="98" x2="384.5" y2="152" stroke="#0d1117" stroke-width="1.2"/>
   <text x="384.5" y="92" text-anchor="middle">frozen</text>
-  <rect x="404" y="100" width="197" height="50" fill="#cfe6e4"/>
-  <line x1="404" y1="150.5" x2="601" y2="150.5" stroke="#0b7a75"/>
+  <rect x="404" y="100" width="197" height="50" fill="#ffd9bd"/>
+  <line x1="404" y1="150.5" x2="601" y2="150.5" stroke="#fd6420"/>
   <text x="416" y="122">each task solved once</text>
-  <text x="416" y="136" fill="#5c6770">nothing a run writes is kept</text>
+  <text x="416" y="136" fill="#5b6068">nothing a run writes is kept</text>
 
   <!-- comparison bracket -->
-  <line x1="502.5" y1="74" x2="502.5" y2="98" stroke="#1a1f24" stroke-width="0.9"/>
-  <text x="510" y="90" fill="#5c6770">compared, task by task</text>
+  <line x1="502.5" y1="74" x2="502.5" y2="98" stroke="#0d1117" stroke-width="0.9"/>
+  <text x="510" y="90" fill="#5b6068">compared, task by task</text>
 </svg>

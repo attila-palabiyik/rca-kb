@@ -1,8 +1,8 @@
 """The report's figures, drawn from the same rows and numbers as its tables.
 
 Each figure is saved as SVG and PNG. The SVG keeps its text as text, so a page
-that places it inline sets it in its own type. Figures are laid out in Libre
-Franklin when its files are in .cache/fonts (scripts/build_report_pdf.py
+that places it inline sets it in its own type. Figures are laid out in
+Figtree when its files are in .cache/fonts (scripts/build_report_pdf.py
 prints the pages in it), and fall back to a system sans otherwise.
 
 Colour has one meaning throughout: the accent is a run with a KB. The baseline
@@ -27,9 +27,9 @@ from statistics import mean
 
 from .metrics import Row
 
-INK, SOFT, FAINT, GRID = "#1a1f24", "#5c6770", "#8b949b", "#d9d9d9"
-GREY, NONE, ACCENT, PALE = "#a9b1b8", "#e9ebec", "#0b7a75", "#cfe6e4"
-FAMILY = ["Libre Franklin", "Franklin Gothic Medium", "Segoe UI", "Helvetica Neue", "Arial", "DejaVu Sans"]
+INK, SOFT, FAINT, GRID = "#0d1117", "#5b6068", "#8f949b", "#e2e3e5"
+GREY, NONE, ACCENT, PALE = "#aeb2b8", "#ececec", "#fd6420", "#ffd9bd"
+FAMILY = ["Figtree", "Segoe UI", "Helvetica Neue", "Arial", "DejaVu Sans"]
 WIDTH = 6.3  # inches: the written report's full width, so 8 pt here is 8 pt there
 HEAD, LABEL, SMALL = 8.5, 8, 7  # the three type sizes
 

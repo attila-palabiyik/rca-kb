@@ -25,8 +25,8 @@ DOCS = Path(__file__).resolve().parents[1] / "docs"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
          'family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600'
-         '&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400'
-         '&family=IBM+Plex+Mono:wght@400;500&display=block">')
+         '&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400'
+         '&family=JetBrains+Mono:wght@400;500&display=block">')
 
 BROWSERS = [
     "chromium", "chromium-browser", "google-chrome", "msedge",
