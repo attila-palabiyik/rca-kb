@@ -17,14 +17,14 @@ mkdir -p "$logs"
 echo "$(date +%H:%M:%S) building: $*"
 for approach in "$@"; do
     uv run -q python -m harness.cli run "configs/experiments/kb-$approach.toml" --conditions build \
-        > "$logs/$approach.build.log" 2>&1 &
+        >> "$logs/$approach.build.log" 2>&1 &
 done
 wait
 echo "$(date +%H:%M:%S) chains finished"
 
 for approach in "$@"; do
     uv run -q python -m harness.cli run "configs/experiments/kb-$approach.toml" --conditions eval \
-        > "$logs/$approach.eval.log" 2>&1
+        >> "$logs/$approach.eval.log" 2>&1
     echo "$(date +%H:%M:%S) $approach: $(grep -c 'verdict pass' "$logs/$approach.eval.log") of $(grep -c 'verdict' "$logs/$approach.eval.log") pass on B"
 done
 echo "$(date +%H:%M:%S) done"
