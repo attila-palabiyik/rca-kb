@@ -329,7 +329,7 @@ def _tasks_by_approach(plt, rows: list[Row], baseline: list[Row], order: list[st
         if row.experiment in order and row.mode == "eval" and row.side == "B" and row.condition != "empty":
             by_task[row.experiment][(row.group, row.tags.get("category", ""))].append(row.passed)
     names = ["baseline", *order]
-    left, right, top, bottom, line_height = 1.35, 0.5, 0.05, 0.45, 0.12
+    left, right, top, bottom, line_height = 1.35, 0.5, 0.05, 0.45, 0.145
     unit = (WIDTH - left - right) / total
     lines = [0.0] + [position + 0.5 for position in range(1, len(names))]
     height = top + bottom + line_height * (lines[-1] + 1)
