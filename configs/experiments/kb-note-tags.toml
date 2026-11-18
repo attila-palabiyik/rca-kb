@@ -3,7 +3,7 @@
 
 dataset = "chipbench"
 split   = "main"
-repeats = 3
+repeats = 1
 seed    = 1
 max_parallel = 10
 retries = 2
@@ -14,10 +14,11 @@ rubric      = "v2"
 assessment  = "v1"
 
 [[conditions]]
-name = "build"
-mode = "build"
-kb   = "note-tags"
-side = ["A"]
+name   = "build"
+mode   = "build"
+kb     = "note-tags"
+side   = ["A"]
+reveal = "fix"              # the agent sees the verdict and the correct fix before it updates
 
 [[conditions]]
 name     = "eval"
@@ -25,6 +26,7 @@ mode     = "eval"
 kb       = "note-tags"
 side     = ["B"]
 snapshot = "build"
+reveal   = "fix"
 
 [[conditions]]
 name     = "empty"
@@ -32,3 +34,4 @@ mode     = "eval"
 kb       = "note-tags"
 side     = ["B"]
 snapshot = "seed"
+reveal   = "fix"

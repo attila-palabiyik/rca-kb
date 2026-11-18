@@ -1,0 +1,1 @@
+- Preserve the existing registered comparison of the shift register and its reset behavior when a sequence detector has a shift-direction bug (TopModule sequence detector: appending the input at bit 0 was the complete fix, and the rewrite that compared the incoming window and added a sample-count gate disagreed with 16 of 237 reference samples).

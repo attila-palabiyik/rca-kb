@@ -28,7 +28,11 @@ OVERLAY_KEYS = ("instructions", "update_prompt", "files", "mcp_servers", "settin
 MODES = ("baseline", "build", "eval")
 EXPERIMENT_KEYS = ("dataset", "split", "repeats", "seed", "max_parallel", "retries", "tasks",
                    "monitor", "conditions", "kind")
-CONDITION_KEYS = ("name", "mode", "kb", "side", "snapshot")
+CONDITION_KEYS = ("name", "mode", "kb", "side", "snapshot", "reveal")
+REVEAL = ("none", "verdict", "fix")
+# With the result shown, the two skeletons say so.
+REVEALED_PIECES = {"_pieces/solve.md": "_pieces/solve_revealed.md",
+                   "_pieces/update.md": "_pieces/update_revealed.md"}
 AGENT_MEMORY = {"builtin": ("off", "on"), "session": ("fresh", "continue")}
 
 
@@ -72,6 +76,7 @@ class Condition:
     side: tuple
     kb: str | None = None
     snapshot: str | None = None
+    reveal: str = "none"             # what the agent is shown before the Update turn
 
 
 @dataclass(frozen=True)
@@ -122,9 +127,11 @@ def load_base(configs: Path) -> Setup:
         raise ConfigError(f"base.toml: missing {missing}") from None
 
 
-def _joined(kb_dir: Path, value) -> str:
+def _joined(kb_dir: Path, value, revealed: bool = False) -> str:
     """Instruction text: an ordered list of files under configs/kb/, joined."""
     names = [value] if isinstance(value, str) else list(value)
+    if revealed:
+        names = [REVEALED_PIECES.get(name, name) for name in names]
     texts = []
     for name in names:
         path = kb_dir / name
@@ -153,8 +160,12 @@ def _merge(into: dict, extra: dict) -> dict:
     return into
 
 
-def apply_overlay(base: Setup, configs: Path, approach: str) -> Setup:
-    """The base Setup with one KB approach's Overlay applied."""
+def apply_overlay(base: Setup, configs: Path, approach: str, revealed: bool = False) -> Setup:
+    """The base Setup with one KB approach's Overlay applied.
+
+    `revealed` says the KB is built with the grading result shown before each
+    Update turn, which the two instruction skeletons then state.
+    """
     kb_dir = configs / "kb"
     approach_dir = kb_dir / approach
     overlay_file = approach_dir / "overlay.toml"
@@ -194,8 +205,8 @@ def apply_overlay(base: Setup, configs: Path, approach: str) -> Setup:
     return Setup(
         agent=base.agent, model=base.model, effort=base.effort, image=base.image,
         limits=base.limits, network=base.network, rules=base.rules,
-        instructions=_joined(kb_dir, overlay.get("instructions", [])),
-        update_prompt=_joined(kb_dir, overlay.get("update_prompt", [])),
+        instructions=_joined(kb_dir, overlay.get("instructions", []), revealed),
+        update_prompt=_joined(kb_dir, overlay.get("update_prompt", []), revealed),
         files=tuple(files), mcp_servers=tuple(overlay.get("mcp_servers", [])),
         settings=settings, agent_memory=memory, kb=kb,
     )
@@ -248,7 +259,9 @@ def load_experiment(path: str | Path, root: str | Path = ".", check_setup=None) 
             if key not in CONDITION_KEYS:
                 raise ConfigError(f"{name}: unknown condition key {key!r}")
         condition = Condition(raw["name"], raw["mode"], tuple(raw.get("side", ["B"])),
-                              raw.get("kb"), raw.get("snapshot"))
+                              raw.get("kb"), raw.get("snapshot"), raw.get("reveal", "none"))
+        if condition.reveal not in REVEAL:
+            raise ConfigError(f"{name}/{condition.name}: reveal is one of {REVEAL}")
         if condition.mode not in MODES:
             raise ConfigError(f"{name}/{condition.name}: unknown mode {condition.mode!r}")
         if condition.mode == "baseline":
@@ -258,7 +271,7 @@ def load_experiment(path: str | Path, root: str | Path = ".", check_setup=None) 
         else:
             if not condition.kb:
                 raise ConfigError(f"{name}/{condition.name}: {condition.mode} needs a kb")
-            setup = apply_overlay(base, configs, condition.kb)
+            setup = apply_overlay(base, configs, condition.kb, condition.reveal != "none")
         if condition.mode == "eval" and not condition.snapshot:
             raise ConfigError(f"{name}/{condition.name}: eval needs a snapshot")
         if check_setup and (problems := check_setup(setup)):
@@ -275,6 +288,8 @@ def load_experiment(path: str | Path, root: str | Path = ".", check_setup=None) 
                                   "is neither 'seed' nor a build condition in this file")
             if source.kb != condition.kb:
                 raise ConfigError(f"{name}/{condition.name}: snapshot comes from a different KB")
+            if source.reveal != condition.reveal:
+                raise ConfigError(f"{name}/{condition.name}: reveal differs from the build it reads")
 
     def tasks_on(sides: tuple) -> list[str]:
         ids = [t for side in sides for t in split.side(side)]

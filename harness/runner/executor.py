@@ -19,7 +19,7 @@ from harness.dataset.loader import Dataset, Task
 from harness.grader import registry
 
 from . import kb as kbstate
-from .materialise import SOLVE, UPDATE, Materialised, materialise
+from .materialise import SOLVE, UPDATE, Materialised, materialise, materialise_update, result_block
 
 HARBOR_VERSION = "0.26.0"
 SUPPORTED_AGENTS = ("codex",)
@@ -200,15 +200,58 @@ class HarborExecutor:
             else:
                 kb_copy.mkdir()
 
+        if kb_copy is not None:
+            # A folder inside the KB that the CLI is linked to has to exist for the
+            # link to resolve, even while the KB is empty.
+            for inside in (setup.kb.get("links") or {}).values():
+                if not Path(inside).suffix:
+                    (kb_copy / inside).mkdir(parents=True, exist_ok=True)
+
         with_update = run.condition.mode == "build" and bool(setup.update_prompt.strip())
-        built = materialise(task, setup, work / "task", kb_copy=kb_copy, with_update=with_update)
+        revealed = with_update and run.condition.reveal != "none"
+        built = materialise(task, setup, work / "task", kb_copy=kb_copy,
+                            with_update=with_update and not revealed)
         command = self._agent_command(setup, built, kb_copy)
         trial = self._run_harbor(run.run_id, command, built, task, work)
+        if revealed:
+            self._revealed_update(run, task, trial, work, kb_copy)
         trial.kb_copy = kb_copy
         if kb_copy is not None:
             self._collect_cli_sessions(setup, trial, kb_copy)
             self._own(kb_copy, setup.image)
         return trial
+
+    def _revealed_update(self, run: RunSpec, task: Task, trial: Trial, work: Path,
+                         kb_copy: Path | None) -> None:
+        """The Update turn when the result is shown first: a second run that resumes
+        Solve's session, with the grading result at the head of its prompt."""
+        trial.update_ok = False
+        saved = trial.output_dir / "agent" / "sessions"
+        rollouts = (sorted(saved.rglob("rollout-*.jsonl"), key=lambda p: p.stat().st_mtime)
+                    if saved.is_dir() else [])
+        if trial.status != "completed" or not rollouts:
+            return
+        setup = run.setup
+        prompt = (result_block(task, trial.verdict, run.condition.reveal) + "\n"
+                  + setup.update_prompt.strip() + "\n")
+        update_work = work / "update"
+        update_work.mkdir()
+        built = materialise_update(task, setup, update_work / "task", kb_copy=kb_copy,
+                                   submission=trial.submission, prompt=prompt, salt=run.run_id)
+        command = self._agent_command(setup, built, kb_copy) + ["--load-trajectory", str(rollouts[-1])]
+        update = self._run_harbor(run.run_id, command, built, task, update_work)
+        turn = update.phases.get(SOLVE)            # a one-step run reports its turn under this name
+        if turn is None or not update.output_dir.is_dir():
+            return
+        kept = trial.output_dir / "update_turn"
+        shutil.copytree(update.output_dir, kept, symlinks=True)
+
+        def moved(path: Path | None) -> Path | None:
+            return kept / path.relative_to(update.output_dir) if path else None
+
+        trial.phases[UPDATE] = Phase(UPDATE, turn.started, turn.ended, turn.usage,
+                                     moved(turn.trajectory), moved(turn.raw_log))
+        trial.update_ok = update.status == "completed"
 
     def discard(self, run: RunSpec) -> None:
         """Destroy a finished run's working files, including its KB copy."""

@@ -109,7 +109,7 @@ EXPERIMENT = """# {title}: built on A, frozen, run on B, with its empty-KB contr
 
 dataset = "chipbench"
 split   = "main"
-repeats = 3
+repeats = 1
 seed    = 1
 max_parallel = 10
 retries = 2
@@ -120,10 +120,11 @@ rubric      = "v2"
 assessment  = "v1"
 
 [[conditions]]
-name = "build"
-mode = "build"
-kb   = "{name}"
-side = ["A"]
+name   = "build"
+mode   = "build"
+kb     = "{name}"
+side   = ["A"]
+reveal = "fix"              # the agent sees the verdict and the correct fix before it updates
 
 [[conditions]]
 name     = "eval"
@@ -131,6 +132,7 @@ mode     = "eval"
 kb       = "{name}"
 side     = ["B"]
 snapshot = "build"
+reveal   = "fix"
 
 [[conditions]]
 name     = "empty"
@@ -138,6 +140,7 @@ mode     = "eval"
 kb       = "{name}"
 side     = ["B"]
 snapshot = "seed"
+reveal   = "fix"
 """
 
 
@@ -156,8 +159,12 @@ def main() -> None:
         (KB / name).mkdir(parents=True)
         (KB / name / "overlay.toml").write_text(toml(approach["overlay"], header), encoding="utf-8",
                                                 newline="\n")
-        (EXPERIMENTS / f"kb-{name}.toml").write_text(
-            EXPERIMENT.format(title=name, name=name), encoding="utf-8", newline="\n")
+        experiment = EXPERIMENT.format(title=name, name=name)
+        if AGENT_WRITTEN not in approach["overlay"]:
+            # No Update turn, so there is nothing to show a result before.
+            experiment = "\n".join(line for line in experiment.splitlines()
+                                   if not line.startswith("reveal")) + "\n"
+        (EXPERIMENTS / f"kb-{name}.toml").write_text(experiment, encoding="utf-8", newline="\n")
     print(f"{len(found)} approaches written: {', '.join(sorted(found))}")
 
 

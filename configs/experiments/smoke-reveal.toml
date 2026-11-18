@@ -1,0 +1,34 @@
+# A check of the Update turn with the result shown first: two building runs on
+# A, then one frozen run on B.
+
+dataset = "chipbench"
+split   = "main"
+repeats = 1
+seed    = 1
+max_parallel = 2
+retries = 1
+tasks = [
+    "arithmetic__Prob002_extraneous_items_sequence_detect",
+    "timing__Prob006_data_serial-to-parallel_circuit",
+    "assignment__Prob005_signal_generator",
+]
+
+[monitor]
+judge_model = "gpt-6.2-sol"
+rubric      = "v2"
+assessment  = "v1"
+
+[[conditions]]
+name   = "build"
+mode   = "build"
+kb     = "playbook"
+side   = ["A"]
+reveal = "fix"
+
+[[conditions]]
+name     = "eval"
+mode     = "eval"
+kb       = "playbook"
+side     = ["B"]
+snapshot = "build"
+reveal   = "fix"

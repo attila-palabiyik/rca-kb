@@ -7,6 +7,8 @@ and the instructions for each turn.
 
 from __future__ import annotations
 
+import difflib
+import hashlib
 import json
 import re
 import shutil
@@ -29,10 +31,15 @@ class Materialised:
     agent_config: dict = field(default_factory=dict)
 
 
-def harbor_name(task: Task, setup: Setup) -> str:
-    """Unique per task and Setup, so two conditions never share a built image."""
+def harbor_name(task: Task, setup: Setup, salt: str = "") -> str:
+    """Unique per task and Setup, so two conditions never share a built image.
+
+    `salt` makes it unique per run as well, for a task whose workspace holds
+    that run's own answer.
+    """
     slug = re.sub(r"[^a-z0-9]+", "-", task.id.lower()).strip("-")
-    return f"rcakb/{slug}-{setup.hash[:8]}"
+    suffix = setup.hash[:8] + (hashlib.sha256(salt.encode()).hexdigest()[:8] if salt else "")
+    return f"rcakb/{slug}-{suffix}"
 
 
 def _write(path: Path, text: str, executable: bool = False) -> None:
@@ -42,9 +49,11 @@ def _write(path: Path, text: str, executable: bool = False) -> None:
         path.chmod(0o755)
 
 
-def _environment(task: Task, setup: Setup, dest: Path) -> None:
+def _environment(task: Task, setup: Setup, dest: Path, replace: dict[str, Path] | None = None) -> None:
     env = dest / "environment"
     shutil.copytree(task.workspace, env / "workspace")
+    for name, source in (replace or {}).items():
+        shutil.copy2(source, env / "workspace" / name)
     lines = [f"FROM {setup.image}", f"WORKDIR {WORKDIR}", f"COPY workspace/ {WORKDIR}/"]
     for index, entry in enumerate(setup.files):
         source = Path(entry["source"])
@@ -88,7 +97,8 @@ def _solution(task: Task, solution: Path) -> None:
     _write(solution / "solve.sh", "\n".join(script) + "\n", executable=True)
 
 
-def _task_toml(task: Task, setup: Setup, steps: list[str]) -> str:
+def _task_toml(task: Task, setup: Setup, steps: list[str], salt: str = "",
+               agent_limit: float | None = None) -> str:
     def quoted(items) -> str:
         return "[" + ", ".join(json.dumps(i) for i in items) + "]"
 
@@ -99,7 +109,7 @@ def _task_toml(task: Task, setup: Setup, steps: list[str]) -> str:
         f"artifacts = {quoted(artifacts)}",
         "",
         "[task]",
-        f"name = {json.dumps(harbor_name(task, setup))}",
+        f"name = {json.dumps(harbor_name(task, setup, salt))}",
         'version = "1.0.0"',
         f"description = {json.dumps(task.id)}",
         "authors = []",
@@ -122,7 +132,7 @@ def _task_toml(task: Task, setup: Setup, steps: list[str]) -> str:
         'environment_mode = "separate"',
         "",
         "[agent]",
-        f"timeout_sec = {float(setup.limits['solve'])}",
+        f"timeout_sec = {float(agent_limit or setup.limits['solve'])}",
         "",
         "[environment]",
         f"network_mode = {json.dumps(network.get('mode', 'allowlist'))}",
@@ -171,14 +181,71 @@ def materialise(task: Task, setup: Setup, dest: Path, *, kb_copy: Path | None = 
         _solution(task, dest / "solution")
     _write(dest / "task.toml", _task_toml(task, setup, steps))
 
-    mounts = []
-    if kb_copy is not None:
-        paths = setup.kb.get("paths")
-        if paths:
-            for subdir, target in paths.items():
-                (kb_copy / subdir).mkdir(parents=True, exist_ok=True)
-                mounts.append({"type": "bind", "source": str(kb_copy / subdir), "target": target})
-        else:
-            mounts.append({"type": "bind", "source": str(kb_copy),
-                           "target": setup.kb.get("path", "/kb")})
-    return Materialised(dest, steps, mounts, agent_config(setup))
+    return Materialised(dest, steps, kb_mounts(setup, kb_copy), agent_config(setup))
+
+
+def kb_mounts(setup: Setup, kb_copy: Path | None) -> list[dict]:
+    """Where the run's copy of the KB state appears inside the container."""
+    if kb_copy is None:
+        return []
+    paths = setup.kb.get("paths")
+    if paths:
+        mounts = []
+        for subdir, target in paths.items():
+            (kb_copy / subdir).mkdir(parents=True, exist_ok=True)
+            mounts.append({"type": "bind", "source": str(kb_copy / subdir), "target": target})
+        return mounts
+    return [{"type": "bind", "source": str(kb_copy), "target": setup.kb.get("path", "/kb")}]
+
+
+def result_block(task: Task, verdict: dict | None, reveal: str) -> str:
+    """What the agent is shown before the Update turn: how its answer was graded
+    and, with `reveal = "fix"`, the correct fix as a change to the original module."""
+    verdict = verdict or {}
+    details = verdict.get("details") or {}
+    reason = verdict.get("reason")
+    if verdict.get("result") == "pass":
+        outcome = f"Your answer PASSED: all {details.get('samples', '')} samples matched the reference."
+    elif reason == "mismatch" and "mismatches" in details:
+        outcome = (f"Your answer FAILED: {details['mismatches']} of {details['samples']} samples "
+                   "did not match the reference.")
+    elif reason == "compile_error":
+        outcome = "Your answer FAILED: it did not compile together with the testbench."
+    elif reason == "forbidden_construct":
+        outcome = (f"Your answer FAILED: it contains a {details.get('construct', 'construct')}, "
+                   "which a design fix may not use.")
+    elif reason == "missing_file":
+        outcome = "Your answer FAILED: the answer file was missing."
+    elif reason == "sim_timeout":
+        outcome = "Your answer FAILED: the simulation did not finish."
+    else:
+        outcome = "Your answer could not be graded."
+    lines = ["## Result of grading", "", outcome]
+    if reveal == "fix":
+        for name, good in registry.get(task.grader).known_good(task).items():
+            original = (task.workspace / name).read_text(encoding="utf-8").splitlines()
+            diff = difflib.unified_diff(original, good.decode("utf-8").splitlines(), "original", "correct",
+                                        lineterm="", n=2)
+            lines += ["", f"The correct fix, as a change to the original `{name}`:", "", "```diff",
+                      *diff, "```"]
+    return "\n".join(lines) + "\n"
+
+
+def materialise_update(task: Task, setup: Setup, dest: Path, *, kb_copy: Path | None,
+                       submission: dict[str, Path], prompt: str, salt: str) -> Materialised:
+    """The Update turn as a run of its own, for when the result is shown first.
+
+    The workspace is as the agent left it, the instruction is the result
+    followed by the update prompt, and there is nothing to grade. The executor
+    resumes the Solve turn's session in it.
+    """
+    if dest.exists():
+        shutil.rmtree(dest)
+    dest.mkdir(parents=True)
+    _environment(task, setup, dest, replace=submission)
+    _write(dest / "instruction.md", prompt)
+    _no_grading(setup, dest / "tests")
+    _write(dest / "solution" / "solve.sh", "#!/bin/bash\n", executable=True)
+    _write(dest / "task.toml",
+           _task_toml(task, setup, [UPDATE], salt=salt, agent_limit=setup.limits["update"]))
+    return Materialised(dest, [SOLVE], kb_mounts(setup, kb_copy), agent_config(setup))
