@@ -148,9 +148,12 @@ def load(experiment_dirs: list[Path], root: Path) -> Loaded:
                 review=(run.review or {}).get("decision"),
             )
             (redteam if info.get("kind") == "redteam" else rows).append(row)
+    # A condition with no run recorded at all was not run, by decision; it is
+    # listed with zero runs in the Trust table but does not keep the report
+    # open. A condition that has started counts every missing run as pending.
     recorded = Counter((r.experiment, r.condition) for r in rows)
     not_run = sum(max(count - recorded.get(key, 0), 0) for key, count in planned.items()
-                  if experiments[key[0]].get("kind") != "redteam")
+                  if experiments[key[0]].get("kind") != "redteam" and recorded.get(key, 0) > 0)
     return Loaded(rows, experiments, pending + not_run > 0, pending + not_run, planned, redteam)
 
 
