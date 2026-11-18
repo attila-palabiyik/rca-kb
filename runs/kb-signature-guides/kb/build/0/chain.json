@@ -58,6 +58,12 @@
       "before": "b395bca56a6d2bcf",
       "after": "fd7ff75797ef368d",
       "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob003_non-overlapping_sequence_detect",
+      "before": "fd7ff75797ef368d",
+      "after": "9620d7a203a04bf6",
+      "status": "completed"
     }
   ],
   "final": null

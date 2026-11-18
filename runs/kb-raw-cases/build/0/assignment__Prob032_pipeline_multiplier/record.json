@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/assignment__Prob032_pipeline_multiplier",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob032_pipeline_multiplier",
+  "repeat": 0,
+  "position": 6,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "4ca2d73d21d6f7d94c76a03d5ed9b2726f4fc0d9",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:30:01.052753Z",
+      "ended": "2026-11-18T18:30:34.199980Z",
+      "usage": {
+        "input_uncached": 15377,
+        "input_cached": 81762,
+        "input_cache_write": 15356,
+        "output": 1300,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "3699b1100ec941c0",
+    "after": "4bd92d1a2e993cdb",
+    "changed": true
+  }
+}

@@ -21,3 +21,6 @@ archives/
 
 # The brief this work answers; kept locally
 task.pdf
+
+# Session transcripts kept inside KB snapshots: delivered in the archive with the other trajectories
+runs/*/kb/*/*/snapshots/*/sessions/

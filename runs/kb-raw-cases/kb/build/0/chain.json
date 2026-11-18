@@ -70,6 +70,24 @@
       "before": "8a3b212532c87178",
       "after": "507004f0820565ca",
       "status": "completed"
+    },
+    {
+      "task_id": "timing__Prob022_synchronous_FIFO",
+      "before": "507004f0820565ca",
+      "after": "72def0e24d560797",
+      "status": "completed"
+    },
+    {
+      "task_id": "arithmetic__Prob008_non-integer_data_width_conversion_24to128",
+      "before": "72def0e24d560797",
+      "after": "3699b1100ec941c0",
+      "status": "completed"
+    },
+    {
+      "task_id": "assignment__Prob032_pipeline_multiplier",
+      "before": "3699b1100ec941c0",
+      "after": "4bd92d1a2e993cdb",
+      "status": "completed"
     }
   ],
   "final": null
