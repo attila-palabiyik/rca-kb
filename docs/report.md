@@ -111,10 +111,20 @@ _To be completed. Known now:_
   affects the baseline and every approach alike, but it narrows the room an
   approach has to help.
 - **One agent and one model.**
-- **The agent never learns whether its fix passed.** What a KB holds is
-  therefore unverified.
-- **One approach was not run.** Codex's own memory could not be kept between
-  runs under this executor; see spec.md, section 8.
+- **The KBs were built with the result shown.** After each task on A the
+  agent saw how its answer had been graded and the correct fix, and then
+  updated the KB. That is how a KB is fed in practice, once a bug is closed
+  and its fix is known. It also means these results say nothing about a KB
+  written by an agent that never learns whether it was right.
+- **One chain and one repeat per approach.** Each KB comes from a single
+  order of A, and each approach was run once on B. The baseline suggests
+  repeats add little, since few tasks change outcome between them, but the
+  effect of the order A is seen in is not measured.
+- **Thirteen of the 51 approaches were run,** chosen to span every kind of
+  entry and every kind of index and to include the ones the baseline on A
+  pointed to.
+- **One approach could not be run.** Codex's own memory could not be kept
+  between runs under this executor; see spec.md, section 8.
 
 ## 8. Future exploration
 

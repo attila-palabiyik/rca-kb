@@ -340,6 +340,14 @@ results and must work within the Setup's `network`.
   effect of merely having the KB's instructions and tools.
 - **`eval` on side A is the "B = A" experiment** the assignment mentions: the
   frozen KB run on the tasks it was built from.
+- **A `build` condition can show the agent the result before the Update
+  turn** (`reveal`). `verdict` shows how its answer was graded. `fix` also
+  shows the correct fix, as a change to the original module. Without it, an
+  agent whose own test passed records a failure as a success, and the KB
+  teaches the next run the same mistake. Only A's results are ever shown, and
+  B's modules do not appear in A, so nothing shown can be an answer on B. The
+  conditions that read such a KB carry the same setting, because the
+  instructions tell the agent how the KB was written.
 - **An approach without an `update_prompt` has no Update turn.** Its KB
   changes only through what the agent CLI itself writes: a continued
   session, saved transcripts, or the CLI's own memory.
@@ -385,10 +393,11 @@ mode = "baseline"
 side = ["A", "B"]
 
 [[conditions]]
-name  = "notes-build"
-mode  = "build"
-kb    = "notes"
-side  = ["A"]
+name   = "notes-build"
+mode   = "build"
+kb     = "notes"
+side   = ["A"]
+reveal = "fix"              # optional: none (default), verdict or fix
 
 [[conditions]]
 name     = "notes-eval"
@@ -526,8 +535,9 @@ generating and using memories, and its thresholds.
   well one prompt happened to be worded.
 - **Three rules for the wording.** No piece gives debugging advice, or the
   instructions would themselves be a guide. Pieces are neutral and of
-  similar length. The agent is told that it never learned whether its fix
-  passed, and that what the KB holds is therefore unverified.
+  similar length. The agent is told how the KB was written: by an agent that
+  saw the grading result first, or, without `reveal`, by one that never
+  learned whether its fix passed.
 - **An approach is run on B once.** If an approach is changed after its B
   results have been seen, it is a new approach under a new name, and the
   report shows both.
@@ -620,7 +630,7 @@ raw log.
 | Solve | Agent turn one, in a new container. A new session, unless the Setup says to continue the one in the KB state. | always |
 | Collect | The Submission is copied out of the container. | always |
 | Grade | The grader runs on the Submission in a separate container and writes a Verdict. | always |
-| Update | Agent turn two, in the same session and container. | `build` only, only if the Setup has an `update_prompt`, and only if Solve completed |
+| Update | Agent turn two, in the same session. With `reveal`, its prompt opens with the grading result, and it runs in a new container whose workspace is as the agent left it. | `build` only, only if the Setup has an `update_prompt`, and only if Solve completed |
 | Finalise | Outputs stored. Container and agent home destroyed. | always |
 
 ### Contract: Submission
@@ -1340,13 +1350,12 @@ tests/
 
 ## 10. Future exploration
 
-Four directions the design leaves room for. None is planned work, and none
+Three directions the design leaves room for. None is planned work, and none
 is needed for the comparison in sections 1 to 9.
 
 | Direction | What it is | Already in place | Still needed |
 |---|---|---|---|
 | Hill climbing on A | Repeated passes over A that keep a change to a KB, or to an approach, only if it helps. B stays untouched until the end. | Chains, snapshots and restore. Experiments limited to a list of tasks. Several splits can coexist, so one can be drawn inside A. | A loop that proposes and accepts changes, safeguards against overfitting to A, and a judge for what a contribution may contain. |
-| Showing the result before the Update turn | The agent learns whether its fix passed, or sees the correct one, before it updates the KB, so what it records is grounded. | Grading already sits between Solve and Update. | A decision on what is shown: pass or fail only, or the answer as well. |
 | A root-cause metric | Scoring whether the agent found the cause, apart from whether it fixed it. | Trajectories and Submissions are stored, so it can be computed later without running an agent again. | A strong deterministic check, such as a recorded fault location per task. Without one it is not worth adding. |
 | Another benchmark | Harder or new debugging tasks, beside ChipBench or in its place. | Only the adapter is specific to a benchmark, and a grader is a named method any dataset can use. | An adapter and, if the tasks are scored differently, a grader. |
 

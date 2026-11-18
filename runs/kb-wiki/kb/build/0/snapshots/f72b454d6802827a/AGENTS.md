@@ -1,0 +1,1 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Diagnose aliased state constants that make an expected Moore output unreachable.

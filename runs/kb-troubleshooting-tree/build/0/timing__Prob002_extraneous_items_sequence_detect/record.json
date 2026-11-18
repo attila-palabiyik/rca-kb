@@ -1,0 +1,56 @@
+{
+  "run_id": "kb-troubleshooting-tree/build/0/timing__Prob002_extraneous_items_sequence_detect",
+  "experiment": "kb-troubleshooting-tree",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "troubleshooting-tree",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob002_extraneous_items_sequence_detect",
+  "repeat": 0,
+  "position": 1,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "cc9bda5f9c4478ba",
+    "harness_commit": "c8b8be09369293b5de45a4c6f2e46d9c9f9e9268",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:23:27.303595Z",
+      "ended": "2026-11-18T18:24:02.585105Z",
+      "usage": {
+        "input_uncached": 15366,
+        "input_cached": 54783,
+        "input_cache_write": 15351,
+        "output": 1777,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    },
+    "update": {
+      "started": "2026-11-18T18:25:18.474544Z",
+      "ended": "2026-11-18T18:25:47.387875Z",
+      "usage": {
+        "input_uncached": 2025,
+        "input_cached": 80861,
+        "input_cache_write": 2010,
+        "output": 982,
+        "responses": 5
+      },
+      "trajectory": "trial/update_turn/agent/trajectory.json",
+      "raw_log": "trial/update_turn/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "be91a80ab473c4c8",
+    "after": "0ab3db3c4bd5bfcf",
+    "changed": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "agent": {
+    "name": "codex",
+    "version": "0.170.0"
+  },
+  "model": "gpt-6.2-sol",
+  "effort": "medium",
+  "image": "rcakb-agent:1",
+  "limits": {
+    "solve": 600,
+    "update": 300,
+    "grade": 120
+  },
+  "network": {
+    "mode": "public",
+    "hosts": [
+      "api.openai.com"
+    ]
+  },
+  "rules": "Work only inside this workspace.\nThe file named in the task is your answer. Edit it in place.\nYou may write and run your own tests with Icarus Verilog.\nDo not use the network or web search.\nDo not look for tests, reference solutions or grading files. None are provided.\n",
+  "instructions": "## Knowledge base\n\nA knowledge base built from earlier debugging tasks is available at `/kb`. An agent like you wrote it. After each of those tasks it was shown how its answer had been graded and what the correct fix was, and it wrote with that in front of it. Those were different designs with different bugs, so judge for yourself what carries over to this one. It may be empty.\n\nLook at it before you start work on the task, using the conventions below.\n\n**Entries are rules.** A rule is one sentence stating something to do or to check, followed by when it applies and which task it came from (the module and the kind of bug). Record what proved to be a dead end as a rule too. Add a rule only when a task taught you one, and reword or merge an existing rule in preference to adding a near-duplicate.\n\n**Entries are separate files** under `/kb/entries`, and `/kb/AGENTS.md` lists every one on a single line with its file and its tags, after a list of the tags in use. That list has already been loaded into your context. Pick the tags that fit your task and open the entries carrying them. When you add an entry, use existing tags where they fit and add a new tag only when none does.",
+  "update_prompt": "The task is finished and your answer has been graded. The result is above.\n\nNow update the knowledge base at `/kb` so that it is more useful for the next task, which will be a different design with a different bug. Record what the result shows, not what you expected. Follow the conventions you were given for what an entry is and how entries are arranged, and keep any index consistent with the entries. If the task taught you nothing worth keeping and the conventions do not require an entry, change nothing.",
+  "files": [],
+  "mcp_servers": [],
+  "settings": {
+    "web_search": "disabled",
+    "features": {
+      "memories": false
+    }
+  },
+  "agent_memory": {
+    "builtin": "off",
+    "session": "fresh"
+  },
+  "kb": {
+    "backend": "directory",
+    "path": "/kb",
+    "seed": "/mnt/c/Users/attil/Desktop/rca-kb-takehome/configs/kb/rule-tags/seed",
+    "links": {
+      "/app/AGENTS.md": "AGENTS.md"
+    }
+  }
+}

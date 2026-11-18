@@ -1,0 +1,1 @@
+- Check that every named state has a distinct encoding when debugging an FSM with a state that never advances, as in the TopModule Moore FSM where `S2` and `S3` shared an encoding and assigning `S3` a unique value passed all 261 grading samples.

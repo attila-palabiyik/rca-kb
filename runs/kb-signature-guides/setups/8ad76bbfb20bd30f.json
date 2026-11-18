@@ -1,0 +1,43 @@
+{
+  "agent": {
+    "name": "codex",
+    "version": "0.170.0"
+  },
+  "model": "gpt-6.2-sol",
+  "effort": "medium",
+  "image": "rcakb-agent:1",
+  "limits": {
+    "solve": 600,
+    "update": 300,
+    "grade": 120
+  },
+  "network": {
+    "mode": "public",
+    "hosts": [
+      "api.openai.com"
+    ]
+  },
+  "rules": "Work only inside this workspace.\nThe file named in the task is your answer. Edit it in place.\nYou may write and run your own tests with Icarus Verilog.\nDo not use the network or web search.\nDo not look for tests, reference solutions or grading files. None are provided.\n",
+  "instructions": "## Knowledge base\n\nA knowledge base built from earlier debugging tasks is available at `/kb`. An agent like you wrote it. After each of those tasks it was shown how its answer had been graded and what the correct fix was, and it wrote with that in front of it. Those were different designs with different bugs, so judge for yourself what carries over to this one. It may be empty.\n\nLook at it before you start work on the task, using the conventions below.\n\n**Entries are guides.** A guide is a markdown file on how to diagnose one kind of failure: what to look at, in what order, and what each finding points to. Include the checks that led nowhere, say when the guide applies, and name the task it came from (the module and the kind of bug). Add or revise a guide only when a task taught you something about diagnosing that kind of failure.\n\n**Entries are separate files** under `/kb/entries`, and `/kb/AGENTS.md` maps failure signatures to them: each line gives a signature, meaning what a failure looks like from the outside, and the entries to open for it. That map has already been loaded into your context. Open the entries whose signature resembles what you see. When you add an entry, add or extend the lines that should lead to it.",
+  "update_prompt": "The task is finished and your answer has been graded. The result is above.\n\nNow update the knowledge base at `/kb` so that it is more useful for the next task, which will be a different design with a different bug. Record what the result shows, not what you expected. Follow the conventions you were given for what an entry is and how entries are arranged, and keep any index consistent with the entries. If the task taught you nothing worth keeping and the conventions do not require an entry, change nothing.",
+  "files": [],
+  "mcp_servers": [],
+  "settings": {
+    "web_search": "disabled",
+    "features": {
+      "memories": false
+    }
+  },
+  "agent_memory": {
+    "builtin": "off",
+    "session": "fresh"
+  },
+  "kb": {
+    "backend": "directory",
+    "path": "/kb",
+    "seed": "/mnt/c/Users/attil/Desktop/rca-kb-takehome/configs/kb/signature-guides/seed",
+    "links": {
+      "/app/AGENTS.md": "AGENTS.md"
+    }
+  }
+}

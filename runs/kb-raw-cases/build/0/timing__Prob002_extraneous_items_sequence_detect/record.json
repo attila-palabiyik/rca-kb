@@ -1,0 +1,43 @@
+{
+  "run_id": "kb-raw-cases/build/0/timing__Prob002_extraneous_items_sequence_detect",
+  "experiment": "kb-raw-cases",
+  "condition": {
+    "name": "build",
+    "mode": "build",
+    "kb": "raw-cases",
+    "snapshot": null
+  },
+  "task_id": "timing__Prob002_extraneous_items_sequence_detect",
+  "repeat": 0,
+  "position": 1,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "fb99563700c23281",
+    "harness_commit": "c8b8be09369293b5de45a4c6f2e46d9c9f9e9268",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T18:22:03.086455Z",
+      "ended": "2026-11-18T18:22:31.828489Z",
+      "usage": {
+        "input_uncached": 16566,
+        "input_cached": 83804,
+        "input_cache_write": 16545,
+        "output": 1291,
+        "responses": 7
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": "a23ba827c16c34a9",
+    "after": "6175b9dd91e21dff",
+    "changed": true
+  }
+}

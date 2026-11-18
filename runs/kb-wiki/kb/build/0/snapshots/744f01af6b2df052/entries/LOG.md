@@ -1,0 +1,2 @@
+- Added [FSM state encodings](fsm-state-encodings.md) from the five-state Moore `TopModule` grading result (261 of 261 samples matched).
+- Added [Shift-register output timing](shift-register-output-timing.md) from the nine-bit `TopModule` grading result (16 of 237 samples differed after using the next window).

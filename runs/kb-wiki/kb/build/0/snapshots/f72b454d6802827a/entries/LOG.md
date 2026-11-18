@@ -1,0 +1,1 @@
+- Added [FSM state encodings](fsm-state-encodings.md) from the five-state Moore `TopModule` grading result (261 of 261 samples matched).

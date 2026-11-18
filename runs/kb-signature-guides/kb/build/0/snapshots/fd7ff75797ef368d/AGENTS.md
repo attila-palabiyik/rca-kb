@@ -1,0 +1,2 @@
+- FSM stalls after an apparently valid transition, or a Moore output never asserts because its state is unreachable: [Duplicate state encodings in a Verilog FSM](entries/duplicate-fsm-state-encodings.md)
+- A shift-register sequence detector mixes combinational and clocked comparisons, or its match pulse appears on the wrong edge: [Cycle alignment in a shift-register sequence detector](entries/shift-register-detector-cycle-alignment.md)

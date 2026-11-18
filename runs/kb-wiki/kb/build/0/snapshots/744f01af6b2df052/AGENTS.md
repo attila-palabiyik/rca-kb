@@ -1,0 +1,2 @@
+- [FSM state encodings](entries/fsm-state-encodings.md) — Diagnose aliased state constants that make an expected Moore output unreachable.
+- [Shift-register output timing](entries/shift-register-output-timing.md) — Align slice predicates to the same sampled window and verify the expected output latency.

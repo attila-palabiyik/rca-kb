@@ -1,0 +1,70 @@
+{
+  "name": "kb-guide-single-file",
+  "kind": "results",
+  "resolved": {
+    "dataset": "chipbench",
+    "split": "main",
+    "repeats": 1,
+    "seed": 1,
+    "max_parallel": 10,
+    "retries": 2,
+    "monitor": {
+      "judge_model": "gpt-6.2-sol",
+      "rubric": "v2",
+      "assessment": "v1"
+    },
+    "conditions": [
+      {
+        "name": "build",
+        "mode": "build",
+        "kb": "guide-single-file",
+        "side": [
+          "A"
+        ],
+        "reveal": "fix"
+      },
+      {
+        "name": "eval",
+        "mode": "eval",
+        "kb": "guide-single-file",
+        "side": [
+          "B"
+        ],
+        "snapshot": "build",
+        "reveal": "fix"
+      },
+      {
+        "name": "empty",
+        "mode": "eval",
+        "kb": "guide-single-file",
+        "side": [
+          "B"
+        ],
+        "snapshot": "seed",
+        "reveal": "fix"
+      }
+    ],
+    "excluded_tasks": [
+      "arithmetic__Prob013_least_common_multiple",
+      "assignment__Prob013_least_common_multiple",
+      "timing__Prob013_least_common_multiple"
+    ]
+  },
+  "dataset": "chipbench",
+  "dataset_version": "3c9d7d87dd78573f",
+  "split": "main",
+  "seed": 1,
+  "harness_commit": "c8b8be09369293b5de45a4c6f2e46d9c9f9e9268",
+  "base_setup_hash": "54cd06f44b2db497",
+  "executor": {
+    "name": "harbor",
+    "version": "0.26.0"
+  },
+  "started": "2026-11-18T18:20:10.065785+00:00",
+  "max_parallel": 10,
+  "setups": {
+    "build": "54cd06f44b2db497",
+    "eval": "54cd06f44b2db497",
+    "empty": "54cd06f44b2db497"
+  }
+}

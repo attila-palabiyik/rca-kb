@@ -1,0 +1,1 @@
+- FSM stalls after an apparently valid transition, or a Moore output never asserts because its state is unreachable: [Duplicate state encodings in a Verilog FSM](entries/duplicate-fsm-state-encodings.md)
