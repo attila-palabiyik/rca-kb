@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "idle, s6, sf6:",
+      "note": "The patch fixed the state encoding but also changed four-state simulation behavior: an unknown first bit in idle previously took the failure branch, whereas the merged ternary can put unknown bits into the next state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire invocation before simulation, so the agent had to submit the testbench again."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "Passed all 4096 ordered group pairs and asynchronous reset checks",
+      "note": "Exhaustively testing every pair was more than the encoding fix needed, since a few directed cases could verify that a rejected group pulses at bit six and leaves the next group aligned."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8147,
+    "output": 317
+  }
+}

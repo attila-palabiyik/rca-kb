@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "zero <= (number == 4'd0);",
+      "note": "The fix gives `zero` the correct one-cycle delay, but it propagates an unknown count to `zero` in simulation, whereas the original and reference `if`/`else` logic drive `zero` low when the comparison is unknown."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5457,
+    "output": 284
+  }
+}

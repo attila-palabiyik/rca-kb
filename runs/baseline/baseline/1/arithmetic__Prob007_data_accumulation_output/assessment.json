@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "+\\telse if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The agent fixed the counter handshake but also removed the original `ready_b` guard, so the first accepted word replaces the accumulator when `ready_b` is low instead of being added to it."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed each group starts from zero regardless of `ready_b`, so it exercised the disputed case but treated the extra behavior change as correct."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rejected: rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire test invocation to be rejected before compilation."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The second test attempt used an unavailable interpreter and had to be repeated with `python3`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8803,
+    "output": 285
+  }
+}

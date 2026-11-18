@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "match <= (next_a_tem == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but also changed the registered comparison to use the newly shifted value, moving the match pulse one clock earlier and causing the grading mismatches."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "match !== (history == 8'h71)",
+      "note": "The test checked against history after shifting, so it confirmed the agent's same-cycle assumption rather than checking that match still reflected the pre-edge register value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted",
+      "note": "Bundling the edit and simulation with a prohibited cleanup command caused the entire invocation to be rejected before either could run."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The replacement test runner relied on an unavailable Python executable, so the agent had to submit the testbench again in a shell-only command."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6815,
+    "output": 296
+  }
+}

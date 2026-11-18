@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "//The final 0 of 0110 and this 1 form 01",
+      "note": "The agent correctly made `s3_d011` hold during invalid cycles, but also changed two post-match transitions to retain the trailing zero for overlaps where the original and reference implementations return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected = (count >= 4 && history == 4'b0110);",
+      "note": "The sliding-window oracle tested the invalid-gap fix but assumed overlaps were required, so it accepted the extra match pulses that the reference rejects."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "apply_patch verification failed: Failed to find expected lines",
+      "note": "The first edit attempt used mismatched patch context and did not change the file."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "assert len(indices) == 1",
+      "note": "The fallback edit searched for comment text that did not match the source, so it aborted without writing the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "stream < 19683",
+      "note": "Exhausting all nine-cycle streams added work without resolving the overlap assumption; a few directed cases could have checked both the invalid gap after `011` and the unchanged post-match behavior."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8940,
+    "output": 450
+  }
+}

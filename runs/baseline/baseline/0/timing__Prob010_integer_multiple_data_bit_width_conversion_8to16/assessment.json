@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "cat > TopModule.sv",
+      "note": "The agent rewrote the whole module and renamed its internal registers, although the fix only required replacing the latch-like byte storage with a clocked register using nonblocking assignments."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5609,
+    "output": 233
+  }
+}

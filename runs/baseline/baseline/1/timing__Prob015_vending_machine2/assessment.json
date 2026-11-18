@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "out1 <= vend && !sel;",
+      "note": "The rewrite still registers the dispense outputs on the rising clock edge instead of decoding them combinationally from the current state and selection."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire [2:0] change_due = pending_change + new_change;",
+      "note": "The rewrite replaced the original FSM with falling-edge credit accounting and queued change, altering simultaneous-coin handling and change dispensing that the correct fix leaves intact."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (balance >= price) begin",
+      "note": "The testbench used the rewrite\u2019s own balance-and-change model and checked outputs after rising edges, so it could pass without verifying that outputs respond to selection changes between edges."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "git status --short && cat TopModule.sv",
+      "note": "The Git check failed because the workspace was not a repository, preventing the file read and forcing a second command."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test with different temporary-file handling."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9015,
+    "output": 494
+  }
+}

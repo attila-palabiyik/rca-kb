@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "module dual_port_RAM #(parameter DEPTH = 16,",
+      "note": "Defining the provided RAM again in TopModule.sv creates a duplicate module definition when compiled with the supplied RAM, consistent with the grading compile error."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "output reg              wfull,",
+      "note": "The rewrite registered both status outputs and gated the RAM enables with reset, changing flag timing and reset-time behavior that the reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "TopModule.sv \"$test_dir/check.sv\"",
+      "note": "The test compiled against the RAM bundled into the edited file rather than a separately supplied RAM, so it could pass without exposing the duplicate definition."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "repeat (DEPTH + 12) @(posedge wclk);",
+      "note": "The scoreboard used the DUT's flags to decide which transfers counted and checked flag values after settling, so it did not detect the changed cycle-by-cycle flag timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The first simulation command was rejected because of its cleanup trap and had to be resubmitted."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10982,
+    "output": 364
+  }
+}

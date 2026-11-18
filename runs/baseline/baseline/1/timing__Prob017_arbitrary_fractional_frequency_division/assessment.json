@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= (clk_cnt < (use_div_e ? HIGH_E : HIGH_O));",
+      "note": "The rewrite removed the faulty combinational feedback but also changed the duty-cycle formula and counter sizing, preserving the default waveform while changing behavior for some parameter overrides."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "(phase % even_div) < (even_div / 2)",
+      "note": "The testbench assumed the rewrite\u2019s half-period pulse widths, so its passing override tests did not verify that the original duty-cycle behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The recursive cleanup command caused the entire first test invocation to be rejected before compilation."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "error: Invalid module instantiation",
+      "note": "The second test attempt used the reserved Verilog keyword `small` as an instance name, so compilation failed before simulation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8988,
+    "output": 357
+  }
+}

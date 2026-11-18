@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "out1 <= vend && !sel;",
+      "note": "Instead of correcting the two wrong 1-yuan transitions (S1 to S2 and S1_5 to S2_5), the agent replaced the FSM with an accumulator that registers the outputs, adds simultaneous coins rather than prioritizing d1, and pays out change across multiple cycles."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 11,
+      "quote": "balance = balance + edges;",
+      "note": "The testbench used the rewrite\u2019s edge-counting and payout rules as its oracle, so passing the directed and randomized checks did not verify that the fix preserved the original FSM\u2019s behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "fatal: not a git repository",
+      "note": "The Git status check failed and provided no information for the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire first test invocation to be rejected before compilation, so the agent had to resubmit it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9171,
+    "output": 394
+  }
+}

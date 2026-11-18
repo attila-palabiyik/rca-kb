@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite gates both RAM enables with reset, suppressing writes during reset that the original permits, even though the defect only required changing the read-pointer wrap comparison to `DEPTH-1`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8906,
+    "output": 276
+  }
+}

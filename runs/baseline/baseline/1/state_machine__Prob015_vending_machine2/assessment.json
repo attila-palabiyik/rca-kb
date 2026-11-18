@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "vend = pulse_window && (total >= price);",
+      "note": "The rewrite computes the correct credit totals for the two faulty transitions, but it also replaces the rising-edge state machine with falling-edge credit updates, samples `sel`, and restricts dispensing to the high clock phase."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "Pulses must end at the falling clock edge",
+      "note": "The testbench enforced the rewrite\u2019s half-cycle output timing and coin-counting rules instead of checking the two faulty transitions while preserving the original output behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "Passed directed cases and 10,000 random cycles",
+      "note": "Running 10,000 cycles against a model that shared the rewrite\u2019s assumptions added no evidence that the original behavior was preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8280,
+    "output": 336
+  }
+}

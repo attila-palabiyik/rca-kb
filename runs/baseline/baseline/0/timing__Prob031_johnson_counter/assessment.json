@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire invocation before simulation could run."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "32'h173FEC80",
+      "note": "The packed expected-state constant swapped 0111 and 0011, causing a false failure and an extra simulation run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6127,
+    "output": 133
+  }
+}

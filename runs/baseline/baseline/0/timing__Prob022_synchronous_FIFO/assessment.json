@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The fix correctly clocked the write pointer, but it also suppressed RAM writes during reset, whereas the original and reference versions leave the RAM write enable independent of reset."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8461,
+    "output": 208
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// Expand each carry directly in terms of G, P, and the input carry.",
+      "note": "Beyond fixing the propagate input and using the requested gate primitives, the agent replaced the reference fix\u2019s carry chain with a look-ahead network, changing gate depth while preserving the settled outputs."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup command caused the tool to reject the entire invocation before the edit or simulation could run."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The retry used an unavailable executable, so the agent had to submit the same edit and test again with `python3`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7003,
+    "output": 301
+  }
+}

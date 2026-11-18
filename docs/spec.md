@@ -5,8 +5,9 @@ approach builds its KB while the agent works through set A. The KB is then
 frozen and the agent is run on set B with it. Each approach is compared with
 the same agent run without a KB, on correctness, tokens and time.
 
-Nothing is implemented yet. Section 8 lists what has to be confirmed by
-running, and section 9 the build order and the tests.
+Section 8 lists what could only be settled by running, with the outcome of
+each check on the machine this was built on. Section 9 gives the build order
+and the tests.
 
 ## How it fits together
 
@@ -308,9 +309,17 @@ This is the only backend implemented.
   is what freezing means here: nothing a run writes to a frozen KB is kept,
   and runs in parallel cannot affect one another.
 - **The copy is placed at `/kb`, or wherever the Overlay's `kb` says.** That
-  may be one path for the whole directory, or one path per named
-  subdirectory. This lets a KB sit where the agent CLI looks for skills or
-  instructions, or where it keeps its sessions or its own memory.
+  may be one path for the whole directory (`path`), or one path per named
+  subdirectory (`paths`).
+- **A file or folder inside the KB can also appear where the agent CLI looks
+  on its own** (`links`). A link from the workspace's `AGENTS.md` makes a KB
+  file part of what the CLI loads at the start of every run. A link from the
+  CLI's skills folder makes KB skills ones it lists by name and description.
+- **The transcripts the CLI saves can be kept in the KB** (`cli_sessions`).
+  The executor creates and removes the CLI's home directory inside each run,
+  so a KB cannot sit there. Instead the run's transcript is copied into the
+  named KB subdirectory when the run ends. With `agent_memory.session =
+  "continue"` that one transcript is the session the next run resumes.
 
 **Other backends.** An Overlay may name a different backend and supply a
 command for each of the four operations. None is implemented until one is
@@ -438,7 +447,9 @@ An approach is a way of storing knowledge and of finding it again. Every
 valid combination below is an approach, and every approach is run: built on
 A, frozen, run on B, and compared with the same baseline. Each is a folder
 under `configs/kb/` and needs no harness code beyond what this section
-defines.
+defines. The folders, and one experiment file per approach
+(`configs/experiments/kb-<approach>.toml`, with conditions `build`, `eval`
+and `empty`), are generated from the chart by `scripts/make_approaches.py`.
 
 **What one entry is, against how entries are indexed.** A name is an
 approach described further down. `o` is valid but unnamed. `-` is not valid.
@@ -481,7 +492,7 @@ approach described further down. `o` is valid but unnamed. `-` is not valid.
 | Agent's own memory | Whatever the CLI's memory feature writes | `agent_memory.builtin`; no update prompt |
 
 The agent's own memory has no cell in the chart: the CLI chooses both the
-entry and the index.
+entry and the index. It is not run: pre-flight check 10 failed (section 8).
 
 **Settings on top of any valid combination.** Each approach runs at the
 defaults; a variant changes one.
@@ -595,7 +606,11 @@ What the executor returns for one run.
 The *trajectory* is every step the agent took, in order, in ATIF: messages,
 tool calls with their arguments, and results. The *usage* is tokens split
 into uncached input, cached input and output, and the number of model
-responses. No component other than the executor reads the agent's raw log.
+responses. It is one turn's own usage: what follows the turn's prompt in the
+trajectory. An Update turn resumes Solve's session, and a continued session
+carries every earlier task, so the session's running total would count
+earlier turns again. No component other than the executor reads the agent's
+raw log.
 
 ### One run
 
@@ -765,7 +780,9 @@ executor's built-in agents, so they follow exactly the path a real run does.
 | Do-nothing | `nop`, which leaves the workspace untouched | `fail` |
 
 A task that fails either check is reported and excluded from experiments
-until fixed. The checks cost seconds per task and no model calls.
+until fixed. The outcomes are written to `checks.json` beside the dataset,
+and loading an experiment leaves out every task marked as failing there. The
+checks cost seconds per task and no model calls.
 
 ---
 
@@ -1062,8 +1079,8 @@ build_report(experiment_dirs, prices, out_dir) -> Report
 
 A report spans several experiments: one baseline and one per approach.
 Experiments of kind `redteam` contribute only to the monitor-test figures.
-`prices` is a dated table of token prices per model: uncached input, cached
-input and output.
+`prices` is a dated table of token prices per model: uncached input, input
+written to the cache, cached input and output.
 
 ### Metrics
 
@@ -1236,6 +1253,28 @@ WSL2 distribution on this machine.
 | 9 | A session continues across runs | A run in a new container, given an earlier run's saved session, continues it with that context intact, and its usage is reported for that run alone. | Run the shared-session approach on the fallback executor. If Codex cannot do it headless, drop the approach and say why. |
 | 10 | The agent's own memory works headless | After runs with it on, memory files appear in the KB state and a later run is given them. | Lower the CLI's idle thresholds. If it still does not run headless, drop the approach and say why. |
 | 11 | Similarity search works offline | Inside a run, with the network limited, the tool indexes a set of files and returns sensible matches for a query, and a copied index still works in the next run. | Use keyword ranking, which needs no model. |
+
+### Outcomes on this machine
+
+| # | Outcome |
+|---|---|
+| 1 | Passed. Harbor 0.26.0 runs under WSL2 with Docker Desktop. |
+| 2 | Passed, with Codex CLI 0.170.0, `gpt-6.2-sol` and medium effort. |
+| 3 | Passed. The agent's image is built from the workspace alone; the tests and reference exist only in the grading image. |
+| 4 | Failed. Harbor's Docker environment needs kernel support for its allowlist that Docker Desktop on WSL2 lacks. The network is open, as the fallback says: web search is off, the rules forbid network use, and the monitor reads every trajectory for it. |
+| 5 | Passed. |
+| 6 | Passed. The key appears in no stored file. |
+| 7 | Passed at 10 runs at once, with no authentication or rate-limit errors. |
+| 8 | Passed. The Update turn resumes Solve's session, and the two turns' usage is told apart. |
+| 9 | Passed. Harbor can start a run from an earlier run's saved session, and a turn's own usage is taken from the trajectory. |
+| 10 | Failed, and the approach is dropped. Harbor's Codex agent creates the CLI's home directory at the start of each run and deletes it at the end, so memory files can neither be supplied before a run nor kept after it. Codex also writes memories in a background pass over sessions that have been idle for hours, which a single headless run never reaches. The fallback executor could keep the home directory between runs; that is the route if this approach is wanted. |
+| 11 | Passed with a local embedding model (`BAAI/bge-small-en-v1.5`), with the container's network disabled. |
+
+The task checks excluded three tasks, the three bugs of
+`Prob013_least_common_multiple`. Its reference module drives an output to
+high impedance, which the testbench's comparison counts as a mismatch even
+against an identical module, so no answer can pass. 86 tasks remain: 45 in A
+and 41 in B.
 
 **Fallback executor.** A thin executor of our own behind the same Executor
 contract: one container per phase around the headless Codex command, with

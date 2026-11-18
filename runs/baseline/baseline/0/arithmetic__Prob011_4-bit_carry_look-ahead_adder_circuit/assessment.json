@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "// Expand each carry in terms of G, P, and the input carry.",
+      "note": "The rewrite corrected the generate gate but also replaced the original carry chain with parallel look-ahead logic, changing the carry path depth while preserving all binary outputs."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "Bundling a disallowed cleanup command with the edit and simulation caused the entire invocation to be rejected and retried."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "warning: Not a git repository.",
+      "note": "The Git whitespace check could not run in this workspace and returned a failure status after the simulation had passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7406,
+    "output": 331
+  }
+}

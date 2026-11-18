@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first test command was rejected before simulation because its cleanup trap used `rm -rf`, so the agent had to resubmit it with safer cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6521,
+    "output": 90
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "idle, s6, sf6:",
+      "note": "Grouping `idle` with the terminal states fixed `sf6` but also changed how an unknown first bit is handled in four-state simulation, and the output rewrite can propagate unknowns where the original drove a definite value."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rejected: rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire first test invocation to be rejected, so no simulation ran until the agent resubmitted it."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "PASS: all 4096 consecutive group pairs and asynchronous reset",
+      "note": "The exhaustive pair sweep was more than needed to verify the fix: a failed group followed by `111100` would expose the original false match."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7999,
+    "output": 351
+  }
+}

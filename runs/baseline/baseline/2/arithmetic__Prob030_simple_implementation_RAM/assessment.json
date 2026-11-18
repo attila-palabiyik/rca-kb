@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "Rewriting the read logic changed four-state simulation behavior: an X or Z on read_en now holds read_data, whereas the original and reference ternary merge the old and addressed values."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire test invocation before simulation, so the agent had to resubmit the testbench using a different temporary-directory approach."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6705,
+    "output": 219
+  }
+}

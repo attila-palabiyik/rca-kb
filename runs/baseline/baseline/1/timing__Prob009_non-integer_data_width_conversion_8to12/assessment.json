@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "valid_out <= valid_in && have_first;",
+      "note": "The rewrite removed the combinational counter feedback but replaced the original three-byte-to-two-word packing with disjoint pairs, dropping the output that combines the second byte\u2019s low nibble with the full third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "step(1, 8'h12, 0, 12'hABC);",
+      "note": "The test passed because it expected no output on the third accepted byte, where the intended converter should assert valid_out and produce 12'hD12."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the first test invocation to be rejected before simulation, so the agent had to rerun the test with different cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7334,
+    "output": 278
+  }
+}

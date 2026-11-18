@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (valid_in) begin",
+      "note": "The rewrite preserved behavior for known inputs but changed four-state simulation behavior: at a word boundary, an unknown `valid_in` now forces `valid_out` low instead of propagating the unknown as the minimal fix would."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire invocation before Icarus Verilog could run."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "mismatch at 120 accepted bits",
+      "note": "The testbench left `valid_in` high when releasing the midstream reset, so the DUT accepted an input the scoreboard did not count and the test had to be rerun."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8548,
+    "output": 341
+  }
+}

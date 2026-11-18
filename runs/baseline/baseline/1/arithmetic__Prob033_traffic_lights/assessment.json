@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "{red, yellow, green} <= 3'b100;",
+      "note": "The rewrite stopped green from repeatedly reloading, but it also asserted red during reset and removed the original startup delay instead of preserving both behaviors with a one-line fix to green's rising-edge check."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "module TopModule (",
+      "note": "The replacement kept the ports but removed the four public state parameters, so an existing instantiation that overrides them would no longer compile."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "#1 check(RED, 10);",
+      "note": "The test required the rewrite's immediate-red reset behavior, so its passing result could not catch the regression in reset and startup timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository",
+      "note": "The Git status check failed because the workspace was not a Git repository and yielded no information useful to the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7735,
+    "output": 345
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "number <= next_number;",
+      "note": "The rewrite fixed zero detection outside reset but removed the existing one-cycle output delay and changed the reset value of `zero` from 0 to 1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "tick(9);",
+      "note": "The passing test expected a set value to appear on the first rising edge after reset release and expected `zero` to be high during reset, so it validated the rewrite rather than detecting either regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "#1 check(i[3:0] + 4'd1);",
+      "note": "The first simulation stopped on a testbench error: before the first set edge, this expression expected 0 even though the preceding count had left the output at 1."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6212,
+    "output": 239
+  }
+}

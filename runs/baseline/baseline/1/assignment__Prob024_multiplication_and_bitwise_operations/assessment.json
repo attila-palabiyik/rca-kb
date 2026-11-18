@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "command -v yosys",
+      "note": "The Yosys check returned no path and did not contribute to the fix or the Icarus verification."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 3907,
+    "output": 74
+  }
+}

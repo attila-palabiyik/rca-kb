@@ -6,7 +6,10 @@
     python -m harness.cli run configs/experiments/baseline.toml
     python -m harness.cli monitor baseline
     python -m harness.cli assess baseline
-    python -m harness.cli report baseline notes --out reports/main
+    python -m harness.cli flagged baseline
+    python -m harness.cli review baseline/baseline/0/<task> cleared --note "..."
+    python -m harness.cli report baseline kb-notes --out reports/main
+    python -m harness.cli archive baseline
 """
 
 from __future__ import annotations
@@ -127,12 +130,66 @@ def cmd_notes(args) -> int:
     return 0
 
 
+def cmd_flagged(args) -> int:
+    """What a person has to read: flagged runs awaiting review, or a sample of certified ones."""
+    import random
+
+    from harness.records import store
+
+    runs = store.load_runs(ROOT / "runs" / args.experiment)
+    if args.sample:
+        certified = [r for r in runs if (r.monitor or {}).get("status") == "certified" and not r.review]
+        chosen = random.Random(1).sample(certified, min(args.sample, len(certified)))
+        for run in sorted(chosen, key=lambda r: r.run_id):
+            print(run.run_id)
+        return 0
+    for run in runs:
+        if (run.monitor or {}).get("status") == "flagged" and not run.review:
+            print(run.run_id)
+            for finding in run.monitor["findings"]:
+                print(f"    {finding['source']}: {finding['category']} ({finding['intent']}) "
+                      f"at step {finding['step']}: {finding['quote'][:100]!r}")
+    return 0
+
+
+def cmd_review(args) -> int:
+    from harness.records import store
+
+    experiment = args.run_id.split("/")[0]
+    store.write_review(ROOT / "runs" / experiment, args.run_id, args.decision, args.note)
+    print(f"{args.run_id}: {args.decision}")
+    return 0
+
+
+def cmd_archive(args) -> int:
+    """Pack an experiment's raw logs and trajectories into one archive, and record its checksum."""
+    import hashlib
+    import tarfile
+
+    directory = ROOT / "runs" / args.experiment
+    out = ROOT / "archives" / f"{args.experiment}-trials.tar.gz"
+    out.parent.mkdir(exist_ok=True)
+    with tarfile.open(out, "w:gz") as archive:
+        for folder in sorted([*directory.glob("*/*/*/trial"), *directory.glob("*/*/*/attempts")]):
+            archive.add(folder, arcname=folder.relative_to(ROOT).as_posix())
+    digest = hashlib.sha256(out.read_bytes()).hexdigest()
+    (directory / "trials.sha256").write_text(f"{digest}  {out.name}\n")
+    print(f"{out} ({out.stat().st_size / 1e6:.1f} MB), sha256 {digest[:16]}...")
+    return 0
+
+
 def cmd_report(args) -> int:
     from harness.report.render import build_report
+
+    from harness.report.render import fill_writeup
 
     directories = [ROOT / "runs" / name for name in args.experiments]
     build_report(directories, ROOT / "configs" / "prices.toml", ROOT / args.out)
     print(f"report written to {args.out}")
+    if args.write_up:
+        generated = (ROOT / args.out / "report.md").read_text(encoding="utf-8")
+        blocks = fill_writeup(generated, ROOT / args.write_up)
+        print(f"{blocks} generated blocks refreshed in {args.write_up}")
     return 0
 
 
@@ -180,9 +237,26 @@ def main(argv: list[str] | None = None) -> int:
     notes.add_argument("--parallel", type=int, default=8)
     notes.set_defaults(run=cmd_notes)
 
+    flagged = commands.add_parser("flagged", help="list flagged runs awaiting a person's review")
+    flagged.add_argument("experiment")
+    flagged.add_argument("--sample", type=int, default=0,
+                         help="list a sample of certified runs to read instead")
+    flagged.set_defaults(run=cmd_flagged)
+
+    review = commands.add_parser("review", help="record a person's decision on a run")
+    review.add_argument("run_id")
+    review.add_argument("decision", choices=["cleared", "void"])
+    review.add_argument("--note", default="")
+    review.set_defaults(run=cmd_review)
+
+    archive = commands.add_parser("archive", help="pack an experiment's trajectories into one archive")
+    archive.add_argument("experiment")
+    archive.set_defaults(run=cmd_archive)
+
     report = commands.add_parser("report", help="build a report from stored runs")
     report.add_argument("experiments", nargs="+")
     report.add_argument("--out", required=True)
+    report.add_argument("--write-up", help="a written report whose generated blocks to refresh")
     report.set_defaults(run=cmd_report)
 
     args = parser.parse_args(argv)

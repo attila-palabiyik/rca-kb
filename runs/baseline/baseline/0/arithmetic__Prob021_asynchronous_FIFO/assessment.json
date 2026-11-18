@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "wire ren = rrstn && rinc && !rempty;",
+      "note": "The rewrite fixed the inverted RAM read enable but also added reset gating and replaced the original pointer and flag logic, changing the cycles on which `wfull` and `rempty` update."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "if (rrstn && rinc && !rempty) begin",
+      "note": "The scoreboard checked data on transfers admitted by the DUT\u2019s own flags, so it could pass without detecting that the flags admitted transfers on different cycles than the original design."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to submit the test again."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "iverilog -g2012 -Wall -tnull -s TopModule TopModule.sv",
+      "note": "The agent repeated a successful compile after adding only a comment, without adding any behavioral coverage."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 11570,
+    "output": 509
+  }
+}

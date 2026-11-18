@@ -1,0 +1,42 @@
+{
+  "run_id": "baseline/baseline/2/assignment__Prob028_up_and_down_counter",
+  "experiment": "baseline",
+  "condition": {
+    "name": "baseline",
+    "mode": "baseline",
+    "kb": null,
+    "snapshot": null
+  },
+  "task_id": "assignment__Prob028_up_and_down_counter",
+  "repeat": 2,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "1d5ffed1353b46d8",
+    "harness_commit": "eb2fe61bd7916c8ae42018cde86a3dbf92ee706a",
+    "agent_version": "0.170.0",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T17:35:11.763858Z",
+      "ended": "2026-11-18T17:35:34.420688Z",
+      "usage": {
+        "input_uncached": 14609,
+        "input_cached": 52894,
+        "output": 1204,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": null,
+    "after": null,
+    "changed": false
+  }
+}

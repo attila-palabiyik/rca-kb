@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wave <= (cnt >= 5'd9 && cnt < 5'd19) ? MAX_WAVE : 5'd0;",
+      "note": "The rewrite fixed the square-wave period and triangle peak, but it also made square mode overwrite the output immediately on entry and made triangle mode start upward rather than preserve the original downward step, which produces 31 from zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "advance((phase <= 20) ? phase : 40 - phase);",
+      "note": "The passing bench encoded the rewrite's upward triangle startup and immediate square-mode clearing, so it accepted the very behavior changes that caused mismatches."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first simulation command was rejected because of its cleanup trap, so it ran no tests and had to be retried."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository",
+      "note": "The Git status check yielded no useful information because the workspace was not a Git repository."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6976,
+    "output": 414
+  }
+}

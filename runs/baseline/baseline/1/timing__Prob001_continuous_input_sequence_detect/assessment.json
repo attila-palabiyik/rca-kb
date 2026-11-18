@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 7,
+      "quote": "if (a_next == 8'b0111_0001)",
+      "note": "The agent registered `match` but compared the post-shift value, so `match` still asserts and deasserts one cycle earlier than required by the pre-shift comparison."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "match !== (expected == 8'b0111_0001)",
+      "note": "The test updated `expected` before checking `match`, so it validated the agent's post-shift assumption rather than detecting the one-cycle timing error."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5341,
+    "output": 172
+  }
+}

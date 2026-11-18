@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign data = q[5];",
+      "note": "The fix made the shift register clocked but replaced the expected registered output with a direct tap, advancing the sequence by one clock and making reset synchronous rather than asynchronous."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "check_bit(PATTERN[5 - i % 6]);",
+      "note": "The test started at index 1 after reset release and required the output to stay high until the next clock when reset was asserted, so it validated the patch's assumptions rather than catching the phase and reset mismatches."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5432,
+    "output": 242
+  }
+}

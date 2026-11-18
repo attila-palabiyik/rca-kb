@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "The registered `match` output goes high on the rising edge that samples the final bit of `011XXX110`. Active-low reset clears `match` and fills the shift register with ones to prevent a match before nine bits have been sampled.",
+      "note": "The shift direction was fixed, but the rewrite also asserted match one clock earlier and replaced the original zero-filled reset history with ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "expected = count >= 9 && window[8:6] == 3'b011 &&",
+      "note": "The test checked the window after inserting the current sample and required nine real samples, so it validated the rewrite\u2019s assumptions rather than checking that the original timing and zero-filled reset behavior were preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "word_index < 512",
+      "note": "Exhaustively testing all 512 windows against an incorrect timing expectation added breadth without testing the key regression, which a directed cycle-by-cycle check would have exposed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5674,
+    "output": 366
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "version": "v1",
+  "derived_from": "Free-text notes on 30 baseline runs of set A (reports/assessment-notes/baseline.json), grouped by hand. The three kb_ categories were fixed in advance, since a baseline run cannot show them.",
+  "categories": [
+    {
+      "id": "missed_the_bug",
+      "definition": "The change does not correct the actual defect: the agent fixed something else, or left the defect in place."
+    },
+    {
+      "id": "changed_more_than_the_bug",
+      "definition": "The agent addressed the defect but also altered behaviour the original code had and a correct answer keeps, such as output timing, reset values or handshakes, typically by rewriting the module instead of making a small change."
+    },
+    {
+      "id": "broke_the_interface",
+      "definition": "The agent altered module names, ports or structure so that the answer no longer fits what uses it, for example so that it no longer compiles with other code."
+    },
+    {
+      "id": "test_did_not_test",
+      "definition": "The agent's own test passed without being able to expose the fault: it encoded the agent's own assumption about the intended behaviour, or did not exercise the behaviour that was wrong."
+    },
+    {
+      "id": "wasted_effort",
+      "definition": "Work that did not bear on the fix: failed tool invocations, redundant or needlessly exhaustive runs, or rebuilding something it already had."
+    },
+    {
+      "id": "kb_ignored",
+      "definition": "A knowledge base was available and held something relevant, and the agent did not look at it or did not look at the relevant part."
+    },
+    {
+      "id": "kb_no_help",
+      "definition": "The agent consulted the knowledge base and what it found had no bearing on this task or made no difference to what it did."
+    },
+    {
+      "id": "kb_misled",
+      "definition": "The agent followed something from the knowledge base that was wrong for this task, and it cost effort or led to a wrong answer."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "clk_out_r <= clk_cnt < (div_e / 2);",
+      "note": "The half-period formula fixes the default waveform but changes pulse widths for some parameter overrides, and the same patch unnecessarily changes the counter widths."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 9,
+      "quote": "wire div_flag = (cyc_cnt >= c89);",
+      "note": "Replacing the registered toggle with a combinational comparison changes mode selection for overrides such as `c89=0`, although the default timing is unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository (or any of the parent directories): .git",
+      "note": "Putting the Git check first in an `&&` chain prevented the source inspection and simulator check, so both had to be retried."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup trap caused the entire simulation command to be rejected before it ran, requiring a second invocation."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7704,
+    "output": 410
+  }
+}

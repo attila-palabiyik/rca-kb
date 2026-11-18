@@ -17,6 +17,7 @@ docs/archive/
 # Raw agent logs and trajectories: delivered as an archive beside the repository
 runs/*/*/*/*/trial/
 runs/*/*/*/*/attempts/
+archives/
 
 # The brief this work answers; kept locally
 task.pdf

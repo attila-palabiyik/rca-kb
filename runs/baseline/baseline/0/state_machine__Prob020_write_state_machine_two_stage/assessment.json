@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first simulation command was rejected before the test could run because its cleanup trap used `rm -f`, so the agent had to retry with a different temporary-directory setup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6377,
+    "output": 89
+  }
+}

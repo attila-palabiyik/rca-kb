@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "have_first_byte <= !have_first_byte;",
+      "note": "The rewrite correctly advances state only on valid input, but replaces the original three-byte packing sequence with disjoint two-byte pairs, dropping the second byte\u2019s low nibble and suppressing the output that should combine it with the third byte."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "step(1, 8'h12, 0, 12'habc);",
+      "note": "The test expects no output on the third accepted byte, so it passes the rewrite while rejecting the correct behavior of asserting valid_out and emitting 12'h712."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6117,
+    "output": 229
+  }
+}

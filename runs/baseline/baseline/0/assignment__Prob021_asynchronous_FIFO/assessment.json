@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "output reg             wfull,",
+      "note": "The rewrite corrected the write stride but replaced the original combinational full and empty comparisons with registered next-pointer logic, changing when the flags transition and which clock edges accept transfers."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wen = wrstn && winc && !wfull;",
+      "note": "The rewrite also added reset gating to both RAM enables, suppressing accesses that the original and corrected designs allow when the corresponding request and status permit them."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "if (wrstn && winc && !wfull) begin",
+      "note": "The scoreboard used the DUT's flags to decide which transfers counted and checked flag states after settling, so it could pass without detecting changes to cycle-by-cycle flag and handshake timing."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The initial test command was rejected because of its cleanup command, so no simulations ran until the test was resubmitted."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "git diff --check",
+      "note": "The trailing Git check failed and gave the command a nonzero exit status even though the simulations had passed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 12149,
+    "output": 372
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (next_history[8:6] == 3'b011) &&",
+      "note": "The rewrite corrected the prefix but checked the newly shifted window, asserting match one clock earlier than the original design, and changed the shift register\u2019s reset value from all zeros to all ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "9'b011???110: expected = samples >= 9;",
+      "note": "The test expected a match on the edge that sampled the final bit and ruled out matches before nine samples, so it validated the rewrite\u2019s assumptions rather than catching the timing and reset differences."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire first test invocation to be rejected before simulation, forcing the agent to set up and run the test again."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6889,
+    "output": 326
+  }
+}

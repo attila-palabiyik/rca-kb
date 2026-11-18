@@ -117,6 +117,11 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             "pending": sum(1 for r in mine if r.pending),
         }
     sampled = [r for r in rows if r.monitor_status == "certified" and r.review]
+    agreement = {}
+    for directory in experiment_dirs:
+        file = directory / "assessment_agreement.json"
+        if file.is_file():
+            agreement[directory.name] = json.loads(file.read_text())
     report = {
         "provisional": loaded.provisional, "pending": loaded.pending,
         "experiments": sorted(loaded.experiments), "model": model,
@@ -132,6 +137,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             "clean_sample_read": len(sampled),
             "clean_sample_voided": (mean(1.0 if r.review == "void" else 0.0 for r in sampled)
                                     if sampled else None),
+            "assessment_self_agreement": agreement,
         },
     }
 
@@ -192,6 +198,37 @@ def _figure(conditions: dict, folder: Path) -> None:
     figure.tight_layout()
     figure.savefig(folder / "pass_rate_vs_tokens.png", dpi=150)
     plt.close(figure)
+
+
+def fill_writeup(report_markdown: str, writeup: Path) -> int:
+    """Refresh the generated blocks of the written report, so that no number in
+    it is typed by hand. A block is
+
+        <!-- generated: Conditions -->
+        ...
+        <!-- /generated -->
+
+    and is replaced by the section of the generated report whose heading starts
+    with that name. Returns the number of blocks filled.
+    """
+    import re
+
+    sections = {}
+    for chunk in report_markdown.split("\n## ")[1:]:
+        heading, _, body = chunk.partition("\n")
+        sections[heading.strip()] = body.strip()
+
+    def replace(match) -> str:
+        name = match.group(1).strip()
+        body = next((b for heading, b in sections.items() if heading.startswith(name)), None)
+        inner = body if body is not None else "_Not available yet._"
+        return f"<!-- generated: {name} -->\n{inner}\n<!-- /generated -->"
+
+    text = writeup.read_text(encoding="utf-8")
+    filled, count = re.subn(r"<!-- generated: ([^>]+?) -->.*?<!-- /generated -->", replace, text,
+                            flags=re.DOTALL)
+    writeup.write_text(filled, encoding="utf-8", newline="\n")
+    return count
 
 
 # -- report.md ---------------------------------------------------------------
@@ -287,6 +324,10 @@ def _markdown(report: dict) -> str:
     if rated:
         out += ["## Limitations", "",
                 "From a model's reading of each run, so descriptive only.", ""]
+        for name, measured in report["trust"]["assessment_self_agreement"].items():
+            if measured.get("runs"):
+                out += [f"Read twice, {name}'s reader named the same set of categories for "
+                        f"{_pct(measured['same_set'])} of {measured['runs']} runs.", ""]
         categories = sorted({c for rates in rated.values() for c in rates})
         out += _table(["Condition", *categories],
                       [[label, *[_pct(rates.get(c, 0.0)) for c in categories]] for label, rates in rated.items()])

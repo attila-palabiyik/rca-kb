@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (data_cnt == 2'd0)",
+      "note": "The agent correctly made the counter clocked, but it also removed the original `ready_b` guard, so the first accepted input of a group replaces `data_out` instead of adding to it when downstream is not ready."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "sum = 0;",
+      "note": "The scoreboard restarted the sum after every four inputs, so it exercised downstream stalls but treated the agent\u2019s changed behavior as correct rather than detecting the mismatch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository (or any of the parent directories): .git",
+      "note": "The Git status check failed because the workspace was not a Git repository and contributed nothing to the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6471,
+    "output": 237
+  }
+}

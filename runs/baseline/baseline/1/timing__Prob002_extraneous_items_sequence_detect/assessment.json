@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (next_history[8:6] == 3'b011) &&",
+      "note": "The rewrite aligned the prefix and suffix checks but moved detection one clock earlier than the original registered suffix check and changed the shift register\u2019s reset value from all zeros to all ones."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected = count >= 9 && (samples & 9'b111000111) == 9'b011000110;",
+      "note": "The test computed its expectation after shifting in the current input and explicitly blocked startup matches, so it validated the rewrite\u2019s assumptions instead of checking the required pre-shift timing and zero-padded reset behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "for (pattern = 0; pattern < 512; pattern = pattern + 1) begin",
+      "note": "Exhaustively enumerating all windows and then adding random samples did not address the timing ambiguity that a short directed test with the correct expected cycle would have exposed."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5674,
+    "output": 365
+  }
+}

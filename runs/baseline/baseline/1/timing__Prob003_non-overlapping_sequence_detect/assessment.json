@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match = (pstate == s6);",
+      "note": "The combinational decode fixes the one-cycle delay but drops the explicit reset override and zero defaults, so an uninitialized state can produce X instead of zero."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "reg rst_n = 1;",
+      "note": "The bench always drives a clean falling reset edge and waits before checking the outputs, so it cannot expose the missing reset override while the state is still unknown."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6747,
+    "output": 238
+  }
+}

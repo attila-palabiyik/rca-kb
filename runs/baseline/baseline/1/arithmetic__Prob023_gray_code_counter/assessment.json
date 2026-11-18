@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (advance)",
+      "note": "The agent fixed the Gray-code conversion but also replaced the original registered pipeline with a toggle-gated feedback path, changing the output timing that the one-line reference fix preserves."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected_binary = (edge_count / 2) % 16;",
+      "note": "The test checked reset, sequence, and wraparound, but it assumed the rewrite's exact post-reset update timing instead of checking whether the original pipeline timing was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test with a different cleanup method."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6906,
+    "output": 234
+  }
+}

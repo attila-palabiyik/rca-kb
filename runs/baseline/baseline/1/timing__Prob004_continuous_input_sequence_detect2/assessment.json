@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// The final 0 can also start the next match.",
+      "note": "The patch fixed the one-cycle match delay but also changed the transitions out of the match state so the final zero can start an overlapping match, which the correct fix does not do."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = count >= 4 && history == 4'b0110;",
+      "note": "The sliding-window oracle expected overlapping matches, so the exhaustive test confirmed the agent's assumption rather than checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected, so no test ran and the agent had to resubmit it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7999,
+    "output": 235
+  }
+}

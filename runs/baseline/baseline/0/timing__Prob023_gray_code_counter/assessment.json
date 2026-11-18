@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "reg advance;",
+      "note": "The agent replaced the registered conversion and increment stages with a toggle-controlled combinational path, changing internal timing even though registering gray_out alone would have fixed the defect and the rewrite passed all graded samples."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5443,
+    "output": 332
+  }
+}

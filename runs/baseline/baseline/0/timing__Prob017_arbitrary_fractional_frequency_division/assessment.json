@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "clk_out_r <= (clk_cnt < (period >> 1));",
+      "note": "The rewrite fixed the divider\u2019s switching defect and passed grading at the default settings, but it also replaced the original pulse-width formula and changed behavior for parameter overrides."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "wide_expected = wide_frame < 180 ? (wide_frame % 18 < 9) :",
+      "note": "The override test assumed the rewrite\u2019s nine-cycle high pulse for divide-by-18 instead of checking that the original six-cycle pulse was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the first simulation invocation to be rejected before it ran, so the agent had to resubmit the test."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8218,
+    "output": 361
+  }
+}

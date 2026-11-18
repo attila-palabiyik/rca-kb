@@ -1,0 +1,18 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if (read_en)",
+      "note": "The patch fixed the inverted write enable but also replaced both ternary assignments with procedural enable checks, which hold the previous value on an X or Z enable instead of merging the two possible values as the reference does."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5490,
+    "output": 170
+  }
+}

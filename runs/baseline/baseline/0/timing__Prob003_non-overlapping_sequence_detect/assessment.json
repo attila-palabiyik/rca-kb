@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "case (pstate)",
+      "note": "The combinational decode fixes the one-cycle output delay but drops explicit reset gating, so asserting reset cannot clear the outputs until the state register updates and triggers the decode."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "rst_n = 0;\n        #1;\n        check(2'b00);",
+      "note": "The reset check waits for the state register and output decode to settle, so it cannot distinguish direct reset gating from outputs that clear only through the state update."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the tool to reject the entire invocation before compilation, so the agent had to submit the test again."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8043,
+    "output": 367
+  }
+}

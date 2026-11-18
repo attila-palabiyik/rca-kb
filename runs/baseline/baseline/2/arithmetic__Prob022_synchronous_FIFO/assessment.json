@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "assign wenc = rst_n & winc & ~wfull;",
+      "note": "The patch fixed the inverted full check but also blocked RAM writes during reset, rewrote the flag logic, and changed the RAM address widths for DEPTH=1, none of which was needed for the fix."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository (or any of the parent directories): .git",
+      "note": "The unnecessary Git status check stopped the chained file lookup, which then had to be run separately."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the entire simulation invocation to be rejected before the test ran, so the agent had to resubmit it with a different cleanup command."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10860,
+    "output": 364
+  }
+}

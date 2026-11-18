@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = (data_cnt != 2'd3) || !valid_b || ready_b;",
+      "note": "The rewrite fixed the counter but also let the module accept up to three more inputs while an output was stalled, whereas the original and reference deassert `ready_a` for the entire stall."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "data_out    <= next_sum;",
+      "note": "The separate partial-sum register made `data_out` update only on the fourth accepted input, replacing the reference's per-input updates and its `ready_b`-dependent rule for starting a new sum."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "if (ready_a !== (count < 3 || !pending || ready_b))",
+      "note": "The test treated the new buffering policy as correct and checked `data_out` only when a result was pending, so its pass did not verify that the original handshake and output behavior were preserved."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 6431,
+    "output": 274
+  }
+}

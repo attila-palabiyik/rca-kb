@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (rst_n) begin",
+      "note": "The output rewrite also changes four-state simulation behavior: with reset unknown and the FSM in a result state, the new logic drives both outputs low, while the original still decodes the result state."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup command caused the entire test invocation to be rejected before compilation, so the agent had to resubmit the test."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "PASS: all 4096 ordered group pairs and asynchronous resets",
+      "note": "Testing every ordered pair repeated equivalent boundary cases; all 64 individual patterns plus targeted transitions out of the match and mismatch states would have covered the fix."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8226,
+    "output": 352
+  }
+}

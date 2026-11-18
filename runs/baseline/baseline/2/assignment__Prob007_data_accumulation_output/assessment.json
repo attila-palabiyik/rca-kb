@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (data_cnt == 2'd0)",
+      "note": "The rewrite fixed the counter wrap but dropped the original `ready_b` guard, so the first accepted input of a group replaces `data_out` even when the downstream is not ready, whereas the reference adds it to the existing value."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "sum = 0;",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b`, so its backpressure cases validated the rewrite rather than checking that it preserved the original accumulation behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the tool to reject the entire simulation invocation, so the agent had to resubmit the testbench using a different temporary-directory mechanism."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7431,
+    "output": 249
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "assign ready_a = 1'b1;",
+      "note": "The rewrite fixed the counter rollover but also made `ready_a` high during reset and allowed the first post-reset edge to accept data, unlike the original and reference."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "valid_b <= 1'b0;\\n+            if (valid_a) begin",
+      "note": "The rewrite made `valid_b` pulse only when the sixth bit arrives, whereas the reference asserts it whenever the pre-edge count is five, even during an input gap."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "repeat (3) cycle(0, 1, 0);",
+      "note": "The passing test expected `valid_b` low in gaps before the sixth bit and `ready_a` high during reset, so it enforced the rewrite's assumptions rather than detecting the behavior changes."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first simulation command was rejected because of its cleanup trap, so it ran no tests and had to be retried."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7773,
+    "output": 323
+  }
+}

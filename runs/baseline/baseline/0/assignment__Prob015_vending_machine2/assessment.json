@@ -1,0 +1,42 @@
+{
+  "limitations": [
+    {
+      "category": "missed_the_bug",
+      "step": 8,
+      "quote": "out2 <= vend && sampled_sel;",
+      "note": "The rewrite did not restore the required output decode: with beverage 2 selected, `S2_5` should produce `010` and `S3` should produce `011`."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "always @(negedge clk or negedge rst) begin",
+      "note": "The rewrite moved dispensing outputs from combinational decoding of the rising-edge FSM to falling-edge registers and introduced new coin-counting and change-queue behavior."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "new_coins = coins & ~last_coins;",
+      "note": "The testbench mirrored the rewrite\u2019s edge-counting and change-queue rules and checked dispensing only after the falling edge, so it could pass without detecting the required FSM output mismatch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "tools.clock__curr_time({})",
+      "note": "Checking the wall-clock time did not help diagnose or verify the Verilog defect."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 10,
+      "quote": "assert change < 8",
+      "note": "The exhaustive width check validated arithmetic introduced by the rewrite rather than the two incorrect output encodings."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7741,
+    "output": 438
+  }
+}

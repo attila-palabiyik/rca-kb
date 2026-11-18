@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "{red, yellow, green} <= 3'b100;",
+      "note": "The rewrite corrected the light sequence but asserted red during reset and removed the original three-clock startup delay before red first lights and the counter reloads."
+    },
+    {
+      "category": "broke_the_interface",
+      "step": 7,
+      "quote": "output reg green\n);",
+      "note": "The replacement removed the four public state parameters, so existing instantiations that override those parameters would no longer elaborate even though the ports were preserved."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "#1 check(RED, 10);",
+      "note": "The test expected immediate red on reset and a countdown from 9 on the first released edge, so it validated the rewrite's startup timing instead of detecting the regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The first simulation command was rejected because of its cleanup trap, so the agent had to resubmit the test before it could run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8999,
+    "output": 359
+  }
+}

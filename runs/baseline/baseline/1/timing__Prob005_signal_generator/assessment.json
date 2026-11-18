@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "2'd0: wave <= (cnt >= 5'd9 && cnt < 5'd19) ? PEAK : 5'd0;",
+      "note": "The counter fix was correct, but decoding its range forces the output low on entry to square mode instead of holding the previous value until a counter threshold is reached."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "if (wave == 5'd0 || (!descending && wave < PEAK)) begin",
+      "note": "The triangle rewrite changes reset and mode-entry behavior: from a reset value of 0, the original logic decrements to 31 on the first triangle clock, while the rewrite increments to 1."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "sample(i % 40 <= 20 ? i % 40 : 40 - i % 40);",
+      "note": "The bench treated the rewritten triangle startup as expected and entered square mode only from an already-zero output, so its passing result missed both behavior changes."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5705,
+    "output": 284
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "red    <= next_remain < charge;",
+      "note": "The rewrite fixed the normal-mode deduction guard but changed both warning lights to use the post-update balance instead of the pre-update balance, shifting their timing by a clock cycle at threshold crossings."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 10,
+      "quote": "expected_yellow = balance > 0 && balance < 10;",
+      "note": "The test derived both expected warning values from the post-update balance, so it caught the original balance bug but could not flag the warning-timing regression."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "The last line of the patch must be '*** End Patch'",
+      "note": "The malformed patch applied nothing and had to be resubmitted."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire invocation before the simulation could run."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7512,
+    "output": 283
+  }
+}

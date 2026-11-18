@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "wasted_effort",
+      "step": 7,
+      "quote": "reg [119:0] data_lock;",
+      "note": "The agent rewrote the packing logic and narrowed the internal register even though the existing packing was correct and only `valid_out` needed to be registered."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit it with safer cleanup."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7614,
+    "output": 156
+  }
+}

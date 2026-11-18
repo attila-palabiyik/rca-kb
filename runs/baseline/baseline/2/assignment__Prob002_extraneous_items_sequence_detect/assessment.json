@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (next_history[8:6] == 3'b011) &&",
+      "note": "The agent fixed the prefix comparison but checked the window including the newly sampled bit, asserting match one clock earlier than the original design."
+    },
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "history <= 9'b111111111;",
+      "note": "The rewrite replaced the original zero-filled reset state with ones, preventing a reset-initialized zero from serving as the pattern\u2019s leading bit."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 8,
+      "quote": "expected = samples >= 9 && ((sampled & 9'b111000111) == 9'b011000110);",
+      "note": "The test updated its reference window before computing the expected output and required nine fresh samples, encoding both behavior changes instead of checking that the fix preserved the original timing and reset behavior."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "for (word = 0; word < 512; word = word + 1) begin",
+      "note": "Exhaustively testing all 512 windows and then running 4,096 random samples added coverage of the bit pattern but could not validate the disputed timing or reset behavior against the test\u2019s own assumptions."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5784,
+    "output": 346
+  }
+}

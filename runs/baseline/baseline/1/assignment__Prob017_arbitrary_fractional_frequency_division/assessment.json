@@ -1,0 +1,36 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "clk_out_r <= clk_cnt < (period_length >> 1);",
+      "note": "The rewrite matches the expected waveform at the default settings but changes the pulse widths for some parameter overrides, whereas the targeted fix only changes the even-branch shift from `>>3` to `>>2`."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository",
+      "note": "The Git status check produced no useful information because the workspace was not a Git repository."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup command caused the tool to reject the entire invocation before the test could run."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "python: command not found",
+      "note": "The first retry also failed to run the test because it used `python` instead of the installed `python3`."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 9040,
+    "output": 517
+  }
+}

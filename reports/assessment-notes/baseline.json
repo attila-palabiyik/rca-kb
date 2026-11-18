@@ -1,0 +1,152 @@
+[
+  {
+    "run_id": "baseline/baseline/0/arithmetic__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the shift direction, but it also changed `match` to check the window including the incoming bit instead of the previously stored window, making detection one clock early relative to the grader. It added an unnecessary sample counter that changed behavior immediately after reset; the run failed with 16 mismatches out of 237 samples. The exhaustive simulation was wasteful because its expected results encoded those same timing and startup assumptions, so it passed without catching the regression."
+  },
+  {
+    "run_id": "baseline/baseline/1/arithmetic__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the shift direction but compared the newly shifted window instead of the pre-edge register contents, so `match` asserted one clock earlier than expected and grading reported 16 mismatches in 237 samples. It also rewrote the detector and added an unnecessary sample counter that changed behavior just after reset; the shift assignment was the only line that needed changing. The exhaustive testbench encoded the same early timing assumption, so passing all 512 windows did not validate the expected behavior."
+  },
+  {
+    "run_id": "baseline/baseline/2/arithmetic__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the shift direction but also changed the timing: it checked the window including the newest input, so match asserted one clock earlier than the original registered comparisons would. It also changed the shift register\u2019s reset value from zeros to ones, suppressing matches that could use a reset-supplied leading zero. The full rewrite was unnecessary because only the shift assignment needed to change, and the exhaustive testbench validated the agent\u2019s new timing and startup assumptions rather than catching the mismatch."
+  },
+  {
+    "run_id": "baseline/baseline/0/arithmetic__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The agent fixed the counter but also tied `ready_a` high through reset and made `valid_b` pulse only on the sixth accepted bit. The reference changed only the counter\u2019s hold condition from AND to OR, preserving registered readiness and keeping `valid_b` tied to `cnt == 5` even when the sixth bit is delayed; the rewrite produced 16 mismatches in 151 samples. The broader rewrite was unnecessary, and the agent had to resubmit its testbench after the shell cleanup command was rejected. The passing testbench enforced the rewritten timing rather than checking that the original timing was preserved."
+  },
+  {
+    "run_id": "baseline/baseline/1/arithmetic__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The agent fixed the counter\u2019s handshake gating but also changed two behaviors the grader expected to stay the same: it tied `ready_a` high through reset and made `valid_b` a one-cycle pulse instead of letting it follow `cnt == 5` even during input gaps. The reference changed only the counter guard from AND to OR, and the broader rewrite produced 16 mismatches in 151 samples. The first simulation command was rejected because of its `rm -f` cleanup, and the replacement testbench passed by asserting the new reset and valid timing rather than checking whether the patch preserved the original behavior."
+  },
+  {
+    "run_id": "baseline/baseline/2/arithmetic__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The agent fixed the counter so it no longer advances on idle cycles, but it also tied `ready_a` high during reset and made `valid_b` depend on `valid_a`. The grader expected the original ready timing and `valid_b` to follow `cnt == 5`, even if the sixth bit was delayed; the rewrite produced 16 mismatches in 151 samples. Deleting and recreating the module was unnecessary for a one-operator fix, and the custom test passed because it asserted the rewritten timing rather than checking that the original timing was preserved."
+  },
+  {
+    "run_id": "baseline/baseline/0/arithmetic__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to match the prose, asserting red immediately on reset, instead of preserving the original idle-to-red startup timing expected by the grader. The reference fix only changes `green && p_green` to `!green && p_green` so the green timer reloads on entry; the rewrite produced 220 mismatches in 517 samples. The custom testbench confirmed the rewritten timing but did not check compatibility with the original startup sequence, and its first run had to be repeated because the cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/1/arithmetic__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to turn red on immediately at reset, which matched the prose but changed the reference behavior: the original circuit starts with all lights off and delays the first red phase. The intended fix only needed to change `green && p_green` to `!green && p_green` so the timer loads 60 on entry to green instead of reloading while green stays on. The full rewrite and the testbench built around its new reset timing were unnecessary for that fix; the local tests passed, but grading found 220 mismatches in 517 samples."
+  },
+  {
+    "run_id": "baseline/baseline/0/assignment__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the prefix comparison from `001` to `011`, but unnecessarily rewrote the detector to check the window including the incoming bit. That asserted `match` one clock earlier than the expected design, and changing the shift-register reset from zeros to ones also changed startup behavior; grading found 16 mismatches in 237 samples. The exhaustive testbench checked those new assumptions rather than the original timing and reset behavior, so its passing result did not validate the intended one-line fix. The first combined edit-and-test command was also rejected because it used `rm -f`, forcing a retry."
+  },
+  {
+    "run_id": "baseline/baseline/1/assignment__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent corrected the prefix from `001` to `011`, but unnecessarily rewrote the detector to check the newly shifted window, making `match` assert one clock earlier than expected, and changed the shift-register reset value from zeros to ones. Changing only the prefix would have preserved the intended timing and reset behavior; the submitted rewrite failed with 16 mismatches in 237 samples. The exhaustive simulation tested the agent\u2019s new timing and startup assumptions rather than checking that the original behavior was preserved, and its first attempt never ran because the cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/0/assignment__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The agent fixed the counter\u2019s off-by-one error but also changed two behaviors the grader expected to preserve: `ready_a` became high during reset, and `valid_b` no longer asserted when the count was five but `valid_a` was low. The grader reported 16 mismatches in 151 samples. Rewriting the whole module was unnecessary for the expected one-line fix, and the exhaustive testbench validated the new handshake behavior rather than checking compatibility with the original. The first simulation attempt also had to be rerun because its cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/1/assignment__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The agent fixed the counter\u2019s off-by-one error, but also changed two behaviors the grader expected to preserve: it tied `ready_a` high through reset and gated `valid_b` on `valid_a` instead of asserting it whenever `cnt == 5`. The grader reported 16 mismatches in 151 samples. Rewriting the module was unnecessary for the reference fix, which only changed the counter\u2019s wrap value from 4 to 5, and the custom testbench validated the new timing rather than checking compatibility with the original behavior. The first simulation attempt also had to be retried because its `rm -rf` cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/0/assignment__Prob027_settable_counter",
+    "verdict": "fail",
+    "notes": "The agent rewrote the counter to update `number` directly on the clock edge and reset `zero` to 1, but the grader expected both outputs to keep sampling the previous value of `num` and `zero` to reset to 0. The intended fix was just to change the zero comparison from `num == 4'd1` to `num == 4'd0`; the rewrite produced 248 mismatches in 273 samples. The Icarus testbench passed because it encoded the rewritten timing and reset behavior, and the first attempt to run it was rejected because its cleanup used `rm -rf`."
+  },
+  {
+    "run_id": "baseline/baseline/1/assignment__Prob027_settable_counter",
+    "verdict": "fail",
+    "notes": "The agent rewrote the counter instead of making the one-line fix: change the zero check from `num == 4'd1` to `num == 4'd0`. The rewrite removed the existing one-cycle output delay and made `zero` high during reset instead of low, resulting in 248 mismatches out of 273 samples. The first Icarus run was wasted on an incorrect testbench expectation, and the corrected testbench passed only because it checked the rewrite\u2019s timing and reset behavior rather than the original behavior the fix needed to preserve."
+  },
+  {
+    "run_id": "baseline/baseline/0/assignment__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to turn red on immediately at reset and switch lights when the countdown reached 1. That follows the written specification, but the grader expected the original startup and transition timing, with only the erroneous green assertion in the red state fixed; the rewrite mismatched 220 of 517 samples. The self-written testbench checked only the new timing, and its first invocation was wasted because the shell cleanup command was rejected, forcing a retry."
+  },
+  {
+    "run_id": "baseline/baseline/1/assignment__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to follow the prose reset behavior, asserting red immediately, but the grader expected the original all-lights-off reset and startup timing. The expected fix was just to clear `p_green` in the red state, so the rewrite changed observable behavior and produced 220 mismatches in 517 samples. The Icarus testbench verified the rewritten timing but never checked whether the patch preserved the original startup sequence."
+  },
+  {
+    "run_id": "baseline/baseline/0/state_machine__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to assert red during reset and switch lights when the countdown reached 1, which follows the prose but changes the startup and transition timing expected by the grader. The reference fix only changes the red-to-green and green-to-yellow transition targets while preserving the existing pipeline; the rewrite mismatched 220 of 517 samples. The Icarus testbench passed because it checked the rewrite\u2019s timing rather than compatibility with the original pipeline, and the first simulation command wasted a retry because its cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/1/state_machine__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to assert red immediately on reset and switch lights when the countdown reached 1. That follows the written requirements, but the grader expected the original reset and pipelined timing with only the red-to-green and green-to-yellow transition targets corrected, resulting in 220 mismatches out of 517 samples. The custom Icarus test passed because it checked the rewritten timing rather than compatibility with the original pipeline, and the first test command had to be resubmitted because its recursive cleanup was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the mixed-window comparison but registered the result from the window that included the incoming bit, so `match` asserted one clock earlier than the reference, which checks the pre-shift register. It also changed the reset fill from zeros to ones to suppress startup matches, departing from the reference reset behavior; grading found 16 mismatches in 237 samples. The exhaustive Icarus tests encoded the agent\u2019s own timing and startup assumptions, so they passed without catching the discrepancy, and the first test command had to be rerun because its cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob002_extraneous_items_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent registered the comparison of the shifted-in window, so `match` asserted on the edge that sampled the final bit instead of one edge later, as expected by the grader. It also changed the shift register\u2019s reset value from all zeros to all ones, altering startup behavior. The exhaustive Icarus sweep and random-stream test were wasted as validation of the fix because their expected results baked in those same assumptions; they passed locally despite 16 grading mismatches."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob003_non-overlapping_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the one-cycle output delay but omitted the explicit `rst_n` check from the combinational output block. That made the outputs rely on `pstate` updating before they could clear on reset, unlike the reference; grading reported one mismatch in 1,215 samples. The exhaustive group-pair test waited after asserting reset, so it missed that timing difference, and the agent had to resubmit the testbench after its first command was rejected for using `rm -rf`."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob003_non-overlapping_sequence_detect",
+    "verdict": "fail",
+    "notes": "The agent fixed the one-cycle output delay but omitted the explicit `rst_n` check in the combinational output block. That left the outputs dependent on `pstate` settling to `idle` instead of forcing both low whenever reset was asserted; grading found one mismatch in 1,215 samples. Changing the next-state sensitivity list was unnecessary, and the exhaustive pattern sweep did not cover the reset timing gap because the testbench waited before checking the outputs."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The rewrite made `ready_a` high even during reset, while the grader expected it to stay low until the first clock edge after reset. It also gated the registered `valid_b` on `valid_a`, whereas the expected logic registers `cnt == 5` even when the sixth bit is stalled; the run failed with 16 mismatched samples out of 151. The self-test encoded the rewrite\u2019s assumptions, so passing it did not reveal either discrepancy. Rewriting the whole module was unnecessary for the expected one-block fix, and bundling the first edit and test with a prohibited `rm -f` cleanup caused the command to be rejected and retried."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob006_data_serial-to-parallel_circuit",
+    "verdict": "fail",
+    "notes": "The rewrite tied `ready_a` high, changing the original reset and first-clock behavior, and made `valid_b` depend on `valid_a` when the grader expected a registered `cnt == 5` even during input gaps. The grader reported 16 mismatches in 151 samples. The 64-word simulation checked bit order but encoded the same handshake assumptions as the rewrite, so it missed both differences. The first combined edit-and-test command was also rejected because of its `rm -f` cleanup, forcing the agent to resubmit the edit and test separately."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+    "verdict": "fail",
+    "notes": "The agent correctly registered `c` to align it with `min(a, b)`, and its local Icarus test passed, but the grader reported a compile error. The patch renamed `slave_mod`\u2019s `a` and `b` ports even though the timing fix did not require it; the local test instantiated only `TopModule`, so it would not catch a compatibility break in a harness using the original port names. The exact compile error was not shown, so the rename is only a possible cause. The first test command was rejected because its cleanup used `rm -f`, so the agent had to resubmit the test with Python-managed temporary files."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob018_submodules_to_implement_comparison_of_three_input_numbers",
+    "verdict": "fail",
+    "notes": "The agent correctly registered `c` to align it with the first comparator\u2019s output, but it also renamed `slave_mod`\u2019s `a` and `b` ports instead of preserving the supplied interface. The local testbench instantiated only `TopModule`, so it passed without checking compatibility with the original submodule ports; the grader reported a compile error but gave no diagnostic confirming its cause. Verification also took two avoidable retries: the first command was rejected for using `rm -f`, and the second invoked `python` when only `python3` was available."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob027_settable_counter",
+    "verdict": "fail",
+    "notes": "The rewrite removed the internal `num` register, so `number` and `zero` reflected the newly computed count instead of sampling the previous `num` together on each rising edge. It also reset `zero` to 1 instead of preserving the original reset value of 0; the submission failed on 248 of 273 samples. Rewriting the whole module was unnecessary: the expected fix only made `number` a clocked output, and the Icarus testbench encoded the rewrite\u2019s assumptions, so its PASS did not catch either mismatch."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob027_settable_counter",
+    "verdict": "fail",
+    "notes": "The agent made `number` the counter state, so both outputs reflected the newly incremented or loaded value one clock earlier than expected. The intended fix was to register `number` from the existing `num` on the same edge that `zero` samples it, while preserving `zero = 0` during reset. The rewrite and exhaustive set-value test were wasteful because the test encoded the same incorrect timing and reset assumptions, so it passed despite 248 of 273 grading samples mismatching. The first combined edit-and-test command also had to be rerun because its cleanup command was rejected."
+  },
+  {
+    "run_id": "baseline/baseline/0/timing__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the controller to match the prose, but the grader expected the original staged timing with only the light outputs changed from combinational to clocked. The rewrite asserted red during reset instead of leaving all lights off, removed the startup delay, and changed when the timer reloaded, producing 220 mismatches in 517 samples. The self-written testbench passed because it checked the rewrite\u2019s timing assumptions, not the staged behavior implied by the starter code. The first simulation command was also rejected because its cleanup used `rm -f`, so the agent had to resubmit it."
+  },
+  {
+    "run_id": "baseline/baseline/1/timing__Prob033_traffic_lights",
+    "verdict": "fail",
+    "notes": "The agent rewrote the FSM to turn red on immediately at reset and switch lights directly at count 1, following the prose but changing the cycle-by-cycle behavior the grader expected. The reference fix only registered the light outputs, preserving the original idle startup and counter-reload timing; the rewrite mismatched 220 of 517 samples. The custom testbench confirmed the rewrite\u2019s assumptions without checking the original output pipeline, and its first invocation was wasted because the cleanup command was rejected."
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "// The final zero can also start the next sequence.",
+      "note": "The patch fixed the one-cycle delay in `match` but also changed the transitions out of `s4_d0110` to allow overlapping matches, including across invalid cycles, whereas the reference fix preserves those transitions."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = data_valid && history == 4'b0110;",
+      "note": "The test oracle assumed every overlapping occurrence should match, so it rewarded the unintended transition changes instead of checking that the original post-match behavior was preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted.",
+      "note": "The cleanup command caused the simulator invocation to be rejected before any tests ran, so the agent had to resubmit it."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7983,
+    "output": 299
+  }
+}

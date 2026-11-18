@@ -1,0 +1,24 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "match <= (a_next == 8'b0111_0001);",
+      "note": "The agent fixed the shift direction but also changed the comparator to use the newly shifted value, making match assert and deassert one clock edge earlier than the original design and the expected fix."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 7,
+      "quote": "match !== (expected == 8'h71)",
+      "note": "The test compared match against the post-shift register value, so it validated the agent\u2019s new timing rather than checking that match still reflected the pre-shift value."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 5087,
+    "output": 175
+  }
+}

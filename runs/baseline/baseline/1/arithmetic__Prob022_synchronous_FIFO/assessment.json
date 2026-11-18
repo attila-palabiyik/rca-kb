@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 8,
+      "quote": "wire wenc = rst_n && winc && !wfull;",
+      "note": "The rewrite fixed the inverted full check but also inhibited RAM writes during reset, whereas the reference fix leaves reset handling unchanged."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 6,
+      "quote": "fatal: not a git repository (or any of the parent directories): .git",
+      "note": "The Git status check failed and prevented the chained AGENTS.md lookup from running, so the agent checked for that file in a separate call."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 9,
+      "quote": "rm -f style commands are not permitted. Use a safer approach",
+      "note": "The cleanup command caused the entire test invocation to be rejected before simulation, so the agent had to resubmit the test with a different temporary-file approach."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 10663,
+    "output": 315
+  }
+}

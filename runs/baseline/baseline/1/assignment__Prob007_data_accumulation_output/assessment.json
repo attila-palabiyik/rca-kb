@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "else if(valid_a && ready_a && (data_cnt == 2'd0))",
+      "note": "The counter fix lets the count reach three, but removing the `ready_b` guard also changes the first accepted input of a group from adding to the existing `data_out` to replacing it when `ready_b` is low, contrary to the reference."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "partial_sum = 0;",
+      "note": "The scoreboard assumed every group starts from zero regardless of `ready_b` and only compared `data_out` while an output was pending, so it validated the extra behavior change instead of catching the mismatch."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The cleanup command caused the tool to reject the entire simulation invocation before it ran, forcing the agent to submit it again."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 7081,
+    "output": 258
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "limitations": [
+    {
+      "category": "changed_more_than_the_bug",
+      "step": 7,
+      "quote": "//The final 0 of the match and this 1 start an overlapping match",
+      "note": "The patch correctly preserves `s3_d011` on invalid cycles, but also changes two post-match transitions to reuse the final zero, allowing overlapping detections where the original and reference return to idle."
+    },
+    {
+      "category": "test_did_not_test",
+      "step": 9,
+      "quote": "expected = valid_count >= 4 && history == 4'b0110;",
+      "note": "The test's sliding-window oracle assumes overlapping matches are intended, so it accepts the extra detections instead of checking that the original post-match behavior is preserved."
+    },
+    {
+      "category": "wasted_effort",
+      "step": 8,
+      "quote": "rm -f style commands are not permitted",
+      "note": "The first test invocation was rejected because of its cleanup command, so no simulation ran and the agent had to resubmit the bench."
+    }
+  ],
+  "judge": {
+    "model": "gpt-6.2-sol",
+    "rubric": "v1"
+  },
+  "usage": {
+    "input": 8004,
+    "output": 248
+  }
+}

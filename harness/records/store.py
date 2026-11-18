@@ -217,7 +217,35 @@ def load_runs(experiment_directory: str | Path) -> list[Run]:
     directory = Path(experiment_directory)
     reviews = _read(directory / "reviews.json", {})
     records = sorted(directory.glob("*/*/*/record.json"))
-    return [load_run(p.parent, reviews) for p in records if p.parts[-4] != "kb"]
+    runs = [load_run(p.parent, reviews) for p in records if p.parts[-4] != "kb"]
+    _void_rest_of_chain(runs)
+    return runs
+
+
+def _void_rest_of_chain(runs: list[Run]) -> None:
+    """A void build run voids the runs after it in its chain: they used KB state
+    it may have contaminated."""
+    first_void: dict[tuple, int] = {}
+    for run in runs:
+        position = run.record.get("position")
+        if run.mode == "build" and position is not None and (run.review or {}).get("decision") == "void":
+            key = (run.condition, run.repeat)
+            first_void[key] = min(first_void.get(key, position), position)
+    for run in runs:
+        start = first_void.get((run.condition, run.repeat))
+        if run.mode == "build" and start is not None and (run.record.get("position") or 0) > start:
+            run.review = {"decision": "void", "note": "an earlier run in its chain was voided"}
+
+
+def write_review(experiment_directory: str | Path, run_id: str, decision: str, note: str) -> None:
+    """Record a person's decision on a run. Reviews are kept as written, never recomputed."""
+    if decision not in ("cleared", "void"):
+        raise ValueError("a review is 'cleared' or 'void'")
+    file = Path(experiment_directory) / "reviews.json"
+    reviews = _read(file, {})
+    reviews[run_id] = {"decision": decision, "note": note,
+                       "date": datetime.now(timezone.utc).date().isoformat()}
+    _json(file, dict(sorted(reviews.items())))
 
 
 def load_experiment_info(experiment_directory: str | Path) -> dict:
