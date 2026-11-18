@@ -48,14 +48,19 @@ docker build -t rcakb-agent:1 configs/image
 ```
 
 Regenerate every table and figure from the stored runs, with no agent runs,
-and print the report and slides:
+and print the report and slides. The first command rewrites the generated
+blocks of `docs/report.md` in place. The second needs Chrome or Edge, and a
+network connection for the typefaces, which come from Google Fonts:
 
 ```bash
 uv run python -m harness.cli report baseline kb-shared-session kb-raw-cases kb-summaries kb-notes kb-note-similarity kb-playbook kb-rule-tags kb-wiki kb-skills kb-hierarchical-skills kb-guide-single-file kb-signature-guides kb-troubleshooting-tree --out reports/main --write-up docs/report.md
 uv run python scripts/build_report_pdf.py
 ```
 
-Run an experiment. Restarting skips whatever is already recorded:
+Run an experiment. Restarting skips whatever is already recorded. With
+`gpt-6.2-sol` at medium effort a run costs about $0.06, so the baseline
+(258 runs) costs about $16. What each KB approach cost is in the report,
+Table B3 and Table B1:
 
 ```bash
 uv run python -m harness.cli run configs/experiments/baseline.toml

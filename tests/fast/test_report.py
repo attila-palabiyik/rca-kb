@@ -88,12 +88,33 @@ def test_a_failure_is_never_solved_within_any_budget():
     assert max(point["solved"] for point in within_budget(rows)) == 0.5
 
 
-def test_experiments_run_differently_are_not_compared():
+def test_experiments_run_differently_are_not_compared(tmp_path):
     def loaded(**other):
-        base = {"base_setup_hash": "h", "dataset_version": "v", "split": "main", "seed": 1}
+        base = {"dataset_version": "v", "split": "main", "seed": 1}
         return Loaded([], {"baseline": base, "kb": {**base, **other}}, False, 0, {})
 
-    _check_comparable(loaded())
-    for key, value in (("base_setup_hash", "x"), ("dataset_version", "x"), ("split", "other"), ("seed", 2)):
+    _check_comparable(loaded(), tmp_path)
+    for key, value in (("dataset_version", "x"), ("split", "other"), ("seed", 2)):
         with pytest.raises(ReportError, match=key):
-            _check_comparable(loaded(**{key: value}))
+            _check_comparable(loaded(**{key: value}), tmp_path)
+
+
+def test_an_approach_may_differ_from_the_baseline_only_by_its_overlay(tmp_path):
+    import json
+
+    base = {"model": "m", "effort": "medium", "rules": "r", "instructions": "", "kb": None,
+            "update_prompt": "", "agent_memory": {"session": "fresh"}}
+    approach = {**base, "instructions": "use the KB", "kb": {"path": "/kb"}, "update_prompt": "update it",
+                "agent_memory": {"session": "continue"}}
+
+    def store(name: str, setup: dict) -> dict:
+        (tmp_path / "runs" / name / "setups").mkdir(parents=True)
+        (tmp_path / "runs" / name / "setups" / "s.json").write_text(json.dumps(setup))
+        return {"dataset_version": "v", "split": "main", "seed": 1, "setups": {"c": "s"}}
+
+    experiments = {"baseline": store("baseline", base), "kb-a": store("kb-a", approach)}
+    _check_comparable(Loaded([], experiments, False, 0, {}), tmp_path)
+
+    experiments["kb-b"] = store("kb-b", {**approach, "effort": "high"})
+    with pytest.raises(ReportError, match="base Setup"):
+        _check_comparable(Loaded([], experiments, False, 0, {}), tmp_path)

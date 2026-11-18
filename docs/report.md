@@ -362,6 +362,13 @@ _Pending: what worked, what failed, and how the choice of A affects B._
   approach was run once on B. The baseline's repeats differ little
   (section 1, Measures), but a gap between two approaches may reflect one
   build.
+- _Whether the KB was read._ The first rule in every prompt is to work only
+  inside the workspace, and the KB is at `/kb`, outside it. Some agents
+  declined to read their KB for that reason ("I'll keep all file access
+  inside `/app`, so `/kb` is outside the scope of this task"). A weak result
+  for an approach may therefore reflect a KB that was not read rather than
+  one that did not help; the "Runs that read the KB" column of Table 6 says
+  which.
 - _Instructions apart from content._ An approach adds instructions as well as
   a KB. The control that separates them, the same instructions with an empty
   KB, is defined for every approach but was not run, for lack of time.
@@ -510,6 +517,14 @@ After the task is graded, the same session receives the result and this:
 A monitor reads every trajectory for breaches of the rules in appendix C: a
 model judge with a written rubric, cross-checked by a pattern match. A run it
 flags does not count until a person has cleared it or voided it.
+
+Every flag raised on a KB run was one of two kinds, and each was cleared
+after review, with a note in the experiment's `reviews.json`. In the first,
+the agent read its KB at `/kb`, or declined to, and the judge counted the
+path as outside the workspace. In the second, a build task's KB already
+held the fix because an earlier task of the same module had been shown it
+(section 3). Eleven of these runs were read in full; none touched the tests,
+the reference or the network.
 
 <p class="caption"><b>Table E1.</b> Every planned run and what became of it.</p>
 

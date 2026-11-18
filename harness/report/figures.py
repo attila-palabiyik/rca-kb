@@ -261,12 +261,21 @@ def _interval_rows(axis, entries: list[dict | None], scale: float, reference: fl
     for position in range(len(entries) - 1):
         axis.axhline(position + 0.5, color="#eeeeee", linewidth=0.4, zorder=0)
     axis.set_ylim(len(entries) - 0.5, -0.5)
-    if log:
-        axis.set_xscale("log")
-        axis.set_xticks([0.8, 1, 1.25, 1.6, 2], ["0.8", "1", "1.25", "1.6", "2×"])
-        axis.minorticks_off()
     axis.grid(axis="x")
     axis.margins(x=0.08)
+    if log:
+        axis.set_xscale("log")
+        axis.minorticks_off()
+        low, high = axis.get_xlim()
+        low, high = min(low, 0.9), max(high, 1.15)
+        axis.set_xlim(low, high)
+        ladder = [0.25, 0.5, 0.8, 1, 1.25, 1.6, 2, 3, 5, 8, 12, 20]
+        ticks = [t for t in ladder if low <= t <= high]
+        while len(ticks) > 5:  # thin out, always keeping 1
+            ticks = [t for i, t in enumerate(ticks) if t == 1 or i % 2 == 0]
+        labels = [f"{t:g}" for t in ticks]
+        labels[-1] += "×"
+        axis.set_xticks(ticks, labels)
 
 
 def _panel_title(axis, title: str, unit: str, rows: int, line: float) -> None:

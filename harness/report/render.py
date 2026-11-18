@@ -22,15 +22,36 @@ class ReportError(ValueError):
     """Experiments that must not be compared."""
 
 
-def _check_comparable(loaded: Loaded) -> None:
-    """One baseline, shared: refuse experiments that were not run alike."""
-    keys = ("base_setup_hash", "dataset_version", "split", "seed")
+OVERLAY_FIELDS = ("instructions", "update_prompt", "kb", "agent_memory")
+
+
+def base_hash(setup: dict) -> str:
+    """A Setup's hash with the fields a KB approach's overlay may set left out:
+    two experiments with equal base hashes ran under the same base Setup."""
+    import hashlib
+
+    base = {k: v for k, v in setup.items() if k not in OVERLAY_FIELDS}
+    return hashlib.sha256(json.dumps(base, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def _check_comparable(loaded: Loaded, root: Path) -> None:
+    """One baseline, shared: refuse experiments that were not run alike.
+
+    The base Setup is compared from each experiment's stored Setups, apart from
+    the fields an approach may set (OVERLAY_FIELDS)."""
+    keys = ("dataset_version", "split", "seed")
     seen = {}
     for name, info in loaded.experiments.items():
         if info.get("kind") == "redteam":
             continue
         for key in keys:
             seen.setdefault(key, {})[name] = info.get(key)
+        bases = set()
+        for setup_hash in set(info.get("setups", {}).values()):
+            file = root / "runs" / name / "setups" / f"{setup_hash}.json"
+            if file.is_file():
+                bases.add(base_hash(json.loads(file.read_text())))
+        seen.setdefault("base Setup", {})[name] = ",".join(sorted(bases)) or info.get("base_setup_hash")
     for key, values in seen.items():
         if len(set(values.values())) > 1:
             raise ReportError(f"experiments differ in {key}: {values}")
@@ -100,7 +121,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
     experiment_dirs = [Path(d) for d in experiment_dirs]
     root = experiment_dirs[0].parents[1]
     loaded = load(experiment_dirs, root)
-    _check_comparable(loaded)
+    _check_comparable(loaded, root)
     prices = load_prices(prices_path)
     model = _model(root, loaded)
     rows = loaded.rows
@@ -464,8 +485,8 @@ def _markdown(report: dict) -> str:
             if not build:
                 continue
             tasks = even.get("tasks_to_break_even")
-            body.append([_name(name), f"{build['tokens'] / 1e6:.2f}M", f"{build['dollars']:.2f}",
-                         f"{build['seconds'] / 60:.0f}", _share(build["contribution_rate"]),
+            body.append([_name(name), f"{_num(build['tokens'] / 1e6, 2)}M", _num(build["dollars"], 2),
+                         _num(build["seconds"] / 60, 0), _share(build["contribution_rate"]),
                          "never" if even and tasks is None else ("" if not even else f"{tasks:.0f} tasks")])
         out += _table(["Approach", "Extra tokens", "Extra cost, $", "Extra time, min",
                        "Tasks after which the KB changed, %", "Pays for itself after"], body)
