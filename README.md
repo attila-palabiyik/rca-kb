@@ -8,8 +8,7 @@ is run with it on a second set (set B, 41 tasks in 15 other modules). Each
 approach is compared with the same agent run without a KB, on correctness,
 tokens and time to solution.
 
-- **Report:** [docs/report.pdf](docs/report.pdf) (source [docs/report.md](docs/report.md))
-- **Slides:** [docs/slides.pdf](docs/slides.pdf) (source [docs/slides.html](docs/slides.html))
+- **Slides:** [docs/slides.pdf](docs/slides.pdf), [docs/slides.pptx](docs/slides.pptx) (source [docs/slides.html](docs/slides.html))
 - **Design:** [docs/spec.md](docs/spec.md)
 
 ## The brief, and where each part is answered
@@ -47,13 +46,12 @@ uv sync
 docker build -t rcakb-agent:1 configs/image
 ```
 
-Regenerate every table and figure from the stored runs, with no agent runs,
-and print the report and slides. The first command rewrites the generated
-blocks of `docs/report.md` in place. The second needs Chrome or Edge, and a
-network connection for the typefaces, which come from Google Fonts:
+Regenerate the tables and figures from the stored runs, with no agent runs,
+and print the slides. The second command needs Chrome or Edge, and a network
+connection for the typefaces, which come from Google Fonts:
 
 ```bash
-uv run python -m harness.cli report baseline kb-shared-session kb-raw-cases kb-summaries kb-notes kb-note-similarity kb-playbook kb-rule-tags kb-wiki kb-skills kb-hierarchical-skills kb-guide-single-file kb-signature-guides kb-troubleshooting-tree --out reports/main --write-up docs/report.md
+uv run python -m harness.cli report baseline kb-shared-session kb-raw-cases kb-summaries kb-notes kb-note-similarity kb-playbook kb-rule-tags kb-wiki kb-skills kb-hierarchical-skills kb-guide-single-file kb-signature-guides kb-troubleshooting-tree --out reports/main
 uv run python scripts/build_report_pdf.py
 ```
 

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 398" font-family="'Figtree', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" fill="#0d1117">
+  <defs><marker id="head-soft" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L7,4 L0.5,7.2" fill="none" stroke="#5b6068" stroke-width="1.3"/></marker><marker id="head-ink" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L7,4 L0.5,7.2" fill="none" stroke="#0d1117" stroke-width="1.3"/></marker><marker id="head-kb" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L7,4 L0.5,7.2" fill="none" stroke="#fd6420" stroke-width="1.3"/></marker></defs>
+  <text x="0" y="20" font-size="20" font-weight="600" fill="#0d1117" text-anchor="start">Playbook</text>
+  <text x="0" y="43" font-size="14.5" font-weight="400" fill="#5b6068" text-anchor="start">rules in a single file  ·  32 rules, 1,949 words</text>
+  <rect x="0" y="58" width="520" height="304" rx="6" fill="#fff" stroke="#fd6420" stroke-width="1.25"/>
+  <text x="16" y="81" font-size="12.5" font-weight="500" fill="#c4490f" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">AGENTS.md</text>
+  <path d="M0 93 L520 93" fill="none" stroke="#fd6420" stroke-width="1"/>
+  <rect x="16" y="106" width="443.34109816971716" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="111.3" width="218.4226289517471" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="116.6" width="269.5773710482529" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="121.89999999999999" width="201.3710482529118" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="127.19999999999999" width="240.3460898502496" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="132.5" width="369.4509151414309" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="137.8" width="336.1597337770383" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="143.10000000000002" width="241.15806988352745" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="148.40000000000003" width="281.757071547421" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="153.70000000000005" width="228.9783693843594" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="159.00000000000006" width="256.585690515807" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="164.30000000000007" width="289.87687188019964" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="169.60000000000008" width="251.71381031613976" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="174.9000000000001" width="314.2362728785358" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="180.2000000000001" width="338.5956738768719" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="185.5000000000001" width="416.5457570715474" height="3" rx="0" fill="#e2e3e5"/>
+  <text x="16" y="206.80000000000013" font-size="13.5" font-weight="500" fill="#c4490f" text-anchor="start">Check that a valid-ready transfer counter holds when either handshake</text>
+  <text x="16" y="224.80000000000013" font-size="13.5" font-weight="500" fill="#c4490f" text-anchor="start">signal is low, as in the TopModule serial-to-6-bit converter where the</text>
+  <text x="16" y="242.80000000000013" font-size="13.5" font-weight="500" fill="#c4490f" text-anchor="start">reference changed the hold condition from !ready_a &amp;&amp; !valid_a to</text>
+  <text x="16" y="260.8000000000001" font-size="13.5" font-weight="500" fill="#c4490f" text-anchor="start">!ready_a || !valid_a.</text>
+  <rect x="16" y="274.8000000000001" width="488.0" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="280.10000000000014" width="338.5956738768719" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="285.40000000000015" width="438.4692179700499" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="290.70000000000016" width="246.84193011647255" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="296.00000000000017" width="212.738768718802" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="301.3000000000002" width="405.9900166389351" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="306.6000000000002" width="425.477537437604" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="311.9000000000002" width="285.8169717138103" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="317.2000000000002" width="323.98003327787023" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="322.5000000000002" width="333.72379367720464" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="327.80000000000024" width="245.2179700499168" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="333.10000000000025" width="330.4758735440932" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="338.40000000000026" width="298.80865224625626" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="343.7000000000003" width="297.99667221297835" height="3" rx="0" fill="#e2e3e5"/>
+  <rect x="16" y="349.0000000000003" width="263.8935108153078" height="3" rx="0" fill="#e2e3e5"/>
+  <text x="0" y="388" font-size="14.5" font-weight="400" fill="#5b6068" text-anchor="start">All of it is in the agent&#x27;s context on every task</text>
+  <text x="600" y="20" font-size="20" font-weight="600" fill="#0d1117" text-anchor="start">Hierarchical skills</text>
+  <text x="600" y="43" font-size="14.5" font-weight="400" fill="#5b6068" text-anchor="start">skills in two levels  ·  2 groups, 8 skills, 7,122 words</text>
+  <rect x="600" y="58" width="520" height="304" rx="6" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="616" y="81" font-size="12.5" font-weight="500" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">skills/</text>
+  <path d="M600 93 L1120 93" fill="none" stroke="#dbdcdd" stroke-width="1"/>
+  <path d="M794 148.0 L839 148.0 L839 119 L884 119" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <path d="M794 148.0 L839 148.0 L839 148 L884 148" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <path d="M794 148.0 L839 148.0 L839 177 L884 177" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <rect x="884" y="106" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="123" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">active-low-decoder</text>
+  <rect x="884" y="135" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="152" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">carry-generate-propagate</text>
+  <rect x="884" y="164" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="181" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">gray-to-binary</text>
+  <rect x="616" y="133.0" width="178" height="30" rx="4" fill="#fff4ec" stroke="#fd6420" stroke-width="1.25"/>
+  <text x="626" y="152.0" font-size="12" font-weight="500" fill="#0d1117" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">debug-hdl-arithmetic</text>
+  <path d="M794 279.0 L839 279.0 L839 221 L884 221" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <path d="M794 279.0 L839 279.0 L839 250 L884 250" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <path d="M794 279.0 L839 279.0 L839 279 L884 279" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <path d="M794 279.0 L839 279.0 L839 308 L884 308" fill="none" stroke="#5b6068" stroke-width="1"/>
+  <rect x="884" y="208" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="225" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">combinational-output-reset</text>
+  <rect x="884" y="237" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="254" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">fifo-pointer-timing</text>
+  <rect x="884" y="266" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="283" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">registered-output-timing</text>
+  <rect x="884" y="295" width="220" height="26" rx="4" fill="#fff" stroke="#8f949b" stroke-width="1"/>
+  <text x="894" y="312" font-size="12" font-weight="400" fill="#5b6068" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">state-encoding</text>
+  <path d="M794 279.0 L839 279.0 L839 337 L882 337" fill="none" stroke="#fd6420" stroke-width="1.5" marker-end="url(#head-kb)"/>
+  <rect x="884" y="324" width="220" height="26" rx="4" fill="#ffd9bd" stroke="#fd6420" stroke-width="1.25"/>
+  <text x="894" y="341" font-size="12" font-weight="500" fill="#0d1117" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">transition-table</text>
+  <rect x="616" y="264.0" width="178" height="30" rx="4" fill="#fff4ec" stroke="#fd6420" stroke-width="1.25"/>
+  <text x="626" y="283.0" font-size="12" font-weight="500" fill="#0d1117" text-anchor="start" font-family="'JetBrains Mono', Consolas, monospace">debug-hdl-fsms</text>
+  <text x="600" y="388" font-size="14.5" font-weight="400" fill="#5b6068" text-anchor="start">The top level is in context; the agent opens the branch that fits the task</text>
+</svg>

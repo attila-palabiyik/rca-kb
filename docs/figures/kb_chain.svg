@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 194 640 88" font-family="'Figtree', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#0d1117">
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0.5 L7,4 L0,7.5" fill="none" stroke="#5b6068" stroke-width="1.2"/>
+    </marker>
+  </defs>
+  <!-- KB chain -->
+  <text x="0" y="206" font-weight="700" fill="#c4490f">The KB across a chain</text>
+  <g font-family="'JetBrains Mono', Consolas, monospace" font-size="9">
+    <rect x="156.5" y="218.5" width="62" height="22" fill="#ffd9bd" stroke="none"/>
+    <text x="164" y="233">seed</text>
+    <rect x="246.5" y="218.5" width="62" height="22" fill="#ffd9bd" stroke="none"/>
+    <text x="254" y="233">08f97f</text>
+    <rect x="336.5" y="218.5" width="62" height="22" fill="#ffd9bd" stroke="none"/>
+    <text x="344" y="233">54e89f</text>
+    <rect x="456.5" y="218.5" width="62" height="22" fill="#ffd9bd" stroke="none"/>
+    <text x="464" y="233">final</text>
+  </g>
+  <line x1="219" y1="229.5" x2="243" y2="229.5" stroke="#fd6420" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="309" y1="229.5" x2="333" y2="229.5" stroke="#fd6420" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="414" y="233" fill="#5b6068">…</text>
+  <line x1="429" y1="229.5" x2="453" y2="229.5" stroke="#fd6420" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="222" y="214" font-size="8.5" fill="#5b6068">task 1</text>
+  <text x="312" y="214" font-size="8.5" fill="#5b6068">task 2</text>
+  <text x="432" y="214" font-size="8.5" fill="#5b6068">task 45</text>
+  <text x="0" y="228" fill="#5b6068">a snapshot is named by</text>
+  <text x="0" y="239" fill="#5b6068">a hash of its contents</text>
+  <text x="530" y="226" fill="#5b6068">frozen: each run on B</text>
+  <text x="530" y="237" fill="#5b6068">gets a copy of it, which</text>
+  <text x="530" y="248" fill="#5b6068">is then discarded</text>
+  <text x="156" y="264" fill="#5b6068">On A, the copy a build run leaves becomes the next snapshot; a run that changed nothing</text>
+  <text x="156" y="276" fill="#5b6068">keeps the same name. Runs in parallel never share a copy.</text>
+</svg>

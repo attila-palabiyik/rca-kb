@@ -11,8 +11,8 @@
 
    Type: Figtree, the published fallback of the ChipAgents typeface, for
    everything but code (JetBrains Mono). Colour: ink #0d1117 on white, greys
-   for structure, and the ChipAgents orange for one thing only, a run with a
-   KB. The title slide is set in the ink. Nothing is decorative. */
+   for structure, and the ChipAgents orange: in every chart it marks a run
+   with a KB. The title slide is set in the ink. Nothing is decorative. */
 @page { size: 1280px 720px; margin: 0; }
 :root {
   --sans: 'Figtree', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -47,11 +47,11 @@ code { font-family: var(--mono); font-size: 0.8em; }
 .chart svg { display: block; width: 100%; height: auto; }
 
 /* Title slide, in the ink */
-.cover { background: var(--ink); color: #f4f4f4; grid-template-rows: 1fr auto auto; }
+.cover { background: var(--ink); color: #f4f4f4; grid-template-rows: 1fr auto; padding-top: 0; }
 .cover::after { content: none; }
-.cover .lede { align-self: end; max-width: 980px; margin-bottom: 64px; }
-.cover h1 { font: 600 62px/1.06 var(--sans); letter-spacing: -1.6px; margin: 0 0 26px; color: #fff; }
-.cover .question { font: 400 24px/1.48 var(--sans); color: rgba(244, 244, 244, 0.72); max-width: 900px; margin: 0; }
+.cover .lede { align-self: center; padding-top: 28px; }
+.cover h1 { font: 600 66px/1.06 var(--sans); letter-spacing: -2px; white-space: nowrap; margin: 0 0 28px; color: #fff; text-wrap: balance; }
+.cover .question { font: 400 22px/1.5 var(--sans); color: rgba(244, 244, 244, 0.7); max-width: 700px; margin: 0; text-wrap: balance; }
 .cover .byline { border-top: 1px solid rgba(244, 244, 244, 0.18); padding: 18px 0 40px; display: flex; justify-content: space-between;
                  font: 500 17px/1.4 var(--sans); color: #f4f4f4; }
 .cover .byline span:last-child { color: rgba(244, 244, 244, 0.6); }
@@ -107,15 +107,15 @@ pre, code { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt
 
 
 /* The grid motif: the design space of entry type against index */
-.motif { display: grid; grid-template-columns: repeat(8, 30px); grid-auto-rows: 30px; gap: 6px; }
+.motif { display: grid; grid-template-columns: repeat(8, 36px); grid-auto-rows: 36px; gap: 6px; }
 .motif i { display: block; }
 .motif i.r { background: var(--kb); }
 .motif i.o { box-shadow: inset 0 0 0 1px rgba(244, 244, 244, 0.2); }
-.cover { grid-template-columns: 1fr 282px; column-gap: 80px; }
-.cover .lede { grid-column: 1; grid-row: 2; }
-.cover .motif-wrap { grid-column: 2; grid-row: 2; align-self: end; margin-bottom: 64px; }
+.cover { grid-template-columns: 1fr 330px; column-gap: 56px; }
+.cover .lede { grid-column: 1; grid-row: 1; }
+.cover .motif-wrap { grid-column: 2; grid-row: 1; align-self: center; padding-top: 28px; }
 .cover .motif-key { margin-top: 14px; font: 500 13px/1.4 var(--sans); color: rgba(244, 244, 244, 0.5); }
-.cover .byline { grid-column: 1 / -1; grid-row: 3; }
+.cover .byline { grid-column: 1 / -1; grid-row: 2; }
 .slide > h1::before { padding-left: 24px; background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIuMiIgaGVpZ2h0PSIyLjIiIGZpbGw9IiNmZDY0MjAiLz48cmVjdCB4PSIzIiB5PSIwIiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjYuMyIgeT0iMC4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjkuMyIgeT0iMC4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjEyLjMiIHk9IjAuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIxNS4zIiB5PSIwLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMjEuMyIgeT0iMC4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjAuMyIgeT0iMy4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSIyLjIiIGhlaWdodD0iMi4yIiBmaWxsPSIjZmQ2NDIwIi8+PHJlY3QgeD0iNi4zIiB5PSIzLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iOS4zIiB5PSIzLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMTIuMyIgeT0iMy4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjE1LjMiIHk9IjMuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIyMS4zIiB5PSIzLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMC4zIiB5PSI2LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMyIgeT0iNiIgd2lkdGg9IjIuMiIgaGVpZ2h0PSIyLjIiIGZpbGw9IiNmZDY0MjAiLz48cmVjdCB4PSI2LjMiIHk9IjYuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSI5LjMiIHk9IjYuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIxMi4zIiB5PSI2LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMTUuMyIgeT0iNi4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjE4LjMiIHk9IjYuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIyMSIgeT0iNiIgd2lkdGg9IjIuMiIgaGVpZ2h0PSIyLjIiIGZpbGw9IiNmZDY0MjAiLz48cmVjdCB4PSIwIiB5PSI5IiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjkuMyIgeT0iOS4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjEyIiB5PSI5IiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjE1LjMiIHk9IjkuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIyMS4zIiB5PSI5LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMy4zIiB5PSIxMi4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjYiIHk9IjEyIiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjkuMyIgeT0iMTIuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIxMi4zIiB5PSIxMi4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjE1LjMiIHk9IjEyLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMTgiIHk9IjEyIiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjIxLjMiIHk9IjEyLjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iNiIgeT0iMTUiIHdpZHRoPSIyLjIiIGhlaWdodD0iMi4yIiBmaWxsPSIjZmQ2NDIwIi8+PHJlY3QgeD0iOS4zIiB5PSIxNS4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjEyLjMiIHk9IjE1LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMTUiIHk9IjE1IiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjE4LjMiIHk9IjE1LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMjEuMyIgeT0iMTUuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIwIiB5PSIxOCIgd2lkdGg9IjIuMiIgaGVpZ2h0PSIyLjIiIGZpbGw9IiNmZDY0MjAiLz48cmVjdCB4PSIzLjMiIHk9IjE4LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iNi4zIiB5PSIxOC4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjkiIHk9IjE4IiB3aWR0aD0iMi4yIiBoZWlnaHQ9IjIuMiIgZmlsbD0iI2ZkNjQyMCIvPjxyZWN0IHg9IjEyLjMiIHk9IjE4LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMTUuMyIgeT0iMTguMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIxOC4zIiB5PSIxOC4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjIxLjMiIHk9IjE4LjMiIHdpZHRoPSIxLjYiIGhlaWdodD0iMS42IiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWJjYzEiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHJlY3QgeD0iMC4zIiB5PSIyMS4zIiB3aWR0aD0iMS42IiBoZWlnaHQ9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjliY2MxIiBzdHJva2Utd2lkdGg9IjAuNSIvPjxyZWN0IHg9IjkuMyIgeT0iMjEuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48cmVjdCB4PSIxNSIgeT0iMjEiIHdpZHRoPSIyLjIiIGhlaWdodD0iMi4yIiBmaWxsPSIjZmQ2NDIwIi8+PHJlY3QgeD0iMTguMyIgeT0iMjEuMyIgd2lkdGg9IjEuNiIgaGVpZ2h0PSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I5YmNjMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3N2Zz4=") left center / 16px 16px no-repeat; }
 .cover > h1::before { content: none; }
 
@@ -132,6 +132,59 @@ blockquote { font-size: 30px; line-height: 1.32; font-weight: 500; letter-spacin
 .limits.big li { font: 500 25px/1.3 var(--sans); letter-spacing: -0.3px; margin-bottom: 20px; }
 .limits.big li::marker { font-size: 20px; }
 
+
+/* Overview: four numbered steps */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-content: start; margin-top: -40px; }
+.step { background: var(--wash); padding: 28px 26px 24px; height: 436px; display: flex; flex-direction: column; }
+.step b { font: 600 64px/1 var(--sans); letter-spacing: -2.5px; color: var(--kb); font-variant-numeric: tabular-nums; }
+.step h2 { font: 600 25px/1.15 var(--sans); letter-spacing: -0.4px; margin: 34px 0 12px; }
+.step p { font-size: 17px; line-height: 1.48; color: var(--soft); margin: 0; }
+.step span { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(13, 17, 23, 0.14); font: 600 15.5px/1.35 var(--sans); color: var(--ink); }
+
+
+/* Components: a pipeline of seven */
+.pipe { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 26px; align-content: start; margin-top: 26px; }
+.part { position: relative; display: flex; flex-direction: column; }
+.part .box { background: var(--wash); padding: 16px 15px 0; height: 172px; }
+.part .box i { font: 600 14px/1 var(--sans); color: var(--faint); font-style: normal; }
+.part .box h2 { font: 600 19px/1.15 var(--sans); letter-spacing: -0.3px; margin: 12px 0 8px; }
+.part .box p { font-size: 14.5px; line-height: 1.42; color: var(--soft); margin: 0; }
+.part:not(:last-child) .box::after { content: "→"; position: absolute; right: -21px; top: 74px; font-size: 17px; color: var(--faint); }
+.part .out { display: block; min-height: 40px; margin-top: 12px; font: 500 12px/1.5 var(--mono); color: var(--soft); }
+.part .plug { display: block; margin-top: 10px; padding: 9px 10px; border: 1px dashed var(--ink); font: 500 13.5px/1.35 var(--sans); }
+.part .plug.kb { border: 1px solid var(--kb); background: #fff4ec; }
+
+/* Checks: a count and what it counts */
+.checks { border-top: 1px solid var(--ink); margin-top: -34px; }
+.checks > div { display: grid; grid-template-columns: 230px 1fr; gap: 40px; align-items: baseline; padding: 21px 0 22px; border-bottom: 1px solid var(--rule); }
+.checks b { font: 600 44px/1 var(--sans); letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+.checks b small { font: 500 19px/1 var(--sans); letter-spacing: 0; color: var(--soft); }
+.checks p { margin: 0; font-size: 21px; line-height: 1.42; color: var(--soft); max-width: none; }
+.checks p strong { color: var(--ink); }
+
+/* A number and what it counts */
+.stat b { display: block; font: 600 46px/1.1 var(--sans); letter-spacing: -1px; margin: 28px 0 10px; }
+.stat p { font-size: 19px; line-height: 1.45; color: var(--soft); }
+
+/* Limits and next steps, in groups */
+.pairs { display: grid; grid-template-columns: 150px 1fr 1fr; column-gap: 40px; margin-top: 4px; }
+.pairs > .head { font: 600 22px/1.2 var(--sans); padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+.pairs > .group { font: 500 16px/1.4 var(--sans); color: var(--soft); padding-top: 20px; border-bottom: 1px solid var(--rule); }
+.pairs > ul { list-style: none; margin: 0; padding: 18px 0 12px; border-bottom: 1px solid var(--rule); }
+.pairs li { position: relative; padding-left: 24px; font: 400 18.5px/1.36 var(--sans); margin-bottom: 8px; }
+.pairs li::before { content: ""; position: absolute; left: 0; top: 7px; width: 11px; height: 11px; box-shadow: inset 0 0 0 1px var(--faint); }
+.pairs ul.next li::before { background: var(--ink); box-shadow: none; }
+
+/* Section dividers: the cover's layout on the orange */
+.divider { background: var(--kb); color: var(--ink); }
+.divider h1 { color: var(--ink); font-size: 88px; margin: 0; }
+.divider .num { font: 600 24px/1 var(--sans); margin: 0 0 20px; color: rgba(13, 17, 23, 0.6); max-width: none; }
+.divider .motif i.r { background: var(--ink); }
+.divider .motif i.o { box-shadow: inset 0 0 0 1px rgba(13, 17, 23, 0.3); }
+.divider .byline { border-top-color: rgba(13, 17, 23, 0.28); justify-content: flex-start; gap: 40px; color: rgba(13, 17, 23, 0.5); }
+.divider .byline span:last-child { color: rgba(13, 17, 23, 0.5); }
+.divider .byline span.on { color: var(--ink); font-weight: 600; }
+
 @media screen {
   body { background: #d8d9da; padding: 24px 0; }
   .slide { margin: 0 auto 24px; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18); }
@@ -142,225 +195,216 @@ blockquote { font-size: 30px; line-height: 1.32; font-weight: 500; letter-spacin
 
 <!-- 1 -->
 <section class="slide cover">
-  <div></div>
   <div class="lede">
-    <h1>Knowledge bases for an RTL debugging agent</h1>
+    <h1>Knowledge bases for an<br>RTL debugging agent</h1>
     <p class="question">Thirteen ways to keep what a debugging agent learns, built on one set of ChipBench tasks and tested on another.</p>
   </div>
   <div class="motif-wrap">
     <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
-    <p class="motif-key">Entry type × index: 13 of 51 run</p>
   </div>
   <div class="byline"><span>Attila Palabiyik</span><span>November 2026</span></div>
 </section>
 
 <!-- 2 -->
 <section class="slide">
-  <h1 data-kicker="The answer">Every KB raised the pass rate on unseen modules, by 5 to 20 points, and none made a task worse</h1>
-  <div class="body">
-    <div class="rows big">
-    <div><span class="label">What to store</span><p>Ways of working, not cases: repair, don't reimplement.</p></div>
-    <div><span class="label">How to organise and retrieve it</span><p>Load it whole, every task: +19.5 for the playbook and the guide.</p></div>
-    <div><span class="label">What it costs</span><p>1.2 to 1.7 times the tokens per run; $0.50 to $2.10 to build.</p></div>
-    <div><span class="label">How set A shapes set B</span><p>B shares no module with A, so only what generalises carries.</p></div>
+  <h1 data-kicker="Overview">What I did</h1>
+  <div class="body steps">
+    <div class="step">
+      <b>01</b>
+      <h2>Harness</h2>
+      <p>Runs Codex on ChipBench debugging tasks in a fresh container, and grades each answer in a second one.</p>
+      <span>86 tasks · 1,376 certified runs</span>
+    </div>
+    <div class="step">
+      <b>02</b>
+      <h2>Baseline</h2>
+      <p>No KB, three runs per task. The agent finds the bug, rewrites past it, and its own test still passes.</p>
+      <span>70% on set A · 39% on set B</span>
+    </div>
+    <div class="step">
+      <b>03</b>
+      <h2>Knowledge bases</h2>
+      <p>Thirteen designs, each an entry type and an index, written by the agent over set A and then frozen.</p>
+      <span>13 of 51 designs run</span>
+    </div>
+    <div class="step">
+      <b>04</b>
+      <h2>Results</h2>
+      <p>Every KB raised the pass rate on unseen modules and none made a task worse. One build each cannot rank them.</p>
+      <span>+5 to +20 points on set B</span>
     </div>
   </div>
-  <div class="foot"><span>Set B: 41 tasks in 15 modules unseen in A. No KB: 39%.</span></div>
+  <div class="foot"><span>The four tasks of the brief, in order</span></div>
 </section>
 
 <!-- 3 -->
-<section class="slide">
-  <h1 data-kicker="Design">Each KB is built on 45 tasks, frozen, and tested on 41 tasks from modules it never saw</h1>
-  <div class="body">
-    <div class="chart" style="width: 1100px;"><img src="figures/design.svg" alt="The comparison"></div>
+<!-- Section 1 -->
+<section class="slide cover divider">
+  <div class="lede">
+    <p class="num">01</p>
+    <h1>Harness</h1>
   </div>
-  <div class="foot"><span>ChipBench Verilog debugging · 86 tasks · 32 modules · Codex CLI 0.170.0 · gpt-6.2-sol</span></div>
+  <div class="motif-wrap">
+    <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
+  </div>
+  <div class="byline"><span class='on'>01 Harness</span><span>02 Baseline</span><span>03 Knowledge bases</span><span>04 Results</span></div>
+</section>
+
+<section class="slide">
+  <h1 data-kicker="01 · Harness">The experiment: build on set A, freeze, test on set B</h1>
+  <div class="body">
+    <div class="chart" style="width: 1120px; margin-top: 6px;"><img src="figures/experiment.svg" alt="Sets A and B as task squares. With no KB every task is run three times. With a KB, the KB grows task by task over set A, is frozen, and every task of set B gets a copy of it."></div>
+  </div>
+  <div class="foot"><span>ChipBench Verilog debugging · Codex CLI 0.170.0 · gpt-6.2-sol</span></div>
+</section>
+
+<!-- 3a -->
+<section class="slide">
+  <h1 data-kicker="01 · Harness">The architecture that runs it</h1>
+  <div class="body">
+    <div class="chart" style="width: 1120px; margin-top: -30px;"><img src="figures/architecture_slide.svg" alt="The harness: dataset, configuration, KB states, runner, grader, run records, monitor and reporting, with the benchmark, the KB approaches, the containers, the reviewer and the report outside it."></div>
+  </div>
+  <div class="foot"><span>Dashed: can be swapped for another · Orange: the knowledge base</span></div>
 </section>
 
 <!-- 3b -->
 <section class="slide">
-  <h1 data-kicker="The harness">An approach is data on one base setup, and the KB is a directory the harness snapshots but never reads</h1>
+  <h1 data-kicker="01 · Harness">One run: the agent and the grader never meet</h1>
   <div class="body">
-    <div class="chart" style="width: 980px;"><img src="figures/architecture.svg" alt="One run and the KB across a chain"></div>
+    <div class="chart" style="width: 1120px; margin-top: -4px;"><img src="figures/run_slide.svg" alt="One run over time, in three lanes: the agent's container, the KB, and the grader's container."></div>
   </div>
-  <div class="foot"><span>Seven components, sixteen contracts: <code>docs/spec.md</code></span></div>
+  <div class="foot"><span>Orange: only while a KB is being built on set A</span></div>
 </section>
 
-<!-- 4 -->
+<!-- 3c -->
 <section class="slide">
-  <h1 data-kicker="Baseline">With no KB the agent passes 70% of set A and 39% of set B, and the module decides which</h1>
+  <h1 data-kicker="01 · Harness">The monitor read every run: 100 flagged, none cheating</h1>
   <div class="body">
-    <div class="chart"><img src="../reports/main/figures/baseline_tasks.svg" alt="Every baseline task by module and kind of bug"></div>
+    <div class="chart" style="width: 1120px; margin-top: -14px;"><img src="figures/monitor.svg" alt="All 1,376 runs as cells: 258 with no KB, none flagged; 1,118 with a KB, 100 flagged and all cleared on review. What the flags were, and the monitor's test on planted violations."></div>
   </div>
-  <div class="foot"><span>258 runs, three per task</span></div>
+  <div class="foot"><span>Also checked: 86 of 89 tasks usable before any run · 258 of 258 baseline answers regraded to the same verdict</span></div>
 </section>
 
-<!-- 5 -->
+<!-- Baseline 1 -->
+<!-- Section 2 -->
+<section class="slide cover divider">
+  <div class="lede">
+    <p class="num">02</p>
+    <h1>Baseline</h1>
+  </div>
+  <div class="motif-wrap">
+    <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
+  </div>
+  <div class="byline"><span>01 Harness</span><span class='on'>02 Baseline</span><span>03 Knowledge bases</span><span>04 Results</span></div>
+</section>
+
 <section class="slide">
-  <h1 data-kicker="Baseline">Failed runs rarely miss the bug: they change more than the bug, and the agent's own test passes</h1>
+  <h1 data-kicker="02 · Baseline">What is measured, and how it adds up</h1>
   <div class="body">
-    <div class="chart"><img src="../reports/main/figures/baseline_limitations.svg" alt="Limitations in failed and passed baseline runs"></div>
+    <div class="chart" style="width: 1120px; margin-top: 26px;"><img src="figures/measures.svg" alt="Four readings from every run; a run, the three runs of a task, the tasks of a module, and a set"></div>
   </div>
-  <div class="foot"><span>A model's reading of every run; 25 of 30 agree when read again</span></div>
+  <div class="foot"><span>Filled: passed · Outlined: failed · Shown: one module of set B and its three tasks</span></div>
 </section>
 
-<!-- 6 -->
+<!-- Baseline 2 -->
 <section class="slide">
-  <h1 data-kicker="One run">One run: the fix was one constant, and the agent rewrote the module around it</h1>
-  <div class="body two code">
-    <div>
-      <h2>The whole fix</h2>
-<pre><span class="dim">always @(posedge clk or negedge rst_n)
-    if (!rst_n)
-        match_f &lt;= 1'b0;</span>
-<span class="del">-   else if (a_tem[8:6] == 3'b001)</span>
-<span class="add">+   else if (a_tem[8:6] == 3'b011)</span>
-<span class="dim">        match_f &lt;= 1'b1;</span></pre>
-      <p class="note">The reference differs in this line only.</p>
-    </div>
-    <div>
-      <h2>What the agent submitted</h2>
-<pre>if (!rst_n) begin
-<span class="extra">    a_tem &lt;= 9'b111111111;</span>
-    match &lt;= 1'b0;
-end else begin
-    a_tem &lt;= next_window;
-<span class="extra">    match &lt;= (next_window[8:6] == 3'b011)</span>
-<span class="extra">          &amp;&amp; (next_window[2:0] == 3'b110);</span>
-end</pre>
-      <p class="note">Shaded: changed beyond the fix. Its own test passed; the hidden one failed 16 of 237 samples.</p>
-    </div>
-  </div>
-  <div class="foot"><span>Set A · <code>Prob002</code>, assignment bug · baseline run 1</span></div>
-</section>
-
-<!-- 7 -->
-<section class="slide">
-  <h1 data-kicker="Feedback">Because its own test passes, the build shows the agent the verdict and the fix before it updates the KB</h1>
+  <h1 data-kicker="02 · Baseline">The baseline: 70% on set A, 39% on set B</h1>
   <div class="body">
-    <div class="loop"><span>Solve with the KB</span><span class="arrow">→</span><span>Grade</span><span class="arrow">→</span><span class="on">See the verdict and the fix</span><span class="arrow">→</span><span>Update the KB</span></div>
-    <blockquote><b>Preserve the existing registered check's sampling point</b> when aligning mixed combinational and registered checks in a shift-register detector.<span class="cite">The playbook, after the run on the previous slide</span></blockquote>
+    <div class="chart" style="width: 1120px; margin-top: 26px;"><img src="figures/baseline_slide.svg" alt="Every baseline run by task and module for sets A and B, and what limited the failed runs"></div>
   </div>
-  <div class="foot"><span>Shown on A only. The harness never writes KB content.</span></div>
+  <div class="foot"><span>A square is a run, a row a task, a block a module · Codex CLI, default settings, no KB: 258 runs</span></div>
 </section>
 
-<!-- 8 -->
+<!-- Knowledge bases 1 -->
+<!-- Section 3 -->
+<section class="slide cover divider">
+  <div class="lede">
+    <p class="num">03</p>
+    <h1>Knowledge bases</h1>
+  </div>
+  <div class="motif-wrap">
+    <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
+  </div>
+  <div class="byline"><span>01 Harness</span><span>02 Baseline</span><span class='on'>03 Knowledge bases</span><span>04 Results</span></div>
+</section>
+
 <section class="slide">
-  <h1 data-kicker="Approaches">Thirteen KBs were built, covering every entry type and index</h1>
+  <h1 data-kicker="03 · Knowledge bases">Two choices make a knowledge base</h1>
   <div class="body">
-    <table class="matrix">
-      <thead>
-        <tr><th style="width: 150px;"></th><th style="width: 120px;"></th><th>Single file</th><th>Flat files</th><th>Catalogue</th><th>Signature key</th><th>Tags</th><th>Hierarchy</th><th>Graph</th><th>Similarity search</th></tr>
-      </thead>
-      <tbody>
-        <tr><th class="group" rowspan="2">What happened</th><th>Transcript</th><td class="run">Shared session</td><td class="run">Raw cases</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td></td><td class="open"></td></tr>
-        <tr><th>Summary</th><td class="open"></td><td class="run">Summaries</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td></td><td class="open"></td></tr>
-        <tr class="gap"><th class="group" rowspan="3">What is true</th><th>Note</th><td class="open"></td><td class="run">Notes</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Notes by similarity</td></tr>
-        <tr><th>Rule</th><td class="run">Playbook</td><td></td><td></td><td class="open"></td><td class="run">Rules by tags</td><td class="open"></td><td></td><td class="open"></td></tr>
-        <tr><th>Page</th><td></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Wiki, linked</td><td class="open"></td></tr>
-        <tr class="gap"><th class="group" rowspan="3">What to do</th><th>Skill</th><td></td><td></td><td class="run">Skills</td><td class="open"></td><td class="open"></td><td class="run">Hierarchical skills</td><td class="open"></td><td class="open"></td></tr>
-        <tr><th>Guide</th><td class="run">Single-file guide</td><td class="open"></td><td class="open"></td><td class="run">Signature guides</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td></tr>
-        <tr><th>Step</th><td class="open"></td><td></td><td></td><td class="open"></td><td></td><td class="run">Trouble&shy;shooting tree</td><td class="open"></td><td></td></tr>
-      </tbody>
-    </table>
+    <div class="chart" style="width: 1120px; margin-top: 26px;"><img src="figures/kb_axes.svg" alt="Curation: a finished task writes entries to the knowledge base. Retrieval: the next task reads them."></div>
   </div>
-  <div class="foot"><span>Outlined: defined, not run. Blank: not meaningful.</span></div>
+  <div class="foot"><span>The agent does both itself, with a shell and the files under <code>/kb</code>. The harness writes nothing in the KB.</span></div>
 </section>
 
-<!-- 9 -->
+<!-- Knowledge bases 2 -->
 <section class="slide">
-  <h1 data-kicker="Prediction">Predicted before B was run: rules read on every task gain most, recalled cases least</h1>
+  <h1 data-kicker="03 · Knowledge bases">The two choices give 51 designs; thirteen were built and run</h1>
   <div class="body">
-    <table class="plain">
-      <thead><tr><th style="width: 320px;">What limits runs on A</th><th style="width: 120px; text-align: right;">Failed runs</th><th style="padding-left: 24px; width: 330px;">What would address it</th><th>Approaches that hold it</th></tr></thead>
-      <tbody>
-        <tr><td>Changed more than the bug</td><td class="num">40 of 41</td><td style="padding-left: 24px;">One general rule, read every time</td><td>Playbook, single-file guide</td></tr>
-        <tr><td>Own test missed the fault</td><td class="num">40 of 41</td><td style="padding-left: 24px;">A testing procedure or script</td><td>Skills, hierarchical skills</td></tr>
-        <tr><td>Missed the bug</td><td class="num">4 of 41</td><td style="padding-left: 24px;">Diagnosis by symptom</td><td>Signature guides, troubleshooting tree</td></tr>
-      </tbody>
-    </table>
+    <div class="chart" style="width: 1120px; margin-top: 24px;"><img src="figures/kb_grid.svg" alt="Entry type against index, with the thirteen approaches that were built and run"></div>
   </div>
-  <div class="foot"><span>Committed before any run on B: <code>1852b56</code></span></div>
+  <div class="foot"><span>Orange: built and run · Outlined: defined, not run · Blank: the pair makes no sense</span></div>
 </section>
 
-<!-- 10 -->
+<!-- Knowledge bases 3 -->
 <section class="slide">
-  <h1 data-kicker="Results on set B">KBs read on every task gained most, but one build each cannot rank them; the cost is about half again in tokens</h1>
+  <h1 data-kicker="03 · Knowledge bases">Two of them on disk, as the agents left them</h1>
   <div class="body">
-    <div class="chart" style="width: 1040px;"><img src="../reports/main/figures/approaches_vs_baseline_slide.svg" alt="Each approach on set B against no KB: change in pass rate, and ratios of tokens and time"></div>
+    <div class="chart" style="width: 1120px; margin-top: 20px;"><img src="figures/kb_on_disk.svg" alt="The playbook, one file of rules, and the hierarchical skills, a tree of folders"></div>
   </div>
-  <div class="foot"><span>95% intervals, modules resampled · filled: excludes no change</span></div>
+  <div class="foot"><span>Orange: in the agent's context on one task · Both written by the agent over set A, shown as frozen</span></div>
 </section>
 
-<!-- 10b -->
-<section class="slide">
-  <h1 data-kicker="What the KBs held">Asked to keep rules, guides or skills, the agents kept cases: up to 14,000 words of them</h1>
-  <div class="body wide-narrow">
-    <div class="chart"><img src="../reports/main/figures/kb_contents_slide.svg" alt="Words held by each frozen KB"></div>
-    <div>
-      
-      <blockquote style="font-size: 23px; line-height: 1.3;">When debugging an up/down counter, check that each mode steps in the correct direction and wraps from the last legal count in that direction, as in two TopModule decimal counter tasks where fixing the up-mode step from subtraction to addition …</blockquote>
-      <p class="small" style="margin-top: 22px; color: var(--soft);">One of the playbook's 32 rules. None states the general lesson.</p>
-    </div>
+<!-- Results -->
+<!-- Section 4 -->
+<section class="slide cover divider">
+  <div class="lede">
+    <p class="num">04</p>
+    <h1>Results</h1>
   </div>
-  <div class="foot"><span>Each KB as frozen after the 45 tasks of A</span></div>
+  <div class="motif-wrap">
+    <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
+  </div>
+  <div class="byline"><span>01 Harness</span><span>02 Baseline</span><span>03 Knowledge bases</span><span class='on'>04 Results</span></div>
 </section>
 
-<!-- 10c -->
 <section class="slide">
-  <h1 data-kicker="Worked and failed">What worked was a way of repairing, loaded every time; what failed was distilling it</h1>
-  <div class="body two">
-    <div>
-      <p class="eyebrow">Worked</p>
-      <ul class="limits big">
-        <li>Loaded whole, every task: +19.5 points</li>
-        <li>Fewer rewrites: up to a quarter fewer tasks changed beyond the bug</li>
-        <li>No harm: no task made worse; misled in at most 7% of runs</li>
-      </ul>
-    </div>
-    <div>
-      <p class="eyebrow">Failed</p>
-      <ul class="limits big">
-        <li>Distilling: the agents kept cases, not rules</li>
-        <li>Relevance: no bearing on the task in 20% to 93% of runs</li>
-        <li>Reading: the workspace rule kept some agents out of their KB</li>
-        <li>Ranking: one build each cannot separate them</li>
-      </ul>
+  <h1 data-kicker="04 · Results">Every KB raised the pass rate on set B; the playbook did it for the fewest tokens</h1>
+  <div class="body">
+    <div class="chart" style="width: 1120px; margin-top: 8px;"><img src="figures/results_slide.svg" alt="Each approach on set B against no KB, ranked: points gained with intervals, tokens and time; and gain against tokens with the Pareto frontier"></div>
+  </div>
+  <div class="foot"><span>Each frozen KB against the baseline, task by task · 95% intervals, modules resampled; filled: excludes no change · Dots carry the ranks on the left</span></div>
+</section>
+
+<!-- Limits and next steps -->
+<section class="slide">
+  <h1 data-kicker="Closing">Limits and next steps</h1>
+  <div class="body">
+    <div class="pairs">
+      <div class="head"></div><div class="head">Limits</div><div class="head">Next steps</div>
+      <div class="group">Scope</div>
+      <ul><li>One benchmark, one agent, one model</li><li>13 of 51 designs, on 41 tasks in 15 modules</li></ul>
+      <ul class="next"><li>A harder benchmark: only the converter is specific to ChipBench</li><li>The other 38 designs, each one command to run</li></ul>
+      <div class="group">Certainty</div>
+      <ul><li>One build and one run on set B for each approach</li><li>Differences under about 10 points cannot be told from noise</li></ul>
+      <ul class="next"><li>Three builds per approach, each over a different order of set A</li><li>Repeated runs on set B</li></ul>
+      <div class="group">Cause</div>
+      <ul><li>The added instructions are not separated from the KB's content</li><li>Every KB was built after seeing the correct fix</li></ul>
+      <ul class="next"><li>The empty-KB control, already defined for every approach</li><li>A build that is shown the verdict only</li></ul>
     </div>
   </div>
-  <div class="foot"><span>A model's reading of each run on B</span></div>
+  <div class="foot"><span>Report, code, runs and trajectories: github.com/attila-palabiyik/rca-kb</span></div>
 </section>
 
-<!-- 11 -->
-<section class="slide">
-  <h1 data-kicker="Set A and set B">On A the KBs gained only where they had met the module; on B, where every module was new, every one still gained</h1>
-  <div class="body">
-    <div class="chart" style="width: 980px;"><img src="../reports/main/figures/seen_and_unseen.svg" alt="Change in pass rate against no KB on set A for modules met before, on set A for new modules, and on set B"></div>
+<!-- Close -->
+<section class="slide cover">
+  <div class="lede">
+    <h1>Thank you</h1>
+    <p class="question">Report, code, runs and trajectories: github.com/attila-palabiyik/rca-kb</p>
   </div>
-  <div class="foot"><span>On A, each task is solved before its result is shown</span></div>
-</section>
-
-<!-- 12 -->
-<section class="slide">
-  <h1 data-kicker="Conclusion">Every KB raised the pass rate on unseen modules, by 5 to 20 points, and none made a task worse</h1>
-  <div class="body wide-narrow">
-    <div class="rows big">
-      <div><span class="label">What to store</span><p>Ways of working, not cases: repair, don't reimplement.</p></div>
-      <div><span class="label">How to organise and retrieve it</span><p>Load it whole, every task: +19.5 for the playbook and the guide.</p></div>
-      <div><span class="label">What it costs</span><p>1.2 to 1.7 times the tokens per run; $0.50 to $2.10 to build.</p></div>
-      <div><span class="label">How set A shapes set B</span><p>B shares no module with A, so only what generalises carries.</p></div>
-    </div>
-    <div>
-      <p class="eyebrow" style="margin-bottom: 18px;">What this cannot show</p>
-      <ul class="limits big">
-        <li>Content apart from instructions and timing</li>
-        <li>Differences under about 10 points</li>
-        <li>Variation between builds</li>
-        <li>A KB built without feedback</li>
-      </ul>
-    </div>
+  <div class="motif-wrap">
+    <div class="motif"><i class="r"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="r"></i><i></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i></i><i></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="r"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i class="r"></i><i class="o"></i><i></i></div>
   </div>
-  <div class="foot"><span>github.com/attila-palabiyik/rca-kb</span></div>
+  <div class="byline"><span>Attila Palabiyik</span><span>November 2026</span></div>
 </section>
 
 </body>

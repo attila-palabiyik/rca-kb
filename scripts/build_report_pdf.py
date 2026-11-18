@@ -2,8 +2,7 @@
 
     python scripts/build_report_pdf.py
 
-docs/report.md  -> docs/report.html -> docs/report.pdf
-docs/slides.html                    -> docs/slides.pdf
+docs/slides.html -> docs/slides.pdf
 
 The report's style is docs/report.css. A figure named in an <img> as an SVG
 file is placed in the page itself, so that its text is set in the page's type.
@@ -96,27 +95,13 @@ def print_pdf(html_file: Path, pdf_file: Path, browser: str | None) -> None:
 
 def main() -> None:
     browser = next((b for b in BROWSERS if shutil.which(b) or Path(b).is_file()), None)
-
-    body = markdown.markdown((DOCS / "report.md").read_text(encoding="utf-8"),
-                             extensions=["tables", "fenced_code", "sane_lists", "md_in_html", "attr_list"])
-    css = (DOCS / "report.css").read_text(encoding="utf-8")
-    title = re.search(r"<h1[^>]*>(.*?)</h1>", body, flags=re.DOTALL)
-    html = (f"<!doctype html><html lang='en'><head><meta charset='utf-8'>"
-            f"<title>{re.sub('<[^>]+>', '', title.group(1)) if title else 'Report'}</title>"
-            f"{FONTS}<style>{css}</style></head><body>{inline_figures(body, DOCS)}</body></html>")
-    report_html = DOCS / "report.html"
-    report_html.write_text(html, encoding="utf-8", newline="\n")
-    print_pdf(report_html, DOCS / "report.pdf", browser)
-
     slides = DOCS / "slides.html"
-    if slides.is_file():
-        printable = DOCS / ".slides.print.html"
-        printable.write_text(inline_figures(slides.read_text(encoding="utf-8"), DOCS),
-                             encoding="utf-8", newline="\n")
-        try:
-            print_pdf(printable, DOCS / "slides.pdf", browser)
-        finally:
-            printable.unlink(missing_ok=True)
+    printable = DOCS / ".slides.print.html"
+    printable.write_text(inline_figures(slides.read_text(encoding="utf-8"), DOCS), encoding="utf-8", newline="\n")
+    try:
+        print_pdf(printable, DOCS / "slides.pdf", browser)
+    finally:
+        printable.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
