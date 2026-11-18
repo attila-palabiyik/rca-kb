@@ -1,0 +1,95 @@
+/* Page style for docs/report.pdf.
+
+   Three typefaces, one job each: the serif for prose, the sans for anything
+   that carries data (headings, tables, figures, captions), the mono for code.
+   Prose is set in a 128 mm column; tables and figures use the full 160 mm.
+   The accent colour means one thing: a run with a KB. */
+
+@page {
+  size: A4;
+  margin: 24mm 25mm 26mm;
+  @bottom-left { content: "Knowledge bases for an RTL debugging agent"; font: 7.5pt 'Libre Franklin', 'Segoe UI', Arial, sans-serif; color: #8b949b; }
+  @bottom-right { content: counter(page); font: 7.5pt 'Libre Franklin', 'Segoe UI', Arial, sans-serif; color: #8b949b; }
+}
+@page :first { @bottom-left { content: none; } }
+
+:root {
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', Consolas, 'Courier New', monospace;
+  --ink: #1a1f24;
+  --slate: #5c6770;
+  --grey: #a9b1b8;
+  --rule: #d9d9d9;
+  --wash: #f3f4f5;
+  --accent: #0b7a75;
+  --text: 128mm;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font: 10pt/1.5 var(--serif); color: var(--ink); font-variant-numeric: lining-nums; }
+
+h1 { font: 600 23pt/1.14 var(--sans); letter-spacing: -0.3pt; margin: 0 0 6pt; max-width: 150mm; }
+.deck { font: 400 12pt/1.4 var(--sans); color: var(--slate); margin: 0 0 8pt; max-width: 140mm; }
+.byline { font: 8.5pt var(--sans); color: var(--slate); margin: 0 0 14pt; }
+h2 { font: 600 12.5pt/1.25 var(--sans); margin: 22pt 0 7pt; break-after: avoid; }
+h3 { font: 600 9.5pt/1.3 var(--sans); margin: 13pt 0 3pt; break-after: avoid; }
+p, ul, ol, blockquote { max-width: var(--text); }
+p { margin: 0 0 7.5pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 7.5pt; padding-left: 14pt; }
+li { margin-bottom: 3.5pt; }
+strong { font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+code { font: 0.85em var(--mono); }
+
+/* The summary: ruled off, set a little larger. */
+.summary { border-top: 0.75pt solid var(--ink); border-bottom: 0.5pt solid var(--rule); padding: 9pt 0 3pt; margin: 0 0 4pt; }
+.summary p { font-size: 10.5pt; max-width: 142mm; }
+
+/* Tables: a rule above and below, a hairline under the head, nothing else. */
+table { border-collapse: collapse; width: 100%; margin: 0 0 13pt; font: 8pt/1.35 var(--sans);
+        font-variant-numeric: tabular-nums lining-nums; border-top: 0.75pt solid var(--ink);
+        border-bottom: 0.75pt solid var(--ink); break-inside: avoid; }
+th, td { padding: 4pt 12pt 4pt 0; text-align: left; vertical-align: top; }
+th:last-child, td:last-child { padding-right: 0; }
+th { font-weight: 600; vertical-align: bottom; border-bottom: 0.5pt solid var(--ink); }
+td[style*="right"] { white-space: nowrap; }
+
+.caption, figcaption { font: 8.5pt/1.4 var(--sans); color: var(--slate); max-width: 150mm; }
+.caption b, figcaption b { color: var(--ink); font-weight: 600; }
+.caption { margin: 13pt 0 5pt; break-after: avoid; }
+figure { margin: 14pt 0; break-inside: avoid; }
+figcaption { margin-top: 7pt; }
+figure .chart svg { display: block; width: 100%; height: auto; }
+figure .chart text { font-family: var(--sans) !important; }
+
+/* The approaches, drawn as a grid. */
+.matrix { table-layout: fixed; border: 0; margin: 0; font-size: 7.5pt; line-height: 1.2; }
+.matrix th, .matrix td { border: 0; padding: 0 2pt; height: 20pt; text-align: center; vertical-align: middle; }
+.matrix thead th { font-weight: 400; color: var(--slate); vertical-align: bottom; padding-bottom: 4pt; height: auto; }
+.matrix thead th.span { text-align: left; padding: 0 0 5pt 2pt; }
+.matrix tbody th { text-align: left; font-weight: 600; width: 17mm; padding: 0; }
+.matrix tbody th.group { font-weight: 400; color: var(--slate); width: 19mm; vertical-align: top; padding-top: 5pt; }
+.matrix td { background-clip: padding-box; border: 1.5pt solid #fff; }
+.matrix td.run { background: var(--accent); color: #fff; font-weight: 600; }
+.matrix td.open { box-shadow: inset 0 0 0 0.5pt var(--grey); }
+.matrix tr.gap > * { border-top: 5pt solid #fff; }
+.matrix tr.gap th.group { padding-top: 5pt; }
+
+/* Code shown side by side. */
+.code { display: flex; gap: 6mm; }
+.code > div { flex: 1; min-width: 0; }
+.code h4 { font: 600 8.5pt var(--sans); margin: 0 0 4pt; }
+.code p { font: 8.5pt/1.4 var(--sans); color: var(--slate); margin: 5pt 0 0; max-width: none; }
+pre { font: 7.6pt/1.5 var(--mono); background: var(--wash); margin: 0; padding: 7pt 8pt; white-space: pre-wrap;
+      overflow-wrap: anywhere; break-inside: avoid; }
+pre .del { background: #e3e5e7; }
+pre .add { background: #cfe6e4; }
+pre .dim { color: #8b949b; }
+
+blockquote { margin: 8pt 0 10pt; padding: 0 0 0 9pt; border-left: 1pt solid var(--ink); }
+blockquote p { font: 8.5pt/1.45 var(--sans); margin-bottom: 5pt; }
+
+.references ol { max-width: 150mm; }
+.references li { font: 8.5pt/1.4 var(--sans); margin-bottom: 3pt; }

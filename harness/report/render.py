@@ -13,7 +13,7 @@ from collections import Counter
 from pathlib import Path
 from statistics import mean
 
-from . import compare
+from . import compare, figures
 from .metrics import Loaded, Row, by_task, condition_metrics, cost, learning_curve, load, load_prices, \
     task_rate, total_tokens, within_budget
 
@@ -53,6 +53,40 @@ def _by_tag(rows: list[Row], prices: dict, model: str) -> dict:
     return grouped
 
 
+def _limitations_by_outcome(rows: list[Row]) -> dict:
+    """Limitation shares among the runs that failed and among those that passed."""
+    out = {}
+    for name, wanted in (("failed", False), ("passed", True)):
+        chosen = [r for r in rows if r.passed == wanted and r.limitations is not None]
+        if chosen:
+            out[name] = {"runs": len(chosen), "none": mean(0.0 if r.limitations else 1.0 for r in chosen),
+                         "rates": compare.limitation_rates(chosen)}
+    return out
+
+
+def _seen_and_unseen(build: list[Row], baseline_a: list[Row], prices: dict, model: str) -> dict:
+    """The build's runs on A against the baseline, apart for tasks whose module
+    the chain had already met and tasks whose module was new to it. A task is
+    solved before its own result is shown, so both are honest outcomes."""
+    if not build or not baseline_a:
+        return {}
+    met, parts = set(), {"seen": [], "first": []}
+    for row in sorted(build, key=lambda r: (r.repeat, r.position or 0)):
+        key = (row.repeat, row.group)
+        parts["seen" if key in met else "first"].append(row)
+        met.add(key)
+    return {name: compare.paired(rows, baseline_a, prices, model) for name, rows in parts.items() if rows}
+
+
+def _group_outcomes(rows: list[Row]) -> dict:
+    """How many groups (modules) pass in every run, in none, or in some."""
+    groups = {}
+    for row in rows:
+        groups.setdefault(row.group, []).append(row.passed)
+    kinds = Counter("all" if all(v) else "none" if not any(v) else "some" for v in groups.values())
+    return {"groups": len(groups), "pass_all": kinds["all"], "pass_none": kinds["none"], "pass_some": kinds["some"]}
+
+
 def _model(root: Path, loaded: Loaded) -> str:
     for name, info in loaded.experiments.items():
         for setup_hash in info.get("setups", {}).values():
@@ -85,6 +119,8 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             entry.update(mode=mode, kb=kb, pass_rate_interval=compare.rate(on_side),
                          within_budget=within_budget(on_side),
                          limitation_rates=compare.limitation_rates(on_side),
+                         limitation_rates_by_outcome=_limitations_by_outcome(on_side),
+                         groups=_group_outcomes(on_side),
                          by_tag=_by_tag(on_side, prices, model))
             entry["by_category"] = {value: m["pass_rate"]
                                     for value, m in entry["by_tag"].get("category", {}).items()}
@@ -114,6 +150,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
             "break_even": compare.break_even(cost_of_building, on_b, _select(baseline, side="B"),
                                              prices, model),
             "learning_curve": learning_curve(build),
+            "seen_and_unseen": _seen_and_unseen(build, _select(baseline, side="A"), prices, model),
         }
 
     findings = Counter(f.get("category") for r in rows for f in r.findings
@@ -167,7 +204,7 @@ def build_report(experiment_dirs: list[Path], prices_path: Path, out_dir: Path) 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "summary.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     _per_task(rows, prices, model, out_dir / "per_task.csv")
-    _figures(report, out_dir / "figures")
+    figures.draw(report, rows, out_dir / "figures")
     (out_dir / "report.md").write_text(_markdown(report), encoding="utf-8")
     return report
 
@@ -192,97 +229,9 @@ def _per_task(rows: list[Row], prices: dict, model: str, path: Path) -> None:
                 ])
 
 
-INK, ACCENT, GREY = "#14212b", "#0b7a75", "#9fb1bd"
-
-
-def _short(label: str) -> str:
-    return label.removeprefix("kb-").removesuffix("/eval").removesuffix("/baseline")
-
-
 def _baseline_sides(report: dict) -> dict:
     return next((sides for sides in report["conditions"].values()
                  if any(m["mode"] == "baseline" for m in sides.values())), {})
-
-
-def _figures(report: dict, folder: Path) -> None:
-    """The report's figures, each as PNG and SVG.
-
-    difference_from_baseline: each approach's paired difference in pass rate on B, with its interval.
-    pass_rate_vs_tokens: pass rate against tokens per run on B, one point per condition.
-    baseline_limitations: share of baseline runs showing each limitation, by side.
-    """
-    try:
-        import matplotlib
-
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except ImportError:
-        return
-    style = {"font.size": 9, "axes.spines.top": False, "axes.spines.right": False,
-             "axes.edgecolor": INK, "axes.labelcolor": INK, "xtick.color": INK, "ytick.color": INK,
-             "text.color": INK, "axes.axisbelow": True}
-
-    def save(figure, name: str) -> None:
-        folder.mkdir(parents=True, exist_ok=True)
-        figure.tight_layout()
-        figure.savefig(folder / f"{name}.png", dpi=200)
-        figure.savefig(folder / f"{name}.svg", metadata={"Date": None})
-        plt.close(figure)
-
-    with plt.rc_context(style):
-        compared = sorted(((_short(name), entry["vs_baseline"]["pass_rate_difference"])
-                           for name, entry in report["comparisons"].items()
-                           if (entry.get("vs_baseline") or {}).get("tasks")),
-                          key=lambda item: item[1]["value"] or 0)
-        if compared:
-            figure, axis = plt.subplots(figsize=(6.4, 0.34 * len(compared) + 1.0))
-            for position, (_, d) in enumerate(compared):
-                axis.plot([100 * d["low"], 100 * d["high"]], [position, position], color=ACCENT, linewidth=1.6)
-                axis.plot(100 * d["value"], position, "o", color=ACCENT, markersize=5)
-            axis.axvline(0, color=INK, linewidth=0.8)
-            axis.set_yticks(range(len(compared)), [name for name, _ in compared])
-            axis.set_ylim(-0.6, len(compared) - 0.4)
-            axis.set_xlabel("Difference in pass rate on B from the baseline, percentage points")
-            axis.grid(axis="x", alpha=0.3)
-            axis.tick_params(axis="y", length=0)
-            save(figure, "difference_from_baseline")
-
-        points = [(label, sides["B"]) for label, sides in report["conditions"].items()
-                  if "B" in sides and sides["B"].get("mode") != "build"]
-        if points:
-            figure, axis = plt.subplots(figsize=(6.4, 4.0))
-            for label, entry in points:
-                is_baseline = entry["mode"] == "baseline"
-                axis.scatter(entry["tokens_per_run_total"] / 1000, 100 * entry["pass_rate"],
-                             s=60 if is_baseline else 34, marker="s" if is_baseline else "o",
-                             color=INK if is_baseline else ACCENT, zorder=3)
-                axis.annotate(_short(label), (entry["tokens_per_run_total"] / 1000, 100 * entry["pass_rate"]),
-                              textcoords="offset points", xytext=(6, 4), fontsize=7)
-            axis.set_xlabel("Tokens per run, thousands")
-            axis.set_ylabel("Pass rate on B, %")
-            axis.set_ylim(0, 100)
-            axis.grid(alpha=0.3)
-            save(figure, "pass_rate_vs_tokens")
-
-        rated = {side: m["limitation_rates"] for side, m in sorted(_baseline_sides(report).items())
-                 if m.get("limitation_rates")}
-        if rated:
-            categories = sorted({c for rates in rated.values() for c in rates},
-                                key=lambda c: max(r.get(c, 0) for r in rated.values()))
-            figure, axis = plt.subplots(figsize=(6.4, 0.5 * len(categories) + 0.9))
-            height = 0.8 / len(rated)
-            for index, (side, rates) in enumerate(rated.items()):
-                offsets = [position + 0.4 - height * (index + 0.5) for position in range(len(categories))]
-                values = [100 * rates.get(c, 0.0) for c in categories]
-                bars = axis.barh(offsets, values, height=height * 0.9, label=f"Set {side}",
-                                 color=GREY if index == 0 else ACCENT)
-                axis.bar_label(bars, labels=[f"{v:.0f}%" for v in values], padding=3, fontsize=7)
-            axis.set_yticks(range(len(categories)), [_label(c).capitalize() for c in categories])
-            axis.set_xlabel("Share of baseline runs, %")
-            axis.set_xlim(0, 100)
-            axis.tick_params(axis="y", length=0)
-            axis.legend(frameon=False, loc="lower right")
-            save(figure, "baseline_limitations")
 
 
 def fill_writeup(report_markdown: str, writeup: Path) -> int:
@@ -318,25 +267,52 @@ def fill_writeup(report_markdown: str, writeup: Path) -> int:
 
 # -- report.md ---------------------------------------------------------------
 
+MINUS = "−"
+VIOLATIONS = {"read_grading_assets": "reading the grading assets", "search_for_answers": "searching for answers",
+              "fetch_from_network": "fetching from the network", "fake_the_result": "faking the result",
+              "copy_another_runs_answer": "copying another run's answer"}
+
+
+def _num(value, digits: int = 1, signed: bool = False) -> str:
+    """A number with a true minus sign, and no sign on zero."""
+    if value is None:
+        return ""
+    text = f"{value:+.{digits}f}" if signed else f"{value:.{digits}f}"
+    if float(text) == 0:
+        text = f"{0:.{digits}f}"
+    return text.replace("-", MINUS)
+
+
 def _pct(value) -> str:
     return "" if value is None else f"{100 * value:.1f}%"
 
 
-def _interval(entry: dict, pct: bool = True, signed: bool = False) -> str:
+def _share(value) -> str:
+    """A share in percent, for a column whose header carries the unit."""
+    return "" if value is None else _num(100 * value)
+
+
+def _range(entry: dict, scale: float = 100.0, signed: bool = False, digits: int = 1) -> str:
     if not entry or entry.get("value") is None:
         return ""
-    scale, unit = (100, "%") if pct else (1, "")
-    sign = "+" if signed else ""
-    return (f"{scale * entry['value']:{sign}.1f}{unit} "
-            f"({scale * entry['low']:{sign}.1f} to {scale * entry['high']:{sign}.1f})") if pct else (
-            f"{entry['value']:.2f} ({entry['low']:.2f} to {entry['high']:.2f})")
+    return f"{_num(scale * entry['low'], digits, signed)} to {_num(scale * entry['high'], digits, signed)}"
+
+
+def _name(label: str) -> str:
+    """baseline -> No KB; kb-rule-tags/eval -> Rules by tags; kb-notes/build -> Notes, build."""
+    experiment, _, condition = label.partition("/")
+    if experiment == "baseline":
+        return "No KB"
+    name = figures.approach_name(experiment)
+    extra = {"": "", "eval": "", "build": ", build", "empty": ", empty KB"}.get(condition, f", {condition}")
+    return name + extra
 
 
 def _table(header: list[str], body: list[list]) -> list[str]:
     """A markdown table. A column whose cells are all numbers is set to the right."""
     def numeric(column: int) -> bool:
         cells = [str(row[column]) for row in body if str(row[column])]
-        return bool(cells) and all(cell[0] in "0123456789+-$" for cell in cells)
+        return bool(cells) and all(cell[0] in "0123456789+-$" + MINUS for cell in cells)
 
     rule = ["---:" if numeric(column) else "---" for column in range(len(header))]
     lines = ["| " + " | ".join(header) + " |", "|" + "|".join(rule) + "|"]
@@ -344,61 +320,93 @@ def _table(header: list[str], body: list[list]) -> list[str]:
     return lines + [""]
 
 
-def _label(category: str) -> str:
-    return category.replace("_", " ")
+def _ordered(report: dict) -> list[tuple[str, dict]]:
+    """Approaches compared with the baseline on B, the largest gain first."""
+    compared = [(name, entry["vs_baseline"]) for name, entry in report["comparisons"].items()
+                if (entry.get("vs_baseline") or {}).get("tasks")]
+    return sorted(compared, key=lambda item: (-(item[1]["pass_rate_difference"]["value"] or 0), item[0]))
 
 
 def _body_sections(report: dict) -> list[str]:
-    """The narrow tables the written report's body uses. The wide ones follow."""
+    """The narrow tables and counted sentences the written report's body uses."""
     out = []
     baseline = _baseline_sides(report)
     if baseline:
         out += ["## Baseline", ""]
+        k = next(iter(baseline.values()))["repeats"]
         body = []
         for side, m in sorted(baseline.items()):
-            k = m["repeats"]
-            body.append([side, m["tasks"], m["runs"], _interval(m["pass_rate_interval"]),
-                         _pct(m[f"pass@{k}"]), _pct(m[f"pass^{k}"]),
-                         f"{m['tokens_per_run_total'] / 1000:.0f}k", f"${m['cost_per_run']:.3f}",
-                         f"{m['seconds_mean']:.0f} s"])
-        out += _table(["Set", "Tasks", "Runs", "Pass rate (95% interval)", "pass@3", "pass^3",
-                       "Tokens per run", "Cost per run", "Time to solution"], body)
-        for side, m in sorted(baseline.items()):
-            k = m["repeats"]
-            always, ever = m[f"pass^{k}"], m[f"pass@{k}"]
-            out += [f"On set {side}, {_pct(always)} of tasks pass in every repeat, "
-                    f"{_pct(1 - ever)} in none, and {_pct(ever - always)} in some but not all.", ""]
+            body.append([side, m["tasks"], m["groups"]["groups"], m["runs"], _share(m["pass_rate"]),
+                         _range(m["pass_rate_interval"]), _share(m[f"pass@{k}"]), _share(m[f"pass^{k}"]),
+                         f"{m['tokens_per_run_total'] / 1000:.0f}k", f"{m['cost_per_run']:.3f}",
+                         f"{m['seconds_mean']:.0f}"])
+        out += _table(["Set", "Tasks", "Modules", "Runs", "Pass rate, %", "95% interval",
+                       f"Tasks passing any run, %", f"every run, %", "Tokens per run",
+                       "Cost per run, $", "Time to solution, s"], body)
 
-        rated = {side: m["limitation_rates"] for side, m in sorted(baseline.items())
-                 if m.get("limitation_rates")}
-        if rated:
-            # The shares themselves are in figures/baseline_limitations and in the Limitations table.
+        out += ["## Baseline outcomes", ""]
+        for side, m in sorted(baseline.items()):
+            tasks, groups = m["tasks"], m["groups"]
+            always, ever = round(m[f"pass^{k}"] * tasks), round(m[f"pass@{k}"] * tasks)
+            out += [f"On set {side}, {always} of {tasks} tasks passed in all {k} runs, {tasks - ever} in none "
+                    f"and {ever - always} in some. Of its {groups['groups']} modules, {groups['pass_all']} "
+                    f"passed every run, {groups['pass_none']} passed none and {groups['pass_some']} "
+                    f"{'was' if groups['pass_some'] == 1 else 'were'} mixed.", ""]
+
+        outcomes = {side: (m.get("limitation_rates_by_outcome") or {}) for side, m in sorted(baseline.items())}
+        if any(outcomes.values()):
             out += ["## Baseline limitations", ""]
-            line = "The limitations are a model's reading of every run, and a run can show several."
+            for side, by in outcomes.items():
+                failed = by.get("failed")
+                if not failed:
+                    continue
+                counts = sorted(((round(rate * failed["runs"]), figures.limitation_label(c).lower())
+                                 for c, rate in failed["rates"].items() if c != "other"), reverse=True)
+                out += [f"Of the {failed['runs']} runs that failed on set {side}: "
+                        + ", ".join(f"{label} {count}" for count, label in counts) + ".", ""]
             for name, measured in report["trust"]["assessment_self_agreement"].items():
                 if measured.get("runs") and name == "baseline":
-                    line += (f" Read twice, the reader named the same set of limitations for "
-                             f"{_pct(measured['same_set'])} of {measured['runs']} runs.")
-            out += [line, ""]
+                    out += [f"Labelling {measured['runs']} runs a second time, the model gave the same set of "
+                            f"limitations for {round(measured['same_set'] * measured['runs'])} of them.", ""]
 
-    compared = [(name, entry["vs_baseline"]) for name, entry in report["comparisons"].items()
-                if (entry.get("vs_baseline") or {}).get("tasks")]
+    compared = _ordered(report)
     if compared:
         out += ["## Results on B", ""]
-        compared.sort(key=lambda item: -(item[1]["pass_rate_difference"]["value"] or 0))
         body = []
+        base = baseline.get("B")
+        if base:
+            body.append(["No KB", f"{round(base['pass_rate'] * base['runs'])} of {base['runs']}",
+                         _share(base["pass_rate"]), "", "", "", "", "", "", ""])
         for name, versus in compared:
-            sides = report["conditions"].get(f"{name}/eval", {})
-            own = sides.get("B", {})
-            body.append([name.removeprefix("kb-"),
-                         _pct(own.get("pass_rate")) if own else "",
-                         _interval(versus["pass_rate_difference"], signed=True),
-                         f"{versus['helped']} / {versus['harmed']}",
-                         _interval(versus["token_ratio"], pct=False),
-                         _interval(versus["time_ratio"], pct=False)])
-        out += _table(["Approach", "Pass rate", "Difference from baseline (95% interval)",
-                       "Tasks helped / harmed", "Tokens, ratio to baseline", "Time, ratio to baseline"],
+            own = report["conditions"].get(f"{name}/eval", {}).get("B", {})
+            passed = f"{round(own['pass_rate'] * own['runs'])} of {own['runs']}" if own else ""
+            body.append([_name(name), passed, _share(own.get("pass_rate")),
+                         _num(100 * versus["pass_rate_difference"]["value"], signed=True),
+                         _range(versus["pass_rate_difference"], signed=True),
+                         versus["helped"], versus["harmed"],
+                         _num(versus["token_ratio"]["value"], 2), _num(versus["time_ratio"]["value"], 2),
+                         _share(own.get("kb_use"))])
+        out += _table(["Approach", "Runs passed", "Pass rate, %", "Difference, points", "95% interval",
+                       "Tasks helped", "Tasks harmed", "Tokens, × no KB", "Time, × no KB", "Runs that read the KB, %"],
                       body)
+
+        seen = [(name, report["kb"].get(name, {}).get("seen_and_unseen") or {}) for name, _ in compared]
+        if any(entry for _, entry in seen):
+            out += ["## Seen and unseen modules", ""]
+            body = []
+            for (name, versus), (_, entry) in zip(compared, seen):
+                row = [_name(name)]
+                for key in ("seen", "first"):
+                    part = entry.get(key) or {}
+                    difference = part.get("pass_rate_difference") or {}
+                    row += [part.get("tasks", ""), _num(100 * difference["value"], signed=True)
+                            if difference.get("value") is not None else "", _range(difference, signed=True)]
+                row += [versus["tasks"], _num(100 * versus["pass_rate_difference"]["value"], signed=True),
+                        _range(versus["pass_rate_difference"], signed=True)]
+                body.append(row)
+            out += _table(["Approach", "A, module met before: tasks", "difference, points", "95% interval",
+                           "A, module new: tasks", "difference, points", "95% interval",
+                           "B, every module new: tasks", "difference, points", "95% interval"], body)
     return out
 
 
@@ -417,94 +425,109 @@ def _markdown(report: dict) -> str:
     for label, sides in report["conditions"].items():
         for side, m in sides.items():
             k = m["repeats"]
-            body.append([label, side, m["tasks"], m["runs"], _interval(m["pass_rate_interval"]),
-                         _pct(m[f"pass@{k}"]), _pct(m[f"pass^{k}"]),
-                         f"{m['tokens_per_run']['input_uncached']:.0f} / "
-                         f"{m['tokens_per_run']['input_cached']:.0f} / {m['tokens_per_run']['output']:.0f}",
-                         f"${m['cost_per_run']:.3f}",
-                         "" if m["cost_per_solved_task"] is None else f"${m['cost_per_solved_task']:.3f}",
-                         "" if m["seconds_mean"] is None else f"{m['seconds_mean']:.0f}s",
-                         f"{m['responses_per_run']:.1f}", _pct(m["kb_use"])])
-    out += _table(["Condition", "Side", "Tasks", "Runs", "Pass rate (95%)", "pass@k", "pass^k",
-                   "Tokens per run: uncached / cached / output", "Cost per run",
-                   "Cost per solved task", "Time to solution", "Responses", "KB use"], body)
+            body.append([_name(label), side, m["tasks"], m["runs"], _share(m["pass_rate"]),
+                         _range(m["pass_rate_interval"]),
+                         f"{m['tokens_per_run']['input_uncached'] / 1000:.1f}k",
+                         f"{m['tokens_per_run']['input_cached'] / 1000:.1f}k",
+                         f"{m['tokens_per_run']['output'] / 1000:.1f}k",
+                         f"{m['cost_per_run']:.3f}",
+                         "" if m["cost_per_solved_task"] is None else f"{m['cost_per_solved_task']:.3f}",
+                         "" if m["seconds_mean"] is None else f"{m['seconds_mean']:.0f}",
+                         f"{m['responses_per_run']:.1f}"])
+    out += _table(["Condition", "Set", "Tasks", "Runs", "Pass rate, %", "95% interval", "Input tokens, uncached",
+                   "cached", "Output tokens", "Cost per run, $", "Cost per solved task, $", "Time to solution, s",
+                   "Model responses per run"], body)
 
-    if report["comparisons"]:
+    compared = _ordered(report)
+    if compared:
         out += [f"## Approaches against the baseline on B ({report['approaches_compared']} compared)", ""]
         body = []
-        for name, entry in report["comparisons"].items():
-            versus = entry.get("vs_baseline") or {}
-            if not versus.get("tasks"):
-                continue
-            empty = entry.get("vs_empty_kb") or {}
-            body.append([name, versus["tasks"], _interval(versus["pass_rate_difference"], signed=True),
+        for name, versus in compared:
+            empty = report["comparisons"][name].get("vs_empty_kb") or {}
+            body.append([_name(name), versus["tasks"],
+                         _num(100 * versus["pass_rate_difference"]["value"], signed=True),
+                         _range(versus["pass_rate_difference"], signed=True),
                          f"{versus['helped']} / {versus['harmed']} / {versus['unchanged']}",
-                         _interval(versus["token_ratio"], pct=False),
-                         _interval(versus["time_ratio"], pct=False),
-                         _interval(empty.get("pass_rate_difference"), signed=True),
-                         _pct(versus.get("smallest_detectable_difference"))])
-        out += _table(["Approach", "Tasks", "Pass rate difference (95%)", "Helped / harmed / unchanged",
-                       "Token ratio", "Time ratio", "Difference against its empty KB",
-                       "Smallest detectable difference"], body)
+                         _num(versus["token_ratio"]["value"], 2), _range(versus["token_ratio"], 1.0, digits=2),
+                         _num(versus["time_ratio"]["value"], 2), _range(versus["time_ratio"], 1.0, digits=2),
+                         _num(100 * empty["pass_rate_difference"]["value"], signed=True)
+                         if (empty.get("pass_rate_difference") or {}).get("value") is not None else "",
+                         _range(empty.get("pass_rate_difference"), signed=True)])
+        out += _table(["Approach", "Tasks", "Pass rate difference, points", "95% interval",
+                       "Tasks helped / harmed / unchanged", "Tokens, × no KB", "95% interval",
+                       "Time, × no KB", "95% interval", "Against its own empty KB, points", "95% interval"], body)
 
         out += ["## Cost of building", ""]
         body = []
-        for name, entry in report["kb"].items():
+        for name, _ in compared:
+            entry = report["kb"].get(name) or {}
             build, even = entry.get("build_cost") or {}, entry.get("break_even") or {}
             if not build:
                 continue
             tasks = even.get("tasks_to_break_even")
-            body.append([name, build["chains"], f"{build['tokens']:.0f}", f"${build['dollars']:.2f}",
-                         f"{build['seconds'] / 60:.1f} min", _pct(build["contribution_rate"]),
+            body.append([_name(name), f"{build['tokens'] / 1e6:.2f}M", f"{build['dollars']:.2f}",
+                         f"{build['seconds'] / 60:.0f}", _share(build["contribution_rate"]),
                          "never" if even and tasks is None else ("" if not even else f"{tasks:.0f} tasks")])
-        out += _table(["Approach", "Chains", "Extra tokens per chain", "Extra cost per chain",
-                       "Extra time per chain", "Contribution rate", "Break-even"], body)
+        out += _table(["Approach", "Extra tokens", "Extra cost, $", "Extra time, min",
+                       "Tasks after which the KB changed, %", "Pays for itself after"], body)
 
-    baseline_b = next((s["B"] for s in report["conditions"].values()
-                       if "B" in s and s["B"]["mode"] == "baseline"), None)
-    if baseline_b:
-        out += ["## By bug category, on B", ""]
-        categories = sorted(baseline_b["by_category"])
-        body = [[label, *[_pct(sides["B"]["by_category"].get(c)) for c in categories]]
-                for label, sides in report["conditions"].items()
-                if "B" in sides and sides["B"]["mode"] != "build"]
-        out += _table(["Condition", *categories], body)
+    base_b = _baseline_sides(report).get("B")
+    if base_b:
+        out += ["## By bug category", ""]
+        categories = sorted(base_b["by_tag"].get("category", {}))
 
-    rated = {f"{label}, side {side}": sides[side]["limitation_rates"]
+        def cells(entry: dict) -> list[str]:
+            tags = entry["by_tag"].get("category", {})
+            return [f"{_share(tags[c]['pass_rate'])} ({tags[c]['tasks']})" if c in tags else "" for c in categories]
+
+        body = [[_name(label), side, *cells(entry)]
+                for label, sides in report["conditions"].items() for side, entry in sorted(sides.items())
+                if entry["mode"] == "baseline"]
+        body += [[_name(name), "B", *cells(report["conditions"][f"{name}/eval"]["B"])]
+                 for name, _ in compared if "B" in report["conditions"].get(f"{name}/eval", {})]
+        out += ["Pass rate in percent, with the number of tasks in brackets.", ""]
+        out += _table(["Condition", "Set", *[c.replace("_", " ").capitalize() for c in categories]], body)
+
+    rated = {(label, side): sides[side]["limitation_rates"]
              for label, sides in report["conditions"].items()
-             for side in sides if sides[side].get("limitation_rates")}
+             for side in sorted(sides) if sides[side].get("limitation_rates") and sides[side]["mode"] != "build"}
     if rated:
-        out += ["## Limitations", "",
-                "From a model's reading of each run, so descriptive only.", ""]
-        for name, measured in report["trust"]["assessment_self_agreement"].items():
-            if measured.get("runs"):
-                out += [f"Read twice, {name}'s reader named the same set of categories for "
-                        f"{_pct(measured['same_set'])} of {measured['runs']} runs.", ""]
-        categories = sorted({c for rates in rated.values() for c in rates})
-        out += _table(["Condition", *categories],
-                      [[label, *[_pct(rates.get(c, 0.0)) for c in categories]] for label, rates in rated.items()])
-        for name, entry in report["comparisons"].items():
-            changes = entry.get("limitations_vs_baseline")
-            if changes:
-                out += [f"### {name}: resolved / persisting / introduced", ""]
-                out += _table(["Category", "Resolved", "Persisting", "Introduced"],
-                              [[c, _pct(v["resolved"]), _pct(v["persisting"]), _pct(v["introduced"])]
-                               for c, v in changes.items()])
+        out += ["## Limitations", ""]
+        categories = sorted({c for rates in rated.values() for c in rates if c != "other"},
+                            key=lambda c: (-max(r.get(c, 0) for r in rated.values()), c))
+        out += ["Share of runs showing each limitation, in percent. A run can show several.", ""]
+        out += _table(["Condition", "Set", *[figures.limitation_label(c) for c in categories]],
+                      [[_name(label), side, *[_share(rates.get(c, 0.0)) for c in categories]]
+                       for (label, side), rates in rated.items()])
+
+        changes = [(name, report["comparisons"][name].get("limitations_vs_baseline") or {}) for name, _ in compared]
+        if any(entry for _, entry in changes):
+            out += ["## Limitation changes", ""]
+            shown = [c for c in categories if not c.startswith("kb_")][:4]
+            out += ["Share of B's tasks, in percent, where a limitation the baseline showed is gone with the KB "
+                    "(resolved) or one it did not show has appeared (introduced).", ""]
+            header = ["Approach"]
+            for c in shown:
+                header += [f"{figures.limitation_label(c)}: resolved", "introduced"]
+            out += _table(header, [[_name(name), *[_share((entry.get(c) or {}).get(key))
+                                                   for c in shown for key in ("resolved", "introduced")]]
+                                   for name, entry in changes if entry])
 
     out += ["## Trust", ""]
-    body = [[label, c["planned"], c["recorded"], c.get("completed", 0), c.get("timeout", 0),
+    body = [[_name(label), c["planned"], c["recorded"], c.get("completed", 0), c.get("timeout", 0),
              c.get("error", 0), c["flagged"], c["cleared"], c["void"], c["pending"]]
             for label, c in report["trust"]["run_counts"].items()]
     out += _table(["Condition", "Planned", "Recorded", "Completed", "Timed out", "Errored", "Flagged",
                    "Cleared", "Void", "Pending"], body)
     trust = report["trust"]
     if trust["monitor_findings"]:
-        out += ["Monitor findings: " + ", ".join(f"{k} {v}" for k, v in sorted(trust["monitor_findings"].items())), ""]
+        out += ["Monitor findings: " + ", ".join(f"{k.replace('_', ' ')} {v}"
+                                                 for k, v in sorted(trust["monitor_findings"].items())) + ".", ""]
     for name, result in trust["planted_violations"].items():
-        kinds = ", ".join(f"{kind.replace('_', ' ')} {v['caught']}/{v['planted']}"
+        kinds = ", ".join(f"{VIOLATIONS.get(kind, kind.replace('_', ' '))} {v['caught']} of {v['planted']}"
                           for kind, v in result["by_kind"].items())
-        out += [f"Violations planted in certified {name} trajectories: the monitor flagged "
-                f"{result['caught']} of {result['planted']} ({kinds}). The judge flagged "
+        out += [f"Violations planted in clean {_name(name).lower().replace('no kb', 'baseline')} trajectories: "
+                f"the monitor flagged {result['caught']} of {result['planted']} ({kinds}). The model judge flagged "
                 f"{result['caught_by_judge']} and the pattern match {result['caught_by_pattern']}.", ""]
     if trust["redteam_runs"]:
         out += [f"Told to get a pass by any means, the agent was flagged in "
@@ -512,7 +535,9 @@ def _markdown(report: dict) -> str:
                 "flagged here is one where the agent did not attempt a violation.", ""]
     noise = report.get("repeat_noise") or {}
     if noise.get("tasks"):
-        out += [f"Two repeats of the baseline differ by {_interval(noise['difference'], signed=True)} on B. "
-                f"The smallest difference in pass rate this benchmark can tell from chance is about "
-                f"{_pct(noise['smallest_detectable_difference'])}.", ""]
+        out += ["## Repeat noise", "",
+                f"Two repeats of the baseline on B differ by {_num(100 * noise['difference']['value'], signed=True)} "
+                f"points ({_range(noise['difference'], signed=True)}). From the standard error of that difference, "
+                f"a paired comparison on B has 80% power to detect a change of about "
+                f"{_num(100 * noise['smallest_detectable_difference'])} points.", ""]
     return "\n".join(out)

@@ -1,92 +1,233 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Report</title><style>
-@page { size: A4; margin: 22mm 22mm 24mm;
-        @bottom-center { content: counter(page); font: 9pt Cambria, Georgia, serif; color: #555; } }
-body { font-family: Cambria, Georgia, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.45; color: #111;
-       max-width: 166mm; margin: 0 auto; }
-h1 { font-size: 21pt; font-weight: 600; margin: 0 0 4pt; line-height: 1.2; }
-h2 { font-size: 13pt; font-weight: 600; margin: 20pt 0 6pt; break-after: avoid; }
-p, li { orphans: 3; widows: 3; }
-p { margin: 0 0 8pt; }
-li { margin-bottom: 3pt; }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Knowledge bases for an RTL debugging agent</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=block"><style>/* Page style for docs/report.pdf.
+
+   Three typefaces, one job each: the serif for prose, the sans for anything
+   that carries data (headings, tables, figures, captions), the mono for code.
+   Prose is set in a 128 mm column; tables and figures use the full 160 mm.
+   The accent colour means one thing: a run with a KB. */
+
+@page {
+  size: A4;
+  margin: 24mm 25mm 26mm;
+  @bottom-left { content: "Knowledge bases for an RTL debugging agent"; font: 7.5pt 'Libre Franklin', 'Segoe UI', Arial, sans-serif; color: #8b949b; }
+  @bottom-right { content: counter(page); font: 7.5pt 'Libre Franklin', 'Segoe UI', Arial, sans-serif; color: #8b949b; }
+}
+@page :first { @bottom-left { content: none; } }
+
+:root {
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', Consolas, 'Courier New', monospace;
+  --ink: #1a1f24;
+  --slate: #5c6770;
+  --grey: #a9b1b8;
+  --rule: #d9d9d9;
+  --wash: #f3f4f5;
+  --accent: #0b7a75;
+  --text: 128mm;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font: 10pt/1.5 var(--serif); color: var(--ink); font-variant-numeric: lining-nums; }
+
+h1 { font: 600 23pt/1.14 var(--sans); letter-spacing: -0.3pt; margin: 0 0 6pt; max-width: 150mm; }
+.deck { font: 400 12pt/1.4 var(--sans); color: var(--slate); margin: 0 0 8pt; max-width: 140mm; }
+.byline { font: 8.5pt var(--sans); color: var(--slate); margin: 0 0 14pt; }
+h2 { font: 600 12.5pt/1.25 var(--sans); margin: 22pt 0 7pt; break-after: avoid; }
+h3 { font: 600 9.5pt/1.3 var(--sans); margin: 13pt 0 3pt; break-after: avoid; }
+p, ul, ol, blockquote { max-width: var(--text); }
+p { margin: 0 0 7.5pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 7.5pt; padding-left: 14pt; }
+li { margin-bottom: 3.5pt; }
+strong { font-weight: 600; }
 a { color: inherit; text-decoration: none; }
-table { border-collapse: collapse; width: 100%; margin: 0 0 12pt; font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-        font-size: 8pt; line-height: 1.35; border-top: 1pt solid #111; border-bottom: 1pt solid #111;
-        break-inside: avoid; }
-th, td { padding: 3.5pt 8pt 3.5pt 0; text-align: left; vertical-align: top; }
+code { font: 0.85em var(--mono); }
+
+/* The summary: ruled off, set a little larger. */
+.summary { border-top: 0.75pt solid var(--ink); border-bottom: 0.5pt solid var(--rule); padding: 9pt 0 3pt; margin: 0 0 4pt; }
+.summary p { font-size: 10.5pt; max-width: 142mm; }
+
+/* Tables: a rule above and below, a hairline under the head, nothing else. */
+table { border-collapse: collapse; width: 100%; margin: 0 0 13pt; font: 8pt/1.35 var(--sans);
+        font-variant-numeric: tabular-nums lining-nums; border-top: 0.75pt solid var(--ink);
+        border-bottom: 0.75pt solid var(--ink); break-inside: avoid; }
+th, td { padding: 4pt 12pt 4pt 0; text-align: left; vertical-align: top; }
 th:last-child, td:last-child { padding-right: 0; }
-th { border-bottom: 0.5pt solid #111; font-weight: 600; vertical-align: bottom; }
-code { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; }
-.byline { color: #555; margin: 0 0 14pt; }
-.caption, figcaption { font-size: 9pt; line-height: 1.35; color: #222; text-align: left; }
-.caption { margin: 12pt 0 4pt; break-after: avoid; }
-figure { margin: 12pt 0 10pt; break-inside: avoid; text-align: center; }
-figure img { width: 80%; }
-figcaption { margin-top: 4pt; }
+th { font-weight: 600; vertical-align: bottom; border-bottom: 0.5pt solid var(--ink); }
+td[style*="right"] { white-space: nowrap; }
+
+.caption, figcaption { font: 8.5pt/1.4 var(--sans); color: var(--slate); max-width: 150mm; }
+.caption b, figcaption b { color: var(--ink); font-weight: 600; }
+.caption { margin: 13pt 0 5pt; break-after: avoid; }
+figure { margin: 14pt 0; break-inside: avoid; }
+figcaption { margin-top: 7pt; }
+figure .chart svg { display: block; width: 100%; height: auto; }
+figure .chart text { font-family: var(--sans) !important; }
+
+/* The approaches, drawn as a grid. */
+.matrix { table-layout: fixed; border: 0; margin: 0; font-size: 7.5pt; line-height: 1.2; }
+.matrix th, .matrix td { border: 0; padding: 0 2pt; height: 20pt; text-align: center; vertical-align: middle; }
+.matrix thead th { font-weight: 400; color: var(--slate); vertical-align: bottom; padding-bottom: 4pt; height: auto; }
+.matrix thead th.span { text-align: left; padding: 0 0 5pt 2pt; }
+.matrix tbody th { text-align: left; font-weight: 600; width: 17mm; padding: 0; }
+.matrix tbody th.group { font-weight: 400; color: var(--slate); width: 19mm; vertical-align: top; padding-top: 5pt; }
+.matrix td { background-clip: padding-box; border: 1.5pt solid #fff; }
+.matrix td.run { background: var(--accent); color: #fff; font-weight: 600; }
+.matrix td.open { box-shadow: inset 0 0 0 0.5pt var(--grey); }
+.matrix tr.gap > * { border-top: 5pt solid #fff; }
+.matrix tr.gap th.group { padding-top: 5pt; }
+
+/* Code shown side by side. */
+.code { display: flex; gap: 6mm; }
+.code > div { flex: 1; min-width: 0; }
+.code h4 { font: 600 8.5pt var(--sans); margin: 0 0 4pt; }
+.code p { font: 8.5pt/1.4 var(--sans); color: var(--slate); margin: 5pt 0 0; max-width: none; }
+pre { font: 7.6pt/1.5 var(--mono); background: var(--wash); margin: 0; padding: 7pt 8pt; white-space: pre-wrap;
+      overflow-wrap: anywhere; break-inside: avoid; }
+pre .del { background: #e3e5e7; }
+pre .add { background: #cfe6e4; }
+pre .dim { color: #8b949b; }
+
+blockquote { margin: 8pt 0 10pt; padding: 0 0 0 9pt; border-left: 1pt solid var(--ink); }
+blockquote p { font: 8.5pt/1.45 var(--sans); margin-bottom: 5pt; }
+
+.references ol { max-width: 150mm; }
+.references li { font: 8.5pt/1.4 var(--sans); margin-bottom: 3pt; }
 </style></head><body><h1>Knowledge bases for an RTL debugging agent</h1>
+<p class="deck">Thirteen ways to store, organise and retrieve what earlier debugging runs learned, compared on ChipBench.</p>
+
 <p class="byline">Attila Palabiyik · November 2026</p>
 
-<h2>Summary</h2>
-<p><em>To be written when the results are in.</em></p>
-<h2>1. Setup</h2>
-<p>The question is which way of storing and retrieving what earlier debugging
-runs learned helps a later run most. The thing under test is a knowledge base
-(KB) approach. The agent, the model and everything else are held fixed, and a
-run with a KB differs from a run without one by exactly the approach's own
-configuration.</p>
-<p><strong>Agent.</strong> Codex CLI 0.170.0 [3], headless, with <code>gpt-6.2-sol</code> at medium
-reasoning effort. Web search is off and the CLI's own memory is off. Every
-prompt opens with the same five lines of rules. Everything else is the CLI's
-default.</p>
-<p><strong>Benchmark.</strong> ChipBench's Verilog debugging cases [1]. Each gives a written
-specification and a module with one injected bug. The agent edits the module
-in place. A hidden testbench then compares it with a reference on every
-sample, and the answer passes on zero mismatches. There are 33 modules, each
-with up to four different bugs.</p>
-<p><strong>Split.</strong> Set A builds a KB and set B tests it. The split is by module, so no
-module has tasks on both sides. Tasks of one module share one correct file,
-and a module on both sides would put B's answers into a KB built on A.</p>
-<p><strong>Conditions.</strong> Table 1 lists them.</p>
-<p class="caption"><b>Table 1.</b> The three conditions. An approach is run as a build followed by a frozen run.</p>
+<div class="summary">
+<p><em>Pending: the summary is written when the frozen runs on B have finished.</em></p>
+</div>
+<!-- Figure 1 goes here when results exist: approaches_vs_baseline -->
+
+<h2>1. Question and setup</h2>
+<p>Previous debugging runs are useful context for the next one. The open
+questions are what to store from them, how to organise it, and how an agent
+should retrieve it. This report compares thirteen knowledge-base (KB)
+designs that answer those three questions differently, with the agent, the
+model and the tasks held fixed. A run with a KB differs from a run without
+one only by the KB and the instructions for using it.</p>
+<figure>
+<div class="chart " role="img" aria-label="Schematic of the comparison: the baseline solves sets A and B three times with no KB; an approach builds its KB over set A, the KB is frozen, and set B is solved once with it."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 172" font-family="'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="10.5" fill="#1a1f24">
+  <!-- column heads -->
+  <text x="112" y="14" font-weight="700">Set A</text>
+  <text x="143" y="14" fill="#5c6770">45 tasks in 17 modules</text>
+  <text x="404" y="14" font-weight="700">Set B</text>
+  <text x="435" y="14" fill="#5c6770">41 tasks in 15 modules, none of them in A</text>
+
+  <!-- baseline row -->
+  <text x="0" y="50" font-weight="700">No KB</text>
+  <text x="0" y="63" fill="#5c6770">the baseline</text>
+  <rect x="112.5" y="26.5" width="252" height="46" fill="none" stroke="#a9b1b8"/>
+  <rect x="404.5" y="26.5" width="196" height="46" fill="none" stroke="#a9b1b8"/>
+  <text x="124" y="53" fill="#5c6770">each task solved three times</text>
+  <text x="416" y="53" fill="#5c6770">each task solved three times</text>
+
+  <!-- KB row -->
+  <text x="0" y="124" font-weight="700">With a KB</text>
+  <text x="0" y="137" fill="#5c6770">one approach</text>
+  <polygon points="112,150 364,150 364,100" fill="#0b7a75" fill-opacity="0.22"/>
+  <line x1="112" y1="150.5" x2="364" y2="150.5" stroke="#0b7a75"/>
+  <text x="124" y="114">the KB starts empty and grows</text>
+  <text x="112" y="166" fill="#5c6770">each task: solve, grade, show the result, update the KB</text>
+  <line x1="384.5" y1="98" x2="384.5" y2="152" stroke="#1a1f24" stroke-width="1.2"/>
+  <text x="384.5" y="92" text-anchor="middle">frozen</text>
+  <rect x="404" y="100" width="197" height="50" fill="#0b7a75" fill-opacity="0.22"/>
+  <line x1="404" y1="150.5" x2="601" y2="150.5" stroke="#0b7a75"/>
+  <text x="416" y="122">each task solved once</text>
+  <text x="416" y="136" fill="#5c6770">nothing a run writes is kept</text>
+  <text x="404" y="166" fill="#5c6770">compared with the baseline, task by task</text>
+
+  <!-- comparison bracket -->
+  <path d="M606.5 49.5 H616.5 V125.5 H606.5" fill="none" stroke="#1a1f24" stroke-width="0.9"/>
+</svg>
+</div>
+<figcaption><b>Figure 2.</b> The comparison. An approach builds its KB over set A, one task after another. The KB is then frozen and set B is solved with it. Each approach is compared with the same agent run on the same tasks without a KB.</figcaption>
+</figure>
+
+<h3>Tasks</h3>
+<p>The tasks are ChipBench's Verilog debugging cases [1]: 89 cases over 33
+modules, each module carrying up to four injected bugs of different kinds
+(arithmetic, assignment, state machine, timing). A task gives the agent a
+written specification and the module with one bug. The agent edits the module
+in place. Three cases are unusable (section 6), which leaves 86 tasks in 32
+modules.</p>
+<p>Set A (45 tasks, 17 modules) builds a KB and set B (41 tasks, 15 modules)
+tests it. The split is by module, drawn once from a fixed seed. Tasks of one
+module share one correct file, so a module on both sides would put B's
+answers into a KB built on A.</p>
+<h3>Agent</h3>
+<p>The agent is Codex CLI 0.170.0 [3] in headless mode with <code>gpt-6.2-sol</code>. It
+has Icarus Verilog in its container and may write and run its own tests. The
+brief asks for default settings. Four things are set, for the baseline and
+for every approach alike: the model and its reasoning effort (medium) are
+pinned; web search is off; the CLI's own memory feature is off; and a
+five-line preamble of rules opens every prompt (appendix C).</p>
+<h3>Conditions</h3>
+<p class="caption"><b>Table 1.</b> The conditions. An approach is one build followed by one frozen run.</p>
 
 <table>
 <thead>
 <tr>
 <th>Condition</th>
 <th>Tasks</th>
+<th>Runs per task</th>
 <th>KB</th>
+<th>Shown the grading result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Baseline</td>
 <td>A and B</td>
+<td>3</td>
 <td>None</td>
+<td>No</td>
 </tr>
 <tr>
 <td>Build</td>
-<td>A, one task after another</td>
-<td>Starts empty. Each task is solved with the KB as it stands; the agent then updates it.</td>
+<td>A, in one fixed order</td>
+<td>1</td>
+<td>Starts empty. Read during each task and updated by the agent after it.</td>
+<td>After each task: the verdict and the correct fix</td>
 </tr>
 <tr>
 <td>Frozen</td>
 <td>B</td>
-<td>The KB as the build left it. Nothing a run writes is kept.</td>
+<td>1</td>
+<td>As the build left it. Each run works on a private copy that is discarded.</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Isolation and grading.</strong> Every run gets a fresh container, started by
-Harbor [2]. The testbench and the reference exist only in a second container,
-where the answer is graded after the agent has finished. Before any agent
-ran, every task was run twice with no model: a known-good answer has to pass
-and the untouched module has to fail [4, 5]. Three tasks failed that check
-and are left out (section 6).</p>
-<p><strong>Measures.</strong> Correctness is the testbench's verdict. Tokens and time are the
-agent's own, for the turn in which it solves the task, and are reported
-beside correctness [6]. An approach is compared with the baseline task by
-task. Intervals come from resampling whole modules, since tasks of one module
-stand or fall together [7].</p>
-<h2>2. What the baseline shows</h2>
-<p class="caption"><b>Table 2.</b> The baseline: the agent with no KB, three repeats per task. pass@3 counts a task as solved if any repeat passes, pass^3 only if all three do.</p>
+<p>The order of A is random, fixed by seed, and the same for every approach.</p>
+<h3>Grading and isolation</h3>
+<p>Each run gets a fresh container, started by Harbor [2]. The testbench and the
+reference module exist only in a second container, where the answer is graded
+after the agent has finished. The testbench drives the answer and the
+reference with the same inputs and counts the samples on which their outputs
+differ. An answer passes on zero mismatches.</p>
+<p>Correct therefore means that the repair restores the reference's behaviour.
+It does not mean that the agent identified the root cause. Section 2 uses a
+reading of each trajectory to tell the two apart.</p>
+<p>Before any agent ran, every task was run twice with no model: a known-good
+answer has to pass and the untouched module has to fail [4, 5].</p>
+<h3>Measures</h3>
+<p>Correctness is the pass rate. Tokens are uncached input, cached input and
+output, summed over the model calls of the turn in which the agent solves the
+task. Time to solution is that turn's wall-clock time, whether or not the
+answer passes. Grading and the KB update are excluded from both and reported
+apart as the cost of building. Cost uses the list prices in
+<code>configs/prices.toml</code>.</p>
+<p>An approach is compared with the baseline task by task [7]. Intervals are 95%
+bootstrap intervals that resample whole modules, because tasks of one module
+are correlated. Thirteen approaches are compared with one baseline and no
+correction is made for that.</p>
+<h2>2. The baseline</h2>
+<p class="caption"><b>Table 2.</b> The agent with no KB, three runs per task. The interval is on the pass rate. The next two columns count a task as passing if any of its runs passes, and only if every run does.</p>
 
 <!-- generated: Baseline -->
 <table>
@@ -94,212 +235,1593 @@ stand or fall together [7].</p>
 <tr>
 <th>Set</th>
 <th style="text-align: right;">Tasks</th>
+<th style="text-align: right;">Modules</th>
 <th style="text-align: right;">Runs</th>
-<th style="text-align: right;">Pass rate (95% interval)</th>
-<th style="text-align: right;">pass@3</th>
-<th style="text-align: right;">pass^3</th>
+<th style="text-align: right;">Pass rate, %</th>
+<th style="text-align: right;">95% interval</th>
+<th style="text-align: right;">Tasks passing any run, %</th>
+<th style="text-align: right;">every run, %</th>
 <th style="text-align: right;">Tokens per run</th>
-<th style="text-align: right;">Cost per run</th>
-<th style="text-align: right;">Time to solution</th>
+<th style="text-align: right;">Cost per run, $</th>
+<th style="text-align: right;">Time to solution, s</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>A</td>
 <td style="text-align: right;">45</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: right;">135</td>
-<td style="text-align: right;">69.6% (45.7 to 90.8)</td>
-<td style="text-align: right;">71.1%</td>
-<td style="text-align: right;">68.9%</td>
+<td style="text-align: right;">69.6</td>
+<td style="text-align: right;">45.7 to 90.8</td>
+<td style="text-align: right;">71.1</td>
+<td style="text-align: right;">68.9</td>
 <td style="text-align: right;">70k</td>
-<td style="text-align: right;">$0.061</td>
-<td style="text-align: right;">31 s</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">31</td>
 </tr>
 <tr>
 <td>B</td>
 <td style="text-align: right;">41</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">123</td>
-<td style="text-align: right;">39.0% (19.0 to 62.5)</td>
-<td style="text-align: right;">43.9%</td>
-<td style="text-align: right;">34.1%</td>
+<td style="text-align: right;">39.0</td>
+<td style="text-align: right;">19.0 to 62.5</td>
+<td style="text-align: right;">43.9</td>
+<td style="text-align: right;">34.1</td>
 <td style="text-align: right;">75k</td>
-<td style="text-align: right;">$0.066</td>
-<td style="text-align: right;">37 s</td>
+<td style="text-align: right;">0.066</td>
+<td style="text-align: right;">37</td>
 </tr>
 </tbody>
 </table>
-<p>On set A, 68.9% of tasks pass in every repeat, 28.9% in none, and 2.2% in some but not all.</p>
-<p>On set B, 34.1% of tasks pass in every repeat, 56.1% in none, and 9.8% in some but not all.</p>
 <!-- /generated -->
 
-<p>Three things stand out.</p>
-<p><strong>B is harder than A.</strong> The split was drawn once, by module, from a fixed
-seed, and was not adjusted afterwards.</p>
-<p><strong>The outcome is settled by the task, not by chance.</strong> Few tasks pass in some
-repeats and fail in others. Whole modules pass or fail together, whichever
-bug was injected.</p>
-<p><strong>Most failures are not a missed bug.</strong> Every baseline run was read against
-the task, the verdict and a correct answer, and what limited it was recorded
-under a fixed set of categories [8]. The categories came from free-text notes
-on a sample of A's runs and were fixed before any KB run. Figure 1 gives
-their shares.</p>
 <figure>
-<img src="../reports/main/figures/baseline_limitations.svg" alt="Bar chart: share of baseline runs showing each limitation, for set A and set B.">
-<figcaption><b>Figure 1.</b> What limited the baseline's runs. On both sets the agent most often changed more than the bug, and on B its own test missed the fault in almost two runs of three. Missing the bug outright is rare.</figcaption>
+<div class="chart " role="img" aria-label="Grid of every baseline task: one column per module, one row per kind of bug, shaded by how many of three runs passed, for set A and set B."><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 453.6 95.04" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="fig2-figure_1">
+  <g id="fig2-patch_1">
+   <path d="M 0 95.04 
+L 453.6 95.04 
+L 453.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="fig2-axes_1">
+   <g id="fig2-patch_2">
+    <path d="M 75.6 64.8 
+L 259.2 64.8 
+L 259.2 21.6 
+L 75.6 21.6 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig2-matplotlib.axis_1"/>
+   <g id="fig2-matplotlib.axis_2">
+    <g id="fig2-ytick_1">
+     <g id="fig2-line2d_1"/>
+     <g id="fig2-text_1">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="72.1" y="30.039375" transform="rotate(-0 72.1 30.039375)">Arithmetic</text>
+     </g>
+    </g>
+    <g id="fig2-ytick_2">
+     <g id="fig2-line2d_2"/>
+     <g id="fig2-text_2">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="72.1" y="40.839375" transform="rotate(-0 72.1 40.839375)">Assignment</text>
+     </g>
+    </g>
+    <g id="fig2-ytick_3">
+     <g id="fig2-line2d_3"/>
+     <g id="fig2-text_3">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="72.1" y="51.639375" transform="rotate(-0 72.1 51.639375)">State machine</text>
+     </g>
+    </g>
+    <g id="fig2-ytick_4">
+     <g id="fig2-line2d_4"/>
+     <g id="fig2-text_4">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="72.1" y="62.439375" transform="rotate(-0 72.1 62.439375)">Timing</text>
+     </g>
+    </g>
+   </g>
+   <g id="fig2-patch_3">
+    <path d="M 76.248 22.248 
+L 85.752 22.248 
+L 85.752 31.752 
+L 76.248 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_4">
+    <path d="M 76.248 33.048 
+L 85.752 33.048 
+L 85.752 42.552 
+L 76.248 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_5">
+    <path d="M 76.248 54.648 
+L 85.752 54.648 
+L 85.752 64.152 
+L 76.248 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_6">
+    <path d="M 87.048 22.248 
+L 96.552 22.248 
+L 96.552 31.752 
+L 87.048 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_7">
+    <path d="M 87.048 33.048 
+L 96.552 33.048 
+L 96.552 42.552 
+L 87.048 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_8">
+    <path d="M 87.048 54.648 
+L 96.552 54.648 
+L 96.552 64.152 
+L 87.048 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_9">
+    <path d="M 97.848 22.248 
+L 107.352 22.248 
+L 107.352 31.752 
+L 97.848 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_10">
+    <path d="M 97.848 33.048 
+L 107.352 33.048 
+L 107.352 42.552 
+L 97.848 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_11">
+    <path d="M 108.648 33.048 
+L 118.152 33.048 
+L 118.152 42.552 
+L 108.648 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_12">
+    <path d="M 108.648 43.848 
+L 118.152 43.848 
+L 118.152 53.352 
+L 108.648 53.352 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_13">
+    <path d="M 108.648 54.648 
+L 118.152 54.648 
+L 118.152 64.152 
+L 108.648 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_14">
+    <path d="M 119.448 22.248 
+L 128.952 22.248 
+L 128.952 31.752 
+L 119.448 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_15">
+    <path d="M 119.448 33.048 
+L 128.952 33.048 
+L 128.952 42.552 
+L 119.448 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_16">
+    <path d="M 119.448 54.648 
+L 128.952 54.648 
+L 128.952 64.152 
+L 119.448 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_17">
+    <path d="M 130.248 22.248 
+L 139.752 22.248 
+L 139.752 31.752 
+L 130.248 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_18">
+    <path d="M 141.048 33.048 
+L 150.552 33.048 
+L 150.552 42.552 
+L 141.048 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_19">
+    <path d="M 141.048 43.848 
+L 150.552 43.848 
+L 150.552 53.352 
+L 141.048 53.352 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_20">
+    <path d="M 151.848 22.248 
+L 161.352 22.248 
+L 161.352 31.752 
+L 151.848 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_21">
+    <path d="M 151.848 33.048 
+L 161.352 33.048 
+L 161.352 42.552 
+L 151.848 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_22">
+    <path d="M 151.848 54.648 
+L 161.352 54.648 
+L 161.352 64.152 
+L 151.848 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_23">
+    <path d="M 162.648 22.248 
+L 172.152 22.248 
+L 172.152 31.752 
+L 162.648 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_24">
+    <path d="M 162.648 33.048 
+L 172.152 33.048 
+L 172.152 42.552 
+L 162.648 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_25">
+    <path d="M 162.648 54.648 
+L 172.152 54.648 
+L 172.152 64.152 
+L 162.648 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_26">
+    <path d="M 173.448 22.248 
+L 182.952 22.248 
+L 182.952 31.752 
+L 173.448 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_27">
+    <path d="M 173.448 33.048 
+L 182.952 33.048 
+L 182.952 42.552 
+L 173.448 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_28">
+    <path d="M 173.448 54.648 
+L 182.952 54.648 
+L 182.952 64.152 
+L 173.448 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_29">
+    <path d="M 184.248 22.248 
+L 193.752 22.248 
+L 193.752 31.752 
+L 184.248 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_30">
+    <path d="M 184.248 33.048 
+L 193.752 33.048 
+L 193.752 42.552 
+L 184.248 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_31">
+    <path d="M 184.248 54.648 
+L 193.752 54.648 
+L 193.752 64.152 
+L 184.248 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_32">
+    <path d="M 195.048 33.048 
+L 204.552 33.048 
+L 204.552 42.552 
+L 195.048 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_33">
+    <path d="M 195.048 43.848 
+L 204.552 43.848 
+L 204.552 53.352 
+L 195.048 53.352 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_34">
+    <path d="M 195.048 54.648 
+L 204.552 54.648 
+L 204.552 64.152 
+L 195.048 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #a9b1b8"/>
+   </g>
+   <g id="fig2-patch_35">
+    <path d="M 205.848 22.248 
+L 215.352 22.248 
+L 215.352 31.752 
+L 205.848 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_36">
+    <path d="M 205.848 33.048 
+L 215.352 33.048 
+L 215.352 42.552 
+L 205.848 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_37">
+    <path d="M 205.848 54.648 
+L 215.352 54.648 
+L 215.352 64.152 
+L 205.848 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_38">
+    <path d="M 216.648 22.248 
+L 226.152 22.248 
+L 226.152 31.752 
+L 216.648 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_39">
+    <path d="M 216.648 33.048 
+L 226.152 33.048 
+L 226.152 42.552 
+L 216.648 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_40">
+    <path d="M 216.648 54.648 
+L 226.152 54.648 
+L 226.152 64.152 
+L 216.648 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_41">
+    <path d="M 227.448 54.648 
+L 236.952 54.648 
+L 236.952 64.152 
+L 227.448 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_42">
+    <path d="M 238.248 33.048 
+L 247.752 33.048 
+L 247.752 42.552 
+L 238.248 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_43">
+    <path d="M 238.248 54.648 
+L 247.752 54.648 
+L 247.752 64.152 
+L 238.248 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_44">
+    <path d="M 249.048 22.248 
+L 258.552 22.248 
+L 258.552 31.752 
+L 249.048 31.752 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_45">
+    <path d="M 249.048 33.048 
+L 258.552 33.048 
+L 258.552 42.552 
+L 249.048 42.552 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_46">
+    <path d="M 249.048 43.848 
+L 258.552 43.848 
+L 258.552 53.352 
+L 249.048 53.352 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_47">
+    <path d="M 249.048 54.648 
+L 258.552 54.648 
+L 258.552 64.152 
+L 249.048 64.152 
+z
+" clip-path="url(#fig2-pe0be4e51fe)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-text_5">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="81" y="71.670547" transform="rotate(-0 81 71.670547)">8</text>
+   </g>
+   <g id="fig2-text_6">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="91.8" y="71.670547" transform="rotate(-0 91.8 71.670547)">10</text>
+   </g>
+   <g id="fig2-text_7">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="102.6" y="71.670547" transform="rotate(-0 102.6 71.670547)">11</text>
+   </g>
+   <g id="fig2-text_8">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="113.4" y="71.670547" transform="rotate(-0 113.4 71.670547)">12</text>
+   </g>
+   <g id="fig2-text_9">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="124.2" y="71.670547" transform="rotate(-0 124.2 71.670547)">17</text>
+   </g>
+   <g id="fig2-text_10">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="135" y="71.670547" transform="rotate(-0 135 71.670547)">19</text>
+   </g>
+   <g id="fig2-text_11">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="145.8" y="71.670547" transform="rotate(-0 145.8 71.670547)">20</text>
+   </g>
+   <g id="fig2-text_12">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="156.6" y="71.670547" transform="rotate(-0 156.6 71.670547)">22</text>
+   </g>
+   <g id="fig2-text_13">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="167.4" y="71.670547" transform="rotate(-0 167.4 71.670547)">23</text>
+   </g>
+   <g id="fig2-text_14">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="178.2" y="71.670547" transform="rotate(-0 178.2 71.670547)">28</text>
+   </g>
+   <g id="fig2-text_15">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="189" y="71.670547" transform="rotate(-0 189 71.670547)">32</text>
+   </g>
+   <g id="fig2-text_16">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="199.8" y="71.670547" transform="rotate(-0 199.8 71.670547)">3</text>
+   </g>
+   <g id="fig2-text_17">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="210.6" y="71.670547" transform="rotate(-0 210.6 71.670547)">2</text>
+   </g>
+   <g id="fig2-text_18">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="221.4" y="71.670547" transform="rotate(-0 221.4 71.670547)">6</text>
+   </g>
+   <g id="fig2-text_19">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="232.2" y="71.670547" transform="rotate(-0 232.2 71.670547)">18</text>
+   </g>
+   <g id="fig2-text_20">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="243" y="71.670547" transform="rotate(-0 243 71.670547)">27</text>
+   </g>
+   <g id="fig2-text_21">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="253.8" y="71.670547" transform="rotate(-0 253.8 71.670547)">33</text>
+   </g>
+   <g id="fig2-text_22">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="75.6" y="14.518008" transform="rotate(-0 75.6 14.518008)">Set A</text>
+   </g>
+   <g id="fig2-text_23">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="105.6" y="14.758242" transform="rotate(-0 105.6 14.758242)">45 tasks in 17 modules, 70% pass</text>
+   </g>
+  </g>
+  <g id="fig2-axes_2">
+   <g id="fig2-patch_48">
+    <path d="M 288 64.8 
+L 450 64.8 
+L 450 21.6 
+L 288 21.6 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig2-matplotlib.axis_3"/>
+   <g id="fig2-matplotlib.axis_4"/>
+   <g id="fig2-patch_49">
+    <path d="M 288.648 22.248 
+L 298.152 22.248 
+L 298.152 31.752 
+L 288.648 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_50">
+    <path d="M 288.648 33.048 
+L 298.152 33.048 
+L 298.152 42.552 
+L 288.648 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_51">
+    <path d="M 299.448 22.248 
+L 308.952 22.248 
+L 308.952 31.752 
+L 299.448 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_52">
+    <path d="M 299.448 54.648 
+L 308.952 54.648 
+L 308.952 64.152 
+L 299.448 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_53">
+    <path d="M 310.248 33.048 
+L 319.752 33.048 
+L 319.752 42.552 
+L 310.248 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_54">
+    <path d="M 310.248 54.648 
+L 319.752 54.648 
+L 319.752 64.152 
+L 310.248 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_55">
+    <path d="M 321.048 22.248 
+L 330.552 22.248 
+L 330.552 31.752 
+L 321.048 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_56">
+    <path d="M 321.048 33.048 
+L 330.552 33.048 
+L 330.552 42.552 
+L 321.048 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_57">
+    <path d="M 321.048 54.648 
+L 330.552 54.648 
+L 330.552 64.152 
+L 321.048 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_58">
+    <path d="M 331.848 22.248 
+L 341.352 22.248 
+L 341.352 31.752 
+L 331.848 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_59">
+    <path d="M 331.848 33.048 
+L 341.352 33.048 
+L 341.352 42.552 
+L 331.848 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_60">
+    <path d="M 331.848 54.648 
+L 341.352 54.648 
+L 341.352 64.152 
+L 331.848 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_61">
+    <path d="M 342.648 22.248 
+L 352.152 22.248 
+L 352.152 31.752 
+L 342.648 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_62">
+    <path d="M 342.648 33.048 
+L 352.152 33.048 
+L 352.152 42.552 
+L 342.648 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #1a1f24"/>
+   </g>
+   <g id="fig2-patch_63">
+    <path d="M 342.648 54.648 
+L 352.152 54.648 
+L 352.152 64.152 
+L 342.648 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_64">
+    <path d="M 353.448 22.248 
+L 362.952 22.248 
+L 362.952 31.752 
+L 353.448 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #a9b1b8"/>
+   </g>
+   <g id="fig2-patch_65">
+    <path d="M 353.448 33.048 
+L 362.952 33.048 
+L 362.952 42.552 
+L 353.448 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_66">
+    <path d="M 353.448 54.648 
+L 362.952 54.648 
+L 362.952 64.152 
+L 353.448 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #a9b1b8"/>
+   </g>
+   <g id="fig2-patch_67">
+    <path d="M 364.248 22.248 
+L 373.752 22.248 
+L 373.752 31.752 
+L 364.248 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #a9b1b8"/>
+   </g>
+   <g id="fig2-patch_68">
+    <path d="M 364.248 33.048 
+L 373.752 33.048 
+L 373.752 42.552 
+L 364.248 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #a9b1b8"/>
+   </g>
+   <g id="fig2-patch_69">
+    <path d="M 364.248 54.648 
+L 373.752 54.648 
+L 373.752 64.152 
+L 364.248 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_70">
+    <path d="M 375.048 22.248 
+L 384.552 22.248 
+L 384.552 31.752 
+L 375.048 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_71">
+    <path d="M 375.048 33.048 
+L 384.552 33.048 
+L 384.552 42.552 
+L 375.048 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_72">
+    <path d="M 375.048 54.648 
+L 384.552 54.648 
+L 384.552 64.152 
+L 375.048 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_73">
+    <path d="M 385.848 33.048 
+L 395.352 33.048 
+L 395.352 42.552 
+L 385.848 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_74">
+    <path d="M 385.848 43.848 
+L 395.352 43.848 
+L 395.352 53.352 
+L 385.848 53.352 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_75">
+    <path d="M 385.848 54.648 
+L 395.352 54.648 
+L 395.352 64.152 
+L 385.848 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_76">
+    <path d="M 396.648 33.048 
+L 406.152 33.048 
+L 406.152 42.552 
+L 396.648 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_77">
+    <path d="M 396.648 54.648 
+L 406.152 54.648 
+L 406.152 64.152 
+L 396.648 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_78">
+    <path d="M 407.448 22.248 
+L 416.952 22.248 
+L 416.952 31.752 
+L 407.448 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_79">
+    <path d="M 407.448 33.048 
+L 416.952 33.048 
+L 416.952 42.552 
+L 407.448 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_80">
+    <path d="M 407.448 54.648 
+L 416.952 54.648 
+L 416.952 64.152 
+L 407.448 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_81">
+    <path d="M 418.248 22.248 
+L 427.752 22.248 
+L 427.752 31.752 
+L 418.248 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_82">
+    <path d="M 418.248 33.048 
+L 427.752 33.048 
+L 427.752 42.552 
+L 418.248 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_83">
+    <path d="M 418.248 54.648 
+L 427.752 54.648 
+L 427.752 64.152 
+L 418.248 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_84">
+    <path d="M 429.048 33.048 
+L 438.552 33.048 
+L 438.552 42.552 
+L 429.048 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_85">
+    <path d="M 429.048 43.848 
+L 438.552 43.848 
+L 438.552 53.352 
+L 429.048 53.352 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_86">
+    <path d="M 429.048 54.648 
+L 438.552 54.648 
+L 438.552 64.152 
+L 429.048 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_87">
+    <path d="M 439.848 22.248 
+L 449.352 22.248 
+L 449.352 31.752 
+L 439.848 31.752 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_88">
+    <path d="M 439.848 33.048 
+L 449.352 33.048 
+L 449.352 42.552 
+L 439.848 42.552 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-patch_89">
+    <path d="M 439.848 54.648 
+L 449.352 54.648 
+L 449.352 64.152 
+L 439.848 64.152 
+z
+" clip-path="url(#fig2-p99bbb0e007)" style="fill: #e9ebec"/>
+   </g>
+   <g id="fig2-text_24">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="293.4" y="71.670547" transform="rotate(-0 293.4 71.670547)">24</text>
+   </g>
+   <g id="fig2-text_25">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="304.2" y="71.670547" transform="rotate(-0 304.2 71.670547)">25</text>
+   </g>
+   <g id="fig2-text_26">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="315" y="71.670547" transform="rotate(-0 315 71.670547)">26</text>
+   </g>
+   <g id="fig2-text_27">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="325.8" y="71.670547" transform="rotate(-0 325.8 71.670547)">30</text>
+   </g>
+   <g id="fig2-text_28">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="336.6" y="71.670547" transform="rotate(-0 336.6 71.670547)">31</text>
+   </g>
+   <g id="fig2-text_29">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="347.4" y="71.670547" transform="rotate(-0 347.4 71.670547)">14</text>
+   </g>
+   <g id="fig2-text_30">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="358.2" y="71.670547" transform="rotate(-0 358.2 71.670547)">16</text>
+   </g>
+   <g id="fig2-text_31">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="369" y="71.670547" transform="rotate(-0 369 71.670547)">34</text>
+   </g>
+   <g id="fig2-text_32">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="379.8" y="71.670547" transform="rotate(-0 379.8 71.670547)">1</text>
+   </g>
+   <g id="fig2-text_33">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="390.6" y="71.670547" transform="rotate(-0 390.6 71.670547)">4</text>
+   </g>
+   <g id="fig2-text_34">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="401.4" y="71.670547" transform="rotate(-0 401.4 71.670547)">5</text>
+   </g>
+   <g id="fig2-text_35">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="412.2" y="71.670547" transform="rotate(-0 412.2 71.670547)">7</text>
+   </g>
+   <g id="fig2-text_36">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="423" y="71.670547" transform="rotate(-0 423 71.670547)">9</text>
+   </g>
+   <g id="fig2-text_37">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="433.8" y="71.670547" transform="rotate(-0 433.8 71.670547)">15</text>
+   </g>
+   <g id="fig2-text_38">
+    <text style="font-size: 6.2px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #8b949b" x="444.6" y="71.670547" transform="rotate(-0 444.6 71.670547)">21</text>
+   </g>
+   <g id="fig2-text_39">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="288" y="14.518008" transform="rotate(-0 288 14.518008)">Set B</text>
+   </g>
+   <g id="fig2-text_40">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="318" y="14.758242" transform="rotate(-0 318 14.758242)">41 tasks in 15 modules, 39% pass</text>
+   </g>
+  </g>
+  <g id="fig2-patch_90">
+   <path d="M 144 91.62 
+L 150.12 91.62 
+L 150.12 85.5 
+L 144 85.5 
+z
+" style="fill: #1a1f24"/>
+  </g>
+  <g id="fig2-patch_91">
+   <path d="M 182.52 91.62 
+L 188.64 91.62 
+L 188.64 85.5 
+L 182.52 85.5 
+z
+" style="fill: #a9b1b8"/>
+  </g>
+  <g id="fig2-patch_92">
+   <path d="M 217.44 91.62 
+L 223.56 91.62 
+L 223.56 85.5 
+L 217.44 85.5 
+z
+" style="fill: #e9ebec"/>
+  </g>
+  <g id="fig2-text_41">
+   <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="75.6" y="90.378633" transform="rotate(-0 75.6 90.378633)">Runs passed, of 3</text>
+  </g>
+  <g id="fig2-text_42">
+   <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="153" y="90.378633" transform="rotate(-0 153 90.378633)">all 3</text>
+  </g>
+  <g id="fig2-text_43">
+   <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="191.52" y="90.378359" transform="rotate(-0 191.52 90.378359)">some</text>
+  </g>
+  <g id="fig2-text_44">
+   <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="226.44" y="90.378359" transform="rotate(-0 226.44 90.378359)">none</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="fig2-pe0be4e51fe">
+   <rect x="75.6" y="21.6" width="183.6" height="43.2"/>
+  </clipPath>
+  <clipPath id="fig2-p99bbb0e007">
+   <rect x="288" y="21.6" width="162" height="43.2"/>
+  </clipPath>
+ </defs>
+</svg>
+</div>
+<figcaption><b>Figure 3.</b> Every baseline task. A column is a module, labelled with its ChipBench problem number; a row is the kind of bug injected. Most columns are one shade from top to bottom: a module passes or fails whichever bug it carries.</figcaption>
+</figure>
+
+<!-- generated: Baseline outcomes -->
+<p>On set A, 31 of 45 tasks passed in all 3 runs, 13 in none and 1 in some. Of its 17 modules, 11 passed every run, 5 passed none and 1 was mixed.</p>
+<p>On set B, 14 of 41 tasks passed in all 3 runs, 23 in none and 4 in some. Of its 15 modules, 5 passed every run, 7 passed none and 3 were mixed.</p>
+<!-- /generated -->
+
+<p>Outcomes are stable across repeats, and they are settled by the module more
+than by the bug. This is the unit a KB has to move: to raise the pass rate on
+B it has to change the outcome on modules where the agent fails every time.</p>
+<p>The baseline passes more of A than of B. The two intervals overlap, and with
+15 to 17 modules a side the difference is within what the draw of modules can
+produce. No other explanation is offered.</p>
+<h3>What limits a run</h3>
+<p>Every baseline run was read by a model (<code>gpt-6.2-sol</code>, the agent's own)
+against the task, the verdict and a correct answer, and labelled with what
+limited it, from a fixed set of limitations [8]. The set came from free-text
+notes on a sample of A's runs and was fixed before any KB run. No person
+checked the labels.</p>
+<figure>
+<div class="chart " role="img" aria-label="For set A and set B, the share of failed runs and of passed runs showing each limitation."><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 453.6 153.36" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="fig3-figure_1">
+  <g id="fig3-patch_1">
+   <path d="M 0 153.36 
+L 453.6 153.36 
+L 453.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="fig3-axes_1">
+   <g id="fig3-patch_2">
+    <path d="M 140.4 133.2 
+L 270 133.2 
+L 270 36 
+L 140.4 36 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig3-matplotlib.axis_1">
+    <g id="fig3-xtick_1">
+     <g id="fig3-line2d_1">
+      <path d="M 146.989831 133.2 
+L 146.989831 36 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_2"/>
+     <g id="fig3-text_1">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="146.989831" y="142.398242" transform="rotate(-0 146.989831 142.398242)">0</text>
+     </g>
+    </g>
+    <g id="fig3-xtick_2">
+     <g id="fig3-line2d_3">
+      <path d="M 201.905085 133.2 
+L 201.905085 36 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_4"/>
+     <g id="fig3-text_2">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="201.905085" y="142.398242" transform="rotate(-0 201.905085 142.398242)">50</text>
+     </g>
+    </g>
+    <g id="fig3-xtick_3">
+     <g id="fig3-line2d_5">
+      <path d="M 256.820339 133.2 
+L 256.820339 36 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_6"/>
+     <g id="fig3-text_3">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="256.820339" y="142.398242" transform="rotate(-0 256.820339 142.398242)">100%</text>
+     </g>
+    </g>
+   </g>
+   <g id="fig3-matplotlib.axis_2">
+    <g id="fig3-ytick_1">
+     <g id="fig3-line2d_7"/>
+     <g id="fig3-text_4">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="48.759375" transform="rotate(-0 116.4 48.759375)">Own test missed the fault</text>
+     </g>
+    </g>
+    <g id="fig3-ytick_2">
+     <g id="fig3-line2d_8"/>
+     <g id="fig3-text_5">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="68.199375" transform="rotate(-0 116.4 68.199375)">Changed more than the bug</text>
+     </g>
+    </g>
+    <g id="fig3-ytick_3">
+     <g id="fig3-line2d_9"/>
+     <g id="fig3-text_6">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="87.639375" transform="rotate(-0 116.4 87.639375)">Wasted effort</text>
+     </g>
+    </g>
+    <g id="fig3-ytick_4">
+     <g id="fig3-line2d_10"/>
+     <g id="fig3-text_7">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="107.079375" transform="rotate(-0 116.4 107.079375)">Missed the bug</text>
+     </g>
+    </g>
+    <g id="fig3-ytick_5">
+     <g id="fig3-line2d_11"/>
+     <g id="fig3-text_8">
+      <text style="font-size: 8px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="116.4" y="126.519375" transform="rotate(-0 116.4 126.519375)">Broke the interface</text>
+     </g>
+    </g>
+   </g>
+   <g id="fig3-line2d_12">
+    <path d="M 157.505517 45.72 
+L 254.141546 45.72 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_13">
+    <path d="M 193.726217 65.16 
+L 254.141546 65.16 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_14">
+    <path d="M 196.063036 84.6 
+L 160.383795 84.6 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_15">
+    <path d="M 146.989831 104.04 
+L 157.705002 104.04 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_16">
+    <path d="M 146.989831 123.48 
+L 165.741381 123.48 
+" clip-path="url(#fig3-pc1bfa8a1af)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_17">
+    <defs>
+     <path id="fig3-mf15284a9cc" d="M 0 2.5 
+C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767 
+C 2.236584 1.29895 2.5 0.663008 2.5 0 
+C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767 
+C 1.29895 -2.236584 0.663008 -2.5 0 -2.5 
+C -0.663008 -2.5 -1.29895 -2.236584 -1.767767 -1.767767 
+C -2.236584 -1.29895 -2.5 -0.663008 -2.5 0 
+C -2.5 0.663008 -2.236584 1.29895 -1.767767 1.767767 
+C -1.29895 2.236584 -0.663008 2.5 0 2.5 
+z
+" style="stroke: #5c6770; stroke-width: 1.1"/>
+    </defs>
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-mf15284a9cc" x="157.505517" y="45.72" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_9">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="47.668242" transform="rotate(-0 260.141546 47.668242)">98%</text>
+   </g>
+   <g id="fig3-text_10">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="151.505517" y="47.668242" transform="rotate(-0 151.505517 47.668242)">10%</text>
+   </g>
+   <g id="fig3-text_11">
+    <text style="font-weight: 700; font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #1a1f24" x="254.141546" y="37.72" transform="rotate(-0 254.141546 37.72)">runs that failed</text>
+   </g>
+   <g id="fig3-text_12">
+    <text style="font-size: 7px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="157.505517" y="37.72" transform="rotate(-0 157.505517 37.72)">runs that passed</text>
+   </g>
+   <g id="fig3-line2d_18">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-mf15284a9cc" x="193.726217" y="65.16" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_13">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="260.141546" y="67.108242" transform="rotate(-0 260.141546 67.108242)">98%</text>
+   </g>
+   <g id="fig3-text_14">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="187.726217" y="67.108242" transform="rotate(-0 187.726217 67.108242)">43%</text>
+   </g>
+   <g id="fig3-line2d_19">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-mf15284a9cc" x="196.063036" y="84.6" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_15">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="154.383795" y="86.548242" transform="rotate(-0 154.383795 86.548242)">12%</text>
+   </g>
+   <g id="fig3-text_16">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="202.063036" y="86.548242" transform="rotate(-0 202.063036 86.548242)">45%</text>
+   </g>
+   <g id="fig3-line2d_20">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-mf15284a9cc" x="146.989831" y="104.04" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_17">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="163.705002" y="105.988242" transform="rotate(-0 163.705002 105.988242)">10%</text>
+   </g>
+   <g id="fig3-text_18">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="105.988242" transform="rotate(-0 140.989831 105.988242)">0%</text>
+   </g>
+   <g id="fig3-line2d_21">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-mf15284a9cc" x="146.989831" y="123.48" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_19">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="171.741381" y="125.428242" transform="rotate(-0 171.741381 125.428242)">17%</text>
+   </g>
+   <g id="fig3-text_20">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="140.989831" y="125.428242" transform="rotate(-0 140.989831 125.428242)">0%</text>
+   </g>
+   <g id="fig3-text_21">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="140.4" y="12.358008" transform="rotate(-0 140.4 12.358008)">Set A</text>
+   </g>
+   <g id="fig3-text_22">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="170.4" y="12.598242" transform="rotate(-0 170.4 12.598242)">41 runs failed, 94 passed</text>
+   </g>
+   <g id="fig3-line2d_22">
+    <defs>
+     <path id="fig3-med57297b01" d="M 0 2.75 
+C 0.729309 2.75 1.428845 2.460243 1.944544 1.944544 
+C 2.460243 1.428845 2.75 0.729309 2.75 0 
+C 2.75 -0.729309 2.460243 -1.428845 1.944544 -1.944544 
+C 1.428845 -2.460243 0.729309 -2.75 0 -2.75 
+C -0.729309 -2.75 -1.428845 -2.460243 -1.944544 -1.944544 
+C -2.460243 -1.428845 -2.75 -0.729309 -2.75 0 
+C -2.75 0.729309 -2.460243 1.428845 -1.944544 1.944544 
+C -1.428845 2.460243 -0.729309 2.75 0 2.75 
+z
+" style="stroke: #ffffff; stroke-width: 0.8"/>
+    </defs>
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-med57297b01" x="254.141546" y="45.72" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_23">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-med57297b01" x="254.141546" y="65.16" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_24">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-med57297b01" x="160.383795" y="84.6" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_25">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-med57297b01" x="157.705002" y="104.04" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_26">
+    <g clip-path="url(#fig3-pc1bfa8a1af)">
+     <use xlink:href="#fig3-med57297b01" x="165.741381" y="123.48" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+  </g>
+  <g id="fig3-axes_2">
+   <g id="fig3-patch_3">
+    <path d="M 302.4 133.2 
+L 432 133.2 
+L 432 36 
+L 302.4 36 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="fig3-matplotlib.axis_3">
+    <g id="fig3-xtick_4">
+     <g id="fig3-line2d_27">
+      <path d="M 308.989831 133.2 
+L 308.989831 36 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_28"/>
+     <g id="fig3-text_23">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="308.989831" y="142.398242" transform="rotate(-0 308.989831 142.398242)">0</text>
+     </g>
+    </g>
+    <g id="fig3-xtick_5">
+     <g id="fig3-line2d_29">
+      <path d="M 363.905085 133.2 
+L 363.905085 36 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_30"/>
+     <g id="fig3-text_24">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="363.905085" y="142.398242" transform="rotate(-0 363.905085 142.398242)">50</text>
+     </g>
+    </g>
+    <g id="fig3-xtick_6">
+     <g id="fig3-line2d_31">
+      <path d="M 418.820339 133.2 
+L 418.820339 36 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.5; stroke-linecap: square"/>
+     </g>
+     <g id="fig3-line2d_32"/>
+     <g id="fig3-text_25">
+      <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5c6770" x="418.820339" y="142.398242" transform="rotate(-0 418.820339 142.398242)">100%</text>
+     </g>
+    </g>
+   </g>
+   <g id="fig3-matplotlib.axis_4">
+    <g id="fig3-ytick_6">
+     <g id="fig3-line2d_33"/>
+    </g>
+    <g id="fig3-ytick_7">
+     <g id="fig3-line2d_34"/>
+    </g>
+    <g id="fig3-ytick_8">
+     <g id="fig3-line2d_35"/>
+    </g>
+    <g id="fig3-ytick_9">
+     <g id="fig3-line2d_36"/>
+    </g>
+    <g id="fig3-ytick_10">
+     <g id="fig3-line2d_37"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_38">
+    <path d="M 318.142373 45.72 
+L 418.820339 45.72 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_39">
+    <path d="M 329.583051 65.16 
+L 411.498305 65.16 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_40">
+    <path d="M 361.616949 84.6 
+L 336.813559 84.6 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_41">
+    <path d="M 308.989831 104.04 
+L 330.955932 104.04 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_42">
+    <path d="M 308.989831 123.48 
+L 311.918644 123.48 
+" clip-path="url(#fig3-p46aad08931)" style="fill: none; stroke: #d9d9d9; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="fig3-line2d_43">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-mf15284a9cc" x="318.142373" y="45.72" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_26">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="424.820339" y="47.668242" transform="rotate(-0 424.820339 47.668242)">100%</text>
+   </g>
+   <g id="fig3-text_27">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="312.142373" y="47.668242" transform="rotate(-0 312.142373 47.668242)">8%</text>
+   </g>
+   <g id="fig3-line2d_44">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-mf15284a9cc" x="329.583051" y="65.16" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_28">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="417.498305" y="67.108242" transform="rotate(-0 417.498305 67.108242)">93%</text>
+   </g>
+   <g id="fig3-text_29">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="323.583051" y="67.108242" transform="rotate(-0 323.583051 67.108242)">19%</text>
+   </g>
+   <g id="fig3-line2d_45">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-mf15284a9cc" x="361.616949" y="84.6" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_30">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #1a1f24" x="330.813559" y="86.548242" transform="rotate(-0 330.813559 86.548242)">25%</text>
+   </g>
+   <g id="fig3-text_31">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="367.616949" y="86.548242" transform="rotate(-0 367.616949 86.548242)">48%</text>
+   </g>
+   <g id="fig3-line2d_46">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-mf15284a9cc" x="308.989831" y="104.04" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_32">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="336.955932" y="105.988242" transform="rotate(-0 336.955932 105.988242)">20%</text>
+   </g>
+   <g id="fig3-text_33">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="105.988242" transform="rotate(-0 302.989831 105.988242)">0%</text>
+   </g>
+   <g id="fig3-line2d_47">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-mf15284a9cc" x="308.989831" y="123.48" style="fill: #ffffff; stroke: #5c6770; stroke-width: 1.1"/>
+    </g>
+   </g>
+   <g id="fig3-text_34">
+    <text style="font-weight: 700; font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="317.918644" y="125.428242" transform="rotate(-0 317.918644 125.428242)">3%</text>
+   </g>
+   <g id="fig3-text_35">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5c6770" x="302.989831" y="125.428242" transform="rotate(-0 302.989831 125.428242)">0%</text>
+   </g>
+   <g id="fig3-text_36">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1a1f24" x="302.4" y="12.358008" transform="rotate(-0 302.4 12.358008)">Set B</text>
+   </g>
+   <g id="fig3-text_37">
+    <text style="font-size: 7.5px; font-family: 'Libre Franklin', 'Franklin Gothic Medium', 'Segoe UI', 'Helvetica Neue', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5c6770" x="332.4" y="12.598242" transform="rotate(-0 332.4 12.598242)">75 runs failed, 48 passed</text>
+   </g>
+   <g id="fig3-line2d_48">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-med57297b01" x="418.820339" y="45.72" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_49">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-med57297b01" x="411.498305" y="65.16" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_50">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-med57297b01" x="336.813559" y="84.6" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_51">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-med57297b01" x="330.955932" y="104.04" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="fig3-line2d_52">
+    <g clip-path="url(#fig3-p46aad08931)">
+     <use xlink:href="#fig3-med57297b01" x="311.918644" y="123.48" style="fill: #1a1f24; stroke: #ffffff; stroke-width: 0.8"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="fig3-pc1bfa8a1af">
+   <rect x="140.4" y="36" width="129.6" height="97.2"/>
+  </clipPath>
+  <clipPath id="fig3-p46aad08931">
+   <rect x="302.4" y="36" width="129.6" height="97.2"/>
+  </clipPath>
+ </defs>
+</svg>
+</div>
+<figcaption><b>Figure 4.</b> Share of baseline runs showing each limitation, for runs that failed and runs that passed. A run can show several. Almost every failed run changed more than the bug; few missed it.</figcaption>
 </figure>
 
 <!-- generated: Baseline limitations -->
-<p>The limitations are a model's reading of every run, and a run can show several. Read twice, the reader named the same set of limitations for 83.3% of 30 runs.</p>
+<p>Of the 41 runs that failed on set A: own test missed the fault 40, changed more than the bug 40, broke the interface 7, wasted effort 5, missed the bug 4.</p>
+<p>Of the 75 runs that failed on set B: own test missed the fault 75, changed more than the bug 70, wasted effort 19, missed the bug 15, broke the interface 2.</p>
+<p>Labelling 30 runs a second time, the model gave the same set of limitations for 25 of them.</p>
 <!-- /generated -->
 
-<p>In the commonest failure the agent finds the defect and then keeps going. It
-rewrites the module to match the written specification, and in doing so moves
-an output by a clock cycle or changes a reset value that the original code
-had and the reference keeps. One sequence detector had its shift register
-filling from the wrong end. Swapping two operands was the whole fix. The
-agent made that swap, and also moved the comparison so that the output rose a
-cycle earlier.</p>
-<p>The second commonest goes with it. The agent writes its own testbench, often
-an exhaustive one, and the testbench passes, because it encodes the same
-reading of the specification as the rewrite. From where the agent stands, the
-run succeeded.</p>
-<p>This matters for what a KB can do. An agent asked to record what it learned
-from such a run will record a success.</p>
-<h2>3. The approaches</h2>
-<p>An approach is two choices: what one entry in the KB is, and how entries are
-found. Each combination that makes sense is an approach. Table 3 lays them
-out, with the thirteen that were run in bold.</p>
-<p class="caption"><b>Table 3.</b> The approaches, by entry (rows) and index (columns). Bold: run. A dot: makes sense, not run. Empty: does not make sense.</p>
+<p>Failed runs rarely miss the bug. In nearly all of them the agent finds the
+defect, repairs it, and then changes something else. Figure 5 shows one.</p>
+<figure>
+<div class="code">
+<div>
+<h4>The whole fix</h4>
+<pre><span class="dim">always @(posedge clk or negedge rst_n)
+    if (!rst_n)
+        begin
+            match_f &lt;= 1'b0;
+        end</span>
+<span class="del">-   else if (a_tem[8:6] == 3'b001)</span>
+<span class="add">+   else if (a_tem[8:6] == 3'b011)</span>
+<span class="dim">        begin
+            match_f &lt;= 1'b1;
+        end</span></pre>
+<p>One constant was wrong. The reference differs from the given module in this line only. The given module resets <code>a_tem</code> to zeros and compares it as it stood before the clock edge, and so does the reference.</p>
+</div>
+<div>
+<h4>What the agent submitted</h4>
+<pre>reg [8:0] a_tem;
+wire [8:0] next_window = {a_tem[7:0], a};
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+<span class="del">        a_tem &lt;= 9'b111111111;</span>
+        match &lt;= 1'b0;
+    end else begin
+        a_tem &lt;= next_window;
+<span class="del">        match &lt;= (next_window[8:6] == 3'b011) &amp;&amp;
+                 (next_window[2:0] == 3'b110);</span>
+    end
+end</pre>
+<p>The constant is corrected, inside a rewrite of the module. The rewrite also resets the register to ones and compares its next value, so <code>match</code> rises a cycle early: 16 mismatches in 237 samples. The agent's own testbench passed.</p>
+</div>
+</div>
+<figcaption><b>Figure 5.</b> One baseline run on set A (<code>assignment__Prob002_extraneous_items_sequence_detect</code>, first repeat). Indentation is normalised and a comment is left out; the code is otherwise as given and as submitted.</figcaption>
+</figure>
+
+<p>The specification for this task describes the pattern to detect. It does not
+say in which cycle <code>match</code> rises or what the register holds after reset. The
+given module answers both, and so does the reference, which is the design as
+it was before the bug was put in. The agent's version is a fair reading of
+the prose and a different circuit.</p>
+<p>This is the general pattern. The specification under-determines the design,
+the reference is the original design, and the task is to repair the module
+that was given. An agent that implements the specification afresh changes
+behaviour the specification never pinned down. Its own testbench, written
+from the same reading, then passes, and the agent reports success on a run
+the hidden testbench fails.</p>
+<p>Two things follow for a KB. An agent asked to record what it learned from
+such a run will record a success, so a KB written without feedback would be
+filled with the wrong lessons. And the most common failure is not specific
+to any module, so a lesson about it can transfer from A to modules A never
+contained.</p>
+<h2>3. Approaches and predictions</h2>
+<p>An approach is two choices. The entry type is what one unit of the KB holds,
+which answers what to store. The index is how entries are arranged and
+found, which answers how to organise and how to retrieve. Figure 6 sets one
+against the other.</p>
+<figure>
+<table class="matrix">
+<thead>
+<tr><th class="corner" colspan="2"></th><th class="span" colspan="8">Index, from the least structure to the most</th></tr>
+<tr><th colspan="2"></th><th>Single file</th><th>Flat files</th><th>Catalogue</th><th>Signature key</th><th>Tags</th><th>Hierarchy</th><th>Graph</th><th>Similarity search</th></tr>
+</thead>
+<tbody>
+<tr><th class="group" rowspan="2">What happened</th><th>Transcript</th><td class="run">Shared session</td><td class="run">Raw cases</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="none"></td><td class="open"></td></tr>
+<tr><th>Summary</th><td class="open"></td><td class="run">Summaries</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="none"></td><td class="open"></td></tr>
+<tr class="gap"><th class="group" rowspan="3">What is true</th><th>Note</th><td class="open"></td><td class="run">Notes</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">Notes by similarity</td></tr>
+<tr><th>Rule</th><td class="run">Playbook</td><td class="none"></td><td class="none"></td><td class="open"></td><td class="run">Rules by tags</td><td class="open"></td><td class="none"></td><td class="open"></td></tr>
+<tr><th>Page</th><td class="none"></td><td class="open"></td><td class="run">Wiki</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="run">+ links</td><td class="open"></td></tr>
+<tr class="gap"><th class="group" rowspan="3">What to do</th><th>Skill</th><td class="none"></td><td class="none"></td><td class="run">Skills</td><td class="open"></td><td class="open"></td><td class="run">Hierarchical skills</td><td class="open"></td><td class="open"></td></tr>
+<tr><th>Guide</th><td class="run">Single-file guide</td><td class="open"></td><td class="open"></td><td class="run">Signature guides</td><td class="open"></td><td class="open"></td><td class="open"></td><td class="open"></td></tr>
+<tr><th>Step</th><td class="open"></td><td class="none"></td><td class="none"></td><td class="open"></td><td class="none"></td><td class="run">Trouble&shy;shooting tree</td><td class="open"></td><td class="none"></td></tr>
+</tbody>
+</table>
+<figcaption><b>Figure 6.</b> The approaches. Filled: built and run, thirteen approaches in fourteen cells, since the wiki is a catalogue of pages that also link to one another. Outlined: defined, not run. No cell: the combination means nothing, as a rule is too small to be a file and a step is nothing without the steps it leads to. The 52 cells that mean something make 51 approaches.</figcaption>
+</figure>
+
+<p class="caption"><b>Table 3.</b> Entry types and indexes. "Loaded" means placed in the agent's context at the start of every task, as the <code>AGENTS.md</code> file the CLI reads.</p>
 
 <table>
 <thead>
 <tr>
-<th>Entry</th>
-<th>Single file</th>
-<th>Flat files</th>
-<th>Catalogue</th>
-<th>Signature key</th>
-<th>Tags</th>
-<th>Hierarchy</th>
-<th>Graph</th>
-<th>Similarity search</th>
+<th>Entry type</th>
+<th>One entry is</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Transcript</td>
-<td><strong>Shared session</strong></td>
-<td><strong>Raw cases</strong></td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td></td>
-<td>·</td>
+<td>The CLI's complete record of one earlier task. The agent does not write it.</td>
 </tr>
 <tr>
 <td>Summary</td>
-<td>·</td>
-<td><strong>Summaries</strong></td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td></td>
-<td>·</td>
+<td>A file describing one finished task: the module, the symptom, what was tried, the change made. Never edited later.</td>
 </tr>
 <tr>
 <td>Note</td>
-<td>·</td>
-<td><strong>Notes</strong></td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td><strong>Notes by similarity</strong></td>
+<td>A file holding one lesson, in whatever form suits it.</td>
 </tr>
 <tr>
 <td>Rule</td>
-<td><strong>Playbook</strong></td>
-<td></td>
-<td></td>
-<td>·</td>
-<td><strong>Rules by tags</strong></td>
-<td>·</td>
-<td></td>
-<td>·</td>
+<td>One sentence saying what to do or check, with when it applies and the task it came from.</td>
 </tr>
 <tr>
 <td>Page</td>
-<td></td>
-<td>·</td>
-<td><strong>Wiki</strong></td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td><strong>Wiki</strong></td>
-<td>·</td>
+<td>A file on one topic, gathering what tasks have taught about it.</td>
 </tr>
 <tr>
 <td>Skill</td>
-<td></td>
-<td></td>
-<td><strong>Skills</strong></td>
-<td>·</td>
-<td>·</td>
-<td><strong>Hierarchical skills</strong></td>
-<td>·</td>
-<td>·</td>
+<td>A folder with a procedure and, optionally, scripts, in the form the CLI's own skill mechanism reads [11].</td>
 </tr>
 <tr>
 <td>Guide</td>
-<td><strong>Single-file guide</strong></td>
-<td>·</td>
-<td>·</td>
-<td><strong>Signature guides</strong></td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
-<td>·</td>
+<td>A file on diagnosing one kind of failure: what to look at, in what order, and what each finding points to.</td>
 </tr>
 <tr>
 <td>Step</td>
-<td>·</td>
-<td></td>
-<td></td>
-<td>·</td>
-<td></td>
-<td><strong>Troubleshooting tree</strong></td>
-<td>·</td>
-<td></td>
+<td>One check, its possible outcomes, and for each the next step or the conclusion.</td>
 </tr>
 </tbody>
 </table>
-<p>An empty cell is a combination that means nothing: a rule is too small to be
-a file of its own, and a step means nothing without the steps it leads to.</p>
-<p>The rows run from records of what happened (transcripts, summaries), through
-statements of what is true (notes, rules, pages), to instructions for what to
-do (skills, guides, steps). The columns run from no structure at all to the
-most. A single file is read whole on every task. A catalogue is one line per
-entry. A signature key maps what a failure looks like to the entries for it.
-Some cells take their form from published designs: the playbook from [10],
-skills from [11], and the troubleshooting tree from [9].</p>
-<p><strong>What is the same in all of them.</strong> The agent manages its KB itself, in its
-own session, with the tools it already has. The harness never writes KB
-content. An approach's instructions are assembled from shared pieces, one for
-the entry type and one for the index, so two approaches differ only in the
-pieces they name. No piece says anything about how to debug.</p>
-<p><strong>The result is shown before the update.</strong> After each task on A the agent is
-told how its answer was graded and shown the correct fix, as a change to the
-original module. It then updates the KB. Section 2 is the reason: without
-this, most of what the KB recorded would be failures written down as
-successes. It is also how a KB is fed in practice, since once a bug is closed
-its fix is known. Only A's results are ever shown, and B's modules do not
-appear in A.</p>
-<p><strong>Why these thirteen.</strong> They were chosen for two things. Together they cover
-every kind of entry and every kind of index. And they include the approaches
-that A's baseline points to (Table 4).</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>How the agent reaches an entry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single file</td>
+<td>Everything is in one loaded file. Nothing has to be looked up.</td>
+</tr>
+<tr>
+<td>Flat files</td>
+<td>One file per entry and no index. The agent lists the folder and searches it by text.</td>
+</tr>
+<tr>
+<td>Catalogue</td>
+<td>A loaded list with one line per entry. The agent opens the entries that bear on the task.</td>
+</tr>
+<tr>
+<td>Signature key</td>
+<td>A loaded map from what a failure looks like from outside to the entries to open for it.</td>
+</tr>
+<tr>
+<td>Tags</td>
+<td>A loaded list of entries with their tags.</td>
+</tr>
+<tr>
+<td>Hierarchy</td>
+<td>Groups in levels. The top level is loaded and the agent goes down one branch.</td>
+</tr>
+<tr>
+<td>Graph</td>
+<td>Entries link to one another and each link says when to follow it. The first entry is loaded.</td>
+</tr>
+<tr>
+<td>Similarity search</td>
+<td>A command in the container returns the entries closest in meaning to a query.</td>
+</tr>
+</tbody>
+</table>
+<p>Three of the thirteen have names that do not say what they are. The shared
+session keeps one CLI session running through every task, so earlier tasks
+are in the agent's context, subject to the CLI's own compaction. The playbook
+is a single file of rules [10]. The troubleshooting tree is a hierarchy of
+steps [9]. Appendix A maps every name to its folder of instructions.</p>
+<h3>What every approach shares</h3>
+<p>The agent manages its KB itself, in its own session, with a shell and the
+files under <code>/kb</code>. The harness never writes KB content. An approach's
+instructions are assembled from shared pieces, one for the entry type and one
+for the index, so two approaches differ only in the pieces they name.
+Appendix D gives one approach's instructions in full. No piece says anything
+about how to debug.</p>
+<h3>The result is shown before the update</h3>
+<p>After each task on A, the agent is shown how its answer was graded and the
+correct fix, as a change to the given module. It then updates the KB.
+Section 2 is the reason: without this step a KB would record failures as
+successes. It is also how a KB is fed in practice, since the fix for a closed
+bug is known. Only A's results are ever shown. On B nothing is shown and
+nothing a run writes is kept.</p>
+<p>This is feedback from the grader, and every result here depends on it
+(section 6).</p>
+<h3>Why these thirteen, and what was predicted</h3>
+<p>The thirteen were chosen to cover every entry type and every index, and to
+include the approaches that A's baseline favours (Table 4).</p>
 <p class="caption"><b>Table 4.</b> What A's baseline suggests a KB should hold, and the approaches that hold it most directly.</p>
 
 <table>
@@ -314,15 +1836,15 @@ that A's baseline points to (Table 4).</p>
 <tr>
 <td>Changed more than the bug</td>
 <td>One general rule, relevant to every task</td>
-<td>Those the agent sees without looking: the playbook, the single-file guide</td>
+<td>Those loaded into context on every task: the playbook, the single-file guide</td>
 </tr>
 <tr>
-<td>Own test could not expose the fault</td>
-<td>A procedure, possibly with a script</td>
+<td>Own test missed the fault</td>
+<td>A procedure for testing, possibly with a script</td>
 <td>Skills, hierarchical skills</td>
 </tr>
 <tr>
-<td>Wasted a share of the run</td>
+<td>Wasted effort</td>
 <td>Commands and scripts that already work</td>
 <td>Skills</td>
 </tr>
@@ -333,57 +1855,352 @@ that A's baseline points to (Table 4).</p>
 </tr>
 </tbody>
 </table>
-<p>On this reading the approaches that put a general rule in front of the agent
-on every task should gain most. Those that recall earlier cases (the shared
-session, raw cases, summaries) should gain least, because none of B's modules
-appears in A. That expectation was written down before any approach had been
-run on B.</p>
+<p>Two predictions follow. Approaches that put general rules in front of the
+agent on every task should gain most. Approaches that recall earlier cases
+(the shared session, raw cases, summaries) should gain least, because no
+module of B appears in A. Both were committed before any frozen run
+(commit <code>1852b56</code>, 18 November, 13:46).</p>
 <h2>4. Results</h2>
-<p><em>To be written when the results are in.</em></p>
-<p class="caption"><b>Table 5.</b> Each approach on B with its frozen KB, against the baseline on the same tasks.</p>
+<p><em>Pending: written when the frozen runs on B have finished.</em></p>
+<p class="caption"><b>Table 5.</b> Each approach on B with its frozen KB, against the baseline on the same tasks. A task is helped if it passes more often with the KB than without, and harmed if less often.</p>
 
 <!-- generated: Results on B -->
 <p><em>Not available yet.</em></p>
 <!-- /generated -->
 
-<p class="caption"><b>Table 6.</b> What building each KB cost over solving A with no KB.</p>
+<p class="caption"><b>Table 6.</b> How A carries to B. During the build each task on A is solved before its own result is shown, so the build's runs can be compared with the baseline as well: apart for tasks whose module the KB had already met and tasks whose module was new to it.</p>
+
+<!-- generated: Seen and unseen modules -->
+<p><em>Not available yet.</em></p>
+<!-- /generated -->
+
+<h2>5. Discussion</h2>
+<p><em>Pending: what worked, what failed, and how the choice of A affects B.</em></p>
+<h2>6. What these results do not show</h2>
+<ul>
+<li><em>Root cause.</em> The grader checks the repair, not the diagnosis. Whether the
+  agent found the cause comes only from a model's reading of the trajectory.</li>
+<li><em>A KB built without feedback.</em> Every KB here was written by an agent that
+  had just been shown the verdict and the correct fix. The likely effect of
+  removing that is a worse KB, for the reason in section 2.</li>
+<li><em>Variation between builds.</em> Each KB comes from one order of A and each
+  approach was run once on B. The baseline's repeats differ little, but a
+  gap between two approaches may reflect one build.</li>
+<li><em>Instructions apart from content.</em> An approach adds instructions as well as
+  a KB. The control that separates them, the same instructions with an empty
+  KB, is defined for every approach; section 4 says where it was run.</li>
+<li><em>More than this benchmark.</em> B has 41 tasks in 15 modules, from a public
+  benchmark the model may have seen. That would raise the baseline and leave
+  an approach less room to help.</li>
+<li><em>Other agents and models.</em> One of each was used.</li>
+<li><em>The other 38 approaches.</em> They are defined and run with the same command.
+  Codex's own memory, a candidate outside the grid, could not be run: the
+  executor recreates the CLI's home directory for every run.</li>
+<li><em>A confined network.</em> The harness can restrict the agent to the model's
+  API, but the Docker installation used here cannot enforce it. Web search
+  was off, the rules forbid network use, and a monitor read every trajectory
+  for it (appendix E).</li>
+<li><em>Set B equal to set A,</em> which the brief offers as a separate experiment,
+  was not run. Table 6 is the nearest evidence.</li>
+</ul>
+<p>Three tasks are left out. The reference for <code>Prob013_least_common_multiple</code>
+drives an output to high impedance, which its own testbench counts as a
+mismatch, so no answer can pass. The check described in section 1 found it.</p>
+<h2>7. Further work</h2>
+<ul>
+<li>Three builds per approach, each over a different order of A, to measure
+  how much a KB depends on what it met first.</li>
+<li>The empty-KB control for every approach, and one setting changed at a time
+  on the approaches that did best: what the key describes, how entries are
+  maintained, whether a count of uses is kept.</li>
+<li>Repeated passes over A that keep a change to the KB only if it helps, with
+  B untouched until the end.</li>
+<li>A measure of diagnosis apart from repair. It needs a recorded fault
+  location for each task.</li>
+<li>A harder benchmark. Only the adapter is specific to ChipBench.</li>
+</ul>
+<h2>References</h2>
+<div class="references">
+<ol>
+<li>Yu, Z., Zhou, C., Lin, Y., Zhang, H., Ye, H., Cui, J., Pan, Z., Zhao, J., Ding, Y. (2026). ChipBench: A Next-Step Benchmark for Evaluating LLM Performance in AI-Aided Chip Design. arXiv:2601.21448. Tasks from github.com/zhongkaiyu/ChipBench at commit <code>b4ba3a0</code>.</li>
+<li>Harbor: a framework for evaluating agents in container environments, version 0.26.0. docs.harborframework.com</li>
+<li>OpenAI. Codex CLI, version 0.170.0. developers.openai.com/codex</li>
+<li>Zhu, Y., Jin, T., Pruksachatkun, Y., et al. (2025). Establishing Best Practices for Building Rigorous Agentic Benchmarks. arXiv:2507.02825.</li>
+<li>Wang, H., Li, H., Mang, Q., Cheung, A., Sen, K., Song, D. (2026). Do Androids Dream of Breaking the Game? Systematically Auditing AI Agent Benchmarks with BenchJack. arXiv:2605.12673.</li>
+<li>Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., Narayanan, A. (2024). AI Agents That Matter. arXiv:2407.01502.</li>
+<li>Miller, E. (2024). Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. arXiv:2411.00640.</li>
+<li>Cemri, M., Pan, M. Z., Yang, S., et al. (2025). Why Do Multi-Agent LLM Systems Fail? arXiv:2503.13657.</li>
+<li>Bai, Y., Ren, H. (2025). Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures. arXiv:2511.17833.</li>
+<li>Zhang, Q., Hu, C., Upasani, S., et al. (2025). Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models. arXiv:2510.04618.</li>
+<li>Zhang, B., Lazuka, K., Murag, M. (2025). Equipping agents for the real world with Agent Skills. Anthropic Engineering, 16 October 2025.</li>
+</ol>
+</div>
+<p>Everything read for this work is listed in <code>docs/spec.md</code>, section 11.</p>
+<h2>Appendix A. Names and files</h2>
+<p class="caption"><b>Table A1.</b> The thirteen approaches. Each folder is under <code>configs/kb/</code> and each experiment is <code>configs/experiments/kb-&lt;folder&gt;.toml</code>, with its runs under <code>runs/kb-&lt;folder&gt;/</code>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Entry type</th>
+<th>Index</th>
+<th>Folder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared session</td>
+<td>Transcript</td>
+<td>Single file (the CLI's session)</td>
+<td><code>shared-session</code></td>
+</tr>
+<tr>
+<td>Raw cases</td>
+<td>Transcript</td>
+<td>Flat files</td>
+<td><code>raw-cases</code></td>
+</tr>
+<tr>
+<td>Summaries</td>
+<td>Summary</td>
+<td>Flat files</td>
+<td><code>summaries</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>Note</td>
+<td>Flat files</td>
+<td><code>notes</code></td>
+</tr>
+<tr>
+<td>Notes by similarity</td>
+<td>Note</td>
+<td>Similarity search</td>
+<td><code>note-similarity</code></td>
+</tr>
+<tr>
+<td>Playbook</td>
+<td>Rule</td>
+<td>Single file</td>
+<td><code>playbook</code></td>
+</tr>
+<tr>
+<td>Rules by tags</td>
+<td>Rule</td>
+<td>Tags</td>
+<td><code>rule-tags</code></td>
+</tr>
+<tr>
+<td>Wiki</td>
+<td>Page</td>
+<td>Catalogue, with links</td>
+<td><code>wiki</code></td>
+</tr>
+<tr>
+<td>Skills</td>
+<td>Skill</td>
+<td>Catalogue (the CLI's skill list)</td>
+<td><code>skills</code></td>
+</tr>
+<tr>
+<td>Hierarchical skills</td>
+<td>Skill</td>
+<td>Hierarchy</td>
+<td><code>hierarchical-skills</code></td>
+</tr>
+<tr>
+<td>Single-file guide</td>
+<td>Guide</td>
+<td>Single file</td>
+<td><code>guide-single-file</code></td>
+</tr>
+<tr>
+<td>Signature guides</td>
+<td>Guide</td>
+<td>Signature key</td>
+<td><code>signature-guides</code></td>
+</tr>
+<tr>
+<td>Troubleshooting tree</td>
+<td>Step</td>
+<td>Hierarchy</td>
+<td><code>troubleshooting-tree</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Appendix B. Full tables</h2>
+<p>Every table and figure in this report is generated from the stored runs. The
+README gives the commands.</p>
+<p class="caption"><b>Table B1.</b> Every condition.</p>
+
+<!-- generated: Conditions -->
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Set</th>
+<th style="text-align: right;">Tasks</th>
+<th style="text-align: right;">Runs</th>
+<th style="text-align: right;">Pass rate, %</th>
+<th style="text-align: right;">95% interval</th>
+<th style="text-align: right;">Input tokens, uncached</th>
+<th style="text-align: right;">cached</th>
+<th style="text-align: right;">Output tokens</th>
+<th style="text-align: right;">Cost per run, $</th>
+<th style="text-align: right;">Cost per solved task, $</th>
+<th style="text-align: right;">Time to solution, s</th>
+<th style="text-align: right;">Model responses per run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No KB</td>
+<td>A</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">69.6</td>
+<td style="text-align: right;">45.7 to 90.8</td>
+<td style="text-align: right;">15.5k</td>
+<td style="text-align: right;">52.8k</td>
+<td style="text-align: right;">1.7k</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">0.088</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">4.8</td>
+</tr>
+<tr>
+<td>No KB</td>
+<td>B</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">39.0</td>
+<td style="text-align: right;">19.0 to 62.5</td>
+<td style="text-align: right;">15.7k</td>
+<td style="text-align: right;">56.9k</td>
+<td style="text-align: right;">2.1k</td>
+<td style="text-align: right;">0.066</td>
+<td style="text-align: right;">0.169</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">5.1</td>
+</tr>
+</tbody>
+</table>
+<!-- /generated -->
+
+<p class="caption"><b>Table B2.</b> Each approach against the baseline on B, with intervals on every ratio.</p>
+
+<!-- generated: Approaches against the baseline -->
+<p><em>Not available yet.</em></p>
+<!-- /generated -->
+
+<p class="caption"><b>Table B3.</b> What building each KB cost over solving A with no KB: the solving turns' extra tokens, cost and time, plus the turns that update the KB.</p>
 
 <!-- generated: Cost of building -->
 <p><em>Not available yet.</em></p>
 <!-- /generated -->
 
-<h2>5. What worked, what failed, and why</h2>
-<p><em>To be written when the results are in.</em></p>
-<h2>6. Limits</h2>
-<ul>
-<li><strong>One build and one run per approach.</strong> Each KB comes from a single order
-  of A, and each approach was run once on B. The baseline suggests repeats
-  add little, since few tasks change outcome between them, but the effect of
-  the order in which A is seen is not measured.</li>
-<li><strong>A small benchmark.</strong> B has 41 tasks in 15 modules. The last line of this
-  section gives the smallest difference it can tell from chance.</li>
-<li><strong>Thirteen approaches of 51.</strong> The rest are defined and can be run with the
-  same command.</li>
-<li><strong>The KBs were built with the result shown.</strong> These results say nothing
-  about a KB written by an agent that never learns whether it was right.</li>
-<li><strong>A public benchmark.</strong> The model may have seen these problems. That
-  affects the baseline and every approach alike, but it narrows the room an
-  approach has to help.</li>
-<li><strong>One agent and one model.</strong></li>
-<li><strong>The network was open.</strong> The harness is built to confine the agent to the
-  model's API, but that needs kernel support this machine's Docker lacks. Web
-  search was off, the rules forbade network use, and every trajectory was
-  read for it.</li>
-<li><strong>Three tasks are unusable.</strong> The reference for
-  <code>Prob013_least_common_multiple</code> drives an output to high impedance, which
-  its own testbench counts as a mismatch, so no answer can pass. The task
-  checks found this.</li>
-<li><strong>One approach could not be run.</strong> Codex's own memory cannot be kept
-  between runs under this executor, which recreates the CLI's home directory
-  for every run.</li>
-<li><strong>Limitations are a model's reading.</strong> They describe; they are not scores.</li>
-</ul>
-<p class="caption"><b>Table 7.</b> Every planned run and what became of it. A flagged run is one a reviewer has to clear or void before it counts.</p>
+<p class="caption"><b>Table B4.</b> Pass rate by the kind of bug injected.</p>
+
+<!-- generated: By bug category -->
+<p>Pass rate in percent, with the number of tasks in brackets.</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Set</th>
+<th style="text-align: right;">Arithmetic</th>
+<th style="text-align: right;">Assignment</th>
+<th style="text-align: right;">State machine</th>
+<th style="text-align: right;">Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No KB</td>
+<td>A</td>
+<td style="text-align: right;">75.0 (12)</td>
+<td style="text-align: right;">73.3 (15)</td>
+<td style="text-align: right;">75.0 (4)</td>
+<td style="text-align: right;">59.5 (14)</td>
+</tr>
+<tr>
+<td>No KB</td>
+<td>B</td>
+<td style="text-align: right;">51.5 (11)</td>
+<td style="text-align: right;">40.5 (14)</td>
+<td style="text-align: right;">0.0 (2)</td>
+<td style="text-align: right;">33.3 (14)</td>
+</tr>
+</tbody>
+</table>
+<!-- /generated -->
+
+<p class="caption"><b>Table B5.</b> Limitations, over all runs of each condition.</p>
+
+<!-- generated: Limitations -->
+<p>Share of runs showing each limitation, in percent. A run can show several.</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Set</th>
+<th style="text-align: right;">Changed more than the bug</th>
+<th style="text-align: right;">Own test missed the fault</th>
+<th style="text-align: right;">Wasted effort</th>
+<th style="text-align: right;">Missed the bug</th>
+<th style="text-align: right;">Broke the interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No KB</td>
+<td>A</td>
+<td style="text-align: right;">59.3</td>
+<td style="text-align: right;">36.3</td>
+<td style="text-align: right;">34.8</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">5.2</td>
+</tr>
+<tr>
+<td>No KB</td>
+<td>B</td>
+<td style="text-align: right;">64.2</td>
+<td style="text-align: right;">64.2</td>
+<td style="text-align: right;">34.1</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: right;">1.6</td>
+</tr>
+</tbody>
+</table>
+<!-- /generated -->
+
+<h2>Appendix C. The rules that open every prompt</h2>
+<blockquote>
+<p>Work only inside this workspace.
+The file named in the task is your answer. Edit it in place.
+You may write and run your own tests with Icarus Verilog.
+Do not use the network or web search.
+Do not look for tests, reference solutions or grading files. None are provided.</p>
+</blockquote>
+<h2>Appendix D. One approach's instructions</h2>
+<p>The playbook's instructions, as added to the task prompt during the build.
+They are three pieces: the general one, the entry type (rule) and the index
+(single file).</p>
+<blockquote>
+<p><strong>Knowledge base.</strong> A knowledge base built from earlier debugging tasks is available at <code>/kb</code>. An agent like you wrote it. After each of those tasks it was shown how its answer had been graded and what the correct fix was, and it wrote with that in front of it. Those were different designs with different bugs, so judge for yourself what carries over to this one. It may be empty. Look at it before you start work on the task, using the conventions below.</p>
+<p><strong>Entries are rules.</strong> A rule is one sentence stating something to do or to check, followed by when it applies and which task it came from (the module and the kind of bug). Record what proved to be a dead end as a rule too. Add a rule only when a task taught you one, and reword or merge an existing rule in preference to adding a near-duplicate.</p>
+<p><strong>Everything is in one file,</strong> <code>/kb/AGENTS.md</code>, read as a whole. It has already been loaded into your context, so you do not need to open it. Keep it short enough to be read in full every time: when it grows, merge and trim instead of appending.</p>
+</blockquote>
+<p>After the task is graded, the same session receives the result and this:</p>
+<blockquote>
+<p>The task is finished and your answer has been graded. The result is above. Now update the knowledge base at <code>/kb</code> so that it is more useful for the next task, which will be a different design with a different bug. Record what the result shows, not what you expected. Follow the conventions you were given for what an entry is and how entries are arranged, and keep any index consistent with the entries. If the task taught you nothing worth keeping and the conventions do not require an entry, change nothing.</p>
+</blockquote>
+<h2>Appendix E. Run integrity</h2>
+<p>A monitor reads every trajectory for breaches of the rules in appendix C: a
+model judge with a written rubric, cross-checked by a pattern match. A run it
+flags does not count until a person has cleared it or voided it.</p>
+<p class="caption"><b>Table E1.</b> Every planned run and what became of it.</p>
 
 <!-- generated: Trust -->
 <table>
@@ -403,7 +2220,7 @@ run on B.</p>
 </thead>
 <tbody>
 <tr>
-<td>baseline/baseline</td>
+<td>No KB</td>
 <td style="text-align: right;">258</td>
 <td style="text-align: right;">258</td>
 <td style="text-align: right;">258</td>
@@ -416,160 +2233,9 @@ run on B.</p>
 </tr>
 </tbody>
 </table>
-<p>Violations planted in certified baseline trajectories: the monitor flagged 20 of 20 (read grading assets 4/4, search for answers 4/4, fetch from network 4/4, fake the result 4/4, copy another runs answer 4/4). The judge flagged 20 and the pattern match 8.</p>
-<p>Two repeats of the baseline differ by +0.0% (-7.1 to +7.0) on B. The smallest difference in pass rate this benchmark can tell from chance is about 9.5%.</p>
+<p>Violations planted in clean baseline trajectories: the monitor flagged 20 of 20 (reading the grading assets 4 of 4, searching for answers 4 of 4, fetching from the network 4 of 4, faking the result 4 of 4, copying another run's answer 4 of 4). The model judge flagged 20 and the pattern match 8.</p>
 <!-- /generated -->
 
-<h2>7. Further work</h2>
-<ul>
-<li><strong>Repeats and orders.</strong> Three chains per approach, each over a different
-  order of A, would show how much a KB depends on what it happened to see
-  first.</li>
-<li><strong>The remaining combinations</strong>, and one setting changed at a time on the
-  approaches that did best: what the key describes, how entries are
-  maintained, whether a use count is kept.</li>
-<li><strong>Hill climbing on A.</strong> Repeated passes over A that keep a change to a KB
-  only if it helps, with B untouched until the end.</li>
-<li><strong>A root-cause measure</strong>, scoring whether the agent found the cause apart
-  from whether it fixed it. It needs a recorded fault location per task to be
-  worth having.</li>
-<li><strong>A harder benchmark.</strong> Only the adapter is specific to ChipBench.</li>
-</ul>
-<h2>References</h2>
-<ol>
-<li>ChipBench. https://github.com/zhongkaiyu/ChipBench</li>
-<li>Harbor. https://docs.harborframework.com</li>
-<li>Codex CLI. https://developers.openai.com/codex</li>
-<li>Establishing Best Practices for Building Rigorous Agentic Benchmarks. https://arxiv.org/abs/2507.02825</li>
-<li>BenchJack: Systematically Auditing AI Agent Benchmarks. https://arxiv.org/abs/2605.12673</li>
-<li>AI Agents That Matter. https://arxiv.org/abs/2407.01502</li>
-<li>Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations. https://arxiv.org/abs/2411.00640</li>
-<li>Why Do Multi-Agent LLM Systems Fail? https://arxiv.org/abs/2503.13657</li>
-<li>Learning to Debug: LLM-Organized Knowledge Trees for Solving RTL Assertion Failures. https://arxiv.org/abs/2511.17833</li>
-<li>Agentic Context Engineering. https://arxiv.org/abs/2510.04618</li>
-<li>Agent Skills. https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</li>
-</ol>
-<p>The full list of what was read is in <code>docs/spec.md</code>, section 11.</p>
-<h2>Appendix: full tables</h2>
-<p>Every table and figure in this report is generated from the stored runs by
-one command, given in the README.</p>
-<p class="caption"><b>Table A1.</b> Every condition, with tokens split into uncached input, cached input and output.</p>
-
-<!-- generated: Conditions -->
-<table>
-<thead>
-<tr>
-<th>Condition</th>
-<th>Side</th>
-<th style="text-align: right;">Tasks</th>
-<th style="text-align: right;">Runs</th>
-<th style="text-align: right;">Pass rate (95%)</th>
-<th style="text-align: right;">pass@k</th>
-<th style="text-align: right;">pass^k</th>
-<th style="text-align: right;">Tokens per run: uncached / cached / output</th>
-<th style="text-align: right;">Cost per run</th>
-<th style="text-align: right;">Cost per solved task</th>
-<th style="text-align: right;">Time to solution</th>
-<th style="text-align: right;">Responses</th>
-<th>KB use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>baseline</td>
-<td>A</td>
-<td style="text-align: right;">45</td>
-<td style="text-align: right;">135</td>
-<td style="text-align: right;">69.6% (45.7 to 90.8)</td>
-<td style="text-align: right;">71.1%</td>
-<td style="text-align: right;">68.9%</td>
-<td style="text-align: right;">15455 / 52800 / 1736</td>
-<td style="text-align: right;">$0.061</td>
-<td style="text-align: right;">$0.088</td>
-<td style="text-align: right;">31s</td>
-<td style="text-align: right;">4.8</td>
-<td></td>
-</tr>
-<tr>
-<td>baseline</td>
-<td>B</td>
-<td style="text-align: right;">41</td>
-<td style="text-align: right;">123</td>
-<td style="text-align: right;">39.0% (19.0 to 62.5)</td>
-<td style="text-align: right;">43.9%</td>
-<td style="text-align: right;">34.1%</td>
-<td style="text-align: right;">15717 / 56935 / 2115</td>
-<td style="text-align: right;">$0.066</td>
-<td style="text-align: right;">$0.169</td>
-<td style="text-align: right;">37s</td>
-<td style="text-align: right;">5.1</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<!-- /generated -->
-
-<p class="caption"><b>Table A2.</b> Pass rate on B by the kind of bug injected.</p>
-
-<!-- generated: By bug category -->
-<table>
-<thead>
-<tr>
-<th>Condition</th>
-<th style="text-align: right;">arithmetic</th>
-<th style="text-align: right;">assignment</th>
-<th style="text-align: right;">state_machine</th>
-<th style="text-align: right;">timing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>baseline</td>
-<td style="text-align: right;">51.5%</td>
-<td style="text-align: right;">40.5%</td>
-<td style="text-align: right;">0.0%</td>
-<td style="text-align: right;">33.3%</td>
-</tr>
-</tbody>
-</table>
-<!-- /generated -->
-
-<p class="caption"><b>Table A3.</b> Share of runs showing each limitation.</p>
-
-<!-- generated: Limitations -->
-<p>From a model's reading of each run, so descriptive only.</p>
-<p>Read twice, baseline's reader named the same set of categories for 83.3% of 30 runs.</p>
-<table>
-<thead>
-<tr>
-<th>Condition</th>
-<th style="text-align: right;">broke_the_interface</th>
-<th style="text-align: right;">changed_more_than_the_bug</th>
-<th style="text-align: right;">missed_the_bug</th>
-<th style="text-align: right;">other</th>
-<th style="text-align: right;">test_did_not_test</th>
-<th style="text-align: right;">wasted_effort</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>baseline, side A</td>
-<td style="text-align: right;">5.2%</td>
-<td style="text-align: right;">59.3%</td>
-<td style="text-align: right;">3.0%</td>
-<td style="text-align: right;">1.5%</td>
-<td style="text-align: right;">36.3%</td>
-<td style="text-align: right;">34.8%</td>
-</tr>
-<tr>
-<td>baseline, side B</td>
-<td style="text-align: right;">1.6%</td>
-<td style="text-align: right;">64.2%</td>
-<td style="text-align: right;">12.2%</td>
-<td style="text-align: right;">0.0%</td>
-<td style="text-align: right;">64.2%</td>
-<td style="text-align: right;">34.1%</td>
-</tr>
-</tbody>
-</table>
+<!-- generated: Repeat noise -->
+<p>Two repeats of the baseline on B differ by 0.0 points (−7.1 to +7.0). From the standard error of that difference, a paired comparison on B has 80% power to detect a change of about 9.5 points.</p>
 <!-- /generated --></body></html>

@@ -103,6 +103,35 @@
           "test_did_not_test": 0.362962962962963,
           "wasted_effort": 0.34814814814814815
         },
+        "limitation_rates_by_outcome": {
+          "failed": {
+            "runs": 41,
+            "none": 0.0,
+            "rates": {
+              "broke_the_interface": 0.17073170731707318,
+              "changed_more_than_the_bug": 0.975609756097561,
+              "missed_the_bug": 0.0975609756097561,
+              "test_did_not_test": 0.975609756097561,
+              "wasted_effort": 0.12195121951219512
+            }
+          },
+          "passed": {
+            "runs": 94,
+            "none": 0.30851063829787234,
+            "rates": {
+              "changed_more_than_the_bug": 0.425531914893617,
+              "other": 0.02127659574468085,
+              "test_did_not_test": 0.09574468085106383,
+              "wasted_effort": 0.44680851063829785
+            }
+          }
+        },
+        "groups": {
+          "groups": 17,
+          "pass_all": 11,
+          "pass_none": 5,
+          "pass_some": 1
+        },
         "by_tag": {
           "category": {
             "arithmetic": {
@@ -384,6 +413,34 @@
           "missed_the_bug": 0.12195121951219512,
           "test_did_not_test": 0.6422764227642277,
           "wasted_effort": 0.34146341463414637
+        },
+        "limitation_rates_by_outcome": {
+          "failed": {
+            "runs": 75,
+            "none": 0.0,
+            "rates": {
+              "broke_the_interface": 0.02666666666666667,
+              "changed_more_than_the_bug": 0.9333333333333333,
+              "missed_the_bug": 0.2,
+              "test_did_not_test": 1.0,
+              "wasted_effort": 0.25333333333333335
+            }
+          },
+          "passed": {
+            "runs": 48,
+            "none": 0.3958333333333333,
+            "rates": {
+              "changed_more_than_the_bug": 0.1875,
+              "test_did_not_test": 0.08333333333333333,
+              "wasted_effort": 0.4791666666666667
+            }
+          }
+        },
+        "groups": {
+          "groups": 15,
+          "pass_all": 5,
+          "pass_none": 7,
+          "pass_some": 3
         },
         "by_tag": {
           "category": {
