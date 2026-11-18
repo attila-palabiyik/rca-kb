@@ -1,0 +1,15 @@
+{
+  "arithmetic__Prob001_continuous_input_sequence_detect": {
+    "known_good": {
+      "result": "pass",
+      "reason": "ok",
+      "expected": "pass"
+    },
+    "do_nothing": {
+      "result": "fail",
+      "reason": "mismatch",
+      "expected": "fail"
+    },
+    "ok": true
+  }
+}

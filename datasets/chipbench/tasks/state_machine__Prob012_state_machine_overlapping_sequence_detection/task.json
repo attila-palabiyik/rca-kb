@@ -1,0 +1,8 @@
+{
+  "id": "state_machine__Prob012_state_machine_overlapping_sequence_detection",
+  "tags": {
+    "source": "chipbench",
+    "category": "state_machine",
+    "module": "Prob012_state_machine_overlapping_sequence_detection"
+  }
+}

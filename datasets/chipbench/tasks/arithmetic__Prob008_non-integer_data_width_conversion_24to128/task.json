@@ -1,0 +1,8 @@
+{
+  "id": "arithmetic__Prob008_non-integer_data_width_conversion_24to128",
+  "tags": {
+    "source": "chipbench",
+    "category": "arithmetic",
+    "module": "Prob008_non-integer_data_width_conversion_24to128"
+  }
+}

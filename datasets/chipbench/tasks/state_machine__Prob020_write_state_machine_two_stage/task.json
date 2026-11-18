@@ -1,0 +1,8 @@
+{
+  "id": "state_machine__Prob020_write_state_machine_two_stage",
+  "tags": {
+    "source": "chipbench",
+    "category": "state_machine",
+    "module": "Prob020_write_state_machine_two_stage"
+  }
+}

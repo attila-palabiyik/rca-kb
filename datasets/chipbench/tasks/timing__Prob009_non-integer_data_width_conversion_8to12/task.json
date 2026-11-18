@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob009_non-integer_data_width_conversion_8to12",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob009_non-integer_data_width_conversion_8to12"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "agent": {
+    "name": "codex",
+    "version": "0.170.0"
+  },
+  "model": "gpt-6.2-sol",
+  "effort": "medium",
+  "image": "rcakb-agent:1",
+  "limits": {
+    "solve": 900,
+    "update": 300,
+    "grade": 120
+  },
+  "network": {
+    "mode": "public",
+    "hosts": [
+      "api.openai.com"
+    ]
+  },
+  "rules": "Work only inside this workspace.\nThe file named in the task is your answer. Edit it in place.\nYou may write and run your own tests with Icarus Verilog.\nDo not use the network or web search.\nDo not look for tests, reference solutions or grading files. None are provided.\n",
+  "instructions": "",
+  "update_prompt": "",
+  "files": [],
+  "mcp_servers": [],
+  "settings": {
+    "web_search": "disabled",
+    "features": {
+      "memories": false
+    }
+  },
+  "agent_memory": {
+    "builtin": "off",
+    "session": "fresh"
+  },
+  "kb": {}
+}

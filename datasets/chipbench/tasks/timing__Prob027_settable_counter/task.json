@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob027_settable_counter",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob027_settable_counter"
+  }
+}

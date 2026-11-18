@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob026_simple_stopwatch",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob026_simple_stopwatch"
+  }
+}

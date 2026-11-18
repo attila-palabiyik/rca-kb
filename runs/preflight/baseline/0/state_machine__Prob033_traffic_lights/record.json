@@ -1,0 +1,42 @@
+{
+  "run_id": "preflight/baseline/0/state_machine__Prob033_traffic_lights",
+  "experiment": "preflight",
+  "condition": {
+    "name": "baseline",
+    "mode": "baseline",
+    "kb": null,
+    "snapshot": null
+  },
+  "task_id": "state_machine__Prob033_traffic_lights",
+  "repeat": 0,
+  "position": null,
+  "provenance": {
+    "dataset_version": "3c9d7d87dd78573f",
+    "setup_hash": "dfbd11b9bd6b7397",
+    "harness_commit": "uncommitted",
+    "agent_version": "WARNING: failed to clean up stale arg0 temp dirs: Cross-device link (os error 18)",
+    "executor_version": "0.26.0"
+  },
+  "status": "completed",
+  "attempts": 1,
+  "exception": null,
+  "phases": {
+    "solve": {
+      "started": "2026-11-18T16:51:15.825316Z",
+      "ended": "2026-11-18T16:51:52.631627Z",
+      "usage": {
+        "input_uncached": 17043,
+        "input_cached": 59574,
+        "output": 2414,
+        "responses": 5
+      },
+      "trajectory": "trial/agent/trajectory.json",
+      "raw_log": "trial/agent/codex.txt"
+    }
+  },
+  "kb": {
+    "before": null,
+    "after": null,
+    "changed": false
+  }
+}

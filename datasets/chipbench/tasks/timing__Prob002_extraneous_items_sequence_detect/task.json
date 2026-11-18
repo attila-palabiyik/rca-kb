@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob002_extraneous_items_sequence_detect",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob002_extraneous_items_sequence_detect"
+  }
+}

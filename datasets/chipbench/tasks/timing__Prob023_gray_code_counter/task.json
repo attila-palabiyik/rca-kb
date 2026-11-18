@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob023_gray_code_counter",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob023_gray_code_counter"
+  }
+}

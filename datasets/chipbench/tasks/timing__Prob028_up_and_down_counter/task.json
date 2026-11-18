@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob028_up_and_down_counter",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob028_up_and_down_counter"
+  }
+}

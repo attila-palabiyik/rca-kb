@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob022_synchronous_FIFO",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob022_synchronous_FIFO"
+  }
+}

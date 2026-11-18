@@ -1,0 +1,8 @@
+{
+  "id": "arithmetic__Prob022_synchronous_FIFO",
+  "tags": {
+    "source": "chipbench",
+    "category": "arithmetic",
+    "module": "Prob022_synchronous_FIFO"
+  }
+}

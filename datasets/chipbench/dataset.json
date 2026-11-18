@@ -1,0 +1,10 @@
+{
+  "name": "chipbench",
+  "grader": "iverilog_mismatch",
+  "group_tag": "module",
+  "source_repo": "https://github.com/zhongkaiyu/ChipBench",
+  "source_commit": "b4ba3a06759804ec88c26c3cf15b28b9a90b3443",
+  "source_path": "Verilog Debugging/dataset_debug_zero_shot_*",
+  "licence": "MIT",
+  "citation": "ChipBench, https://github.com/zhongkaiyu/ChipBench"
+}

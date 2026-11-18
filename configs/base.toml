@@ -1,0 +1,36 @@
+# The base Setup: everything a run is given before any KB approach is applied.
+# A KB approach's overlay may add to this but may not change what is set here,
+# except for [agent_memory].
+
+model  = "gpt-6.2-sol"
+effort = "medium"
+image  = "rcakb-agent:1"
+rules  = "rules.md"
+
+[agent]
+name    = "codex"
+version = "0.170.0"
+
+[limits]              # seconds; solve is well over five times the measured median
+solve  = 600
+update = 300
+grade  = 120
+
+[network]
+# Intended: "allowlist", so the agent reaches these hosts and nothing else.
+# Harbor's Docker environment needs kernel support for that which Docker
+# Desktop on WSL2 does not have (pre-flight check 4), so the network is open
+# here. Web search stays off, the rules forbid network use, and the monitor
+# reads every trajectory for it.
+mode  = "public"
+hosts = ["api.openai.com"]
+
+[settings]            # passed through to the agent's own configuration
+web_search = "disabled"
+
+[settings.features]
+memories = false
+
+[agent_memory]        # the agent CLI's own memory; only an overlay turns it on
+builtin = "off"
+session = "fresh"

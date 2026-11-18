@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob032_pipeline_multiplier",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob032_pipeline_multiplier"
+  }
+}

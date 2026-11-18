@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob014_sequence_generator",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob014_sequence_generator"
+  }
+}

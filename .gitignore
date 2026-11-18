@@ -1,0 +1,22 @@
+# Upstream checkouts and other fetched material
+.cache/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local secrets and environment
+.env
+.env.*
+
+# Working copies of earlier spec drafts
+docs/archive/
+
+# Raw agent logs and trajectories: delivered as an archive beside the repository
+runs/*/*/*/*/trial/
+runs/*/*/*/*/attempts/
+
+# The brief this work answers; kept locally
+task.pdf

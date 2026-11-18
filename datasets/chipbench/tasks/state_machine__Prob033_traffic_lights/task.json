@@ -1,0 +1,8 @@
+{
+  "id": "state_machine__Prob033_traffic_lights",
+  "tags": {
+    "source": "chipbench",
+    "category": "state_machine",
+    "module": "Prob033_traffic_lights"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob010_integer_multiple_data_bit_width_conversion_8to16",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob010_integer_multiple_data_bit_width_conversion_8to16"
+  }
+}

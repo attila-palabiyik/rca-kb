@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob006_data_serial-to-parallel_circuit",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob006_data_serial-to-parallel_circuit"
+  }
+}

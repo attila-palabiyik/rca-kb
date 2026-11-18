@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob033_traffic_lights",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob033_traffic_lights"
+  }
+}

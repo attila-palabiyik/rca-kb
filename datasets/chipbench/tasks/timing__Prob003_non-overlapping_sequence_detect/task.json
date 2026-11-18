@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob003_non-overlapping_sequence_detect",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob003_non-overlapping_sequence_detect"
+  }
+}

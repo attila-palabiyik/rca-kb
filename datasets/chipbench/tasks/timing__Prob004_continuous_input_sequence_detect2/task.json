@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob004_continuous_input_sequence_detect2",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob004_continuous_input_sequence_detect2"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "submission_files": [
+    "TopModule.sv"
+  ],
+  "compile_timeout_sec": 60,
+  "sim_timeout_sec": 60
+}

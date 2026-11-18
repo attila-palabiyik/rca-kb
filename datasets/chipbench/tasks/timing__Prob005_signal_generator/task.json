@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob005_signal_generator",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob005_signal_generator"
+  }
+}

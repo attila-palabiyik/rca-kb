@@ -1,0 +1,18 @@
+# The no-KB baseline: every task, three repeats.
+
+dataset = "chipbench"
+split   = "main"
+repeats = 3
+seed    = 1
+max_parallel = 10
+retries = 2
+
+[monitor]
+judge_model = "gpt-6.2-sol"
+rubric      = "v1"
+assessment  = "v1"
+
+[[conditions]]
+name = "baseline"
+mode = "baseline"
+side = ["A", "B"]

@@ -1,0 +1,8 @@
+{
+  "id": "arithmetic__Prob011_4-bit_carry_look-ahead_adder_circuit",
+  "tags": {
+    "source": "chipbench",
+    "category": "arithmetic",
+    "module": "Prob011_4-bit_carry_look-ahead_adder_circuit"
+  }
+}

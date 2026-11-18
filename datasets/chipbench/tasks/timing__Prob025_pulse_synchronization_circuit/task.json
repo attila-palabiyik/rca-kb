@@ -1,0 +1,8 @@
+{
+  "id": "timing__Prob025_pulse_synchronization_circuit",
+  "tags": {
+    "source": "chipbench",
+    "category": "timing",
+    "module": "Prob025_pulse_synchronization_circuit"
+  }
+}

@@ -1,0 +1,16 @@
+[project]
+name = "rca-kb-harness"
+version = "0.1.0"
+description = "Compares ways of giving a debugging agent a knowledge base."
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.9",
+    "openai>=1.50",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/fast"]
+markers = ["container: needs Docker and the harness image"]
