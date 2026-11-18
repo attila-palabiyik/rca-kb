@@ -207,8 +207,14 @@ def cmd_archive(args) -> int:
     directory = ROOT / "runs" / args.experiment
     out = ROOT / "archives" / f"{args.experiment}-trials.tar.gz"
     out.parent.mkdir(exist_ok=True)
+    # The session transcripts a KB keeps: the final snapshot of each chain holds them all.
+    sessions = []
+    for chain in directory.glob("kb/*/*/chain.json"):
+        final = json.loads(chain.read_text()).get("final")
+        if final and (chain.parent / "snapshots" / final / "sessions").is_dir():
+            sessions.append(chain.parent / "snapshots" / final / "sessions")
     with tarfile.open(out, "w:gz") as archive:
-        for folder in sorted([*directory.glob("*/*/*/trial"), *directory.glob("*/*/*/attempts")]):
+        for folder in sorted([*directory.glob("*/*/*/trial"), *directory.glob("*/*/*/attempts"), *sessions]):
             archive.add(folder, arcname=folder.relative_to(ROOT).as_posix())
     digest = hashlib.sha256(out.read_bytes()).hexdigest()
     (directory / "trials.sha256").write_text(f"{digest}  {out.name}\n")

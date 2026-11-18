@@ -17,12 +17,12 @@ tokens and time to solution.
 | The brief asks for | Where |
 |---|---|
 | Task 1: tasks from a hardware debugging benchmark, a set A and a disjoint set B, deterministic grading | [datasets/chipbench/](datasets/chipbench/): 89 ChipBench cases in the harness's task format; the split in `splits/main.json`; the grader in [harness/grader/graders/iverilog_mismatch/](harness/grader/graders/iverilog_mismatch/). Report, section 1. |
-| Task 2: Codex headless, default settings, no KB; trajectories and results saved | [configs/experiments/baseline.toml](configs/experiments/baseline.toml); results in [runs/baseline/](runs/baseline/); trajectories in the release archive (below). The four settings that are not Codex's defaults are listed in the report, section 1, and in [configs/base.toml](configs/base.toml). |
+| Task 2: Codex headless, default settings, no KB; trajectories and results saved | [configs/experiments/baseline.toml](configs/experiments/baseline.toml); results in [runs/baseline/](runs/baseline/); trajectories in [archives/](archives/). The four settings that are not Codex's defaults are listed in the report, section 1, and in [configs/base.toml](configs/base.toml). |
 | Task 3: analyse trajectories; explore ways to store and retrieve knowledge; implement at least one | Report, sections 2 and 3. All 51 approaches are defined in [configs/kb/](configs/kb/), assembled from the shared pieces in `configs/kb/_pieces/`; thirteen were run. |
 | Task 4: per approach, run A with a mutable KB, freeze, run B, compare with the baseline on correctness, tokens and time; what worked, what failed, how A affects B | [configs/experiments/kb-*.toml](configs/experiments/); results in `runs/kb-*/`; report, sections 4 and 5. |
 | Set B equal to set A, as a separate experiment | Not run. Report, section 6. |
 | Bonus A, own benchmark; Bonus B, novel interfaces | Not attempted. |
-| Implementation, tasks and graders, trajectories, results, report, cited resources | This repository; trajectories in the release archive; references in the report and in [docs/spec.md](docs/spec.md), section 11. |
+| Implementation, tasks and graders, trajectories, results, report, cited resources | This repository, with trajectories in [archives/](archives/); references in the report and in [docs/spec.md](docs/spec.md), section 11. |
 
 ## Where things are
 
@@ -34,7 +34,7 @@ tokens and time to solution.
 | KB approaches | [configs/kb/](configs/kb/): one folder each. Report, appendix A, maps names to folders. |
 | Experiments | [configs/experiments/](configs/experiments/) |
 | Results | [runs/](runs/): one folder per run with its record, answer, verdict, monitor report and assessment; each built KB, with a snapshot after every task, under `runs/kb-*/kb/` |
-| Trajectories | Not in the tree, for size. Each experiment's are in `<experiment>-trials.tar.gz`, attached to this repository's release, with its checksum in `runs/<experiment>/trials.sha256`. They unpack into `runs/` in place. |
+| Trajectories | [archives/](archives/): one `<experiment>-trials.tar.gz` per experiment, holding every run's agent logs and trajectory, and for the two transcript approaches the session files their KB kept. Each unpacks into `runs/` in place; its checksum is in `runs/<experiment>/trials.sha256`. |
 | Generated reports | [reports/](reports/), from `runs/` |
 
 ## Quick start

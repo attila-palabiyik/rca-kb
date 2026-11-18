@@ -14,13 +14,12 @@ __pycache__/
 # Working copies of earlier spec drafts
 docs/archive/
 
-# Raw agent logs and trajectories: delivered as an archive beside the repository
+# Raw agent logs and trajectories: kept in the tree as one archive per experiment, in archives/
 runs/*/*/*/*/trial/
 runs/*/*/*/*/attempts/
-archives/
 
 # The brief this work answers; kept locally
 task.pdf
 
-# Session transcripts kept inside KB snapshots: delivered in the archive with the other trajectories
+# Session transcripts kept inside KB snapshots: the final snapshot's are in the experiment's archive
 runs/*/kb/*/*/snapshots/*/sessions/
